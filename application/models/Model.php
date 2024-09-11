@@ -15,9 +15,18 @@ class model extends CI_Model
             if (md5($password) == $user['password']){ //if user password input = user password di database
                 $_SESSION['login_surat'] = true;
                 $_SESSION['id_surat'] = $user['userId'];
+
+                redirect('menu');
 				
-                return $user;
+            }else {
+                $this->session->set_flashdata('type', 'alert-danger');
+                $this->session->set_flashdata('pesan', '<strong>Gagal!</strong> ID atau Password salah');
+                redirect();
             }
+        }else {
+            $this->session->set_flashdata('type', 'alert-danger');
+            $this->session->set_flashdata('pesan', '<strong>Gagal!</strong> ID atau Password salah');
+            redirect();
         }
         return false;
     }
@@ -25,6 +34,11 @@ class model extends CI_Model
     //contoh query biasa
     public function contoh1(){
         $query = "SELECT kolom FROM tabel";
+        return $this->db->query($query);
+    }
+	
+    public function allData(){
+        $query = "SELECT pict_surat,title,description,status FROM surat";
         return $this->db->query($query);
     }
 	

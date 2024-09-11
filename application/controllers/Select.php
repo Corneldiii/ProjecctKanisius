@@ -16,6 +16,10 @@ class Select extends CI_Controller {
         $data = $this->Model->contoh1()->result_array(); // buka class contoh1 di Model
         echo json_encode($data); 
     }
+    public function getAllData(){
+        $data = $this->Model->allData()->result_array(); // buka class contoh1 di Model
+        echo json_encode($data); 
+    }
     public function contoh2(){
         $inputAjax = $this->input->get('inputAjax');
 		

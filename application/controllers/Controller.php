@@ -21,17 +21,7 @@ class Controller extends CI_Controller
     public function login()
     {
         $user = $this->Model->login();
-        if (empty($user)) {
-            $this->session->set_flashdata('type', 'alert-success'); //bootstrap alert
-            $this->session->set_flashdata('pesan', '<strong>Sukses!</strong> Anda berhasil login.');
-            redirect($this->index());
-        }
-        // jika user tidak ditemukan
-        else {
-            $this->session->set_flashdata('type', 'alert-danger');
-            $this->session->set_flashdata('pesan', '<strong>Gagal!</strong> ID atau Password salah');
-            redirect();
-        }
+       
 
 
         // echo "test";
