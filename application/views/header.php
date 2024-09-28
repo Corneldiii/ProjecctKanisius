@@ -72,7 +72,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Menu:</h6>
-                        <a class="collapse-item" href="menu" style="white-space: normal;">Menu</a>
+                        <a class="collapse-item" href="menu" style="white-space: normal;">Arsip Surat</a>
+                        <a class="collapse-item" href="insert" style="white-space: normal;">Input Surat</a>
                     </div>
                 </div>
             </li>

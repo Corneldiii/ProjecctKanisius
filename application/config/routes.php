@@ -10,3 +10,4 @@ $route['logout'] = 'Controller/logout';
 // $route['login'] = 'Controller/login';
 
 $route['menu'] = 'Controller/menu';
+$route['insert'] = 'Controller/input';

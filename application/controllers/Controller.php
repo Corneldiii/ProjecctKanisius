@@ -15,6 +15,8 @@ class Controller extends CI_Controller
         $this->load->helper('date');
         $this->load->model("Model");
         $this->load->library('session');
+        $this->load->config('email');
+        $this->load->library('email');
         $this->load->database();
     }
 
@@ -22,14 +24,35 @@ class Controller extends CI_Controller
     {
         $user = $this->Model->login();
        
-
-
-        // echo "test";
     }
     public function logout()
     {
         $this->session->sess_destroy();
         redirect();
+    }
+
+    public function sendEmail(){
+        $id = $this->input->post('id');
+
+        $data = $this->Model->getDataById($id);
+
+
+        $this->email->from('aldianocta178@gmail.com','admin');
+
+        $this->email->to('exdarkout@gmail.com');
+        $this->email->subject('Test Email dengan SMTP CodeIgniter');
+        $foto = './assets/pictSurat/bayu.png';
+        $this->email->attach($foto);
+
+        // Isi email
+        $this->email->message('Ini adalah email percobaan menggunakan SMTP di CodeIgniter 3.');
+
+        // Mengirim email
+        if ($this->email->send()) {
+            echo 'Email berhasil dikirim!';
+        } else {
+            echo $this->email->print_debugger();
+        }
     }
 
     // http://localhost/surat/
@@ -43,5 +66,10 @@ class Controller extends CI_Controller
     {
         $this->load->view('header');
         $this->load->view('menu');
+    }
+    public function input()
+    {
+        $this->load->view('header');
+        $this->load->view('insert');
     }
 }

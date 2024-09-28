@@ -51,11 +51,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <thead style="color: black;">
                             <tr>
                                 <th style="width:10px" class="text-center align-middle">No</th>
-                                <th class="text-center align-middle">Scan Surat</th>
-                                <th class="text-center align-middle">Perihal</th>
-                                <th class="text-center align-middle">Deskripsi</th>
-                                <th class="text-center align-middle">Status</th>
-                                <th class="text-center align-middle">Tindakan</th>
+                                <th class="text-center align-middle">Agenda</th>
+                                <th class="text-center align-middle">Tanggal</th>
+                                <th class="text-center align-middle">No. Surat</th>
+                                <th class="text-center align-middle">Kode</th>
+                                <th class="text-center align-middle">Nama Person</th>
+                                <th class="text-center align-middle">Nama Lembaga</th>
+                                <th class="text-center align-middle">Hal</th>
+                                <th class="text-center align-middle">Lampiran</th>
+                                <th class="text-center align-middle">Detail</th>
                             </tr>
                         </thead>
                         <tbody id="tbody" name="tbody" style="color: black;">
@@ -136,7 +140,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 html += '<td class="text-center align-middle"><img src="' + data[i].pict_surat + '" alt="Gambar Surat" style="width: 100px; height: auto;"></td>';
                 html += '<td class="text-center align-middle">' + data[i].title + '</td>';
                 html += '<td class="text-center align-middle">' + data[i].description + '</td>';
-                html += '<td class="text-center align-middle">' + (data[i].status == 0 ? 'Tertunda <td class="text-center align-middle"><button type="button" class="btn btn-danger">Hapus</button></td>' : 'Terkirim <td class="text-center align-middle"> - </td>') + '</td>';
+                html += '<td class="text-center align-middle">' + data[i].description + '</td>';
+                html += '<td class="text-center align-middle">' + data[i].description + '</td>';
+                html += '<td class="text-center align-middle">' + data[i].description + '</td>';
+                html += '<td class="text-center align-middle">' + data[i].description + '</td>';
+                html += '<td class="text-center align-middle">' +
+                    (data[i].status == 0 ?
+                        'Tertunda <td class="text-center align-middle"><button type="button" class="btn btn-primary btn-kirim rounded-circle w-50 h-50" data-id="' + data[i].id + '">i  </button></td>' :
+                        'Terkirim <td class="text-center align-middle"> - </td>'
+                    ) + '</td>';
+
                 // html += '<td><button type="button" class="btn btn-danger">Hapus</button></td>';
                 html += '</tr>';
 
@@ -145,6 +158,28 @@ defined('BASEPATH') or exit('No direct script access allowed');
             $("#tbody").html(html);
         }
     });
+
+    $(document).on('click', '.btn-kirim', function() {
+        var id = $(this).data('id'); 
+        var button = $(this);
+
+        $.ajax({
+            url: '<?php echo base_url('Controller/sendEmail'); ?>', 
+            type: 'POST',
+            data: {
+                id: id
+            },
+            success: function(response) {
+                console.log(response);
+                alert('Email berhasil dikirim!');
+                button.closest('td').html('Terkirim <td class="text-center align-middle"> - </td>');
+            },
+            error: function(xhr, status, error) {
+                alert('Gagal mengirim email: ' + xhr.responseText);
+            }
+        });
+    });
+
 
     // kalau butuh input dari user
     function getContoh2() {

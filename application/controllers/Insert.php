@@ -11,6 +11,10 @@ class Insert extends CI_Controller {
         $this->load->helper('date');
         $this->load->model("Model");
     }
+
+    public function index(){
+        
+    }
     
     public function contoh2(){
         $inputAjax = $this->input->post('inputAjax');

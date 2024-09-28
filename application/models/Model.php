@@ -17,7 +17,6 @@ class model extends CI_Model
                 $_SESSION['id_surat'] = $user['userId'];
 
                 redirect('menu');
-				
             }else {
                 $this->session->set_flashdata('type', 'alert-danger');
                 $this->session->set_flashdata('pesan', '<strong>Gagal!</strong> ID atau Password salah');
@@ -38,7 +37,11 @@ class model extends CI_Model
     }
 	
     public function allData(){
-        $query = "SELECT pict_surat,title,description,status FROM surat";
+        $query = "SELECT * FROM surat";
+        return $this->db->query($query);
+    }
+    public function getDataByID($id){
+        $query = "SELECT * FROM surat WHERE id_surat = '".$id."'";
         return $this->db->query($query);
     }
 	
