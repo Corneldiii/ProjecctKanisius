@@ -47,21 +47,21 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
             <!-- form input surat dari admin sekretaris (start) -->
 
-            <form>
+            <form class="user" action="<?= site_url("insert") ?>" method="post">
                 <div class="form-group row">
                     <div class="col-8">
                         <div class="header d-flex justify-content-between p-3">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Nomor</label>
-                                <input type="text" class="form-control w-25 text-center " id="exampleInputEmail1" value="1" aria-describedby="emailHelp" readonly>
+                                <input type="text" class="form-control w-25 text-center " id="nomor" value="1" aria-describedby="emailHelp" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tanggal Input</label>
-                                <input type="date" class="form-control w-100 text-center " id="exampleInputEmail1" value="1" aria-describedby="emailHelp">
+                                <input type="date" class="form-control w-100 text-center " id="tanggal" aria-describedby="emailHelp">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Jenis Surat</label>
-                                <select class="form-control" style="width:300px;">
+                                <select class="form-control" id="jenis" style="width:300px;">
                                     <option>Surat</option>
                                     <option>Email</option>
                                     <option>Penawaran</option>
@@ -71,19 +71,19 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
                         <div class="header d-flex p-3" style="gap: 30px;">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Nomor</label>
-                                <input type="text" class="form-control w-100 text-center " id="exampleInputEmail1" placeholder="Nomor Fisik Surat" aria-describedby="emailHelp">
+                                <label for="exampleInputEmail1">Nomor Surat</label>
+                                <input type="text" class="form-control w-100 text-center " id="nomorSurat" placeholder="Nomor Fisik Surat" aria-describedby="emailHelp">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tanggal Fisik Surat</label>
-                                <input type="date" class="form-control w-100 text-center " id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <input type="date" class="form-control w-100 text-center " id="tanggalSurat" aria-describedby="emailHelp">
                             </div>
                         </div>
 
                         <div class="input-lanjutan">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Hal</label>
-                                <input type="text" class="form-control w-75 text-center " id="exampleInputEmail1" placeholder="Perihal Surat" aria-describedby="emailHelp">
+                                <input type="text" class="form-control w-75 text-center " id="hal" placeholder="Perihal Surat" aria-describedby="emailHelp">
                             </div>
                         </div>
 
@@ -92,7 +92,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <!-- <label for="custom-file">Sisipkan File</label> -->
                         <div class="custom-file d-flex justify-content-between align-items-center w-100">
                             <input type="file" class="custom-file-input w-100" style="cursor: pointer;" id="customFile">
-                            <label class="custom-file-label w-75 ml-5 d-flex  justify-content-center align-items-center" style="height:300px ; cursor:pointer;" for="customFile">+</label>
+                            <label class="custom-file-label w-75 ml-5 d-flex  justify-content-center align-items-center" id="file" style="height:300px ; cursor:pointer;" for="customFile">+</label>
                         </div>
                     </div>
                 </div>
@@ -101,50 +101,51 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <div class="input-lanjutan">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Lampiran</label>
-                                <input type="text" class="form-control w-75 text-center " id="exampleInputEmail1" placeholder="Lampiran" aria-describedby="emailHelp">
+                                <input type="text" class="form-control w-75 text-center " id="lampiran" placeholder="Lampiran" aria-describedby="emailHelp">
                             </div>
                             <div class="form-group d-flex flex-column">
                                 <label for="description">Deskripsi:</label>
-                                <textarea class="form-control w-75 text-center" id="description" name="description" rows="4" placeholder="Ringksan Isi Surat" aria-describedby="emailHelp"></textarea>
+                                <textarea class="form-control w-75 text-center" id="keterangan" name="description" rows="4" placeholder="Ringksan Isi Surat" aria-describedby="emailHelp"></textarea>
                             </div>
 
                             <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
 
-                            <!-- Input Kode Relasi -->
                             <div class="form-group w-25">
                                 <label for="kodeRelasi">Kode Relasi</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control text-center" id="kodeRelasi" placeholder="Masukkan Kode Relasi">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-secondary" type="button">Cari</button>
-                                    </div>
+                                    <input type="text" class="form-control text-center" id="kodeRelasi" placeholder="Kode Relasi" readonly>
+                                    <div id="kodeRelasiList" class="list-group overflow-hidden"></div>
                                 </div>
                             </div>
 
-                            <!-- Detail Relasi -->
                             <div class="form-group">
                                 <label for="namaPerson">Nama</label>
-                                <input type="text" class="form-control w-75 text-center" id="namaPerson" placeholder="Nama">
+                                <div class="input-group">
+                                    <input type="text" class="form-control w-75 text-center" id="namaPerson" placeholder="Nama">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-secondary" id="search" type="button">Cari</button>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="namaLembaga">Lembaga</label>
-                                <input type="text" class="form-control w-75 text-center" id="namaLembaga" placeholder="Nama Lembaga">
+                                <input type="text" class="form-control w-75 text-center" id="namaLembaga" placeholder="Nama Lembaga" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="alamat">Alamat</label>
-                                <input type="text" class="form-control w-75 text-center" id="alamat" placeholder="Alamat">
+                                <input type="text" class="form-control w-75 text-center" id="alamat" placeholder="Alamat" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="kota">Kota</label>
-                                <input type="text" class="form-control w-75 text-center" id="kota" placeholder="Kota">
+                                <input type="text" class="form-control w-75 text-center" id="kota" placeholder="Kota" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="propinsi">Propinsi</label>
-                                <input type="text" class="form-control w-75 text-center" id="propinsi" placeholder="Propinsi">
+                                <input type="text" class="form-control w-75 text-center" id="propinsi" placeholder="Propinsi" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="kodepos">Kodepos</label>
-                                <input type="text" class="form-control w-75 text-center" id="kodepos" placeholder="Kodepos">
+                                <input type="text" class="form-control w-75 text-center" id="kodepos" placeholder="Kodepos" readonly>
                             </div>
 
                             <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
@@ -272,6 +273,45 @@ defined('BASEPATH') or exit('No direct script access allowed');
             "scrollX": true,
             "select": true,
             "bSort": false
+        });
+    });
+
+
+    $(document).ready(function() {
+        // Saat tombol Cari diklik
+        $('#search').on('click', function() {
+            // alert('test');
+            var query = $('#namaPerson').val();
+
+            // console.log(query);
+
+            if (query.length > 0) {
+                // alert('test');
+                $.ajax({
+                    url: "<?php echo site_url('Controller/searchKodeRelasi'); ?>",
+                    method: "POST",
+                    data: {
+                        query: query
+                    },
+                    success: function(data) {
+                        $('#kodeRelasiList').html(data);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('AJAX Error:', error);
+                        console.error('Response Text:', xhr.responseText);
+                    }
+                });
+
+            } else {
+                $('#kodeRelasiList').html('');
+            }
+        });
+
+
+        // Saat user klik salah satu hasil
+        $(document).on('click', '.list-group-item', function() {
+            $('#kodeRelasi').val($(this).text());
+            $('#kodeRelasiList').html('');
         });
     });
 

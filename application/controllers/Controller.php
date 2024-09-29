@@ -23,7 +23,6 @@ class Controller extends CI_Controller
     public function login()
     {
         $user = $this->Model->login();
-       
     }
     public function logout()
     {
@@ -31,13 +30,32 @@ class Controller extends CI_Controller
         redirect();
     }
 
-    public function sendEmail(){
+    public function searchKodeRelasi()
+    {
+        // echo 'fungsi kepanggil';
+        $query = $this->input->post('query');
+
+        // var_dump($query);
+
+        if ($query != '') {
+            $result = $this->Model->getRelasiData($query);
+            $output = '<ul class="list-group">';
+            foreach ($result as $row) {
+                $output .= '<li class="list-group-item">' . $row->milistId . ' - ' . $row->namaPerson . '</li>';
+            }
+            $output .= '</ul>';
+            echo $output; 
+        }
+    }
+
+    public function sendEmail()
+    {
         $id = $this->input->post('id');
 
         $data = $this->Model->getDataById($id);
 
 
-        $this->email->from('aldianocta178@gmail.com','admin');
+        $this->email->from('aldianocta178@gmail.com', 'admin');
 
         $this->email->to('exdarkout@gmail.com');
         $this->email->subject('Test Email dengan SMTP CodeIgniter');
