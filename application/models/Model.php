@@ -69,14 +69,14 @@ class model extends CI_Model
 
     // }
 
-    public function getRelasiData($query) {
+    public function getRelasiData($person,$lembaga) {
         $this->db->select('milistId, namaPerson, namaLembaga, alamat, kotanama, kodepos, propNama');
         $this->db->from('db_referensi.ref_alamat a');
         $this->db->join('db_referensi.ref_kota b', 'b.kotakode=a.kota', 'left');
         $this->db->join('db_referensi.ref_propinsi c', 'c.propKode=a.propinsi', 'left');
         $this->db->where('STATUS', 'Y');
-        $this->db->like('namaPerson', $query);
-        $this->db->or_like('namaLembaga', $query);
+        $this->db->like('namaPerson', $person);
+        $this->db->or_like('namaLembaga', $lembaga);
         
         $query = $this->db->get();
         return $query->result();

@@ -118,34 +118,51 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="namaPerson">Nama</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control w-75 text-center" id="namaPerson" placeholder="Nama">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-secondary" id="search" type="button">Cari</button>
+                            <div class="form-group row m-4">
+                                <div class="col">
+                                    <label for="namaPerson">Nama</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control w-75 text-center" id="namaPerson" placeholder="Nama person">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-secondary" id="searchPerson" type="button">Cari</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <label for="namaLembaga">Lembaga</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control w-75 text-center" id="namaLembaga" placeholder="Nama Lembaga">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-secondary" id="searchLembaga" type="button">Cari</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="namaLembaga">Lembaga</label>
-                                <input type="text" class="form-control w-75 text-center" id="namaLembaga" placeholder="Nama Lembaga" readonly>
-                            </div>
-                            <div class="form-group">
+
+                            <div class="form-group m-3">
                                 <label for="alamat">Alamat</label>
                                 <input type="text" class="form-control w-75 text-center" id="alamat" placeholder="Alamat" readonly>
                             </div>
-                            <div class="form-group">
-                                <label for="kota">Kota</label>
-                                <input type="text" class="form-control w-75 text-center" id="kota" placeholder="Kota" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="propinsi">Propinsi</label>
-                                <input type="text" class="form-control w-75 text-center" id="propinsi" placeholder="Propinsi" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="kodepos">Kodepos</label>
-                                <input type="text" class="form-control w-75 text-center" id="kodepos" placeholder="Kodepos" readonly>
+
+                            <div class="row m-3">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="kota">Kota</label>
+                                        <input type="text" class="form-control w-75 text-center" id="kota" placeholder="Kota" readonly>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="propinsi">Propinsi</label>
+                                        <input type="text" class="form-control w-75 text-center" id="propinsi" placeholder="Propinsi" readonly>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="kodepos">Kodepos</label>
+                                        <input type="text" class="form-control w-75 text-center" id="kodepos" placeholder="Kodepos" readonly>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
@@ -278,42 +295,112 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 
     $(document).ready(function() {
-        // Saat tombol Cari diklik
-        $('#search').on('click', function() {
-            // alert('test');
-            var query = $('#namaPerson').val();
+        // Saat tombol Cari diklik (untuk nama person)
+        $('#searchPerson').on('click', function() {
+            var namaPerson = $('#namaPerson').val();
+            var namaLembaga = $('#namaLembaga').val();
 
-            // console.log(query);
-
-            if (query.length > 0) {
-                // alert('test');
+            if (namaPerson.length > 0 || namaLembaga.length > 0) {
                 $.ajax({
                     url: "<?php echo site_url('Controller/searchKodeRelasi'); ?>",
                     method: "POST",
                     data: {
-                        query: query
+                        person: namaPerson,
+                        lembaga: namaLembaga
                     },
+                    dataType: "json", // Mengharapkan respons JSON
                     success: function(data) {
-                        $('#kodeRelasiList').html(data);
+                        $('#kodeRelasiList').empty(); // Bersihkan list sebelumnya
+
+                        if (data.length > 0) {
+                            $.each(data, function(index, item) {
+                                $('#kodeRelasiList').append(
+                                    '<a href="#" class="list-group-item list-group-item-action" data-id="' + item.milistId + '" data-nama="' + item.namaPerson + '" data-lembaga="' + item.lembaga + '" data-alamat="' + item.alamat + '" data-kota="' + item.kota + '" data-propinsi="' + item.propinsi + '" data-kodepos="' + item.kodepos + '">' +
+                                    item.milistId + ' - ' + item.namaPerson +
+                                    '</a>'
+                                );
+                            });
+                        } else {
+                            $('#kodeRelasiList').append('<li class="list-group-item">No Results Found</li>');
+                        }
                     },
                     error: function(xhr, status, error) {
                         console.error('AJAX Error:', error);
                         console.error('Response Text:', xhr.responseText);
                     }
                 });
-
             } else {
-                $('#kodeRelasiList').html('');
+                $('#kodeRelasiList').html(''); // Kosongkan jika input kosong
             }
         });
 
+        // Saat tombol Cari diklik (untuk nama lembaga)
+        $('#searchLembaga').on('click', function() {
+            var namaPerson = $('#namaPerson').val();
+            var namaLembaga = $('#namaLembaga').val();
 
-        // Saat user klik salah satu hasil
-        $(document).on('click', '.list-group-item', function() {
-            $('#kodeRelasi').val($(this).text());
+            if (namaPerson.length > 0 || namaLembaga.length > 0) {
+                $.ajax({
+                    url: "<?php echo site_url('Controller/searchKodeRelasi'); ?>",
+                    method: "POST",
+                    data: {
+                        person: namaPerson,
+                        lembaga: namaLembaga
+                    },
+                    dataType: "json", // Mengharapkan respons JSON
+                    success: function(data) {
+                        $('#kodeRelasiList').empty(); // Bersihkan list sebelumnya
+
+                        if (data.length > 0) {
+                            $.each(data, function(index, item) {
+                                $('#kodeRelasiList').append(
+                                    '<a href="#" class="list-group-item list-group-item-action" data-id="' + item.milistId + '" data-nama="' + item.namaPerson + '" data-lembaga="' + item.lembaga + '" data-alamat="' + item.alamat + '" data-kota="' + item.kota + '" data-propinsi="' + item.propinsi + '" data-kodepos="' + item.kodepos + '">' +
+                                    item.milistId + ' - ' + item.namaPerson +
+                                    '</a>'
+                                );
+                            });
+                        } else {
+                            $('#kodeRelasiList').append('<li class="list-group-item">No Results Found</li>');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('AJAX Error:', error);
+                        console.error('Response Text:', xhr.responseText);
+                    }
+                });
+            } else {
+                $('#kodeRelasiList').html(''); // Kosongkan jika input kosong
+            }
+        });
+
+        // Saat user klik salah satu hasil dari list
+        $(document).on('click', '.list-group-item', function(e) {
+            e.preventDefault(); // Mencegah tindakan default link <a>
+
+            console.log($(this).data());
+            // Ambil data dari atribut 'data-'
+            var milistId = $(this).data('id');
+            var namaPerson = $(this).data('nama');
+            var lembaga = $(this).data('namaLembaga');
+            var alamat = $(this).data('alamat');
+            var kota = $(this).data('kotanama');
+            var propinsi = $(this).data('propNama');
+            var kodepos = $(this).data('kodepos');
+
+            // Isi form input dengan data yang dipilih
+            $('#kodeRelasi').val(milistId);
+            $('#namaPerson').val(namaPerson);
+            $('#namaLembaga').val(lembaga);
+            $('#alamat').val(alamat);
+            $('#kota').val(kota);
+            $('#propinsi').val(propinsi);
+            $('#kodepos').val(kodepos);
+
+            // Kosongkan list setelah memilih
             $('#kodeRelasiList').html('');
         });
     });
+
 
     // menggunakan AJAX untuk membuat tabel dari data tabel
     // AJAX (View) -> Controller -> Model -> dapat hasil

@@ -32,21 +32,32 @@ class Controller extends CI_Controller
 
     public function searchKodeRelasi()
     {
-        // echo 'fungsi kepanggil';
-        $query = $this->input->post('query');
+        $person = $this->input->post('person');
+        $lembaga = $this->input->post('lembaga');
 
-        // var_dump($query);
+        if ($person != '' || $lembaga != '') {
+            $result = $this->Model->getRelasiData($person, $lembaga);
 
-        if ($query != '') {
-            $result = $this->Model->getRelasiData($query);
-            $output = '<ul class="list-group">';
+            // Mengubah hasil menjadi array
+            $output = array();
+            echo var_dump($result);
             foreach ($result as $row) {
-                $output .= '<li class="list-group-item">' . $row->milistId . ' - ' . $row->namaPerson . '</li>';
+                $output[] = array(
+                    'milistId' => $row->milistId,
+                    'namaPerson' => $row->namaPerson,
+                    'namaLembaga' => $row->namaLembaga,
+                    'alamat' => $row->alamat,
+                    'kotanama' => $row->kotanama,
+                    'pronama' => $row->propNama,
+                    'kodepos' => $row->kodepos
+                );
             }
-            $output .= '</ul>';
-            echo $output; 
+
+            // Mengembalikan hasil dalam format JSON
+            echo json_encode($output);
         }
     }
+
 
     public function sendEmail()
     {
