@@ -101,4 +101,14 @@ class Controller extends CI_Controller
         $this->load->view('header');
         $this->load->view('insert');
     }
+    public function menuKeluar()
+    {
+        $this->load->view('header');
+        $this->load->view('menuKeluar');
+    }
+    public function inputKeluar()
+    {
+        $this->load->view('header');
+        $this->load->view('insertKeluar');
+    }
 }

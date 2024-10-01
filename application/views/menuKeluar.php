@@ -29,8 +29,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
         <div class="container-fluid">
             <div class="menu">
-                <a href="menu" class="btn btn-primary">Tabel</a>
-                <a href="insert" class="btn btn-primary">Insert</a>
+                <a href="menuKeluar" class="btn btn-primary">Tabel</a>
+                <a href="insertKeluar" class="btn btn-primary">Insert</a>
             </div>
 
             <div class="d-sm-flex align-items-center justify-content-between mb-4">

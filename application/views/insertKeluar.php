@@ -27,8 +27,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
         <div class="container-fluid">
             <div class="menu">
-                <a href="menu" class="btn btn-primary">Tabel</a>
-                <a href="insert" class="btn btn-primary">Insert</a>
+                <a href="menuKeluar" class="btn btn-primary">Tabel</a>
+                <a href="insertKeluar" class="btn btn-primary">Insert</a>
             </div>
 
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -170,73 +170,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             </div>
 
                             <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
-
-                            <div class="row">
-                                <div class="col">
-
-                                    <!-- Disposisi 1 dan Person 1 -->
-                                    <div class="form-group row">
-                                        <label for="dispoDivisi1" class="col-sm-2 col-form-label">Disposisi 1</label>
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="dispoDivisi1" placeholder="Disposisi 1 (Divisi)">
-                                        </div>
-                                        <label for="dispoNoreg1" class="col-sm-2 col-form-label">Person 1</label>
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="dispoNoreg1" placeholder="Person 1 (Noreg)">
-                                        </div>
-                                    </div>
-
-                                    <!-- Disposisi 2 dan Person 2 -->
-                                    <div class="form-group row">
-                                        <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 2</label>
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="dispoDivisi2" placeholder="Disposisi 2 (Divisi)">
-                                        </div>
-                                        <label for="dispoNoreg2" class="col-sm-2 col-form-label">Person 2</label>
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="dispoNoreg2" placeholder="Person 2 (Noreg)">
-                                        </div>
-                                    </div>
-
-                                    <!-- Disposisi 3 dan Person 3 -->
-                                    <div class="form-group row">
-                                        <label for="dispoDivisi3" class="col-sm-2 col-form-label">Disposisi 3</label>
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="dispoDivisi3" placeholder="Disposisi 3 (Divisi)">
-                                        </div>
-                                        <label for="dispoNoreg3" class="col-sm-2 col-form-label">Person 3</label>
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="dispoNoreg3" placeholder="Person 3 (Noreg)">
-                                        </div>
-                                    </div>
-
-                                    <!-- Disposisi 4 dan Person 4 -->
-                                    <div class="form-group row">
-                                        <label for="dispoDivisi4" class="col-sm-2 col-form-label">Disposisi 4</label>
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="dispoDivisi4" placeholder="Disposisi 4 (Divisi)">
-                                        </div>
-                                        <label for="dispoNoreg4" class="col-sm-2 col-form-label">Person 4</label>
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="dispoNoreg4" placeholder="Person 4 (Noreg)">
-                                        </div>
-                                    </div>
-
-                                    <!-- Disposisi 5 dan Person 5 -->
-                                    <div class="form-group row">
-                                        <label for="dispoDivisi5" class="col-sm-2 col-form-label">Disposisi 5</label>
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="dispoDivisi5" placeholder="Disposisi 5 (Divisi)">
-                                        </div>
-                                        <label for="dispoNoreg5" class="col-sm-2 col-form-label">Person 5</label>
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="dispoNoreg5" placeholder="Person 5 (Noreg)">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
                         </div>
                     </div>
                 </div>
