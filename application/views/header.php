@@ -77,6 +77,19 @@
                         <a class="collapse-item" href="insert" style="white-space: normal;">Memo Iternal</a>
                         <a class="collapse-item" href="insert" style="white-space: normal;">User</a>
                         <a class="collapse-item" href="insert" style="white-space: normal;">Laporan - laporan</a>
+                        <a class="collapse-item" href="insert" style="white-space: normal;">Laporan - laporan</a>
+                        <a class="collapse-item" href="insert" style="white-space: normal;">Laporan - laporan</a>
+                        <a class="collapse-item" href="insert" style="white-space: normal;">Laporan - laporan</a>
+                        <a class="collapse-item" href="insert" style="white-space: normal;">Laporan - laporan</a>
+                        <a class="collapse-item" href="insert" style="white-space: normal;">Laporan - laporan</a>
+                        <a class="collapse-item" href="insert" style="white-space: normal;">Laporan - laporan</a>
+                        <a class="collapse-item" href="insert" style="white-space: normal;">Laporan - laporan</a>
+                        <a class="collapse-item" href="insert" style="white-space: normal;">Laporan - laporan</a>
+                        <a class="collapse-item" href="insert" style="white-space: normal;">Laporan - laporan</a>
+                        <a class="collapse-item" href="insert" style="white-space: normal;">Laporan - laporan</a>
+                        <a class="collapse-item" href="insert" style="white-space: normal;">Laporan - laporan</a>
+                        <a class="collapse-item" href="insert" style="white-space: normal;">Laporan - laporan</a>
+
                     </div>
                 </div>
             </li>
