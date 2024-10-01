@@ -40,7 +40,7 @@ class Controller extends CI_Controller
 
             // Mengubah hasil menjadi array
             $output = array();
-            echo var_dump($result);
+            // echo var_dump($result);
             foreach ($result as $row) {
                 $output[] = array(
                     'milistId' => $row->milistId,
