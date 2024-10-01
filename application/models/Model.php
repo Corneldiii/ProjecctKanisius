@@ -69,7 +69,25 @@ class model extends CI_Model
 
     // }
 
-    public function getRelasiData($person,$lembaga) {
+    public function get_divisi()
+    {
+        $this->db->select('divID, DivNama');
+        $this->db->from('db_personalia.ref_divisi');
+        $this->db->where('divAktif', 'Y');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function get_karyawan()
+    {
+        $this->db->select('userId, userNama');
+        $this->db->from('vUser');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function getRelasiData($person, $lembaga)
+    {
         $this->db->select('milistId, namaPerson, namaLembaga, alamat, kotanama, kodepos, propNama');
         $this->db->from('db_referensi.ref_alamat a');
         $this->db->join('db_referensi.ref_kota b', 'b.kotakode=a.kota', 'left');
@@ -77,9 +95,8 @@ class model extends CI_Model
         $this->db->where('STATUS', 'Y');
         $this->db->like('namaPerson', $person);
         $this->db->or_like('namaLembaga', $lembaga);
-        
+
         $query = $this->db->get();
         return $query->result();
     }
-    
 }

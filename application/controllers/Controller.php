@@ -98,8 +98,12 @@ class Controller extends CI_Controller
     }
     public function input()
     {
+        $data['divisi'] = $this->Model->get_divisi();
+        $data['karyawan'] = $this->Model->get_karyawan();
+
         $this->load->view('header');
-        $this->load->view('insert');
+        $this->load->view('insert',$data);
+
     }
     public function menuKeluar()
     {
