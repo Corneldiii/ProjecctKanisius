@@ -78,10 +78,11 @@ class model extends CI_Model
         return $query->result_array();
     }
 
-    public function get_karyawan()
+    public function get_karyawan($divisiID)
     {
         $this->db->select('userId, userNama');
         $this->db->from('vUser');
+        $this->db->where('pegLastDivId', $divisiID);
         $query = $this->db->get();
         return $query->result_array();
     }

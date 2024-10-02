@@ -178,8 +178,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     <div class="form-group row">
                                         <label for="dispoDivisi1" class="col-sm-2 col-form-label">Disposisi 1</label>
                                         <div class="col-sm-4">
-                                            <select class="form-control" id="dispoDivisi1">
-                                                <!-- Opsikan divisi di sini -->
+                                            <select class="form-control" id="dispoDivisi1" onchange="getPersons(1)">
                                                 <option value="">Pilih Divisi</option>
                                                 <?php foreach ($divisi as $d): ?>
                                                     <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
@@ -189,11 +188,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                         <label for="dispoNoreg1" class="col-sm-2 col-form-label">Person 1</label>
                                         <div class="col-sm-4">
                                             <select class="form-control" id="dispoNoreg1">
-                                                <!-- Opsikan karyawan di sini -->
                                                 <option value="">Pilih Person</option>
-                                                <?php foreach ($karyawan as $k): ?>
-                                                    <option value="<?= $k['userId'] ?>"><?= $k['userNama'] ?></option>
-                                                <?php endforeach; ?>
                                             </select>
                                         </div>
                                     </div>
@@ -202,7 +197,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     <div class="form-group row">
                                         <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 2</label>
                                         <div class="col-sm-4">
-                                            <select class="form-control" id="dispoDivisi2">
+                                            <select class="form-control" id="dispoDivisi2" onchange="getPersons(2)">
                                                 <option value="">Pilih Divisi</option>
                                                 <?php foreach ($divisi as $d): ?>
                                                     <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
@@ -213,14 +208,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                         <div class="col-sm-4">
                                             <select class="form-control" id="dispoNoreg2">
                                                 <option value="">Pilih Person</option>
-                                                <?php foreach ($karyawan as $k): ?>
-                                                    <option value="<?= $k['userId'] ?>"><?= $k['userNama'] ?></option>
-                                                <?php endforeach; ?>
                                             </select>
                                         </div>
                                     </div>
+
+                                    <!-- Tambahkan dropdown untuk Disposisi 3, 4, dan 5 dengan cara yang sama -->
                                 </div>
                             </div>
+
 
 
 
@@ -389,8 +384,51 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
             // Kosongkan list setelah memilih
             $('#kodeRelasiList').html('');
+
+
         });
     });
+
+    function getPersons(dispoNumber) {
+        var divisiID = document.getElementById('dispoDivisi' + dispoNumber).value;
+
+        if (divisiID) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '<?= base_url("get-persons/") ?>' + encodeURIComponent(divisiID), true);
+            xhr.onload = function() {
+                if (this.status === 200) {
+                    console.log(this.responseText); 
+                    try {
+                        var persons = JSON.parse(this.responseText);
+                        console.log(persons);
+
+                        var select = document.getElementById('dispoNoreg' + dispoNumber);
+                        select.innerHTML = '<option value="">Pilih Person</option>'; 
+
+                        persons.forEach(function(person) {
+                            var option = document.createElement('option');
+                            option.value = person.userId;
+                            option.text = person.userNama;
+                            select.appendChild(option);
+                        });
+                    } catch (e) {
+                        console.error('Error parsing JSON:', e);
+                    }
+                } else {
+                    console.error('Error fetching persons:', this.statusText);
+                }
+            };
+
+            xhr.onerror = function() {
+                console.error('Request failed');
+            };
+            xhr.send();
+        } else {
+            document.getElementById('dispoNoreg' + dispoNumber).innerHTML = '<option value="">Pilih Person</option>';
+        }
+    }
+
+
 
 
     // menggunakan AJAX untuk membuat tabel dari data tabel
