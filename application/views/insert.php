@@ -484,8 +484,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
     $(document).ready(function() {
         var kode = '1';
         var divisi = '<?php echo $kodeDiv; ?>';
+        var noFinal = '<?php echo str_pad($noFinal+1, 4, "0", STR_PAD_LEFT); ?>';
+        console.log(noFinal);
         var Tahun = new Date().getFullYear().toString().substring(2);
-        var urut = '0001'
+        var urut = noFinal !== '' ? noFinal : '0001'; 
 
         var kodeSurat = kode + divisi + Tahun + urut;
         console.log(kodeSurat);
