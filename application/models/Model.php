@@ -15,8 +15,9 @@ ON divID=LEFT(pegLastDivId,2) WHERE a.userId='" . $username . "' AND a.userPass=
 
         // jika user ditemukan
         if ($user) {
-            $_SESSION['login_surat'] = true;
-            $_SESSION['id_surat'] = $user['userId'];
+            $this->session->set_userdata('login_surat', true);
+            $this->session->set_userdata('id_surat', $user['userId']);
+            $this->session->set_userdata('user_id', $user['kodeDiv']);
 
             redirect('menu');
         } else {
@@ -83,13 +84,6 @@ ON divID=LEFT(pegLastDivId,2) WHERE a.userId='" . $username . "' AND a.userPass=
         return $query->result_array();
     }
 
-    public function get_KodeDivisi($username)
-    {
-        $query = "SELECT LEFT(pegLastDivId,2) kodeDiv,divisiNama FROM tb_user a LEFT JOIN vUser b ON a.userId=b.userId
-        LEFT JOIN (SELECT LEFT(divID,2) divID,divNama divisiNama FROM db_personalia.`ref_divisi` WHERE RIGHT(divID,4)='0000' AND divAktif='Y') divisi
-        ON divID=LEFT(pegLastDivId,2) WHERE a.userId='" . $username . "' "; //query database
-        $user = $this->db->query($query)->row_array();
-    }
 
     public function getRelasiData($person, $lembaga)
     {

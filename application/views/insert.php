@@ -450,13 +450,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
             xhr.open('GET', '<?= base_url("get-persons/") ?>' + encodeURIComponent(divisiID), true);
             xhr.onload = function() {
                 if (this.status === 200) {
-                    console.log(this.responseText); 
+                    console.log(this.responseText);
                     try {
                         var persons = JSON.parse(this.responseText);
                         console.log(persons);
 
                         var select = document.getElementById('dispoNoreg' + dispoNumber);
-                        select.innerHTML = '<option value="">Pilih Person</option>'; 
+                        select.innerHTML = '<option value="">Pilih Person</option>';
 
                         persons.forEach(function(person) {
                             var option = document.createElement('option');
@@ -483,15 +483,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
     $(document).ready(function() {
         var kode = '1';
-        var divisi = '01';
+        var divisi = '<?php echo $kodeDiv; ?>';
         var Tahun = new Date().getFullYear().toString().substring(2);
         var urut = '0001'
 
-        var kodeSurat = kode + divisi + Tahun +urut;
+        var kodeSurat = kode + divisi + Tahun + urut;
         console.log(kodeSurat);
         $('#nomorSurat').val(kodeSurat);
-
-
 
     });
 

@@ -98,14 +98,15 @@ class Controller extends CI_Controller
     }
     public function input()
     {
-        $data['divisi'] = $this->Model->get_divisi();
+        $data['divisi'] = $this->Model->get_divisi(); 
+        $data['kodeDiv'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
 
         $this->load->view('header');
-        $this->load->view('insert',$data);
-
+        $this->load->view('insert', $data);
     }
 
-    public function get_persons($divisiID) {
+    public function get_persons($divisiID)
+    {
         $persons = $this->Model->get_karyawan($divisiID);
         header('Content-Type: application/json');
         echo json_encode($persons);
