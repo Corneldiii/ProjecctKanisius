@@ -8,21 +8,17 @@ class model extends CI_Model
         $username = $this->input->post('id');
         $password = $this->input->post('password');
 
-        $query = "SELECT username, password FROM user WHERE username = '" . $username . "'"; //query database
+        $query = "SELECT a.userId userId,userNama,LEFT(pegLastDivId,2) kodeDiv,divisiNama FROM tb_user a LEFT JOIN vUser b ON a.userId=b.userId
+LEFT JOIN (SELECT LEFT(divID,2) divID,divNama divisiNama FROM db_personalia.`ref_divisi` WHERE RIGHT(divID,4)='0000' AND divAktif='Y') divisi
+ON divID=LEFT(pegLastDivId,2) WHERE a.userId='" . $username . "' AND a.userPass=MD5('" . $password . "')"; //query database
         $user = $this->db->query($query)->row_array();
 
         // jika user ditemukan
         if ($user) {
-            if (md5($password) == $user['password']) { //if user password input = user password di database
-                $_SESSION['login_surat'] = true;
-                $_SESSION['id_surat'] = $user['userId'];
+            $_SESSION['login_surat'] = true;
+            $_SESSION['id_surat'] = $user['userId'];
 
-                redirect('menu');
-            } else {
-                $this->session->set_flashdata('type', 'alert-danger');
-                $this->session->set_flashdata('pesan', '<strong>Gagal!</strong> ID atau Password salah');
-                redirect();
-            }
+            redirect('menu');
         } else {
             $this->session->set_flashdata('type', 'alert-danger');
             $this->session->set_flashdata('pesan', '<strong>Gagal!</strong> ID atau Password salah');
@@ -85,6 +81,14 @@ class model extends CI_Model
         $this->db->where('pegLastDivId', $divisiID);
         $query = $this->db->get();
         return $query->result_array();
+    }
+
+    public function get_KodeDivisi($username)
+    {
+        $query = "SELECT LEFT(pegLastDivId,2) kodeDiv,divisiNama FROM tb_user a LEFT JOIN vUser b ON a.userId=b.userId
+        LEFT JOIN (SELECT LEFT(divID,2) divID,divNama divisiNama FROM db_personalia.`ref_divisi` WHERE RIGHT(divID,4)='0000' AND divAktif='Y') divisi
+        ON divID=LEFT(pegLastDivId,2) WHERE a.userId='" . $username . "' "; //query database
+        $user = $this->db->query($query)->row_array();
     }
 
     public function getRelasiData($person, $lembaga)

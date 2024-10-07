@@ -76,7 +76,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <div class="header d-flex p-3" style="gap: 30px;">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Nomor Surat</label>
-                                <input type="text" class="form-control w-100 text-center " id="nomorSurat" placeholder="Nomor Fisik Surat" aria-describedby="emailHelp">
+                                <input type="text" class="form-control w-100 text-center " id="nomorSurat" placeholder="Nomor Fisik Surat" aria-describedby="emailHelp" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Nomor Fisik Surat</label>
+                                <input type="text" class="form-control w-100 text-center " id="nomorSuratFisik" placeholder="Nomor Fisik Surat" aria-describedby="emailHelp">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tanggal Fisik Surat</label>
@@ -211,6 +215,57 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="form-group row">
+                                        <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 2</label>
+                                        <div class="col-sm-4">
+                                            <select class="form-control" id="dispoDivisi2" onchange="getPersons(2)">
+                                                <option value="">Pilih Divisi</option>
+                                                <?php foreach ($divisi as $d): ?>
+                                                    <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                        <label for="dispoNoreg2" class="col-sm-2 col-form-label">Person 2</label>
+                                        <div class="col-sm-4">
+                                            <select class="form-control" id="dispoNoreg2">
+                                                <option value="">Pilih Person</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 2</label>
+                                        <div class="col-sm-4">
+                                            <select class="form-control" id="dispoDivisi2" onchange="getPersons(2)">
+                                                <option value="">Pilih Divisi</option>
+                                                <?php foreach ($divisi as $d): ?>
+                                                    <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                        <label for="dispoNoreg2" class="col-sm-2 col-form-label">Person 2</label>
+                                        <div class="col-sm-4">
+                                            <select class="form-control" id="dispoNoreg2">
+                                                <option value="">Pilih Person</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 2</label>
+                                        <div class="col-sm-4">
+                                            <select class="form-control" id="dispoDivisi2" onchange="getPersons(2)">
+                                                <option value="">Pilih Divisi</option>
+                                                <?php foreach ($divisi as $d): ?>
+                                                    <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                        <label for="dispoNoreg2" class="col-sm-2 col-form-label">Person 2</label>
+                                        <div class="col-sm-4">
+                                            <select class="form-control" id="dispoNoreg2">
+                                                <option value="">Pilih Person</option>
+                                            </select>
+                                        </div>
+                                    </div>
 
                                     <!-- Tambahkan dropdown untuk Disposisi 3, 4, dan 5 dengan cara yang sama -->
                                 </div>
@@ -281,7 +336,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 
     $(document).ready(function() {
-        // Saat tombol Cari diklik (untuk nama person)
         $('#searchPerson').on('click', function() {
             var namaPerson = $('#namaPerson').val();
             var namaLembaga = $('#namaLembaga').val();
@@ -320,7 +374,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
             }
         });
 
-        // Saat tombol Cari diklik (untuk nama lembaga)
         $('#searchLembaga').on('click', function() {
             var namaPerson = $('#namaPerson').val();
             var namaLembaga = $('#namaLembaga').val();
@@ -427,6 +480,20 @@ defined('BASEPATH') or exit('No direct script access allowed');
             document.getElementById('dispoNoreg' + dispoNumber).innerHTML = '<option value="">Pilih Person</option>';
         }
     }
+
+    $(document).ready(function() {
+        var kode = '1';
+        var divisi = '01';
+        var Tahun = new Date().getFullYear().toString().substring(2);
+        var urut = '0001'
+
+        var kodeSurat = kode + divisi + Tahun +urut;
+        console.log(kodeSurat);
+        $('#nomorSurat').val(kodeSurat);
+
+
+
+    });
 
 
 
