@@ -218,16 +218,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     <div class="form-group row">
                                         <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 2</label>
                                         <div class="col-sm-4">
-                                            <select class="form-control" id="dispoDivisi2" onchange="getPersons(3)">
+                                            <select class="form-control" id="dispoDivisi3" onchange="getPersons(3)">
                                                 <option value="">Pilih Divisi</option>
                                                 <?php foreach ($divisi as $d): ?>
                                                     <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
-                                        <label for="dispoNoreg2" class="col-sm-2 col-form-label">Person 2</label>
+                                        <label for="dispoNoreg2" class="col-sm-2 col-form-label">Person 3</label>
                                         <div class="col-sm-4">
-                                            <select class="form-control" id="dispoNoreg2">
+                                            <select class="form-control" id="dispoNoreg3">
                                                 <option value="">Pilih Person</option>
                                             </select>
                                         </div>
@@ -235,16 +235,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     <div class="form-group row">
                                         <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 2</label>
                                         <div class="col-sm-4">
-                                            <select class="form-control" id="dispoDivisi2" onchange="getPersons(4)">
+                                            <select class="form-control" id="dispoDivisi4" onchange="getPersons(4)">
                                                 <option value="">Pilih Divisi</option>
                                                 <?php foreach ($divisi as $d): ?>
                                                     <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
-                                        <label for="dispoNoreg2" class="col-sm-2 col-form-label">Person 2</label>
+                                        <label for="dispoNoreg2" class="col-sm-2 col-form-label">Person 4</label>
                                         <div class="col-sm-4">
-                                            <select class="form-control" id="dispoNoreg2">
+                                            <select class="form-control" id="dispoNoreg4">
                                                 <option value="">Pilih Person</option>
                                             </select>
                                         </div>
@@ -252,7 +252,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     <div class="form-group row">
                                         <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 2</label>
                                         <div class="col-sm-4">
-                                            <select class="form-control" id="dispoDivisi2" onchange="getPersons(5)">
+                                            <select class="form-control" id="dispoDivisi5" onchange="getPersons(5)">
                                                 <option value="">Pilih Divisi</option>
                                                 <?php foreach ($divisi as $d): ?>
                                                     <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
@@ -261,7 +261,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                         </div>
                                         <label for="dispoNoreg2" class="col-sm-2 col-form-label">Person 2</label>
                                         <div class="col-sm-4">
-                                            <select class="form-control" id="dispoNoreg2">
+                                            <select class="form-control" id="dispoNoreg5">
                                                 <option value="">Pilih Person</option>
                                             </select>
                                         </div>
