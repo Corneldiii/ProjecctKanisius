@@ -218,7 +218,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     <div class="form-group row">
                                         <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 2</label>
                                         <div class="col-sm-4">
-                                            <select class="form-control" id="dispoDivisi2" onchange="getPersons(2)">
+                                            <select class="form-control" id="dispoDivisi2" onchange="getPersons(3)">
                                                 <option value="">Pilih Divisi</option>
                                                 <?php foreach ($divisi as $d): ?>
                                                     <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
@@ -235,7 +235,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     <div class="form-group row">
                                         <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 2</label>
                                         <div class="col-sm-4">
-                                            <select class="form-control" id="dispoDivisi2" onchange="getPersons(2)">
+                                            <select class="form-control" id="dispoDivisi2" onchange="getPersons(4)">
                                                 <option value="">Pilih Divisi</option>
                                                 <?php foreach ($divisi as $d): ?>
                                                     <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
@@ -252,7 +252,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     <div class="form-group row">
                                         <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 2</label>
                                         <div class="col-sm-4">
-                                            <select class="form-control" id="dispoDivisi2" onchange="getPersons(2)">
+                                            <select class="form-control" id="dispoDivisi2" onchange="getPersons(5)">
                                                 <option value="">Pilih Divisi</option>
                                                 <?php foreach ($divisi as $d): ?>
                                                     <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
@@ -266,8 +266,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                             </select>
                                         </div>
                                     </div>
-
-                                    <!-- Tambahkan dropdown untuk Disposisi 3, 4, dan 5 dengan cara yang sama -->
                                 </div>
                             </div>
 
@@ -277,7 +275,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary w-100 mt-4">Submit</button>
             </form>
 
             <!-- form insert (end) -->
@@ -348,9 +346,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         person: namaPerson,
                         lembaga: namaLembaga
                     },
-                    dataType: "json", // Mengharapkan respons JSON
+                    dataType: "json", 
                     success: function(data) {
-                        $('#kodeRelasiList').empty(); // Bersihkan list sebelumnya
+                        $('#kodeRelasiList').empty(); 
 
                         if (data.length > 0) {
                             $.each(data, function(index, item) {
@@ -370,7 +368,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     }
                 });
             } else {
-                $('#kodeRelasiList').html(''); // Kosongkan jika input kosong
+                $('#kodeRelasiList').html('');
             }
         });
 
@@ -386,9 +384,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         person: namaPerson,
                         lembaga: namaLembaga
                     },
-                    dataType: "json", // Mengharapkan respons JSON
+                    dataType: "json", 
                     success: function(data) {
-                        $('#kodeRelasiList').empty(); // Bersihkan list sebelumnya
+                        $('#kodeRelasiList').empty();
 
                         if (data.length > 0) {
                             $.each(data, function(index, item) {
@@ -408,16 +406,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     }
                 });
             } else {
-                $('#kodeRelasiList').html(''); // Kosongkan jika input kosong
+                $('#kodeRelasiList').html(''); 
             }
         });
 
-        // Saat user klik salah satu hasil dari list
+
         $(document).on('click', '.list-group-item', function(e) {
-            e.preventDefault(); // Mencegah tindakan default link <a>
+            e.preventDefault();
 
             console.log($(this).data());
-            // Ambil data dari atribut 'data-'
             var milistId = $(this).data('id');
             var namaPerson = $(this).data('nama');
             var lembaga = $(this).data('namaLembaga');
@@ -426,7 +423,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
             var propinsi = $(this).data('propNama');
             var kodepos = $(this).data('kodepos');
 
-            // Isi form input dengan data yang dipilih
             $('#kodeRelasi').val(milistId);
             $('#namaPerson').val(namaPerson);
             $('#namaLembaga').val(lembaga);
@@ -435,7 +431,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
             $('#propinsi').val(propinsi);
             $('#kodepos').val(kodepos);
 
-            // Kosongkan list setelah memilih
             $('#kodeRelasiList').html('');
 
 
@@ -484,16 +479,20 @@ defined('BASEPATH') or exit('No direct script access allowed');
     $(document).ready(function() {
         var kode = '1';
         var divisi = '<?php echo $kodeDiv; ?>';
-        var noFinal = '<?php echo str_pad($noFinal+1, 4, "0", STR_PAD_LEFT); ?>';
+        var noFinal = '<?php echo str_pad($noFinal + 1, 4, "0", STR_PAD_LEFT); ?>';
         console.log(noFinal);
         var Tahun = new Date().getFullYear().toString().substring(2);
-        var urut = noFinal !== '' ? noFinal : '0001'; 
+        var urut = noFinal !== '' ? noFinal : '0001';
 
         var kodeSurat = kode + divisi + Tahun + urut;
         console.log(kodeSurat);
         $('#nomorSurat').val(kodeSurat);
 
     });
+
+    
+
+
 
 
 
