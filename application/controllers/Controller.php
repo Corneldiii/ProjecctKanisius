@@ -125,5 +125,15 @@ class Controller extends CI_Controller
         $this->load->view('header');
         $this->load->view('insertKeluar');
     }
+
+     // http://localhost/surat/memo
+    public function memo()
+    {
+        
+        // Tampilkan ke view memo
+        $this->load->view('header');  // Load header (opsional)
+        $this->load->view('memo');  // Load view memo dengan data memo
+        
+    }
     
 }

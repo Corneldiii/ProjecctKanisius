@@ -15,3 +15,4 @@ $route['get-persons/(:any)'] = 'Controller/get_persons/$1';
 $route['menuKeluar'] = 'Controller/menuKeluar';
 $route['insertKeluar'] = 'Controller/inputKeluar';
 $route['searchId'] = 'Controller/searchKodeRelasi';
+$route['memo'] = 'Controller/memo';
