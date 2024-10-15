@@ -18,47 +18,6 @@ class Insert extends CI_Controller
     }
 
     public function index() {}
-
-    public function insert()
-    {
-        $data = [
-            'nomor' => $this->input->post('nomor'),
-            'tanggal' => $this->input->post('tanggal'),
-            'jenis' => $this->input->post('jenis'),
-            'noSurat' => $this->input->post('nomorSuratFisik'),
-            'tglSurat' => $this->input->post('tanggalSurat'),
-            'hal' => $this->input->post('hal'),
-            'lampiran' => $this->input->post('lampiran'),
-            'keterangan' => $this->input->post('keterangan'),
-            'namaPerson' => $this->input->post('namaPerson'),
-            'namaLembaga' => $this->input->post('namaLembaga'),
-            'alamat' => $this->input->post('alamat'),
-            'kota' => $this->input->post('kota'),
-            'propinsi' => $this->input->post('propinsi'),
-            'kodepos' => $this->input->post('kodepos'),
-            'divisi' => $this->input->post('divisi'),
-            'file' => $file,
-            'dispoDivisi1' => $this->input->post('dispoDivisi1'),
-            'dispoNoreg1' => $this->input->post('dispoNoreg1'),
-            'dispoDivisi2' => $this->input->post('dispoDivisi2'),
-            'dispoNoreg12' => $this->input->post('dispoNoreg2'),
-            'dispoDivisi3' => $this->input->post('dispoDivisi3'),
-            'dispoNoreg3' => $this->input->post('dispoNoreg3'),
-            'dispoDivisi4' => $this->input->post('dispoDivisi4'),
-            'dispoNoreg4' => $this->input->post('dispoNoreg4'),
-            'dispoDivisi5' => $this->input->post('dispoDivisi5'),
-            'dispoNoreg5' => $this->input->post('dispoNoreg5'),
-        ];
-
-        $insert = $this->Surat_model->insertSurat($data);
-
-        if ($insert) {
-            echo json_encode(["status" => true, "message" => "Data berhasil disimpan"]);
-        } else {
-            echo json_encode(["status" => false, "message" => "Data gagal disimpan"]);
-        }
-    }
-
     public function contoh2()
     {
         $inputAjax = $this->input->post('inputAjax');
@@ -66,4 +25,88 @@ class Insert extends CI_Controller
         $this->Model->contoh2($inputAjax);
         redirect('menu');
     }
+
+    public function insert_data() {
+        // Ambil data dari POST request
+        $nomor = $this->input->post('nomor');
+        $tanggal = $this->input->post('tanggal');
+        $jenis = $this->input->post('jenis');
+        $nomorSuratFisik = $this->input->post('nomorSuratFisik');
+        $tanggalSurat = $this->input->post('tanggalSurat');
+        $hal = $this->input->post('hal');
+        $lampiran = $this->input->post('lampiran');
+        $keterangan = $this->input->post('keterangan');
+        $kodeRelasi = $this->input->post('kodeRelasi');
+        $namaPerson = $this->input->post('namaPerson');
+        $namaLembaga = $this->input->post('namaLembaga');
+        $alamat = $this->input->post('alamat');
+        $kota = $this->input->post('kota');
+        $propinsi = $this->input->post('propinsi');
+        $kodepos = $this->input->post('kodepos');
+        $divisi1 = $this->input->post('divisi1');
+        $divisi2 = $this->input->post('divisi2');
+        $divisi3 = $this->input->post('divisi3');
+        $divisi4 = $this->input->post('divisi4');
+        $divisi5 = $this->input->post('divisi5');
+        $person1 = $this -> input -> post('person1');
+        $person2 = $this -> input -> post('person2');
+        $person3 = $this -> input -> post('person3');
+        $person4 = $this -> input -> post('person4');
+        $person5 = $this -> input -> post('person5');
+
+
+        // Simpan file jika ada
+        if (!empty($_FILES['customFile']['name'])) {
+            $config['upload_path'] = './uploads/';
+            $config['allowed_types'] = 'pdf|jpg|png|docx';
+            $this->load->library('upload', $config);
+
+            if ($this->upload->do_upload('customFile')) {
+                $uploadData = $this->upload->data();
+                $filePath = $uploadData['file_name'];
+                var_dump($filePath);
+            } else {
+                echo $this->upload->display_errors();
+                return;
+            }
+        }
+
+        // Data array untuk disimpan di database
+        $data = array(
+            'nomor' => $nomor,
+            'tanggal' => $tanggal,
+            'jenis' => $jenis,
+            'noSurat' => $nomorSuratFisik,
+            'tglSurat' => $tanggalSurat,
+            'hal' => $hal,
+            'lampiran' => $lampiran,
+            'keterangan' => $keterangan,
+            'relasiID' => $kodeRelasi,
+            'namaPerson' => $namaPerson,
+            'namaLembaga' => $namaLembaga,
+            'alamat' => $alamat,
+            'kota' => $kota,
+            'propinsi' => $propinsi,
+            'kodepos' => $kodepos,
+            'file' => isset($filePath) ? $filePath : null,
+            'dispoDivisi1' => $divisi1,
+            'dispoDivisi2' => $divisi2,
+            'dispoDivisi3' => $divisi3,
+            'dispoDivisi4' => $divisi4,
+            'dispoDivisi5' => $divisi5,
+            'dispoNoreg1' => $person1,
+            'dispoNoreg2' => $person2,
+            'dispoNoreg3' => $person3,
+            'dispoNoreg4' => $person4,
+            'dispoNoreg5' => $person5,
+
+        );
+
+        var_dump($data);
+
+        $this->Model->insertMasuk($data);
+
+        echo json_encode(array("status" => "success"));
+    }
+
 }

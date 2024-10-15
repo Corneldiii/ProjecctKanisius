@@ -144,17 +144,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 html += '<tr>';
                 html += '<td class="text-center align-middle">' + no + '</td>';
                 html += '<td class="text-center align-middle"><img src="' + data[i].pict_surat + '" alt="Gambar Surat" style="width: 100px; height: auto;"></td>';
-                html += '<td class="text-center align-middle">' + data[i].title + '</td>';
-                html += '<td class="text-center align-middle">' + data[i].description + '</td>';
-                html += '<td class="text-center align-middle">' + data[i].description + '</td>';
-                html += '<td class="text-center align-middle">' + data[i].description + '</td>';
-                html += '<td class="text-center align-middle">' + data[i].description + '</td>';
-                html += '<td class="text-center align-middle">' + data[i].description + '</td>';
-                html += '<td class="text-center align-middle">' +
-                    (data[i].status == 0 ?
-                        'Tertunda <td class="text-center align-middle"><button type="button" class="btn btn-primary btn-kirim rounded-circle w-50 h-50" data-id="' + data[i].id + '">i  </button></td>' :
-                        'Terkirim <td class="text-center align-middle"> - </td>'
-                    ) + '</td>';
+                html += '<td class="text-center align-middle">' + data[i].tanggal + '</td>';
+                html += '<td class="text-center align-middle">' + data[i].noSurat + '</td>';
+                html += '<td class="text-center align-middle">' + data[i].relasiID + '</td>';
+                html += '<td class="text-center align-middle">' + data[i].namaPerson + '</td>';
+                html += '<td class="text-center align-middle">' + data[i].namaLembaga + '</td>';
+                html += '<td class="text-center align-middle">' + data[i].hal + '</td>';
+                html += '<td class="text-center align-middle">' + data[i].lampiran +'</td>';
 
                 // html += '<td><button type="button" class="btn btn-danger">Hapus</button></td>';
                 html += '</tr>';
