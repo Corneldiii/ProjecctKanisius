@@ -135,5 +135,14 @@ class Controller extends CI_Controller
         $this->load->view('memo');  // Load view memo dengan data memo
         
     }
+
+    public function inputMemo()
+    {
+        
+        // Tampilkan ke view memo
+        $this->load->view('header');  // Load header (opsional)
+        $this->load->view('inputMemo');  // Load view memo dengan data memo
+        
+    }
     
 }

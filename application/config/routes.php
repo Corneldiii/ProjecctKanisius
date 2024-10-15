@@ -16,3 +16,4 @@ $route['menuKeluar'] = 'Controller/menuKeluar';
 $route['insertKeluar'] = 'Controller/inputKeluar';
 $route['searchId'] = 'Controller/searchKodeRelasi';
 $route['memo'] = 'Controller/memo';
+$route['inputMemo'] = 'Controller/inputMemo';
