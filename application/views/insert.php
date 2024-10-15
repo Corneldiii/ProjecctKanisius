@@ -26,10 +26,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
         </nav>
 
         <div class="container-fluid">
-            <div class="menu">
-                <a href="menu" class="btn btn-primary">Tabel</a>
-                <a href="insert" class="btn btn-primary">Insert</a>
-            </div>
+        <div class="menu"
+                style="display: flex; justify-content: flex-start; margin-top: 20px; margin-bottom: 20px; border-bottom: 2px solid #ddd;">
+                <a href="menu" class="btn btn-primary active"
+                    style="display: inline-block; padding: 12px 20px; margin: 0 10px; font-size: 16px; text-decoration: none; color: #555; border: 1px solid #ddd; border-bottom: none; background-color: #f9f9f9; border-radius: 8px 8px 0 0; transition: background-color 0.3s ease, color 0.3s ease;">Tabel</a>
+                <a href="insert" class="btn btn-primary"
+                    style="display: inline-block; padding: 12px 20px; margin: 0 10px; font-size: 16px; text-decoration: none; color: #555; border: 1px solid #ddd; border-bottom: none; background-color: #f9f9f9; border-radius: 8px 8px 0 0; transition: background-color 0.3s ease, color 0.3s ease;">Insert</a>
+        </div>
 
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 class="h3 mb-0 text-gray-800">Daftar Menu atau Tabel</h1>
@@ -61,11 +64,19 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tanggal Input</label>
+<<<<<<< HEAD
                                 <input type="date" class="form-control w-100 text-center" name="tglInput" id="tanggal" aria-describedby="emailHelp">
+=======
+                                <input type="date" class="form-control w-80 text-center " id="tanggal" aria-describedby="emailHelp">
+>>>>>>> 59a17e7b1d3114038c5e17b4a0ef5e2220203a89
                             </div>
-                            <div class="form-group">
+                            <div class="form-group ms-3">
                                 <label for="exampleInputEmail1">Jenis Surat</label>
+<<<<<<< HEAD
                                 <select class="form-control" name="jenis" id="jenis" style="width:300px;">
+=======
+                                <select class="form-control" id="jenis" style="width:200px;">
+>>>>>>> 59a17e7b1d3114038c5e17b4a0ef5e2220203a89
                                     <option>Surat</option>
                                     <option>Email</option>
                                     <option>Penawaran</option>
@@ -74,8 +85,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         </div>
                         <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
                         <div class="header d-flex p-3" style="gap: 30px;">
-                            <div class="form-group">
+                            <div class="form-group ">
                                 <label for="exampleInputEmail1">Nomor Surat</label>
+<<<<<<< HEAD
                                 <input type="text" class="form-control w-100 text-center " name="nomorSurat" id="nomorSurat" placeholder="Nomor Fisik Surat" aria-describedby="emailHelp" readonly>
                             </div>
                             <div class="form-group">
@@ -85,13 +97,30 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tanggal Fisik Surat</label>
                                 <input type="date" class="form-control w-100 text-center " name="tglSurat" id="tanggalSurat" aria-describedby="emailHelp">
+=======
+                                <input type="text" class="form-control w-70 text-center " id="nomorSurat" placeholder="Nomor Fisik Surat" aria-describedby="emailHelp" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Nomor Fisik Surat</label>
+                                <input type="text" class="form-control w-70 text-center " id="nomorSuratFisik" placeholder="Nomor Fisik Surat" aria-describedby="emailHelp">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Tanggal Fisik Surat</label>
+                                <input type="date" class="form-control w-70 text-center " id="tanggalSurat" aria-describedby="emailHelp">
+>>>>>>> 59a17e7b1d3114038c5e17b4a0ef5e2220203a89
                             </div>
                         </div>
 
                         <div class="input-lanjutan">
+<<<<<<< HEAD
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Hal</label>
                                 <input type="text" class="form-control w-75 text-center " name="hal" id="hal" placeholder="Perihal Surat" aria-describedby="emailHelp">
+=======
+                            <div class="form-group ">
+                                <label for="exampleInputEmail1" >Hal</label>
+                                <input type="text" class="form-control w-80 text-center " id="hal" placeholder="Perihal Surat" aria-describedby="emailHelp">
+>>>>>>> 59a17e7b1d3114038c5e17b4a0ef5e2220203a89
                             </div>
                         </div>
 
@@ -107,18 +136,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <div class="row">
                     <div class="col">
                         <div class="input-lanjutan">
-                            <div class="form-group">
+                            <div class="form-group ">
                                 <label for="exampleInputEmail1">Lampiran</label>
                                 <input type="text" class="form-control w-75 text-center " name="lampiran" id="lampiran" placeholder="Lampiran" aria-describedby="emailHelp">
                             </div>
-                            <div class="form-group d-flex flex-column">
+                            <div class="form-group d-flex flex-column ">
                                 <label for="description">Deskripsi:</label>
                                 <textarea class="form-control w-75 text-center" id="keterangan" name="description" rows="4" placeholder="Ringksan Isi Surat" aria-describedby="emailHelp"></textarea>
                             </div>
 
                             <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
 
-                            <div class="form-group w-25">
+                            <div class="form-group w-25 m-4 ">
                                 <label for="kodeRelasi">Kode Relasi</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control text-center" name="kodeRelasi" id="kodeRelasi" placeholder="Kode Relasi" readonly>
@@ -126,7 +155,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 </div>
                             </div>
 
-                            <div class="form-group row m-4">
+                            <div class="form-group row m-3">
                                 <div class="col">
                                     <label for="namaPerson">Nama</label>
                                     <div class="input-group">
@@ -147,7 +176,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 </div>
                             </div>
 
-                            <div class="form-group m-3">
+                            <div class="form-group m-4">
                                 <label for="alamat">Alamat</label>
                                 <input type="text" class="form-control w-75 text-center" name="alamat" id="alamat" placeholder="Alamat" readonly>
                             </div>
