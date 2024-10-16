@@ -11,6 +11,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 ?>
 <!-- untuk daftar menu dst, cek header.php-->
 
+
+
 <div id="content-wrapper" class="d-flex flex-column">
 
     <div id="content">
@@ -25,7 +27,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
             </ul>
         </nav>
 
+        <div id="overlay"></div>
+
+        <div id="spinner" class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+
+
         <div class="container-fluid">
+
+
+
+
             <div class="menu"
                 style="display: flex; justify-content: flex-start; margin-top: 20px; margin-bottom: 20px; border-bottom: 2px solid #ddd;">
                 <a href="menu" class="btn btn-primary active"
@@ -230,7 +243,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                         </div>
                                         <label for="dispoNoreg2" class="col-sm-2 col-form-label">Person 3</label>
                                         <div class="col-sm-4">
-                                            <select class="form-control" name="perosn3" id="dispoNoreg3">
+                                            <select class="form-control" name="person3" id="dispoNoreg3">
                                                 <option value="">Pilih Person</option>
                                             </select>
                                         </div>
@@ -349,6 +362,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         person: namaPerson,
                         lembaga: namaLembaga
                     },
+                    beforeSend: function() {
+                        console.log("msauk");
+                        $("#spinner, #overlay").show();
+                    },
                     dataType: "json",
                     success: function(data) {
                         $('#kodeRelasiList').empty();
@@ -364,6 +381,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         } else {
                             $('#kodeRelasiList').append('<li class="list-group-item">No Results Found</li>');
                         }
+                    },
+                    complete: function() {
+                        $("#spinner, #overlay").hide();
                     },
                     error: function(xhr, status, error) {
                         console.error('AJAX Error:', error);
@@ -387,6 +407,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         person: namaPerson,
                         lembaga: namaLembaga
                     },
+
+                    beforeSend: function() {
+                        console.log("msauk");
+                        $("#spinner, #overlay").show();
+                    },
                     dataType: "json",
                     success: function(data) {
                         $('#kodeRelasiList').empty();
@@ -402,6 +427,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         } else {
                             $('#kodeRelasiList').append('<li class="list-group-item">No Results Found</li>');
                         }
+                    },
+                    complete: function() {
+                        $("#spinner, #overlay").hide();
                     },
                     error: function(xhr, status, error) {
                         console.error('AJAX Error:', error);

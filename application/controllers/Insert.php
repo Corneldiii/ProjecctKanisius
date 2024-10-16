@@ -28,7 +28,7 @@ class Insert extends CI_Controller
 
     public function insert_data() {
         // Ambil data dari POST request
-        $nomor = $this->input->post('nomor');
+        $nomor = $this->input->post('nomorSurat');
         $tanggal = $this->input->post('tanggal');
         $jenis = $this->input->post('jenis');
         $nomorSuratFisik = $this->input->post('nomorSuratFisik');
@@ -98,7 +98,7 @@ class Insert extends CI_Controller
             'dispoNoreg2' => $person2,
             'dispoNoreg3' => $person3,
             'dispoNoreg4' => $person4,
-            'dispoNoreg5' => $person5,
+            'dispoNoreg5' => $person5
 
         );
 
