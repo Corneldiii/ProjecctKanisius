@@ -18,7 +18,7 @@ class Controller extends CI_Controller
         $this->load->config('email');
         $this->load->library('email');
         $this->load->database();
-    }
+    }   
 
     public function login()
     {
