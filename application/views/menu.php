@@ -28,12 +28,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
         </nav>
 
         <div class="container-fluid">
-            <div class="menu">
-                <a href="menu" class="btn btn-primary">Tabel</a>
-                <a href="insert" class="btn btn-primary">Insert</a>
+            <div class="menu"
+                style="display: flex; justify-content: flex-start; margin-top: 20px; margin-bottom: 20px; border-bottom: 2px solid #ddd;">
+                <a href="menu" class="btn btn-primary active"
+                    style="display: inline-block; padding: 12px 20px; margin: 0 10px; font-size: 16px; text-decoration: none; color: #555; border: 1px solid #ddd; border-bottom: none; background-color: #f9f9f9; border-radius: 8px 8px 0 0; transition: background-color 0.3s ease, color 0.3s ease;">Tabel</a>
+                <a href="insert" class="btn btn-primary"
+                    style="display: inline-block; padding: 12px 20px; margin: 0 10px; font-size: 16px; text-decoration: none; color: #555; border: 1px solid #ddd; border-bottom: none; background-color: #f9f9f9; border-radius: 8px 8px 0 0; transition: background-color 0.3s ease, color 0.3s ease;">Insert</a>
             </div>
 
-            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+
+
+            <div class=" d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 class="h3 mb-0 text-gray-800">Daftar Menu atau Tabel</h1>
             </div>
 
@@ -46,7 +51,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             <?= $_SESSION['pesan'] ?>
 
                         </div>
-                    <?php unset($_SESSION['pesan']);
+                        <?php unset($_SESSION['pesan']);
                     } ?>
                 </div>
             </div>
@@ -115,7 +120,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <script>
     // gunakan Javascript dan jQuery
 
-    $(document).ready(function() { // jika jalaman web selesai diload, maka jalankan script ini
+    $(document).ready(function () { // jika jalaman web selesai diload, maka jalankan script ini
         $('#menuMenu').trigger('click');
 
         //getContoh1();
@@ -138,23 +143,19 @@ defined('BASEPATH') or exit('No direct script access allowed');
         method: "GET",
         dataType: "JSON",
         async: false,
-        success: function(data) {
+        success: function (data) {
             for (var i = 0; i < data.length; i++) {
 
                 html += '<tr>';
                 html += '<td class="text-center align-middle">' + no + '</td>';
                 html += '<td class="text-center align-middle"><img src="' + data[i].pict_surat + '" alt="Gambar Surat" style="width: 100px; height: auto;"></td>';
-                html += '<td class="text-center align-middle">' + data[i].title + '</td>';
-                html += '<td class="text-center align-middle">' + data[i].description + '</td>';
-                html += '<td class="text-center align-middle">' + data[i].description + '</td>';
-                html += '<td class="text-center align-middle">' + data[i].description + '</td>';
-                html += '<td class="text-center align-middle">' + data[i].description + '</td>';
-                html += '<td class="text-center align-middle">' + data[i].description + '</td>';
-                html += '<td class="text-center align-middle">' +
-                    (data[i].status == 0 ?
-                        'Tertunda <td class="text-center align-middle"><button type="button" class="btn btn-primary btn-kirim rounded-circle w-50 h-50" data-id="' + data[i].id + '">i  </button></td>' :
-                        'Terkirim <td class="text-center align-middle"> - </td>'
-                    ) + '</td>';
+                html += '<td class="text-center align-middle">' + data[i].tanggal + '</td>';
+                html += '<td class="text-center align-middle">' + data[i].noSurat + '</td>';
+                html += '<td class="text-center align-middle">' + data[i].relasiID + '</td>';
+                html += '<td class="text-center align-middle">' + data[i].namaPerson + '</td>';
+                html += '<td class="text-center align-middle">' + data[i].namaLembaga + '</td>';
+                html += '<td class="text-center align-middle">' + data[i].hal + '</td>';
+                html += '<td class="text-center align-middle">' + data[i].lampiran +'</td>';
 
                 // html += '<td><button type="button" class="btn btn-danger">Hapus</button></td>';
                 html += '</tr>';
@@ -165,7 +166,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
         }
     });
 
-    $(document).on('click', '.btn-kirim', function() {
+    $(document).on('click', '.btn-kirim', function () {
         var id = $(this).data('id');
         var button = $(this);
 
@@ -175,12 +176,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
             data: {
                 id: id
             },
-            success: function(response) {
+            success: function (response) {
                 console.log(response);
                 alert('Email berhasil dikirim!');
                 button.closest('td').html('Terkirim <td class="text-center align-middle"> - </td>');
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 alert('Gagal mengirim email: ' + xhr.responseText);
             }
         });
@@ -203,7 +204,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             method: "POST",
             dataType: "JSON",
             async: false,
-            success: function(data) {
+            success: function (data) {
                 for (var i = 0; i < data.length; i++) {
 
                     html += '<tr>';

@@ -11,6 +11,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 ?>
 <!-- untuk daftar menu dst, cek header.php-->
 
+
+
 <div id="content-wrapper" class="d-flex flex-column">
 
     <div id="content">
@@ -25,10 +27,24 @@ defined('BASEPATH') or exit('No direct script access allowed');
             </ul>
         </nav>
 
+        <div id="overlay"></div>
+
+        <div id="spinner" class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+
+
         <div class="container-fluid">
-            <div class="menu">
-                <a href="menu" class="btn btn-primary">Tabel</a>
-                <a href="insert" class="btn btn-primary">Insert</a>
+
+
+
+
+            <div class="menu"
+                style="display: flex; justify-content: flex-start; margin-top: 20px; margin-bottom: 20px; border-bottom: 2px solid #ddd;">
+                <a href="menu" class="btn btn-primary active"
+                    style="display: inline-block; padding: 12px 20px; margin: 0 10px; font-size: 16px; text-decoration: none; color: #555; border: 1px solid #ddd; border-bottom: none; background-color: #f9f9f9; border-radius: 8px 8px 0 0; transition: background-color 0.3s ease, color 0.3s ease;">Tabel</a>
+                <a href="insert" class="btn btn-primary"
+                    style="display: inline-block; padding: 12px 20px; margin: 0 10px; font-size: 16px; text-decoration: none; color: #555; border: 1px solid #ddd; border-bottom: none; background-color: #f9f9f9; border-radius: 8px 8px 0 0; transition: background-color 0.3s ease, color 0.3s ease;">Insert</a>
             </div>
 
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -51,21 +67,21 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
             <!-- form input surat dari admin sekretaris (start) -->
 
-            <form class="user" action="<?= site_url("insert") ?>" method="post">
+            <form class="user" id="insertMasuk" action="<?= site_url("insert") ?>" method="post">
                 <div class="form-group row">
                     <div class="col-8">
                         <div class="header d-flex justify-content-between p-3">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Nomor</label>
-                                <input type="text" class="form-control w-25 text-center " id="nomor" value="1" aria-describedby="emailHelp" readonly>
+                                <input type="text" class="form-control w-25 text-center" name="nomor" id="nomor" value="4" aria-describedby="emailHelp" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tanggal Input</label>
-                                <input type="date" class="form-control w-100 text-center " id="tanggal" aria-describedby="emailHelp">
+                                <input type="date" class="form-control w-100 text-center" name="tanggal" id="tanggal" aria-describedby="emailHelp">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Jenis Surat</label>
-                                <select class="form-control" id="jenis" style="width:300px;">
+                                <select class="form-control" id="jenis" name="jenis" style="width:300px;">
                                     <option>Surat</option>
                                     <option>Email</option>
                                     <option>Penawaran</option>
@@ -76,22 +92,22 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <div class="header d-flex p-3" style="gap: 30px;">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Nomor Surat</label>
-                                <input type="text" class="form-control w-100 text-center " id="nomorSurat" placeholder="Nomor Fisik Surat" aria-describedby="emailHelp" readonly>
+                                <input type="text" class="form-control w-100 text-center" name="nomorSurat" id="nomorSurat" placeholder="Nomor Fisik Surat" aria-describedby="emailHelp" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Nomor Fisik Surat</label>
-                                <input type="text" class="form-control w-100 text-center " id="nomorSuratFisik" placeholder="Nomor Fisik Surat" aria-describedby="emailHelp">
+                                <input type="text" class="form-control w-100 text-center " name="nomorSuratFisik" id="nomorSuratFisik" placeholder="Nomor Fisik Surat" aria-describedby="emailHelp">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tanggal Fisik Surat</label>
-                                <input type="date" class="form-control w-100 text-center " id="tanggalSurat" aria-describedby="emailHelp">
+                                <input type="date" class="form-control w-100 text-center " name="tanggalSurat" id="tanggalSurat" aria-describedby="emailHelp">
                             </div>
                         </div>
 
                         <div class="input-lanjutan">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Hal</label>
-                                <input type="text" class="form-control w-75 text-center " id="hal" placeholder="Perihal Surat" aria-describedby="emailHelp">
+                                <input type="text" class="form-control w-75 text-center " name="hal" id="hal" placeholder="Perihal Surat" aria-describedby="emailHelp">
                             </div>
                         </div>
 
@@ -99,7 +115,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     <div class="col-4 w-100" style="height:300px ;">
                         <!-- <label for="custom-file">Sisipkan File</label> -->
                         <div class="custom-file d-flex justify-content-between align-items-center w-100">
-                            <input type="file" class="custom-file-input w-100" style="cursor: pointer;" id="customFile">
+                            <input type="file" class="custom-file-input w-100" name="file" style="cursor: pointer;" id="customFile">
                             <label class="custom-file-label w-75 ml-5 d-flex  justify-content-center align-items-center" id="file" style="height:300px ; cursor:pointer;" for="customFile">+</label>
                         </div>
                     </div>
@@ -109,11 +125,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <div class="input-lanjutan">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Lampiran</label>
-                                <input type="text" class="form-control w-75 text-center " id="lampiran" placeholder="Lampiran" aria-describedby="emailHelp">
+                                <input type="text" class="form-control w-75 text-center " name="lampiran" id="lampiran" placeholder="Lampiran" aria-describedby="emailHelp">
                             </div>
                             <div class="form-group d-flex flex-column">
                                 <label for="description">Deskripsi:</label>
-                                <textarea class="form-control w-75 text-center" id="keterangan" name="description" rows="4" placeholder="Ringksan Isi Surat" aria-describedby="emailHelp"></textarea>
+                                <textarea class="form-control w-75 text-center" id="keterangan" name="keterangan" rows="4" placeholder="Ringksan Isi Surat" aria-describedby="emailHelp"></textarea>
                             </div>
 
                             <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
@@ -121,7 +137,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             <div class="form-group w-25">
                                 <label for="kodeRelasi">Kode Relasi</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control text-center" id="kodeRelasi" placeholder="Kode Relasi" readonly>
+                                    <input type="text" class="form-control text-center" name="kodeRelasi" id="kodeRelasi" placeholder="Kode Relasi" readonly>
                                     <div id="kodeRelasiList" class="list-group overflow-hidden"></div>
                                 </div>
                             </div>
@@ -130,7 +146,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 <div class="col">
                                     <label for="namaPerson">Nama</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control w-75 text-center" id="namaPerson" placeholder="Nama person">
+                                        <input type="text" class="form-control w-75 text-center" name="namaPerson" id="namaPerson" placeholder="Nama person">
                                         <div class="input-group-append">
                                             <button class="btn btn-secondary" id="searchPerson" type="button">Cari</button>
                                         </div>
@@ -139,7 +155,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 <div class="col">
                                     <label for="namaLembaga">Lembaga</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control w-75 text-center" id="namaLembaga" placeholder="Nama Lembaga">
+                                        <input type="text" class="form-control w-75 text-center" name="namaLembaga" id="namaLembaga" placeholder="Nama Lembaga">
                                         <div class="input-group-append">
                                             <button class="btn btn-secondary" id="searchLembaga" type="button">Cari</button>
                                         </div>
@@ -149,26 +165,26 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
                             <div class="form-group m-3">
                                 <label for="alamat">Alamat</label>
-                                <input type="text" class="form-control w-75 text-center" id="alamat" placeholder="Alamat" readonly>
+                                <input type="text" class="form-control w-75 text-center" name="alamat" id="alamat" placeholder="Alamat" readonly>
                             </div>
 
                             <div class="row m-3">
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="kota">Kota</label>
-                                        <input type="text" class="form-control w-75 text-center" id="kota" placeholder="Kota" readonly>
+                                        <input type="text" class="form-control w-75 text-center" name="kota" id="kota" placeholder="Kota" readonly>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="propinsi">Propinsi</label>
-                                        <input type="text" class="form-control w-75 text-center" id="propinsi" placeholder="Propinsi" readonly>
+                                        <input type="text" class="form-control w-75 text-center" name="propinsi" id="propinsi" placeholder="Propinsi" readonly>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="kodepos">Kodepos</label>
-                                        <input type="text" class="form-control w-75 text-center" id="kodepos" placeholder="Kodepos" readonly>
+                                        <input type="text" class="form-control w-75 text-center" name="kodepos" id="kodepos" placeholder="Kodepos" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -182,7 +198,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     <div class="form-group row">
                                         <label for="dispoDivisi1" class="col-sm-2 col-form-label">Disposisi 1</label>
                                         <div class="col-sm-4">
-                                            <select class="form-control" id="dispoDivisi1" onchange="getPersons(1)">
+                                            <select class="form-control" id="dispoDivisi1" name="divisi1" onchange="getPersons(1)">
                                                 <option value="">Pilih Divisi</option>
                                                 <?php foreach ($divisi as $d): ?>
                                                     <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
@@ -191,7 +207,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                         </div>
                                         <label for="dispoNoreg1" class="col-sm-2 col-form-label">Person 1</label>
                                         <div class="col-sm-4">
-                                            <select class="form-control" id="dispoNoreg1">
+                                            <select class="form-control" name="person1" id="dispoNoreg1">
                                                 <option value="">Pilih Person</option>
                                             </select>
                                         </div>
@@ -201,7 +217,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     <div class="form-group row">
                                         <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 2</label>
                                         <div class="col-sm-4">
-                                            <select class="form-control" id="dispoDivisi2" onchange="getPersons(2)">
+                                            <select class="form-control" id="dispoDivisi2" name="divisi2" onchange="getPersons(2)">
                                                 <option value="">Pilih Divisi</option>
                                                 <?php foreach ($divisi as $d): ?>
                                                     <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
@@ -210,7 +226,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                         </div>
                                         <label for="dispoNoreg2" class="col-sm-2 col-form-label">Person 2</label>
                                         <div class="col-sm-4">
-                                            <select class="form-control" id="dispoNoreg2">
+                                            <select class="form-control" name="person2" id="dispoNoreg2">
                                                 <option value="">Pilih Person</option>
                                             </select>
                                         </div>
@@ -218,7 +234,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     <div class="form-group row">
                                         <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 2</label>
                                         <div class="col-sm-4">
-                                            <select class="form-control" id="dispoDivisi3" onchange="getPersons(3)">
+                                            <select class="form-control" id="dispoDivisi3" name="divisi3" onchange="getPersons(3)">
                                                 <option value="">Pilih Divisi</option>
                                                 <?php foreach ($divisi as $d): ?>
                                                     <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
@@ -227,7 +243,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                         </div>
                                         <label for="dispoNoreg2" class="col-sm-2 col-form-label">Person 3</label>
                                         <div class="col-sm-4">
-                                            <select class="form-control" id="dispoNoreg3">
+                                            <select class="form-control" name="person3" id="dispoNoreg3">
                                                 <option value="">Pilih Person</option>
                                             </select>
                                         </div>
@@ -235,7 +251,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     <div class="form-group row">
                                         <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 2</label>
                                         <div class="col-sm-4">
-                                            <select class="form-control" id="dispoDivisi4" onchange="getPersons(4)">
+                                            <select class="form-control" id="dispoDivisi4" name="divisi4" onchange="getPersons(4)">
                                                 <option value="">Pilih Divisi</option>
                                                 <?php foreach ($divisi as $d): ?>
                                                     <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
@@ -244,7 +260,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                         </div>
                                         <label for="dispoNoreg2" class="col-sm-2 col-form-label">Person 4</label>
                                         <div class="col-sm-4">
-                                            <select class="form-control" id="dispoNoreg4">
+                                            <select class="form-control" name="person4" id="dispoNoreg4">
                                                 <option value="">Pilih Person</option>
                                             </select>
                                         </div>
@@ -252,7 +268,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     <div class="form-group row">
                                         <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 2</label>
                                         <div class="col-sm-4">
-                                            <select class="form-control" id="dispoDivisi5" onchange="getPersons(5)">
+                                            <select class="form-control" id="dispoDivisi5" name="divisi5" onchange="getPersons(5)">
                                                 <option value="">Pilih Divisi</option>
                                                 <?php foreach ($divisi as $d): ?>
                                                     <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
@@ -261,7 +277,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                         </div>
                                         <label for="dispoNoreg2" class="col-sm-2 col-form-label">Person 2</label>
                                         <div class="col-sm-4">
-                                            <select class="form-control" id="dispoNoreg5">
+                                            <select class="form-control" name="person5" id="dispoNoreg5">
                                                 <option value="">Pilih Person</option>
                                             </select>
                                         </div>
@@ -346,9 +362,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         person: namaPerson,
                         lembaga: namaLembaga
                     },
-                    dataType: "json", 
+                    beforeSend: function() {
+                        console.log("msauk");
+                        $("#spinner, #overlay").show();
+                    },
+                    dataType: "json",
                     success: function(data) {
-                        $('#kodeRelasiList').empty(); 
+                        $('#kodeRelasiList').empty();
 
                         if (data.length > 0) {
                             $.each(data, function(index, item) {
@@ -361,6 +381,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         } else {
                             $('#kodeRelasiList').append('<li class="list-group-item">No Results Found</li>');
                         }
+                    },
+                    complete: function() {
+                        $("#spinner, #overlay").hide();
                     },
                     error: function(xhr, status, error) {
                         console.error('AJAX Error:', error);
@@ -384,7 +407,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         person: namaPerson,
                         lembaga: namaLembaga
                     },
-                    dataType: "json", 
+
+                    beforeSend: function() {
+                        console.log("msauk");
+                        $("#spinner, #overlay").show();
+                    },
+                    dataType: "json",
                     success: function(data) {
                         $('#kodeRelasiList').empty();
 
@@ -400,13 +428,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             $('#kodeRelasiList').append('<li class="list-group-item">No Results Found</li>');
                         }
                     },
+                    complete: function() {
+                        $("#spinner, #overlay").hide();
+                    },
                     error: function(xhr, status, error) {
                         console.error('AJAX Error:', error);
                         console.error('Response Text:', xhr.responseText);
                     }
                 });
             } else {
-                $('#kodeRelasiList').html(''); 
+                $('#kodeRelasiList').html('');
             }
         });
 
@@ -490,7 +521,37 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
     });
 
-    
+
+
+    $(document).ready(function() {
+        $('#insertMasuk').on('submit', function(event) {
+            event.preventDefault();
+
+            var formData = new FormData(this);
+
+            formData.forEach((value, key) => {
+                console.log(key + ": " + value);
+            });
+
+
+            $.ajax({
+                url: '<?= site_url("Insert/insert_data") ?>',
+                method: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    alert('Data berhasil disimpan!');
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+        });
+    });
+
+
+
 
 
 

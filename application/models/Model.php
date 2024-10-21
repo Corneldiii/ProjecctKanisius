@@ -43,7 +43,7 @@ ON divID=LEFT(pegLastDivId,2) WHERE a.userId='" . $username . "' AND a.userPass=
 
     public function allData()
     {
-        $query = "SELECT * FROM surat";
+        $query = "SELECT * FROM tb_surat";
         return $this->db->query($query);
     }
     public function getDataByID($id)
@@ -103,5 +103,10 @@ ON divID=LEFT(pegLastDivId,2) WHERE a.userId='" . $username . "' AND a.userPass=
 
         $query = $this->db->get();
         return $query->result();
+    }
+
+
+    public function insertMasuk($data){
+        $this->db->insert('tb_surat', $data);
     }
 }
