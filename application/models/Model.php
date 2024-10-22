@@ -31,13 +31,9 @@ ON divID=LEFT(pegLastDivId,2) WHERE a.userId='" . $username . "' AND a.userPass=
     //contoh query biasa
     public function getNoSurat()
     {
-        $query = "SELECT NOMOR AS nomorForm FROM tb_surat ORDER BY NOMOR DESC LIMIT 1";
+        $query = "SELECT SUBSTR(NOMOR,6,9) AS nomorForm FROM tb_surat ORDER BY nomorForm DESC LIMIT 1";
         $result = $this->db->query($query)->row();
-        if ($result) {
-            echo json_encode(array('nomor' => (string)$result->nomorForm));
-        } else {
-            echo json_encode(array('nomor' => '0001'));
-        }
+        return $result ? (string)$result->nomorForm : '0001';
     }
 
 

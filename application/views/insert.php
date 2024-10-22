@@ -73,7 +73,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <div class="header d-flex justify-content-between p-3">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Nomor</label>
-                                <input type="text" class="form-control w-25 text-center" name="nomor" id="nomor" value="4" aria-describedby="emailHelp" readonly>
+                                <input type="text" class="form-control w-25 text-center" name="nomor" id="nomor" value="1" aria-describedby="emailHelp" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tanggal Input</label>
@@ -134,31 +134,41 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
                             <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
 
-                            <div class="form-group w-25">
-                                <label for="kodeRelasi">Kode Relasi</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control text-center" name="kodeRelasi" id="kodeRelasi" placeholder="Kode Relasi" readonly>
-                                    <div id="kodeRelasiList" class="list-group overflow-hidden"></div>
-                                </div>
-                            </div>
 
-                            <div class="form-group row m-4">
+
+                            <div class="form-group row m-4 w-25">
                                 <div class="col">
-                                    <label for="namaPerson">Nama</label>
+                                    <label for="namaPerson">cari Nama / kode relasi</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control w-75 text-center" name="namaPerson" id="namaPerson" placeholder="Nama person">
+                                        <input type="text" class="form-control w-75 text-center" name="namaPerson" id="namaPerson" placeholder="Nama person / kode relasi">
                                         <div class="input-group-append">
                                             <button class="btn btn-secondary" id="searchPerson" type="button">Cari</button>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col">
-                                    <label for="namaLembaga">Lembaga</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control w-75 text-center" name="namaLembaga" id="namaLembaga" placeholder="Nama Lembaga">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-secondary" id="searchLembaga" type="button">Cari</button>
-                                        </div>
+                            </div>
+
+
+                            <div class="container d-flex justify-content-center align-items-center">
+                                <div class="row border p-4">
+                                    <div class="col w-50">
+                                        <table id="tabel" class="display nowrap" style="width:100%">
+                                            <thead style="color: black;">
+                                                <tr>
+                                                    <th style="width:10px" class="text-center align-middle">No</th>
+                                                    <th class="text-center align-middle">milistId</th>
+                                                    <th class="text-center align-middle">Nama</th>
+                                                    <th class="text-center align-middle">Lembaga</th>
+                                                    <th class="text-center align-middle">Alamat</th>
+                                                    <th class="text-center align-middle">Nama Kota</th>
+                                                    <th class="text-center align-middle">Kode pos</th>
+                                                    <th class="text-center align-middle">Provinsi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbody" name="tbody" style="color: black;">
+
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -348,6 +358,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
         });
     });
 
+    var no = 1;
+    var html = '';
+
 
     $(document).ready(function() {
         $('#searchPerson').on('click', function() {
@@ -369,15 +382,25 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     dataType: "json",
                     success: function(data) {
                         $('#kodeRelasiList').empty();
+                        
 
                         if (data.length > 0) {
                             $.each(data, function(index, item) {
-                                $('#kodeRelasiList').append(
-                                    '<a href="#" class="list-group-item list-group-item-action" data-id="' + item.milistId + '" data-nama="' + item.namaPerson + '" data-lembaga="' + item.lembaga + '" data-alamat="' + item.alamat + '" data-kota="' + item.kota + '" data-propinsi="' + item.propinsi + '" data-kodepos="' + item.kodepos + '">' +
-                                    item.milistId + ' - ' + item.namaPerson +
-                                    '</a>'
-                                );
+                                html += '<tr>';
+                                html += '<td class="text-center align-middle">' + no + '</td>';
+                                html += '<td class="text-center align-middle">' + (item.milistId ? item.milistId : '-') + '</td>';
+                                html += '<td class="text-center align-middle">' + (item.namaPerson ? item.namaPerson : '-') + '</td>';
+                                html += '<td class="text-center align-middle">' + (item.namaLembaga ? item.lembaga : '-') + '</td>';
+                                html += '<td class="text-center align-middle">' + (item.alamat ? item.alamat : '-') + '</td>';
+                                html += '<td class="text-center align-middle">' + (item.kotanama ? item.kotanama : '-') + '</td>';
+                                html += '<td class="text-center align-middle">' + (item.kodepos ? item.kodepos : '-') + '</td>';
+                                html += '<td class="text-center align-middle">' + (item.pronama ? item.pronama : '-') + '</td>';
+
+                                html += '</tr>';
+
+                                no++;
                             });
+                            $("#tbody").html(html);
                         } else {
                             $('#kodeRelasiList').append('<li class="list-group-item">No Results Found</li>');
                         }
@@ -510,10 +533,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
     $(document).ready(function() {
         var kode = '1';
         var divisi = '<?php echo $kodeDiv; ?>';
+        var cek = '<?php echo $noFinal ?>'
+        console.log(cek);
         var noFinal = '<?php echo str_pad($noFinal + 1, 4, "0", STR_PAD_LEFT); ?>';
-        console.log(noFinal);
         var Tahun = new Date().getFullYear().toString().substring(2);
         var urut = noFinal !== '' ? noFinal : '0001';
+        console.log(urut);
+
+        var tanggalInput = new Date().toISOString().split('T')[0];
+        $('#tanggal').val(tanggalInput);
 
         var kodeSurat = kode + divisi + Tahun + urut;
         console.log(kodeSurat);

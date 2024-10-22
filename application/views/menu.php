@@ -51,7 +51,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             <?= $_SESSION['pesan'] ?>
 
                         </div>
-                        <?php unset($_SESSION['pesan']);
+                    <?php unset($_SESSION['pesan']);
                     } ?>
                 </div>
             </div>
@@ -120,7 +120,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <script>
     // gunakan Javascript dan jQuery
 
-    $(document).ready(function () { // jika jalaman web selesai diload, maka jalankan script ini
+    $(document).ready(function() { // jika jalaman web selesai diload, maka jalankan script ini
         $('#menuMenu').trigger('click');
 
         //getContoh1();
@@ -143,30 +143,30 @@ defined('BASEPATH') or exit('No direct script access allowed');
         method: "GET",
         dataType: "JSON",
         async: false,
-        success: function (data) {
+        success: function(data) {
             for (var i = 0; i < data.length; i++) {
 
                 html += '<tr>';
                 html += '<td class="text-center align-middle">' + no + '</td>';
-                html += '<td class="text-center align-middle"><img src="' + data[i].pict_surat + '" alt="Gambar Surat" style="width: 100px; height: auto;"></td>';
-                html += '<td class="text-center align-middle">' + data[i].tanggal + '</td>';
-                html += '<td class="text-center align-middle">' + data[i].noSurat + '</td>';
-                html += '<td class="text-center align-middle">' + data[i].relasiID + '</td>';
-                html += '<td class="text-center align-middle">' + data[i].namaPerson + '</td>';
-                html += '<td class="text-center align-middle">' + data[i].namaLembaga + '</td>';
-                html += '<td class="text-center align-middle">' + data[i].hal + '</td>';
-                html += '<td class="text-center align-middle">' + data[i].lampiran +'</td>';
+                html += '<td class="text-center align-middle"><img src="' + (data[i].pict_surat ? data[i].pict_surat : '-') + '" alt="Gambar Surat" style="width: 100px; height: auto;"></td>';
+                html += '<td class="text-center align-middle">' + (data[i].tanggal ? data[i].tanggal : '-') + '</td>';
+                html += '<td class="text-center align-middle">' + (data[i].noSurat ? data[i].noSurat : '-') + '</td>';
+                html += '<td class="text-center align-middle">' + (data[i].relasiID ? data[i].relasiID : '-') + '</td>';
+                html += '<td class="text-center align-middle">' + (data[i].namaPerson ? data[i].namaPerson : '-') + '</td>';
+                html += '<td class="text-center align-middle">' + (data[i].namaLembaga ? data[i].namaLembaga : '-') + '</td>';
+                html += '<td class="text-center align-middle">' + (data[i].hal ? data[i].hal : '-') + '</td>';
+                html += '<td class="text-center align-middle">' + (data[i].lampiran ? data[i].lampiran : '-') + '</td>';
 
-                // html += '<td><button type="button" class="btn btn-danger">Hapus</button></td>';
                 html += '</tr>';
 
                 no++;
             }
+
             $("#tbody").html(html);
         }
     });
 
-    $(document).on('click', '.btn-kirim', function () {
+    $(document).on('click', '.btn-kirim', function() {
         var id = $(this).data('id');
         var button = $(this);
 
@@ -176,12 +176,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
             data: {
                 id: id
             },
-            success: function (response) {
+            success: function(response) {
                 console.log(response);
                 alert('Email berhasil dikirim!');
                 button.closest('td').html('Terkirim <td class="text-center align-middle"> - </td>');
             },
-            error: function (xhr, status, error) {
+            error: function(xhr, status, error) {
                 alert('Gagal mengirim email: ' + xhr.responseText);
             }
         });
@@ -204,7 +204,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             method: "POST",
             dataType: "JSON",
             async: false,
-            success: function (data) {
+            success: function(data) {
                 for (var i = 0; i < data.length; i++) {
 
                     html += '<tr>';
