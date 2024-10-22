@@ -38,11 +38,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 </div>
             </div>
 
-            <div class="form-group row">
-                <div class="col-sm-12">
-                    <input type="text" id="search" class="form-control" placeholder="Cari Memo...">
-                </div>
-            </div>
 
             <div class="row">
                 <div class="col">
