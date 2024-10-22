@@ -14,9 +14,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
         </nav>
 
         <div class="container-fluid">
-            <div class="daftarmemo">
-                <a href="memo" class="btn btn-primary">Tabel</a>
-                <a href="insert" class="btn btn-primary">Input Memo</a>
+            <div class="menu"
+                style="display: flex; justify-content: flex-start; margin-top: 20px; margin-bottom: 20px; border-bottom: 2px solid #ddd;">
+                <a href="menuKeluar" class="btn btn-primary active"
+                    style="display: inline-block; padding: 12px 20px; margin: 0 10px; font-size: 16px; text-decoration: none; color: #555; border: 1px solid #ddd; border-bottom: none; background-color: #f9f9f9; border-radius: 8px 8px 0 0; transition: background-color 0.3s ease, color 0.3s ease;">Tabel</a>
+                <a href="insertKeluar" class="btn btn-primary"
+                    style="display: inline-block; padding: 12px 20px; margin: 0 10px; font-size: 16px; text-decoration: none; color: #555; border: 1px solid #ddd; border-bottom: none; background-color: #f9f9f9; border-radius: 8px 8px 0 0; transition: background-color 0.3s ease, color 0.3s ease;">Insert</a>
             </div>
 
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
