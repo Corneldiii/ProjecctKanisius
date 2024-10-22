@@ -11,8 +11,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 ?>
 <!-- untuk daftar menu dst, cek header.php-->
 
-
-
 <div id="content-wrapper" class="d-flex flex-column">
 
     <div id="content">
@@ -33,11 +31,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <span class="sr-only">Loading...</span>
         </div>
 
-
         <div class="container-fluid">
-
-
-
 
             <div class="menu"
                 style="display: flex; justify-content: flex-start; margin-top: 20px; margin-bottom: 20px; border-bottom: 2px solid #ddd;">
@@ -553,11 +547,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 
 
-
-
-
-
-
     // menggunakan AJAX untuk membuat tabel dari data tabel
     // AJAX (View) -> Controller -> Model -> dapat hasil
 
@@ -645,6 +634,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
             }
         });
     }
+    
+    // Tanggal otomatis
+    document.addEventListener('DOMContentLoaded', (event) => {
+        let today = new Date().toISOString().substr(0, 10);
+        document.querySelector("#tanggal").value = today;
+    });
+
 </script>
 
 </body>
