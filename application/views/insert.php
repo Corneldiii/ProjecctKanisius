@@ -136,36 +136,50 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     <div class="input-group">
                                         <input type="text" class="form-control w-75 text-center" name="namaPerson" id="namaPerson" placeholder="Nama person / kode relasi">
                                         <div class="input-group-append">
-                                            <button class="btn btn-secondary" id="searchPerson" type="button">Cari</button>
+                                            <button class="btn btn-secondary" id="searchPerson" type="button" data-toggle="modal" data-target="#exampleModal">Cari</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content" >
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body w-100">
+                                            <table id="tabel" class="display nowrap" style="width:100%">
+                                                <thead style="color: black;">
+                                                    <tr>
+                                                        <th style="width:10px" class="text-center align-middle">No</th>
+                                                        <th class="text-center align-middle">milistId</th>
+                                                        <th class="text-center align-middle">Nama</th>
+                                                        <th class="text-center align-middle">Lembaga</th>
+                                                        <th class="text-center align-middle">Alamat</th>
+                                                        <th class="text-center align-middle">Nama Kota</th>
+                                                        <th class="text-center align-middle">Kode pos</th>
+                                                        <th class="text-center align-middle">Provinsi</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tbody" name="tbody" style="color: black;">
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Save changes</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
 
-                            <div class="container d-flex justify-content-center align-items-center">
-                                <div class="row border p-4">
-                                    <div class="col w-50">
-                                        <table id="tabel" class="display nowrap" style="width:100%">
-                                            <thead style="color: black;">
-                                                <tr>
-                                                    <th style="width:10px" class="text-center align-middle">No</th>
-                                                    <th class="text-center align-middle">milistId</th>
-                                                    <th class="text-center align-middle">Nama</th>
-                                                    <th class="text-center align-middle">Lembaga</th>
-                                                    <th class="text-center align-middle">Alamat</th>
-                                                    <th class="text-center align-middle">Nama Kota</th>
-                                                    <th class="text-center align-middle">Kode pos</th>
-                                                    <th class="text-center align-middle">Provinsi</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="tbody" name="tbody" style="color: black;">
 
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
 
                             <div class="form-group m-3">
                                 <label for="alamat">Alamat</label>
@@ -376,7 +390,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     dataType: "json",
                     success: function(data) {
                         $('#kodeRelasiList').empty();
-                        
+
 
                         if (data.length > 0) {
                             $.each(data, function(index, item) {
@@ -384,7 +398,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 html += '<td class="text-center align-middle">' + no + '</td>';
                                 html += '<td class="text-center align-middle">' + (item.milistId ? item.milistId : '-') + '</td>';
                                 html += '<td class="text-center align-middle">' + (item.namaPerson ? item.namaPerson : '-') + '</td>';
-                                html += '<td class="text-center align-middle">' + (item.namaLembaga ? item.lembaga : '-') + '</td>';
+                                html += '<td class="text-center align-middle">' + (item.namaLembaga ? item.namaLembaga : '-') + '</td>';
                                 html += '<td class="text-center align-middle">' + (item.alamat ? item.alamat : '-') + '</td>';
                                 html += '<td class="text-center align-middle">' + (item.kotanama ? item.kotanama : '-') + '</td>';
                                 html += '<td class="text-center align-middle">' + (item.kodepos ? item.kodepos : '-') + '</td>';
@@ -395,6 +409,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 no++;
                             });
                             $("#tbody").html(html);
+
                         } else {
                             $('#kodeRelasiList').append('<li class="list-group-item">No Results Found</li>');
                         }
@@ -662,13 +677,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
             }
         });
     }
-    
+
     // Tanggal otomatis
     document.addEventListener('DOMContentLoaded', (event) => {
         let today = new Date().toISOString().substr(0, 10);
         document.querySelector("#tanggal").value = today;
     });
-
 </script>
 
 </body>
