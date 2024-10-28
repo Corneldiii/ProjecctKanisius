@@ -1,13 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-// if (!isset($_SESSION["id_surat"])) { //jika tidak ada id
-//    $this->session->set_flashdata('type', 'alert-danger');
-//    $this->session->set_flashdata('pesan', '<strong>Error!</strong> Anda harus login terlebih dahulu');
-//    redirect();
-//    exit;
-// }
-
 ?>
 <!-- untuk daftar menu dst, cek header.php-->
 
