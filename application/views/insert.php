@@ -36,7 +36,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
         <div class="container-fluid">
 
-        <div class="menu"
+            <div class="menu"
                 style="display: flex; justify-content: flex-start; margin-top: 20px; margin-bottom: 20px; border-bottom: 2px solid #ddd;">
                 <a href="menu" class="menu-btn active">
                     <i class="bi bi-file-earmark-spreadsheet"></i>
@@ -49,35 +49,140 @@ defined('BASEPATH') or exit('No direct script access allowed');
             </div>
 
             <style>
-                .menu-btn {
-                    display: inline-block;
-                    padding: 12px 20px;
-                    margin: 0 10px;
-                    font-size: 16px;
-                    color: #fff;
-                    background-color: #4b5320;
-                    border-radius: 8px 8px 0 0;
-                    transition: background-color 0.3s ease, transform 0.2s;
-                    position: relative;
-                    z-index: 1;
-                }
+    /* Tombol Menu */
+    .menu-btn {
+        display: inline-block;
+        padding: 12px 20px;
+        margin: 0 10px;
+        font-size: 16px;
+        color: #fff;
+        background-color: #4b5320;
+        border-radius: 8px 8px 0 0;
+        transition: background-color 0.3s ease, transform 0.2s;
+        position: relative;
+        z-index: 1;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
 
-                .menu-btn.active {
-                    background-color: #3e4520;
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                }
+    .menu-btn.active {
+        background-color: #3e4520;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
 
-                .menu-btn:hover {
-                    background-color: #3e4520;
-                    transform: translateY(-2px);
-                    color: #fff;
-                    text-decoration: none;
-                }
+    .menu-btn:hover {
+        background-color: #3a4a1c;
+        transform: translateY(-2px);
+        color: #fff;
+        text-decoration: none;
+    }
 
-                .menu-btn span {
-                    margin-left: 4px;
-                }
-            </style>
+    .menu-btn span {
+        margin-left: 4px;
+    }
+
+    /* Modal Tabel */
+
+    /* Atur tabel agar mengikuti lebar modal */
+    .table-fixed {
+        width: 100%;
+        table-layout: fixed;
+        border-collapse: collapse;
+    }
+
+    /* Header Tabel */
+    .table-fixed thead th {
+        background-color: #4CAF50;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+        padding: 12px;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        box-sizing: border-box;
+    }
+
+    /* Kolom Tabel dengan min-width */
+    .table-fixed th,
+    .table-fixed td {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        padding: 10px;
+        font-size: 12px;
+        border: 1px solid #ddd;
+        box-sizing: border-box;
+        min-width: 50px; /* Lebar minimum */
+    }
+
+    /* Tentukan lebar kolom untuk setiap kolom */
+    .table-fixed th:nth-child(1),
+    .table-fixed td:nth-child(1) {
+        width: 5%;
+        min-width: 40px;
+    }
+
+    .table-fixed th:nth-child(2),
+    .table-fixed td:nth-child(2) {
+        width: 10%;
+        min-width: 80px;
+    }
+
+    .table-fixed th:nth-child(3),
+    .table-fixed td:nth-child(3) {
+        width: 20%;
+        min-width: 120px;
+    }
+
+    .table-fixed th:nth-child(4),
+    .table-fixed td:nth-child(4) {
+        width: 20%;
+        min-width: 120px;
+    }
+
+    .table-fixed th:nth-child(5),
+    .table-fixed td:nth-child(5) {
+        width: 20%;
+        min-width: 120px;
+    }
+
+    .table-fixed th:nth-child(6),
+    .table-fixed td:nth-child(6) {
+        width: 10%;
+        min-width: 80px;
+    }
+
+    .table-fixed th:nth-child(7),
+    .table-fixed td:nth-child(7) {
+        width: 10%;
+        min-width: 80px;
+    }
+
+    .table-fixed th:nth-child(8),
+    .table-fixed td:nth-child(8) {
+        width: 10%;
+        min-width: 80px;
+    }
+
+    /* Warna alternatif dan hover */
+    .table-fixed tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .table-fixed tbody tr:hover {
+        background-color: #e9ecef;
+    }
+
+    /* Responsif */
+    @media (max-width: 768px) {
+        .table-fixed th,
+        .table-fixed td {
+            font-size: 10px;
+            padding: 6px;
+        }
+    }
+</style>
+
 
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 class="h3 mb-0 text-gray-800">Daftar Menu atau Tabel</h1>
@@ -180,32 +285,34 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 </div>
                             </div>
 
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                            <!-- Gagal setelah search -->
+                            <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-xl">
-                                    <div class="modal-content" >
+                                    <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">Daftar Personel</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body w-100">
-                                            <table id="tabel" class="display nowrap" style="width:100%">
-                                                <thead style="color: black;">
-                                                    <tr>
-                                                        <th style="width:10px" class="text-center align-middle">No</th>
-                                                        <th class="text-center align-middle">milistId</th>
-                                                        <th class="text-center align-middle">Nama</th>
-                                                        <th class="text-center align-middle">Lembaga</th>
-                                                        <th class="text-center align-middle">Alamat</th>
-                                                        <th class="text-center align-middle">Nama Kota</th>
-                                                        <th class="text-center align-middle">Kode pos</th>
-                                                        <th class="text-center align-middle">Provinsi</th>
-                                                    </tr>
+                                            <table id="tabel" class="display nowrap table table-striped table-bordered" style="width:100%">
+                                                </thead style="color: black;">
+                                                <tr>
+                                                    <th style="width:10px" class="text-center align-middle">No</th>
+                                                    <th class="text-center align-middle">Milist ID</th>
+                                                    <th class="text-center align-middle">Nama</th>
+                                                    <th class="text-center align-middle">Lembaga</th>
+                                                    <th class="text-center align-middle">Alamat</th>
+                                                    <th class="text-center align-middle">Nama Kota</th>
+                                                    <th class="text-center align-middle">Kode Pos</th>
+                                                    <th class="text-center align-middle">Provinsi</th>
+                                                </tr>
                                                 </thead>
                                                 <tbody id="tbody" name="tbody" style="color: black;">
-
-                                                </tbody>
+                                                    <!-- Data will be appended here by JavaScript -->
+                            <!-- </tbody>
                                             </table>
                                         </div>
                                         <div class="modal-footer">
@@ -214,8 +321,76 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --> 
 
+                            <!-- Gagal sebelum search -->
+                            <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Judul Modal</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                                        </div>
+                                        <div class="modal-body w-100">
+                                            <table id="tabel" class="display nowrap table-fixed" style="width:100%">
+                                                <thead style="color: black;">
+                                                    <tr>
+                                                        <th class="text-center align-middle">No</th>
+                                                        <th class="text-center align-middle">Milist ID</th>
+                                                        <th class="text-center align-middle">Nama</th>
+                                                        <th class="text-center align-middle">Lembaga</th>
+                                                        <th class="text-center align-middle">Alamat</th>
+                                                        <th class="text-center align-middle">Nama Kota</th>
+                                                        <th class="text-center align-middle">Kode Pos</th>
+                                                        <th class="text-center align-middle">Provinsi</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tbody" name="tbody" style="color: black; font-size: 12px;"> <!-- Data will be populated here --> </tbody>
+                            <!-- </table>
+                                        </div>
+                                        <div class="modal-footer"> <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> <button type="button" class="btn btn-primary">Save changes</button> </div>
+                                    </div>
+                                </div>
+                            </div> --> 
+
+
+                            <!-- Modal baru -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title w-100 text-center" id="exampleModalLabel">Judul Modal</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="table-responsive">
+                                                <table id="tabel" class="display nowrap table table-striped table-bordered table-fixed text-nowrap" style="width:100%">
+                                                    <thead style="color: black;">
+                                                        <tr>
+                                                            <th class="text-center align-middle">No</th>
+                                                            <th class="text-center align-middle">Milist ID</th>
+                                                            <th class="text-center align-middle">Nama</th>
+                                                            <th class="text-center align-middle">Lembaga</th>
+                                                            <th class="text-center align-middle">Alamat</th>
+                                                            <th class="text-center align-middle">Nama Kota</th>
+                                                            <th class="text-center align-middle">Kode Pos</th>
+                                                            <th class="text-center align-middle">Provinsi</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="tbody" name="tbody" style="color: black; font-size: 12px;">
+                                                        <!-- Data akan dimuat di sini -->
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
 
 
@@ -398,9 +573,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
         //getContoh1();
 
         $('#tabel').DataTable({
-            "scrollX": true,
-            "select": true,
-            "bSort": false
+            "scrollY": "300px", // Batasi scroll vertikal
+            "scrollX": true, // Aktifkan scroll horizontal
+            "scrollCollapse": true,
+            "paging": false, // Nonaktifkan paging jika tabel tidak terlalu panjang
+            "bSort": false,
         });
     });
 
@@ -626,63 +803,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
     });
 
 
-
-
-    // menggunakan AJAX untuk membuat tabel dari data tabel
-    // AJAX (View) -> Controller -> Model -> dapat hasil
-
-    // var html = '';
-    // var no = 1;
-
-    // $.ajax({
-    //     url: "<?php echo base_url('Select/getAllData'); ?>",
-    //     method: "GET",
-    //     dataType: "JSON",
-    //     async: false,
-    //     success: function(data) {
-    //         for (var i = 0; i < data.length; i++) {
-
-    //             html += '<tr>';
-    //             html += '<td class="text-center align-middle">' + no + '</td>';
-    //             html += '<td class="text-center align-middle"><img src="' + data[i].pict_surat + '" alt="Gambar Surat" style="width: 100px; height: auto;"></td>';
-    //             html += '<td class="text-center align-middle">' + data[i].title + '</td>';
-    //             html += '<td class="text-center align-middle">' + data[i].description + '</td>';
-    //             html += '<td class="text-center align-middle">' +
-    //                 (data[i].status == 0 ?
-    //                     'Tertunda <td class="text-center align-middle"><button type="button" class="btn btn-primary btn-kirim" data-id="' + data[i].id + '">Kirim</button></td>' :
-    //                     'Terkirim <td class="text-center align-middle"> - </td>'
-    //                 ) + '</td>';
-    //             // html += '<td><button type="button" class="btn btn-danger">Hapus</button></td>';
-    //             html += '</tr>';
-
-    //             no++;
-    //         }
-    //         $("#tbody").html(html);
-    //     }
-    // });
-
-    // $(document).on('click', '.btn-kirim', function() {
-    //     var id = $(this).data('id'); 
-    //     var button = $(this);
-
-    //     $.ajax({
-    //         url: '<?php echo base_url('Controller/sendEmail'); ?>', 
-    //         type: 'POST',
-    //         data: {
-    //             id: id
-    //         },
-    //         success: function(response) {
-    //             console.log(response);
-    //             alert('Email berhasil dikirim!');
-    //             button.closest('td').html('Terkirim <td class="text-center align-middle"> - </td>');
-    //         },
-    //         error: function(xhr, status, error) {
-    //             alert('Gagal mengirim email: ' + xhr.responseText);
-    //         }
-    //     });
-    // });
-
-
     // kalau butuh input dari user
     function getContoh2() {
         var test = 'test';
@@ -722,7 +842,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
         document.querySelector("#tanggal").value = today;
     });
 </script>
-
 </body>
 
 </html>
