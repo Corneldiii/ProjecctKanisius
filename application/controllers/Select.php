@@ -17,9 +17,17 @@ class Select extends CI_Controller {
         echo json_encode($data); 
     }
     public function getAllData(){
-        $data = $this->Model->allData()->result_array(); // buka class contoh1 di Model
+        $data = $this->Model->getDataUser(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '')->result_array();
+        // var_dump($data);
         echo json_encode($data); 
     }
+
+    public function getDetailData() {
+        $id = $this->input->get('id');
+        $data = $this->Model->getDataById($id); // Sesuaikan dengan model Anda
+        echo json_encode($data);
+    }
+    
     public function contoh2(){
         $inputAjax = $this->input->get('inputAjax');
 		

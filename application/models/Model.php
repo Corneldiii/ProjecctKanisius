@@ -42,11 +42,25 @@ ON divID=LEFT(pegLastDivId,2) WHERE a.userId='" . $username . "' AND a.userPass=
         $query = "SELECT * FROM tb_surat";
         return $this->db->query($query);
     }
-    public function getDataByID($id)
-    {
-        $query = "SELECT * FROM surat WHERE id_surat = '" . $id . "'";
+
+    public function getDataUser($kodeDivisi){
+        $query = "SELECT nomor, Tanggal, noSurat, tglSurat, relasiID, namaPerson, namaLembaga, hal, lampiran, keterangan FROM 
+                    tb_surat WHERE LEFT(nomor,1)='1' AND (divisi='" . $kodeDivisi . "' OR dispoDivisi1 LIKE '" . $kodeDivisi . "%' OR dispoDivisi2 LIKE '" . $kodeDivisi . "%' 
+                    OR dispoDivisi3 LIKE '" . $kodeDivisi . "%' OR dispoDivisi4 LIKE '" . $kodeDivisi . "%' OR dispoDivisi5 LIKE '" . $kodeDivisi . "%')";
         return $this->db->query($query);
     }
+
+    public function getDataById($nomor){
+        $query = "SELECT nomor, Tanggal, noSurat, tglSurat, relasiID, namaPerson, namaLembaga, hal, lampiran, keterangan FROM 
+                    tb_surat WHERE LEFT(nomor,1)='1' AND nomor = '".$nomor."'";
+        return $this->db->query($query);
+    }
+
+    // public function getDataByID($id)
+    // {
+    //     $query = "SELECT * FROM surat WHERE id_surat = '" . $id . "'";
+    //     return $this->db->query($query);
+    // }
 
     //contoh query dengan input dari AJAX
     public function contoh2($inputAjax)
