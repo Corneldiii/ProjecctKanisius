@@ -11,6 +11,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 ?>
 <!-- untuk daftar menu dst, cek header.php-->
 
+<!-- Bootstrap Icons Library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+
+
 <div id="content-wrapper" class="d-flex flex-column">
 
     <div id="content">
@@ -26,13 +30,49 @@ defined('BASEPATH') or exit('No direct script access allowed');
         </nav>
 
         <div class="container-fluid">
-        <div class="menu"
+            <div class="menu"
                 style="display: flex; justify-content: flex-start; margin-top: 20px; margin-bottom: 20px; border-bottom: 2px solid #ddd;">
-                <a href="menuKeluar" class="btn btn-primary active"
-                    style="display: inline-block; padding: 12px 20px; margin: 0 10px; font-size: 16px; text-decoration: none; color: #555; border: 1px solid #ddd; border-bottom: none; background-color: #f9f9f9; border-radius: 8px 8px 0 0; transition: background-color 0.3s ease, color 0.3s ease;">Tabel</a>
-                <a href="insertKeluar" class="btn btn-primary"
-                    style="display: inline-block; padding: 12px 20px; margin: 0 10px; font-size: 16px; text-decoration: none; color: #555; border: 1px solid #ddd; border-bottom: none; background-color: #f9f9f9; border-radius: 8px 8px 0 0; transition: background-color 0.3s ease, color 0.3s ease;">Insert</a>
+                <a href="menuKeluar" class="menu-btn active">
+                <i class="bi bi-file-earmark-spreadsheet"></i> Tabel
+                </a>
+                <a href="insertKeluar" class="menu-btn">
+                <i class="bi bi-file-earmark-plus"></i> Insert
+                </a>
             </div>
+
+            <style>
+                .menu-btn {
+                    display: inline-block;
+                    padding: 12px 20px;
+                    margin: 0 10px;
+                    font-size: 16px;
+                    text-decoration: none;
+                    color: #fff;
+                    background-color: #4b5320;
+                    border: none;
+                    border-radius: 8px 8px 0 0;
+                    transition: background-color 0.3s ease, transform 0.2s;
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                }
+
+                .menu-btn.active {
+                    background-color: #3e4520;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                }
+
+                .menu-btn:hover {
+                    background-color: #3e4520;
+                    transform: translateY(-2px);
+                    color: #fff;
+                }
+
+                .menu-btn:focus {
+                    outline: none;
+                    box-shadow: 0 0 0 3px rgba(75, 83, 32, 0.5);
+                }
+            </style>
+
+
 
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 class="h3 mb-0 text-gray-800">Input/Koreksi Surat Keluar</h1>
@@ -47,7 +87,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             <?= $_SESSION['pesan'] ?>
 
                         </div>
-                    <?php unset($_SESSION['pesan']);
+                        <?php unset($_SESSION['pesan']);
                     } ?>
                 </div>
             </div>
@@ -60,11 +100,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <div class="header d-flex justify-content-between p-3">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Nomor</label>
-                                <input type="text" class="form-control w-25 text-center " id="nomor" value="1" aria-describedby="emailHelp" readonly>
+                                <input type="text" class="form-control w-25 text-center " id="nomor" value="1"
+                                    aria-describedby="emailHelp" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tanggal Input</label>
-                                <input type="date" class="form-control w-100 text-center " id="tanggal" aria-describedby="emailHelp">
+                                <input type="date" class="form-control w-100 text-center " id="tanggal"
+                                    aria-describedby="emailHelp">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Jenis Surat</label>
@@ -79,18 +121,21 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <div class="header d-flex p-3" style="gap: 30px;">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Nomor Surat</label>
-                                <input type="text" class="form-control w-100 text-center " id="nomorSurat" placeholder="Nomor Fisik Surat" aria-describedby="emailHelp">
+                                <input type="text" class="form-control w-100 text-center " id="nomorSurat"
+                                    placeholder="Nomor Fisik Surat" aria-describedby="emailHelp">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tanggal Fisik Surat</label>
-                                <input type="date" class="form-control w-100 text-center " id="tanggalSurat" aria-describedby="emailHelp">
+                                <input type="date" class="form-control w-100 text-center " id="tanggalSurat"
+                                    aria-describedby="emailHelp">
                             </div>
                         </div>
 
                         <div class="input-lanjutan">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Hal</label>
-                                <input type="text" class="form-control w-75 text-center " id="hal" placeholder="Perihal Surat" aria-describedby="emailHelp">
+                                <input type="text" class="form-control w-75 text-center " id="hal"
+                                    placeholder="Perihal Surat" aria-describedby="emailHelp">
                             </div>
                         </div>
 
@@ -99,7 +144,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <!-- <label for="custom-file">Sisipkan File</label> -->
                         <div class="custom-file d-flex justify-content-between align-items-center w-100">
                             <input type="file" class="custom-file-input w-100" style="cursor: pointer;" id="customFile">
-                            <label class="custom-file-label w-75 ml-5 d-flex  justify-content-center align-items-center" id="file" style="height:300px ; cursor:pointer;" for="customFile">+</label>
+                            <label class="custom-file-label w-75 ml-5 d-flex  justify-content-center align-items-center"
+                                id="file" style="height:300px ; cursor:pointer;" for="customFile">+</label>
                         </div>
                     </div>
                 </div>
@@ -108,11 +154,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <div class="input-lanjutan">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Lampiran</label>
-                                <input type="text" class="form-control w-75 text-center " id="lampiran" placeholder="Lampiran" aria-describedby="emailHelp">
+                                <input type="text" class="form-control w-75 text-center " id="lampiran"
+                                    placeholder="Lampiran" aria-describedby="emailHelp">
                             </div>
                             <div class="form-group d-flex flex-column">
                                 <label for="description">Deskripsi:</label>
-                                <textarea class="form-control w-75 text-center" id="keterangan" name="description" rows="4" placeholder="Ringksan Isi Surat" aria-describedby="emailHelp"></textarea>
+                                <textarea class="form-control w-75 text-center" id="keterangan" name="description"
+                                    rows="4" placeholder="Ringksan Isi Surat" aria-describedby="emailHelp"></textarea>
                             </div>
 
                             <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
@@ -120,7 +168,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             <div class="form-group w-25">
                                 <label for="kodeRelasi">Kode Relasi</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control text-center" id="kodeRelasi" placeholder="Kode Relasi" readonly>
+                                    <input type="text" class="form-control text-center" id="kodeRelasi"
+                                        placeholder="Kode Relasi" readonly>
                                     <div id="kodeRelasiList" class="list-group overflow-hidden"></div>
                                 </div>
                             </div>
@@ -129,18 +178,22 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 <div class="col">
                                     <label for="namaPerson">Nama</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control w-75 text-center" id="namaPerson" placeholder="Nama person">
+                                        <input type="text" class="form-control w-75 text-center" id="namaPerson"
+                                            placeholder="Nama person">
                                         <div class="input-group-append">
-                                            <button class="btn btn-secondary" id="searchPerson" type="button">Cari</button>
+                                            <button class="btn btn-secondary" id="searchPerson"
+                                                type="button">Cari</button>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <label for="namaLembaga">Lembaga</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control w-75 text-center" id="namaLembaga" placeholder="Nama Lembaga">
+                                        <input type="text" class="form-control w-75 text-center" id="namaLembaga"
+                                            placeholder="Nama Lembaga">
                                         <div class="input-group-append">
-                                            <button class="btn btn-secondary" id="searchLembaga" type="button">Cari</button>
+                                            <button class="btn btn-secondary" id="searchLembaga"
+                                                type="button">Cari</button>
                                         </div>
                                     </div>
                                 </div>
@@ -148,26 +201,30 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
                             <div class="form-group m-3">
                                 <label for="alamat">Alamat</label>
-                                <input type="text" class="form-control w-75 text-center" id="alamat" placeholder="Alamat" readonly>
+                                <input type="text" class="form-control w-75 text-center" id="alamat"
+                                    placeholder="Alamat" readonly>
                             </div>
 
                             <div class="row m-3">
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="kota">Kota</label>
-                                        <input type="text" class="form-control w-75 text-center" id="kota" placeholder="Kota" readonly>
+                                        <input type="text" class="form-control w-75 text-center" id="kota"
+                                            placeholder="Kota" readonly>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="propinsi">Propinsi</label>
-                                        <input type="text" class="form-control w-75 text-center" id="propinsi" placeholder="Propinsi" readonly>
+                                        <input type="text" class="form-control w-75 text-center" id="propinsi"
+                                            placeholder="Propinsi" readonly>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="kodepos">Kodepos</label>
-                                        <input type="text" class="form-control w-75 text-center" id="kodepos" placeholder="Kodepos" readonly>
+                                        <input type="text" class="form-control w-75 text-center" id="kodepos"
+                                            placeholder="Kodepos" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -221,7 +278,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <script>
     // gunakan Javascript dan jQuery
 
-    $(document).ready(function() { // jika jalaman web selesai diload, maka jalankan script ini
+    $(document).ready(function () { // jika jalaman web selesai diload, maka jalankan script ini
         $('#menuMenu').trigger('click');
 
         //getContoh1();
@@ -234,9 +291,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
     });
 
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         // Saat tombol Cari diklik (untuk nama person)
-        $('#searchPerson').on('click', function() {
+        $('#searchPerson').on('click', function () {
             var namaPerson = $('#namaPerson').val();
             var namaLembaga = $('#namaLembaga').val();
 
@@ -249,11 +306,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         lembaga: namaLembaga
                     },
                     dataType: "json", // Mengharapkan respons JSON
-                    success: function(data) {
+                    success: function (data) {
                         $('#kodeRelasiList').empty(); // Bersihkan list sebelumnya
 
                         if (data.length > 0) {
-                            $.each(data, function(index, item) {
+                            $.each(data, function (index, item) {
                                 $('#kodeRelasiList').append(
                                     '<a href="#" class="list-group-item list-group-item-action" data-id="' + item.milistId + '" data-nama="' + item.namaPerson + '" data-lembaga="' + item.lembaga + '" data-alamat="' + item.alamat + '" data-kota="' + item.kota + '" data-propinsi="' + item.propinsi + '" data-kodepos="' + item.kodepos + '">' +
                                     item.milistId + ' - ' + item.namaPerson +
@@ -264,7 +321,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             $('#kodeRelasiList').append('<li class="list-group-item">No Results Found</li>');
                         }
                     },
-                    error: function(xhr, status, error) {
+                    error: function (xhr, status, error) {
                         console.error('AJAX Error:', error);
                         console.error('Response Text:', xhr.responseText);
                     }
@@ -275,7 +332,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
         });
 
         // Saat tombol Cari diklik (untuk nama lembaga)
-        $('#searchLembaga').on('click', function() {
+        $('#searchLembaga').on('click', function () {
             var namaPerson = $('#namaPerson').val();
             var namaLembaga = $('#namaLembaga').val();
 
@@ -288,11 +345,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         lembaga: namaLembaga
                     },
                     dataType: "json", // Mengharapkan respons JSON
-                    success: function(data) {
+                    success: function (data) {
                         $('#kodeRelasiList').empty(); // Bersihkan list sebelumnya
 
                         if (data.length > 0) {
-                            $.each(data, function(index, item) {
+                            $.each(data, function (index, item) {
                                 $('#kodeRelasiList').append(
                                     '<a href="#" class="list-group-item list-group-item-action" data-id="' + item.milistId + '" data-nama="' + item.namaPerson + '" data-lembaga="' + item.lembaga + '" data-alamat="' + item.alamat + '" data-kota="' + item.kota + '" data-propinsi="' + item.propinsi + '" data-kodepos="' + item.kodepos + '">' +
                                     item.milistId + ' - ' + item.namaPerson +
@@ -303,7 +360,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             $('#kodeRelasiList').append('<li class="list-group-item">No Results Found</li>');
                         }
                     },
-                    error: function(xhr, status, error) {
+                    error: function (xhr, status, error) {
                         console.error('AJAX Error:', error);
                         console.error('Response Text:', xhr.responseText);
                     }
@@ -314,7 +371,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
         });
 
         // Saat user klik salah satu hasil dari list
-        $(document).on('click', '.list-group-item', function(e) {
+        $(document).on('click', '.list-group-item', function (e) {
             e.preventDefault(); // Mencegah tindakan default link <a>
 
             console.log($(this).data());
@@ -413,7 +470,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             method: "POST",
             dataType: "JSON",
             async: false,
-            success: function(data) {
+            success: function (data) {
                 for (var i = 0; i < data.length; i++) {
 
                     html += '<tr>';
