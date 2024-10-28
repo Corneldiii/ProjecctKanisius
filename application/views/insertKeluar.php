@@ -33,10 +33,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <div class="menu"
                 style="display: flex; justify-content: flex-start; margin-top: 20px; margin-bottom: 20px; border-bottom: 2px solid #ddd;">
                 <a href="menuKeluar" class="menu-btn active">
-                <i class="bi bi-file-earmark-spreadsheet"></i> Tabel
+                    <i class="bi bi-file-earmark-spreadsheet"></i>
+                    <span>Tabel</span>
                 </a>
                 <a href="insertKeluar" class="menu-btn">
-                <i class="bi bi-file-earmark-plus"></i> Insert
+                    <i class="bi bi-file-earmark-plus"></i>
+                    <span>Insert</span>
                 </a>
             </div>
 
@@ -46,13 +48,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     padding: 12px 20px;
                     margin: 0 10px;
                     font-size: 16px;
-                    text-decoration: none;
                     color: #fff;
                     background-color: #4b5320;
-                    border: none;
                     border-radius: 8px 8px 0 0;
                     transition: background-color 0.3s ease, transform 0.2s;
-                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                    position: relative;
+                    z-index: 1;
                 }
 
                 .menu-btn.active {
@@ -64,11 +65,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     background-color: #3e4520;
                     transform: translateY(-2px);
                     color: #fff;
+                    text-decoration: none;
                 }
 
-                .menu-btn:focus {
-                    outline: none;
-                    box-shadow: 0 0 0 3px rgba(75, 83, 32, 0.5);
+                .menu-btn span {
+                    margin-left: 4px;
                 }
             </style>
 
