@@ -11,6 +11,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 ?>
 <!-- untuk daftar menu dst, cek header.php-->
 
+<!-- Bootstrap Icons Library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+
 <div id="content-wrapper" class="d-flex flex-column">
 
     <div id="content">
