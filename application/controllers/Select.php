@@ -21,6 +21,13 @@ class Select extends CI_Controller {
         // var_dump($data);
         echo json_encode($data); 
     }
+
+    public function getDetailData() {
+        $id = $this->input->get('id');
+        $data = $this->Model->getDataById($id); // Sesuaikan dengan model Anda
+        echo json_encode($data);
+    }
+    
     public function contoh2(){
         $inputAjax = $this->input->get('inputAjax');
 		
