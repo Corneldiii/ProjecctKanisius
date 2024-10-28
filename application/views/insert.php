@@ -580,6 +580,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
     $(document).ready(function() {
         var kode = '1';
         var divisi = '<?php echo $kodeDiv; ?>';
+        console.log(divisi);
         var cek = '<?php echo $noFinal ?>'
         console.log(cek);
         var noFinal = '<?php echo str_pad($noFinal + 1, 4, "0", STR_PAD_LEFT); ?>';

@@ -42,6 +42,14 @@ ON divID=LEFT(pegLastDivId,2) WHERE a.userId='" . $username . "' AND a.userPass=
         $query = "SELECT * FROM tb_surat";
         return $this->db->query($query);
     }
+
+    public function getDataUser($kodeDivisi){
+        $query = "SELECT nomor, Tanggal, noSurat, tglSurat, relasiID, namaPerson, namaLembaga, hal, lampiran, keterangan FROM 
+                    tb_surat WHERE LEFT(nomor,1)='1' AND (divisi='" . $kodeDivisi . "' OR dispoDivisi1='" . $kodeDivisi . "' OR dispoDivisi2='" . $kodeDivisi . "' 
+                    OR dispoDivisi3='" . $kodeDivisi . "' OR dispoDivisi4='" . $kodeDivisi . "' OR dispoDivisi5='" . $kodeDivisi . "')";
+        return $this->db->query($query);
+    }
+
     public function getDataByID($id)
     {
         $query = "SELECT * FROM surat WHERE id_surat = '" . $id . "'";
