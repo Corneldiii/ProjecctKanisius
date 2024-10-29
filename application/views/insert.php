@@ -266,8 +266,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
                             <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
 
-
-
+                            
                             <div class="form-group row m-4 w-25">
                                 <div class="col">
                                     <label for="namaPerson">cari Nama / kode relasi</label>
@@ -353,7 +352,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 <div class="modal-dialog modal-xl">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title w-100 text-center" id="exampleModalLabel">Judul Modal</h5>
+                                           
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -381,13 +380,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                        
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-
 
                             <div class="form-group m-3">
                                 <label for="alamat">Alamat</label>
@@ -511,9 +508,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 </div>
                             </div>
 
-
-
-
                         </div>
                     </div>
                 </div>
@@ -562,16 +556,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <script>
     // gunakan Javascript dan jQuery
 
-    $(document).ready(function() { // jika jalaman web selesai diload, maka jalankan script ini
+    $(document).ready(function() { 
         $('#menuMenu').trigger('click');
 
-        //getContoh1();
-
         $('#tabel').DataTable({
-            "scrollY": "300px", // Batasi scroll vertikal
-            "scrollX": true, // Aktifkan scroll horizontal
+            "scrollY": "300px", 
+            "scrollX": true, 
             "scrollCollapse": true,
-            "paging": false, // Nonaktifkan paging jika tabel tidak terlalu panjang
+            "paging": false, 
             "bSort": false,
         });
     });
