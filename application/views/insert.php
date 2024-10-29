@@ -205,7 +205,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <div class="header d-flex justify-content-between p-3">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Nomor</label>
-                                <input type="text" class="form-control w-25 text-center" name="nomor" id="nomor" value="1" aria-describedby="emailHelp" readonly>
+                                <input type="text" class="form-control w-25 text-center" name="nomor" id="nomor" aria-describedby="emailHelp" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tanggal Input</label>
@@ -753,12 +753,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
         var kode = '1';
         var divisi = '<?php echo $kodeDiv; ?>';
         console.log(divisi);
-        var cek = '<?php echo $noFinal ?>'
-        console.log(cek);
-        var noFinal = '<?php echo str_pad($noFinal + 1, 4, "0", STR_PAD_LEFT); ?>';
+        var noFinal = '<?php echo ($noFinal === '0000') ? $noFinal='0001' : str_pad($noFinal + 1, 4, "0", STR_PAD_LEFT); ?>';
         var Tahun = new Date().getFullYear().toString().substring(2);
         var urut = noFinal !== '' ? noFinal : '0001';
         console.log(urut);
+
+        var kodeForm = '<?php echo $kodeForm + 1?>';
+        console.log(kodeForm+'cek');
+        $('#nomor').val(kodeForm);
 
         var tanggalInput = new Date().toISOString().split('T')[0];
         $('#tanggal').val(tanggalInput);

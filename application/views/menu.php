@@ -280,9 +280,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     <p><span class="detail-label">Divisi:</span> <span class="detail-value">${data.divisi || '-'}</span></p>
                     <p><span class="detail-label">Create User ID:</span> <span class="detail-value">${data.createUserID || '-'}</span></p>
                     <p><span class="detail-label">Create Date:</span> <span class="detail-value">${data.createDate || '-'}</span></p>
-                    <p><span class="detail-label">File:</span> 
+                    <p><span class="detail-label">File: </span> 
                       <span class="detail-value">
-                        ${data.file ? `<a href="<?php echo base_url(); ?>${data.file}" target="_blank">Lihat File</a>` : '-'}
+                        ${data.file ? `<a href="<?php echo base_url(); ?>${data.file}" target="_blank" class="bi bi-download">    Lihat File </a>` : '-'}
                       </span>
                     </p>
                 </div>
