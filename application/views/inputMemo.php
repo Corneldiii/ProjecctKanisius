@@ -17,247 +17,264 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 <div id="content-wrapper" class="d-flex flex-column">
 
-    <div id="content">
+<div id="content-wrapper" class="d-flex flex-column">
 
-        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                <i class="fa fa-bars"></i>
-            </button>
+<!DOCTYPE html>
+<html lang="en">
 
-            <ul class="navbar-nav ml-auto">
-                <img src="img/kanisius.png">
-            </ul>
-        </nav>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memo Internal - Form Input</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+    /* Warna dasar dan tema */
+body {
+background-color: #e8f5e9; /* Hijau lembut background */
+font-family: Arial, sans-serif;
+color: #1b5e20; /* Hijau gelap teks */
+}
 
-        <div class="container-fluid">
-        <div class="menu"
-                style="display: flex; justify-content: flex-start; margin-top: 20px; margin-bottom: 20px; border-bottom: 2px solid #ddd;">
-                <a href="memo" class="menu-btn active">
-                    <i class="bi bi-file-earmark-spreadsheet"></i> Tabel
-                </a>
-                <a href="inputMemo" class="menu-btn">
-                    <i class="bi bi-file-earmark-plus"></i> Insert
-                </a>
-            </div>
+.navbar {
+background-color: #2e7d32; /* Hijau gelap navbar */
+border-bottom: 2px solid #1b5e20;
+}
 
-            <style>
-                .menu-btn {
-                    display: inline-block;
-                    padding: 12px 20px;
-                    margin: 0 10px;
-                    font-size: 16px;
-                    text-decoration: none;
-                    color: #fff;
-                    background-color: #4b5320;
-                    border: none;
-                    border-radius: 8px 8px 0 0;
-                    transition: background-color 0.3s ease, transform 0.2s;
-                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                }
+.navbar a, .navbar img {
+color: white;
+}
 
-                .menu-btn.active {
-                    background-color: #3e4520;
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                }
+.btn-menu {
+padding: 12px 20px;
+margin: 0 10px;
+font-size: 16px;
+text-decoration: none;
+color: #1b5e20;
+background-color: #a5d6a7; /* Hijau sedang */
+border: 1px solid #81c784;
+border-radius: 8px 8px 0 0;
+transition: background-color 0.3s, color 0.3s;
+}
 
-                .menu-btn:hover {
-                    background-color: #3e4520;
-                    transform: translateY(-2px);
-                    color: #fff;
-                    text-decoration: none; /* Menghilangkan garis bawah saat hover */
-                }
+.btn-menu.active,
+.btn-menu:hover {
+background-color: #2e7d32; /* Hijau gelap untuk hover */
+color: white;
+}
 
-                .menu-btn:focus {
-                    outline: none;
-                    box-shadow: 0 0 0 3px rgba(75, 83, 32, 0.5);
-                }
-            </style>
+.divider {
+border-top: 2px solid #1b5e20; /* Garis divider hijau gelap */
+margin: 20px 0;
+}
 
-            <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Input/Koreksi Memo Interna</h1>
-            </div>
+.custom-file-container {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+height: 300px;
+border: 1px dashed #4caf50; /* Border hijau */
+border-radius: 8px;
+cursor: pointer;
+transition: border-color 0.3s;
+background-color: #e8f5e9;
+}
 
-            <!-- Alert untuk "set_flashdata", biarkan saja -->
-            <div class="form-group row">
-                <div class="col-sm-12">
-                    <?php if (isset($_SESSION["pesan"])) { ?>
-                        <div class="alert <?= $_SESSION['type'] ?> alert-dismissible">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            <?= $_SESSION['pesan'] ?>
+.custom-file-container:hover {
+border-color: #1b5e20;
+}
 
-                        </div>
-                    <?php unset($_SESSION['pesan']);
-                    } ?>
-                </div>
-            </div>
+.custom-file-label {
+text-align: center;
+width: 100%;
+padding: 20px;
+color: #1b5e20;
+}
 
-            <!-- form input surat dari admin sekretaris (start) -->
+.alert {
+background-color: #a5d6a7;
+color: #1b5e20;
+border-left: 5px solid #2e7d32;
+margin-top: 10px;
+}
 
-            <form class="user" action="<?= site_url("insert") ?>" method="post">
-                <div class="form-group row">
-                    <div class="col-8">
-                        <div class="header d-flex p-3" style="gap: 30px;">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Nomor</label>
-                                <input type="text" class="form-control w-25 text-center " id="nomor" value="1" aria-describedby="emailHelp" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Tanggal Input</label>
-                                <input type="date" class="form-control w-100 text-center " id="tanggal" aria-describedby="emailHelp">
-                            </div>
-                        </div>
-                        <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
-                        <div class="header d-flex p-3" style="gap: 30px;">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Nomor Memo</label>
-                                <input type="text" class="form-control w-100 text-center " id="nomorSurat" placeholder="Nomor Fisik Memo" aria-describedby="emailHelp">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Tanggal Memo</label>
-                                <input type="date" class="form-control w-100 text-center " id="tanggalSurat" aria-describedby="emailHelp">
-                            </div>
-                        </div>
+.form-control {
+margin-bottom: 10px;
+border: 1px solid #81c784;
+background-color: #f1f8e9;
+color: #1b5e20;
+}
 
-                        <div class="input-lanjutan">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Hal</label>
-                                <input type="text" class="form-control w-75 text-center " id="hal" placeholder="Perihal Memo" aria-describedby="emailHelp">
-                            </div>
-                        </div>
+.form-control:focus {
+border-color: #2e7d32;
+box-shadow: 0 0 5px rgba(46, 125, 50, 0.5);
+}
 
-                    </div>
-                    <div class="col-4 w-100" style="height:300px ;">
-                        <!-- <label for="custom-file">Sisipkan File</label> -->
-                        <div class="custom-file d-flex justify-content-between align-items-center w-100">
-                            <input type="file" class="custom-file-input w-100" style="cursor: pointer;" id="customFile">
-                            <label class="custom-file-label w-75 ml-5 d-flex  justify-content-center align-items-center" id="file" style="height:300px ; cursor:pointer;" for="customFile">+</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="input-lanjutan">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Lampiran</label>
-                                <input type="text" class="form-control w-75 text-center " id="lampiran" placeholder="Lampiran" aria-describedby="emailHelp">
-                            </div>
-                            <div class="form-group d-flex flex-column">
-                                <label for="description">Deskripsi:</label>
-                                <textarea class="form-control w-75 text-center" id="keterangan" name="description" rows="4" placeholder="Ringksan Isi Memo" aria-describedby="emailHelp"></textarea>
-                            </div>
+.btn-primary {
+background-color: #2e7d32;
+border-color: #2e7d32;
+color: white;
+transition: background-color 0.3s;
+}
 
-                            <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
+.btn-primary:hover {
+background-color: #1b5e20;
+}
 
+h1, label {
+color: #1b5e20;
+}
 
-                            <div class="row">
-                                <div class="col">
+.menu-btn {
+                display: inline-block;
+                padding: 12px 20px;
+                margin: 0 10px;
+                font-size: 16px;
+                text-decoration: none;
+                color: #fff;
+                background-color: #4b5320;
+                border: none;
+                border-radius: 8px 8px 0 0;
+                transition: background-color 0.3s ease, transform 0.2s;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
 
-                                    <!-- Disposisi 1 dan Person 1 -->
-                                    <div class="form-group row">
-                                        <label for="dispoDivisi1" class="col-sm-2 col-form-label">Disposisi 1</label>
-                                        <div class="col-sm-4">
-                                            <select class="form-control" id="dispoDivisi1" name="divisi1" onchange="getPersons(1)">
-                                                <option value="">Pilih Divisi</option>
-                                                <?php foreach ($divisi as $d): ?>
-                                                    <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                        <label for="dispoNoreg1" class="col-sm-2 col-form-label">Person 1</label>
-                                        <div class="col-sm-4">
-                                            <select class="form-control" name="person1" id="dispoNoreg1">
-                                                <option value="">Pilih Person</option>
-                                            </select>
-                                        </div>
-                                    </div>
+            .menu-btn.active {
+                background-color: #3e4520;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
 
-                                    <!-- Disposisi 2 dan Person 2 -->
-                                    <div class="form-group row">
-                                        <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 2</label>
-                                        <div class="col-sm-4">
-                                            <select class="form-control" id="dispoDivisi2" name="divisi2" onchange="getPersons(2)">
-                                                <option value="">Pilih Divisi</option>
-                                                <?php foreach ($divisi as $d): ?>
-                                                    <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                        <label for="dispoNoreg2" class="col-sm-2 col-form-label">Person 2</label>
-                                        <div class="col-sm-4">
-                                            <select class="form-control" name="person2" id="dispoNoreg2">
-                                                <option value="">Pilih Person</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <!-- Disposisi 3 dan Person 3 -->
-                                    <div class="form-group row">
-                                        <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 3</label>
-                                        <div class="col-sm-4">
-                                            <select class="form-control" id="dispoDivisi3" name="divisi3" onchange="getPersons(3)">
-                                                <option value="">Pilih Divisi</option>
-                                                <?php foreach ($divisi as $d): ?>
-                                                    <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                        <label for="dispoNoreg2" class="col-sm-2 col-form-label">Person 3</label>
-                                        <div class="col-sm-4">
-                                            <select class="form-control" name="person3" id="dispoNoreg3">
-                                                <option value="">Pilih Person</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <!-- Disposisi 4 dan Person 4 -->
-                                    <div class="form-group row">
-                                        <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 4</label>
-                                        <div class="col-sm-4">
-                                            <select class="form-control" id="dispoDivisi4" name="divisi4" onchange="getPersons(4)">
-                                                <option value="">Pilih Divisi</option>
-                                                <?php foreach ($divisi as $d): ?>
-                                                    <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                        <label for="dispoNoreg2" class="col-sm-2 col-form-label">Person 4</label>
-                                        <div class="col-sm-4">
-                                            <select class="form-control" name="person4" id="dispoNoreg4">
-                                                <option value="">Pilih Person</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <!-- Disposisi 5 dan Person 5 -->
-                                    <div class="form-group row">
-                                        <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 5</label>
-                                        <div class="col-sm-4">
-                                            <select class="form-control" id="dispoDivisi5" name="divisi5" onchange="getPersons(5)">
-                                                <option value="">Pilih Divisi</option>
-                                                <?php foreach ($divisi as $d): ?>
-                                                    <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                        <label for="dispoNoreg2" class="col-sm-2 col-form-label">Person 2</label>
-                                        <div class="col-sm-4">
-                                            <select class="form-control" name="person5" id="dispoNoreg5">
-                                                <option value="">Pilih Person</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+            .menu-btn:hover {
+                background-color: #3e4520;
+                transform: translateY(-2px);
+                color: #fff;
+                text-decoration: none; /* Menghilangkan garis bawah saat hover */
+            }
 
-                            <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
-                        </div>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+            .menu-btn:focus {
+                outline: none;
+                box-shadow: 0 0 0 3px rgba(75, 83, 32, 0.5);
+            }
+</style>
+</head>
 
-            <!-- form insert (end) -->
+<body>
 
-        </div>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="#">Memo Internal</a>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <img src="img/kanisius.png" alt="Logo">
+        </li>
+    </ul>
+</nav>
 
+<div class="container mt-4">
+    <div class="menu mb-3"
+    style="display: flex; justify-content: flex-start; margin-top: 20px; margin-bottom: 20px; border-bottom: 2px solid #ddd;">
+            <a href="memo" class="menu-btn active">
+                <i class="bi bi-file-earmark-spreadsheet"></i> Tabel
+            </a>
+            <a href="inputMemo" class="menu-btn">
+                <i class="bi bi-file-earmark-plus"></i> Insert
+            </a>
     </div>
+
+    <div class="form-section">
+        <h3 class="text-center mb-4">Input / Koreksi Memo Internal</h3>
+
+        <!-- Alert Pesan -->
+        <?php if (isset($_SESSION["pesan"])): ?>
+            <div class="alert <?= $_SESSION['type'] ?> alert-dismissible fade show" role="alert">
+                <?= $_SESSION['pesan'] ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <?php unset($_SESSION['pesan']); ?>
+        <?php endif; ?>
+
+        <!-- Form Input -->
+        <form action="<?= site_url('insert') ?>" method="post" enctype="multipart/form-data">
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <label>Nomor</label>
+                    <input type="text" class="form-control text-center" value="1" readonly>
+                </div>
+                <div class="col-md-6">
+                    <label>Tanggal Input</label>
+                    <input type="date" class="form-control text-center">
+                </div>
+            </div>
+
+            <div class="border-divider"></div>
+
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <label>Nomor Memo</label>
+                    <input type="text" class="form-control text-center" placeholder="Nomor Fisik Memo">
+                </div>
+                <div class="col-md-6">
+                    <label>Tanggal Memo</label>
+                    <input type="date" class="form-control text-center">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Hal</label>
+                <input type="text" class="form-control text-center" placeholder="Perihal Memo">
+            </div>
+
+            <div class="form-group">
+                <label>Lampiran</label>
+                <input type="text" class="form-control text-center" placeholder="Lampiran">
+            </div>
+
+            <div class="form-group">
+                <label>Deskripsi</label>
+                <textarea class="form-control text-center" rows="4" placeholder="Ringkasan Isi Memo"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Upload File</label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="customFile">
+                    <label class="custom-file-label" for="customFile">Pilih File...</label>
+                </div>
+            </div>
+
+            <div class="border-divider"></div>
+
+            <h5>Disposisi</h5>
+            <?php for ($i = 1; $i <= 5; $i++): ?>
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label>Disposisi <?= $i ?></label>
+                        <select class="form-control" name="divisi<?= $i ?>" onchange="getPersons(<?= $i ?>)">
+                            <option value="">Pilih Divisi</option>
+                            <?php foreach ($divisi as $d): ?>
+                                <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Person <?= $i ?></label>
+                        <select class="form-control" name="person<?= $i ?>">
+                            <option value="">Pilih Person</option>
+                        </select>
+                    </div>
+                </div>
+            <?php endfor; ?>
+
+            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+        </form>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 
     <footer class="sticky-footer bg-white">
         <div class="container my-auto">
