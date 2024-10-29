@@ -42,139 +42,141 @@ defined('BASEPATH') or exit('No direct script access allowed');
             </div>
 
             <style>
-    /* Tombol Menu */
-    .menu-btn {
-        display: inline-block;
-        padding: 12px 20px;
-        margin: 0 10px;
-        font-size: 16px;
-        color: #fff;
-        background-color: #4b5320;
-        border-radius: 8px 8px 0 0;
-        transition: background-color 0.3s ease, transform 0.2s;
-        position: relative;
-        z-index: 1;
-        cursor: pointer;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
+                /* Tombol Menu */
+                .menu-btn {
+                    display: inline-block;
+                    padding: 12px 20px;
+                    margin: 0 10px;
+                    font-size: 16px;
+                    color: #fff;
+                    background-color: #4b5320;
+                    border-radius: 8px 8px 0 0;
+                    transition: background-color 0.3s ease, transform 0.2s;
+                    position: relative;
+                    z-index: 1;
+                    cursor: pointer;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                }
 
-    .menu-btn.active {
-        background-color: #3e4520;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    }
+                .menu-btn.active {
+                    background-color: #3e4520;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                }
 
-    .menu-btn:hover {
-        background-color: #3a4a1c;
-        transform: translateY(-2px);
-        color: #fff;
-        text-decoration: none;
-    }
+                .menu-btn:hover {
+                    background-color: #3a4a1c;
+                    transform: translateY(-2px);
+                    color: #fff;
+                    text-decoration: none;
+                }
 
-    .menu-btn span {
-        margin-left: 4px;
-    }
+                .menu-btn span {
+                    margin-left: 4px;
+                }
 
-    /* Modal Tabel */
+                /* Modal Tabel */
 
-    /* Atur tabel agar mengikuti lebar modal */
-    .table-fixed {
-        width: 100%;
-        table-layout: fixed;
-        border-collapse: collapse;
-    }
+                /* Atur tabel agar mengikuti lebar modal */
+                .table-fixed {
+                    width: 100%;
+                    table-layout: fixed;
+                    border-collapse: collapse;
+                }
 
-    /* Header Tabel */
-    .table-fixed thead th {
-        background-color: #4CAF50;
-        color: white;
-        font-weight: bold;
-        text-align: center;
-        padding: 12px;
-        font-size: 14px;
-        border: 1px solid #ddd;
-        box-sizing: border-box;
-    }
+                /* Header Tabel */
+                .table-fixed thead th {
+                    background-color: #4CAF50;
+                    color: white;
+                    font-weight: bold;
+                    text-align: center;
+                    padding: 12px;
+                    font-size: 14px;
+                    border: 1px solid #ddd;
+                    box-sizing: border-box;
+                }
 
-    /* Kolom Tabel dengan min-width */
-    .table-fixed th,
-    .table-fixed td {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        padding: 10px;
-        font-size: 12px;
-        border: 1px solid #ddd;
-        box-sizing: border-box;
-        min-width: 50px; /* Lebar minimum */
-    }
+                /* Kolom Tabel dengan min-width */
+                .table-fixed th,
+                .table-fixed td {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    padding: 10px;
+                    font-size: 12px;
+                    border: 1px solid #ddd;
+                    box-sizing: border-box;
+                    min-width: 50px;
+                    /* Lebar minimum */
+                }
 
-    /* Tentukan lebar kolom untuk setiap kolom */
-    .table-fixed th:nth-child(1),
-    .table-fixed td:nth-child(1) {
-        width: 5%;
-        min-width: 40px;
-    }
+                /* Tentukan lebar kolom untuk setiap kolom */
+                .table-fixed th:nth-child(1),
+                .table-fixed td:nth-child(1) {
+                    width: 5%;
+                    min-width: 40px;
+                }
 
-    .table-fixed th:nth-child(2),
-    .table-fixed td:nth-child(2) {
-        width: 10%;
-        min-width: 80px;
-    }
+                .table-fixed th:nth-child(2),
+                .table-fixed td:nth-child(2) {
+                    width: 10%;
+                    min-width: 80px;
+                }
 
-    .table-fixed th:nth-child(3),
-    .table-fixed td:nth-child(3) {
-        width: 20%;
-        min-width: 120px;
-    }
+                .table-fixed th:nth-child(3),
+                .table-fixed td:nth-child(3) {
+                    width: 20%;
+                    min-width: 120px;
+                }
 
-    .table-fixed th:nth-child(4),
-    .table-fixed td:nth-child(4) {
-        width: 20%;
-        min-width: 120px;
-    }
+                .table-fixed th:nth-child(4),
+                .table-fixed td:nth-child(4) {
+                    width: 20%;
+                    min-width: 120px;
+                }
 
-    .table-fixed th:nth-child(5),
-    .table-fixed td:nth-child(5) {
-        width: 20%;
-        min-width: 120px;
-    }
+                .table-fixed th:nth-child(5),
+                .table-fixed td:nth-child(5) {
+                    width: 20%;
+                    min-width: 120px;
+                }
 
-    .table-fixed th:nth-child(6),
-    .table-fixed td:nth-child(6) {
-        width: 10%;
-        min-width: 80px;
-    }
+                .table-fixed th:nth-child(6),
+                .table-fixed td:nth-child(6) {
+                    width: 10%;
+                    min-width: 80px;
+                }
 
-    .table-fixed th:nth-child(7),
-    .table-fixed td:nth-child(7) {
-        width: 10%;
-        min-width: 80px;
-    }
+                .table-fixed th:nth-child(7),
+                .table-fixed td:nth-child(7) {
+                    width: 10%;
+                    min-width: 80px;
+                }
 
-    .table-fixed th:nth-child(8),
-    .table-fixed td:nth-child(8) {
-        width: 10%;
-        min-width: 80px;
-    }
+                .table-fixed th:nth-child(8),
+                .table-fixed td:nth-child(8) {
+                    width: 10%;
+                    min-width: 80px;
+                }
 
-    /* Warna alternatif dan hover */
-    .table-fixed tbody tr:nth-child(even) {
-        background-color: #f9f9f9;
-    }
+                /* Warna alternatif dan hover */
+                .table-fixed tbody tr:nth-child(even) {
+                    background-color: #f9f9f9;
+                }
 
-    .table-fixed tbody tr:hover {
-        background-color: #e9ecef;
-    }
+                .table-fixed tbody tr:hover {
+                    background-color: #e9ecef;
+                }
 
-    /* Responsif */
-    @media (max-width: 768px) {
-        .table-fixed th,
-        .table-fixed td {
-            font-size: 10px;
-            padding: 6px;
-        }
-    }
-</style>
+                /* Responsif */
+                @media (max-width: 768px) {
+
+                    .table-fixed th,
+                    .table-fixed td {
+                        font-size: 10px;
+                        padding: 6px;
+                    }
+                }
+            </style>
 
 
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -314,7 +316,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                         </div>
                                     </div>
                                 </div>
-                            </div> --> 
+                            </div> -->
 
                             <!-- Gagal sebelum search -->
                             <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -343,7 +345,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                         <div class="modal-footer"> <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> <button type="button" class="btn btn-primary">Save changes</button> </div>
                                     </div>
                                 </div>
-                            </div> --> 
+                            </div> -->
 
 
                             <!-- Modal baru -->
