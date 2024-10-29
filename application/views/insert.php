@@ -266,7 +266,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
                             <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
 
-                            
                             <div class="form-group row m-4 w-25">
                                 <div class="col">
                                     <label for="namaPerson">cari Nama / kode relasi</label>
@@ -352,7 +351,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 <div class="modal-dialog modal-xl">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                           
+
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -380,7 +379,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        
+
                                         </div>
                                     </div>
                                 </div>
@@ -556,15 +555,31 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <script>
     // gunakan Javascript dan jQuery
 
-    $(document).ready(function() { 
+    $(document).ready(function() {
         $('#menuMenu').trigger('click');
 
         $('#tabel').DataTable({
-            "scrollY": "300px", 
-            "scrollX": true, 
+            "scrollY": "300px",
+            "scrollX": true,
             "scrollCollapse": true,
-            "paging": false, 
+            "paging": false,
             "bSort": false,
+        });
+
+        $('#tabel tbody').on('click', 'tr', function() {
+            // Get the cells data from the clicked row
+            var namaPerson = $(this).find('td').eq(2).text();
+            var alamat = $(this).find('td').eq(4).text();
+            var kota = $(this).find('td').eq(5).text();
+            var kodepos = $(this).find('td').eq(6).text();
+            var propinsi = $(this).find('td').eq(7).text();
+
+            // Populate the form fields
+            $('#namaPerson').val(namaPerson);
+            $('#alamat').val(alamat);
+            $('#kota').val(kota);
+            $('#kodepos').val(kodepos);
+            $('#propinsi').val(propinsi);
         });
     });
 
@@ -745,13 +760,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
         var kode = '1';
         var divisi = '<?php echo $kodeDiv; ?>';
         console.log(divisi);
-        var noFinal = '<?php echo ($noFinal === '0000') ? $noFinal='0001' : str_pad($noFinal + 1, 4, "0", STR_PAD_LEFT); ?>';
+        var noFinal = '<?php echo ($noFinal === '0000') ? $noFinal = '0001' : str_pad($noFinal + 1, 4, "0", STR_PAD_LEFT); ?>';
         var Tahun = new Date().getFullYear().toString().substring(2);
         var urut = noFinal !== '' ? noFinal : '0001';
         console.log(urut);
 
-        var kodeForm = '<?php echo $kodeForm + 1?>';
-        console.log(kodeForm+'cek');
+        var kodeForm = '<?php echo $kodeForm + 1 ?>';
+        console.log(kodeForm + 'cek');
         $('#nomor').val(kodeForm);
 
         var tanggalInput = new Date().toISOString().split('T')[0];
