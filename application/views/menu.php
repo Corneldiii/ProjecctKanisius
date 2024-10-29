@@ -71,7 +71,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 }
 
                 .btn-circle:hover {
-                    background-color: #90ee90; /* Hijau muda */
+                    background-color: #90ee90;
+                    /* Hijau muda */
                     color: white;
                 }
             </style>
@@ -97,8 +98,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     <table id="tabel" class="display nowrap" style="width:100%">
                         <thead style="color: black;">
                             <tr>
-                                <th style="width:10px" class="text-center align-middle">No</th>
-                                <th class="text-center align-middle">Agenda</th>
+                                <th style="width:10px" class="text-center align-middle">No. Agenda</th>
                                 <th class="text-center align-middle">Tgl Input</th>
                                 <th class="text-center align-middle">No. Surat</th>
                                 <th class="text-center align-middle">Tgl Surat</th>
@@ -179,10 +179,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
         async: false,
         success: function(data) {
             for (var i = 0; i < data.length; i++) {
+                console.log(data);
                 html += '<tr>';
                 html += '<td class="text-center align-middle">' + no + '</td>';
-                html += '<td class="text-center align-middle"><img src="' + (data[i].pict_surat ? data[i].pict_surat : '-') + '" alt="Gambar Surat" style="width: 100px; height: auto;"></td>';
-                html += '<td class="text-center align-middle">' + (data[i].tanggal ? data[i].tanggal : '-') + '</td>';
+                html += '<td class="text-center align-middle">' + (data[i].Tanggal ? data[i].Tanggal : '-') + '</td>';
                 html += '<td class="text-center align-middle">' + (data[i].noSurat ? data[i].noSurat : '-') + '</td>';
                 html += '<td class="text-center align-middle">' + (data[i].tglSurat ? data[i].tglSurat : '-') + '</td>';
                 html += '<td class="text-center align-middle">' + (data[i].relasiID ? data[i].relasiID : '-') + '</td>';
@@ -201,25 +201,31 @@ defined('BASEPATH') or exit('No direct script access allowed');
             $("#tbody").html(html);
         }
     });
-
     $(document).on('click', '.btn-detail', function() {
-        var id = $(this).data('nomor');
+        var id = $(this).data('id');
+        console.log("ID yang dikirim: ", id); // Debugging ID yang dikirim
         $.ajax({
             url: "<?php echo base_url('Select/getDetailData'); ?>",
             method: "GET",
-            data: { id: id },
+            data: {
+                id: id
+            },
+            dataType: "json", // Pastikan AJAX menguraikan JSON secara otomatis
             success: function(data) {
+                console.log("Data yang diterima:", data); // Debugging data yang diterima
                 var detailHtml = `
-                    <p><strong>Agenda:</strong> ${data.agenda}</p>
-                    <p><strong>Tanggal Input:</strong> ${data.tanggal}</p>
-                    <p><strong>No. Surat:</strong> ${data.noSurat}</p>
-                    <p><strong>Tgl Surat:</strong> ${data.tglSurat}</p>
-                    <p><strong>Nama Person:</strong> ${data.namaPerson}</p>
-                    <p><strong>Nama Lembaga:</strong> ${data.namaLembaga}</p>
-                    <p><strong>Hal:</strong> ${data.hal}</p>
-                    <p><strong>Lampiran:</strong> ${data.lampiran}</p>
-                `;
-                $('#modalDetailContent').html(detailHtml);
+                <p><strong>Tanggal Input:</strong> ${data.Tanggal}</p>
+                <p><strong>No. Surat:</strong> ${data.noSurat}</p>
+                <p><strong>Tgl Surat:</strong> ${data.tglSurat}</p>
+                <p><strong>Nama Person:</strong> ${data.namaPerson}</p>
+                <p><strong>Nama Lembaga:</strong> ${data.namaLembaga}</p>
+                <p><strong>Hal:</strong> ${data.hal}</p>
+                <p><strong>Lampiran:</strong> ${data.lampiran}</p>
+            `;
+                $('#modalDetailContent').html(detailHtml); // Menambahkan konten ke modal
+            },
+            error: function(xhr, status, error) {
+                console.error("Error AJAX:", error); // Debugging jika terjadi error
             }
         });
     });

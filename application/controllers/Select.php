@@ -24,7 +24,7 @@ class Select extends CI_Controller {
 
     public function getDetailData() {
         $id = $this->input->get('id');
-        $data = $this->Model->getDataById($id); // Sesuaikan dengan model Anda
+        $data = $this->Model->getDataById($id);
         echo json_encode($data);
     }
     

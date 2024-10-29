@@ -26,7 +26,9 @@ class Insert extends CI_Controller
         redirect('menu');
     }
 
-    public function insert_data() {
+    public function insert_data()
+    {
+        var_dump($_POST);
         // Ambil data dari POST request
         $nomor = $this->input->post('nomorSurat');
         $tanggal = $this->input->post('tanggal');
@@ -48,26 +50,40 @@ class Insert extends CI_Controller
         $divisi3 = $this->input->post('divisi3');
         $divisi4 = $this->input->post('divisi4');
         $divisi5 = $this->input->post('divisi5');
-        $person1 = $this -> input -> post('person1');
-        $person2 = $this -> input -> post('person2');
-        $person3 = $this -> input -> post('person3');
-        $person4 = $this -> input -> post('person4');
-        $person5 = $this -> input -> post('person5');
+        $person1 = $this->input->post('person1');
+        $person2 = $this->input->post('person2');
+        $person3 = $this->input->post('person3');
+        $person4 = $this->input->post('person4');
+        $person5 = $this->input->post('person5');
 
 
-        // Simpan file jika ada
-        if (!empty($_FILES['customFile']['name'])) {
-            $config['upload_path'] = './uploads/';
+        $filePath = null;
+        if (!empty($_FILES['file']['name'])) {
+            $config['upload_path'] = FCPATH . 'file/';  // Path absolut
             $config['allowed_types'] = 'pdf|jpg|png|docx';
-            $this->load->library('upload', $config);
+            $config['max_size'] = 2048;  // Maksimum ukuran 2MB
 
-            if ($this->upload->do_upload('customFile')) {
+            $this->upload->initialize($config);
+
+            // Debugging tambahan: Tampilkan path dan cek apakah bisa diakses
+            var_dump($config['upload_path']);  // Lihat path yang digunakan
+
+            if (!is_dir($config['upload_path'])) {
+                echo "Folder tidak ditemukan!";
+                return;
+            }
+            if (!is_writable($config['upload_path'])) {
+                echo "Folder tidak bisa ditulis!";
+                return;
+            }
+
+            if ($this->upload->do_upload('file')) {
                 $uploadData = $this->upload->data();
-                $filePath = $uploadData['file_name'];
-                var_dump($filePath);
+                $filePath = 'file/' . $uploadData['file_name'];
+                echo "Upload berhasil!";
+                var_dump($uploadData);
             } else {
                 echo $this->upload->display_errors();
-                return;
             }
         }
 
@@ -91,7 +107,7 @@ class Insert extends CI_Controller
             'divisi' => isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '',
             'createUserID' => isset($_SESSION['id_surat']) ? $_SESSION['id_surat'] : '',
             'createDate' => date('Y-m-d H:i:s'),
-            'file' => isset($filePath) ? $filePath : null,
+            'file' => $filePath,
             'dispoDivisi1' => $divisi1,
             'dispoDivisi2' => $divisi2,
             'dispoDivisi3' => $divisi3,
@@ -111,5 +127,4 @@ class Insert extends CI_Controller
 
         echo json_encode(array("status" => "success"));
     }
-
 }
