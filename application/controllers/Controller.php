@@ -101,8 +101,9 @@ class Controller extends CI_Controller
         $data['divisi'] = $this->Model->get_divisi(); 
         $data['kodeDiv'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
         $data['noFinal'] = $this->Model->getNoSurat();
+        $data['kodeForm'] = $this->Model->getCount();
 
-        // var_dump($data['noFinal']);
+        // var_dump($this->Model->getCount());
 
         $this->load->view('header');
         $this->load->view('insert', $data);

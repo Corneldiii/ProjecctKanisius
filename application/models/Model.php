@@ -33,9 +33,15 @@ ON divID=LEFT(pegLastDivId,2) WHERE a.userId='" . $username . "' AND a.userPass=
     {
         $query = "SELECT SUBSTR(NOMOR,6,9) AS nomorForm FROM tb_surat ORDER BY nomorForm DESC LIMIT 1";
         $result = $this->db->query($query)->row();
-        return $result ? (string)$result->nomorForm : '0001';
+        return $result ? (string)$result->nomorForm : '0000';
     }
 
+    public function getCount(){
+        $query = "SELECT COUNT(*) as count FROM tb_surat";
+        $result = $this->db->query($query)->row();
+        return $result->count;
+    }
+    
 
     public function allData()
     {
