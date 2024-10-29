@@ -199,7 +199,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
             <!-- form input surat dari admin sekretaris (start) -->
 
-            <form class="user" id="insertMasuk" method="POST" enctype="multipart/form-data">
+            <form class="user" id="insertMasuk" action="<?= site_url("insert") ?>" method="post">
                 <div class="form-group row">
                     <div class="col-8">
                         <div class="header d-flex justify-content-between p-3">
@@ -244,13 +244,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         </div>
 
                     </div>
-                    <div class="col-4 w-100" style="height:300px;">
+                    <div class="col-4 w-100" style="height:300px ;">
+                        <!-- <label for="custom-file">Sisipkan File</label> -->
                         <div class="custom-file d-flex justify-content-between align-items-center w-100">
                             <input type="file" class="custom-file-input w-100" name="file" style="cursor: pointer;" id="customFile">
-                            <label class="custom-file-label w-75 ml-5 d-flex justify-content-center align-items-center" id="file" style="height:300px; cursor:pointer;" for="customFile">+</label>
+                            <label class="custom-file-label w-75 ml-5 d-flex  justify-content-center align-items-center" id="file" style="height:300px ; cursor:pointer;" for="customFile">+</label>
                         </div>
                     </div>
-
                 </div>
                 <div class="row">
                     <div class="col">
@@ -274,7 +274,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     <div class="input-group">
                                         <input type="text" class="form-control w-75 text-center" name="namaPerson" id="namaPerson" placeholder="Nama person / kode relasi">
                                         <div class="input-group-append">
-                                            <button class="btn btn-secondary" id="searchPerson" type="button">Cari</button>
+                                            <button class="btn btn-secondary" id="searchPerson" type="button" data-toggle="modal" data-target="#exampleModal">Cari</button>
                                         </div>
                                     </div>
                                 </div>
@@ -594,16 +594,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         lembaga: namaLembaga
                     },
                     beforeSend: function() {
+                        console.log("msauk");
                         $("#spinner, #overlay").show();
                     },
                     dataType: "json",
                     success: function(data) {
                         $('#kodeRelasiList').empty();
-                        var html = '';
-                        var no = 1;
+
 
                         if (data.length > 0) {
-                            $('#exampleModal').modal('show');
                             $.each(data, function(index, item) {
                                 html += '<tr>';
                                 html += '<td class="text-center align-middle">' + no + '</td>';
@@ -614,10 +613,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 html += '<td class="text-center align-middle">' + (item.kotanama ? item.kotanama : '-') + '</td>';
                                 html += '<td class="text-center align-middle">' + (item.kodepos ? item.kodepos : '-') + '</td>';
                                 html += '<td class="text-center align-middle">' + (item.pronama ? item.pronama : '-') + '</td>';
+
                                 html += '</tr>';
+
                                 no++;
                             });
                             $("#tbody").html(html);
+
                         } else {
                             $('#kodeRelasiList').append('<li class="list-group-item">No Results Found</li>');
                         }
@@ -788,7 +790,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 processData: false,
                 success: function(response) {
                     alert('Data berhasil disimpan!');
-                    console.log(response);
                 },
                 error: function(xhr, status, error) {
                     console.error('Error:', error);
