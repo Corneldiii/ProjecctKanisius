@@ -59,23 +59,12 @@ class Insert extends CI_Controller
 
         $filePath = null;
         if (!empty($_FILES['file']['name'])) {
-            $config['upload_path'] = FCPATH . 'file/';  // Path absolut
+            $config['upload_path'] = FCPATH . 'file/';
             $config['allowed_types'] = 'pdf|jpg|png|docx';
-            $config['max_size'] = 2048;  // Maksimum ukuran 2MB
+            $config['max_size'] = 2048; 
 
             $this->upload->initialize($config);
-
-            // Debugging tambahan: Tampilkan path dan cek apakah bisa diakses
-            var_dump($config['upload_path']);  // Lihat path yang digunakan
-
-            if (!is_dir($config['upload_path'])) {
-                echo "Folder tidak ditemukan!";
-                return;
-            }
-            if (!is_writable($config['upload_path'])) {
-                echo "Folder tidak bisa ditulis!";
-                return;
-            }
+            var_dump($config['upload_path']);  
 
             if ($this->upload->do_upload('file')) {
                 $uploadData = $this->upload->data();
@@ -85,6 +74,16 @@ class Insert extends CI_Controller
             } else {
                 echo $this->upload->display_errors();
             }
+        }
+
+        if($jenis == 'Surat'){
+            $jenis = 1;
+        }else if($jenis == 'Email'){
+            $jenis = 2;
+        }else if($jenis == 'Penawaran'){
+            $jenis = 3;
+        }else{
+            $jenis = null;
         }
 
         // Data array untuk disimpan di database

@@ -51,7 +51,7 @@ ON divID=LEFT(pegLastDivId,2) WHERE a.userId='" . $username . "' AND a.userPass=
     }
 
     public function getDataById($nomor){
-        $query = "SELECT nomor, Tanggal, noSurat, tglSurat, relasiID, namaPerson, namaLembaga, hal, lampiran, keterangan FROM 
+        $query = "SELECT * FROM 
                     tb_surat WHERE LEFT(nomor,1)='1' AND nomor = '".$nomor."'";
         $result = $this->db->query($query);
         return $result->row_array();
