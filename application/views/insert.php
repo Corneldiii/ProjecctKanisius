@@ -214,9 +214,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Jenis Surat</label>
                                 <select class="form-control" id="jenis" name="jenis" style="width:300px;">
-                                    <option>Surat</option>
-                                    <option>Email</option>
-                                    <option>Penawaran</option>
+                                    <option value="Surat">Surat</option>
+                                    <option value="Email">Email</option>
+                                    <option value="Penawaran">Penawaran</option>
                                 </select>
                             </div>
                         </div>
@@ -771,6 +771,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
     $(document).ready(function() {
         $('#insertMasuk').on('submit', function(event) {
+            $("#spinner, #overlay").show();
             event.preventDefault();
 
             var formData = new FormData(this);
@@ -779,13 +780,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 console.log(key + ": " + value);
             });
 
-
             $.ajax({
                 url: '<?= site_url("Insert/insert_data") ?>',
                 method: 'POST',
                 data: formData,
                 contentType: false,
                 processData: false,
+                complete: function() {
+                    $("#spinner, #overlay").hide();
+                },
                 success: function(response) {
                     alert('Data berhasil disimpan!');
                     console.log(response);

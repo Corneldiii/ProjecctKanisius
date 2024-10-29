@@ -75,6 +75,36 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     /* Hijau muda */
                     color: white;
                 }
+
+                .modal-body {
+                    padding: 20px;
+                    background-color: #f9f9f9;
+                }
+
+                .detail-section {
+                    margin-bottom: 15px;
+                    padding: 10px;
+                    background-color: #fff;
+                    border-radius: 8px;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                }
+
+                .detail-section h6 {
+                    font-weight: bold;
+                    border-bottom: 2px solid #007bff;
+                    margin-bottom: 10px;
+                    padding-bottom: 5px;
+                }
+
+                .detail-label {
+                    font-weight: bold;
+                    color: #333;
+                    margin-right: 5px;
+                }
+
+                .detail-value {
+                    color: #555;
+                }
             </style>
 
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -128,24 +158,27 @@ defined('BASEPATH') or exit('No direct script access allowed');
 </div>
 
 <!-- Modal untuk detail data -->
-<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="modalDetailLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="detailModalLabel">Detail Data</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="modalDetailLabel">Detail Surat</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body" id="modalDetailContent">
-                <!-- Detail data akan ditampilkan di sini -->
+            <div class="modal-body">
+                <div id="modalDetailContent">
+                    <!-- Konten Detail akan diisi oleh JavaScript -->
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
             </div>
         </div>
     </div>
 </div>
+
 
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
@@ -203,29 +236,63 @@ defined('BASEPATH') or exit('No direct script access allowed');
     });
     $(document).on('click', '.btn-detail', function() {
         var id = $(this).data('id');
-        console.log("ID yang dikirim: ", id); // Debugging ID yang dikirim
+        console.log("ID yang dikirim: ", id);
         $.ajax({
             url: "<?php echo base_url('Select/getDetailData'); ?>",
             method: "GET",
             data: {
                 id: id
             },
-            dataType: "json", // Pastikan AJAX menguraikan JSON secara otomatis
+            dataType: "json",
             success: function(data) {
-                console.log("Data yang diterima:", data); // Debugging data yang diterima
+                console.log("Data yang diterima:", data); 
+
                 var detailHtml = `
-                <p><strong>Tanggal Input:</strong> ${data.Tanggal}</p>
-                <p><strong>No. Surat:</strong> ${data.noSurat}</p>
-                <p><strong>Tgl Surat:</strong> ${data.tglSurat}</p>
-                <p><strong>Nama Person:</strong> ${data.namaPerson}</p>
-                <p><strong>Nama Lembaga:</strong> ${data.namaLembaga}</p>
-                <p><strong>Hal:</strong> ${data.hal}</p>
-                <p><strong>Lampiran:</strong> ${data.lampiran}</p>
+                <div class="detail-section">
+                    <h6>Informasi Utama</h6>
+                    <p><span class="detail-label">Nomor:</span> <span class="detail-value">${data.nomor || '-'}</span></p>
+                    <p><span class="detail-label">Tanggal:</span> <span class="detail-value">${data.tanggal || '-'}</span></p>
+                    <p><span class="detail-label">Referensi:</span> <span class="detail-value">${data.referensi || '-'}</span></p>
+                    <p><span class="detail-label">Jenis:</span> <span class="detail-value">${data.jenis = (data.jenis == 1) ? 'Surat' : ((data.jenis == 2) ? 'Email' : ((data.jenis == 3) ? 'Penawaran' : 'Tidak diketahui'))
+                    || '-'}</span></p>
+                </div>
+
+                <div class="detail-section">
+                    <h6>Surat dan Lampiran</h6>
+                    <p><span class="detail-label">No. Surat:</span> <span class="detail-value">${data.noSurat || '-'}</span></p>
+                    <p><span class="detail-label">Tanggal Surat:</span> <span class="detail-value">${data.tglSurat || '-'}</span></p>
+                    <p><span class="detail-label">Hal:</span> <span class="detail-value">${data.hal || '-'}</span></p>
+                    <p><span class="detail-label">Lampiran:</span> <span class="detail-value">${data.lampiran || '-'}</span></p>
+                </div>
+
+                <div class="detail-section">
+                    <h6>Informasi Relasi</h6>
+                    <p><span class="detail-label">Nama Person:</span> <span class="detail-value">${data.namaPerson || '-'}</span></p>
+                    <p><span class="detail-label">Nama Lembaga:</span> <span class="detail-value">${data.namaLembaga || '-'}</span></p>
+                    <p><span class="detail-label">Alamat:</span> <span class="detail-value">${data.alamat || '-'}</span></p>
+                    <p><span class="detail-label">Kota:</span> <span class="detail-value">${data.kota || '-'}</span></p>
+                    <p><span class="detail-label">Propinsi:</span> <span class="detail-value">${data.propinsi || '-'}</span></p>
+                    <p><span class="detail-label">Kode Pos:</span> <span class="detail-value">${data.kodepos || '-'}</span></p>
+                </div>
+
+                <div class="detail-section">
+                    <h6>Informasi Tambahan</h6>
+                    <p><span class="detail-label">Divisi:</span> <span class="detail-value">${data.divisi || '-'}</span></p>
+                    <p><span class="detail-label">Create User ID:</span> <span class="detail-value">${data.createUserID || '-'}</span></p>
+                    <p><span class="detail-label">Create Date:</span> <span class="detail-value">${data.createDate || '-'}</span></p>
+                    <p><span class="detail-label">File:</span> 
+                      <span class="detail-value">
+                        ${data.file ? `<a href="<?php echo base_url(); ?>${data.file}" target="_blank">Lihat File</a>` : '-'}
+                      </span>
+                    </p>
+                </div>
             `;
-                $('#modalDetailContent').html(detailHtml); // Menambahkan konten ke modal
+
+                $('#modalDetailContent').html(detailHtml);
+                $('#modalDetail').modal('show');
             },
             error: function(xhr, status, error) {
-                console.error("Error AJAX:", error); // Debugging jika terjadi error
+                console.error("Error AJAX:", error); 
             }
         });
     });
