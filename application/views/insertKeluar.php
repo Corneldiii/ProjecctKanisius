@@ -98,144 +98,166 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <form class="user" action="<?= site_url("insert") ?>" method="post">
                 <div class="form-group row">
                     <div class="col-8">
-                        <div class="header d-flex justify-content-between p-3">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Nomor</label>
-                                <input type="text" class="form-control w-25 text-center " id="nomor" value="1"
-                                    aria-describedby="emailHelp" readonly>
+                        <div class="header p-3">
+                            <div class="form-group row mb-2">
+                                <label for="nomor" class="col-sm-3 col-form-label">Nomor</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control text-left" id="nomor" value="1" readonly
+                                        style="width: 50%;">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Tanggal Input</label>
-                                <input type="date" class="form-control w-100 text-center " id="tanggal"
-                                    aria-describedby="emailHelp">
+                            <div class="form-group row mb-2">
+                                <label for="tanggal" class="col-sm-3 col-form-label">Tanggal Input</label>
+                                <div class="col-sm-9">
+                                    <input type="date" class="form-control text-left" id="tanggal" style="width: 50%;">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Jenis Surat</label>
-                                <select class="form-control" id="jenis" style="width:300px;">
-                                    <option>Surat</option>
-                                    <option>Email</option>
-                                    <option>Penawaran</option>
-                                </select>
+                            <div class="form-group row mb-2">
+                                <label for="jenis" class="col-sm-3 col-form-label">Jenis Surat</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" id="jenis" style="width: 50%;">
+                                        <option>Surat</option>
+                                        <option>Email</option>
+                                        <option>Penawaran</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
-                        <div class="header d-flex p-3" style="gap: 30px;">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Nomor Surat</label>
-                                <input type="text" class="form-control w-100 text-center " id="nomorSurat"
-                                    placeholder="Nomor Fisik Surat" aria-describedby="emailHelp">
+                        <div class="header p-3">
+                            <div class="form-group row mb-2">
+                                <label for="nomorSurat" class="col-sm-3 col-form-label">Nomor Surat</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control text-left" id="nomorSurat"
+                                        placeholder="Nomor Fisik Surat" style="width: 50%;">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Tanggal Fisik Surat</label>
-                                <input type="date" class="form-control w-100 text-center " id="tanggalSurat"
-                                    aria-describedby="emailHelp">
+                            <div class="form-group row mb-2">
+                                <label for="tanggalSurat" class="col-sm-3 col-form-label">Tanggal Fisik Surat</label>
+                                <div class="col-sm-9">
+                                    <input type="date" class="form-control text-left" id="tanggalSurat"
+                                        style="width: 50%;">
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="input-lanjutan">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Hal</label>
-                                <input type="text" class="form-control w-75 text-center " id="hal"
-                                    placeholder="Perihal Surat" aria-describedby="emailHelp">
+                            <div class="form-group row mb-2">
+                                <label for="hal" class="col-sm-3 col-form-label">Hal</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control text-left" id="hal"
+                                        placeholder="Perihal Surat" style="width: 50%;">
+                                </div>
                             </div>
-                        </div>
-
-                    </div>
-                    <div class="col-4 w-100" style="height:300px ;">
-                        <!-- <label for="custom-file">Sisipkan File</label> -->
-                        <div class="custom-file d-flex justify-content-between align-items-center w-100">
-                            <input type="file" class="custom-file-input w-100" style="cursor: pointer;" id="customFile">
-                            <label class="custom-file-label w-75 ml-5 d-flex  justify-content-center align-items-center"
-                                id="file" style="height:300px ; cursor:pointer;" for="customFile">+</label>
                         </div>
                     </div>
                 </div>
+
+
                 <div class="row">
-                    <div class="col">
+                    <div class="col-8">
                         <div class="input-lanjutan">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Lampiran</label>
-                                <input type="text" class="form-control w-75 text-center " id="lampiran"
-                                    placeholder="Lampiran" aria-describedby="emailHelp">
-                            </div>
-                            <div class="form-group d-flex flex-column">
-                                <label for="description">Deskripsi:</label>
-                                <textarea class="form-control w-75 text-center" id="keterangan" name="description"
-                                    rows="4" placeholder="Ringksan Isi Surat" aria-describedby="emailHelp"></textarea>
-                            </div>
-
-                            <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
-
-                            <div class="form-group w-25">
-                                <label for="kodeRelasi">Kode Relasi</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control text-center" id="kodeRelasi"
-                                        placeholder="Kode Relasi" readonly>
-                                    <div id="kodeRelasiList" class="list-group overflow-hidden"></div>
+                            <div class="header p-3">
+                                <div class="form-group row mb-2">
+                                    <label for="lampiran" class="col-sm-3 col-form-label">Lampiran</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control text-left" id="lampiran"
+                                            placeholder="Lampiran">
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="form-group row m-4">
-                                <div class="col">
-                                    <label for="namaPerson">Nama</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control w-75 text-center" id="namaPerson"
-                                            placeholder="Nama person">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-secondary" id="searchPerson"
-                                                type="button">Cari</button>
+                                <div class="form-group d-flex flex-column mb-2">
+                                    <label for="keterangan" class="col-form-label">Deskripsi:</label>
+                                    <textarea class="form-control text-left" id="keterangan" name="description" rows="4"
+                                        placeholder="Ringksan Isi Surat"></textarea>
+                                </div>
+                                <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;">
+                                </div>
+                                <div class="form-group row mb-2">
+                                    <label for="kodeRelasi" class="col-sm-3 col-form-label">Kode Relasi</label>
+                                    <div class="col-sm-9">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control text-left" id="kodeRelasi"
+                                                placeholder="Kode Relasi" readonly>
+                                            <div id="kodeRelasiList" class="list-group overflow-hidden"></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col">
-                                    <label for="namaLembaga">Lembaga</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control w-75 text-center" id="namaLembaga"
-                                            placeholder="Nama Lembaga">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-secondary" id="searchLembaga"
-                                                type="button">Cari</button>
+                                <div class="form-group row mb-2">
+                                    <label for="namaPerson" class="col-sm-3 col-form-label">Nama</label>
+                                    <div class="col-sm-9">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control text-left" id="namaPerson"
+                                                placeholder="Nama person">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-secondary" id="searchPerson"
+                                                    type="button">Cari</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="form-group m-3">
-                                <label for="alamat">Alamat</label>
-                                <input type="text" class="form-control w-75 text-center" id="alamat"
-                                    placeholder="Alamat" readonly>
-                            </div>
-
-                            <div class="row m-3">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="kota">Kota</label>
-                                        <input type="text" class="form-control w-75 text-center" id="kota"
-                                            placeholder="Kota" readonly>
+                                <div class="form-group row mb-2">
+                                    <label for="namaLembaga" class="col-sm-3 col-form-label">Lembaga</label>
+                                    <div class="col-sm-9">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control text-left" id="namaLembaga"
+                                                placeholder="Nama Lembaga">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-secondary" id="searchLembaga"
+                                                    type="button">Cari</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="propinsi">Propinsi</label>
-                                        <input type="text" class="form-control w-75 text-center" id="propinsi"
-                                            placeholder="Propinsi" readonly>
+                                <div class="form-group row mb-2">
+                                    <label for="alamat" class="col-sm-3 col-form-label">Alamat</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control text-left" id="alamat"
+                                            placeholder="Alamat" readonly>
                                     </div>
                                 </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="kodepos">Kodepos</label>
-                                        <input type="text" class="form-control w-75 text-center" id="kodepos"
-                                            placeholder="Kodepos" readonly>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <div class="form-group row mb-2">
+                                            <label for="kota" class="col-sm-3 col-form-label">Kota</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control text-left" id="kota"
+                                                    placeholder="Kota" readonly>
+                                            </div>
+                                        </div>
                                     </div>
+                                    <div class="col">
+                                        <div class="form-group row mb-2">
+                                            <label for="propinsi" class="col-sm-3 col-form-label">Provinsi</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control text-left" id="propinsi"
+                                                    placeholder="Propinsi" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group row mb-2">
+                                            <label for="kodepos" class="col-sm-3 col-form-label">Kodepos</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control text-left" id="kodepos"
+                                                    placeholder="Kodepos" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;">
                                 </div>
                             </div>
-
-                            <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
                         </div>
                     </div>
+                </div>
+                <div class="form-group text-start mt-3">
+                    <input type="file" id="customFile" style="display: none;">
+                    <label for="customFile" class="btn btn-sm px-4"
+                        style="background-color: #4B5320; color: white; cursor: pointer;">
+                        <i class="bi bi-file-earmark-plus"></i>
+                        <span> Sisipkan File</span>
+                    </label>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
+
 
             <!-- form insert (end) -->
 
