@@ -209,7 +209,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     <label for="alamat" class="col-sm-3 col-form-label">Alamat</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control text-left" id="alamat"
-                                            placeholder="Alamat" readonly>
+                                            placeholder="Alamat" readonly style="height: 80px;"readonly >
                                     </div>
                                 </div>
                                 <div class="row mb-3">
