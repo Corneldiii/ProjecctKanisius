@@ -361,7 +361,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                                 <table id="tabel" class="display nowrap table table-striped table-bordered table-fixed text-nowrap" style="width:100%">
                                                     <thead style="color: black;">
                                                         <tr>
-                                                            <th class="text-center align-middle">No</th>
                                                             <th class="text-center align-middle">Milist ID</th>
                                                             <th class="text-center align-middle">Nama</th>
                                                             <th class="text-center align-middle">Lembaga</th>
@@ -577,13 +576,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
         });
 
         $('#tabel tbody').on('click', 'tr', function() {
-            var milistId = $(this).find('td').eq(1).text();
-            var namaPerson = $(this).find('td').eq(2).text();
-            var alamat = $(this).find('td').eq(4).text();
-            var kota = $(this).find('td').eq(5).text();
-            var kodepos = $(this).find('td').eq(6).text();
-            var propinsi = $(this).find('td').eq(7).text();
-            var namaLembaga = $(this).find('td').eq(3).text();
+            var milistId = $(this).find('td').eq(0).text();
+            var namaPerson = $(this).find('td').eq(1).text();
+            var alamat = $(this).find('td').eq(3).text();
+            var kota = $(this).find('td').eq(4).text();
+            var kodepos = $(this).find('td').eq(5).text();
+            var propinsi = $(this).find('td').eq(6).text();
+            var namaLembaga = $(this).find('td').eq(2).text();
 
             $('#namaPerson').val(namaPerson);
             $('#kodeRelasi').val(milistId);
@@ -626,14 +625,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         if (data.length > 0) {
                             $.each(data, function(index, item) {
                                 html += '<tr>';
-                                html += '<td class="text-center align-middle">' + no + '</td>';
-                                html += '<td class="text-center align-middle">' + (item.milistId ? item.milistId : '-') + '</td>';
-                                html += '<td class="text-center align-middle">' + (item.namaPerson ? item.namaPerson : '-') + '</td>';
-                                html += '<td class="text-center align-middle">' + (item.namaLembaga ? item.namaLembaga : '-') + '</td>';
-                                html += '<td class="text-center align-middle">' + (item.alamat ? item.alamat : '-') + '</td>';
-                                html += '<td class="text-center align-middle">' + (item.kotanama ? item.kotanama : '-') + '</td>';
-                                html += '<td class="text-center align-middle">' + (item.kodepos ? item.kodepos : '-') + '</td>';
-                                html += '<td class="text-center align-middle">' + (item.pronama ? item.pronama : '-') + '</td>';
+                                html += '<td class="text-center align-middle" style="cursor:pointer;">' + (item.milistId ? item.milistId : '-') + '</td>';
+                                html += '<td class="text-center align-middle" style="cursor:pointer;">' + (item.namaPerson ? item.namaPerson : '-') + '</td>';
+                                html += '<td class="text-center align-middle" style="cursor:pointer;">' + (item.namaLembaga ? item.namaLembaga : '-') + '</td>';
+                                html += '<td class="text-center align-middle" style="cursor:pointer;">' + (item.alamat ? item.alamat : '-') + '</td>';
+                                html += '<td class="text-center align-middle" style="cursor:pointer;">' + (item.kotanama ? item.kotanama : '-') + '</td>';
+                                html += '<td class="text-center align-middle" style="cursor:pointer;">' + (item.kodepos ? item.kodepos : '-') + '</td>';
+                                html += '<td class="text-center align-middle" style="cursor:pointer;">' + (item.pronama ? item.pronama : '-') + '</td>';
 
                                 html += '</tr>';
 
