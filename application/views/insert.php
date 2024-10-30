@@ -385,28 +385,38 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 </div>
                             </div>
 
-                            <div class="form-group m-3">
-                                <label for="alamat">Alamat</label>
-                                <input type="text" class="form-control w-75 text-center" name="alamat" id="alamat" placeholder="Alamat" readonly>
+                            <div class="row form-group m-3">
+                                <div class="col-2">
+                                    <label for="kodeRelasi">Kode Relasi</label>
+                                    <input type="text" class="form-control w-100 text-center" name="kodeRelasi" id="kodeRelasi" placeholder="kode Rlasi" readonly>
+                                </div>
+                                <div class="col-2">
+                                    <label for="nsmsLembaga">Nama Lembaga</label>
+                                    <input type="text" class="form-control w-100 text-center" name="namaLembaga" id="namaLembaga" placeholder="Nama Lembaga" readonly>
+                                </div>
+                                <div class="col-8">
+                                    <label for="alamat">Alamat</label>
+                                    <input type="text" class="form-control w-100 text-center" name="alamat" id="alamat" placeholder="Alamat" readonly>
+                                </div>
                             </div>
 
                             <div class="row m-3">
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="kota">Kota</label>
-                                        <input type="text" class="form-control w-75 text-center" name="kota" id="kota" placeholder="Kota" readonly>
+                                        <input type="text" class="form-control w-100 text-center" name="kota" id="kota" placeholder="Kota" readonly>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="propinsi">Propinsi</label>
-                                        <input type="text" class="form-control w-75 text-center" name="propinsi" id="propinsi" placeholder="Propinsi" readonly>
+                                        <input type="text" class="form-control w-100 text-center" name="propinsi" id="propinsi" placeholder="Propinsi" readonly>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="kodepos">Kodepos</label>
-                                        <input type="text" class="form-control w-75 text-center" name="kodepos" id="kodepos" placeholder="Kodepos" readonly>
+                                        <input type="text" class="form-control w-100 text-center" name="kodepos" id="kodepos" placeholder="Kodepos" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -567,19 +577,21 @@ defined('BASEPATH') or exit('No direct script access allowed');
         });
 
         $('#tabel tbody').on('click', 'tr', function() {
-            // Get the cells data from the clicked row
+            var milistId = $(this).find('td').eq(1).text();
             var namaPerson = $(this).find('td').eq(2).text();
             var alamat = $(this).find('td').eq(4).text();
             var kota = $(this).find('td').eq(5).text();
             var kodepos = $(this).find('td').eq(6).text();
             var propinsi = $(this).find('td').eq(7).text();
+            var namaLembaga = $(this).find('td').eq(3).text();
 
-            // Populate the form fields
             $('#namaPerson').val(namaPerson);
+            $('#kodeRelasi').val(milistId);
             $('#alamat').val(alamat);
             $('#kota').val(kota);
             $('#kodepos').val(kodepos);
             $('#propinsi').val(propinsi);
+            $('#namaLembaga').val(namaLembaga);
         });
     });
 
@@ -691,30 +703,29 @@ defined('BASEPATH') or exit('No direct script access allowed');
         });
 
 
-        $(document).on('click', '.list-group-item', function(e) {
-            e.preventDefault();
+        // $(document).on('click', '.list-group-item', function(e) {
+        //     e.preventDefault();
 
-            console.log($(this).data());
-            var milistId = $(this).data('id');
-            var namaPerson = $(this).data('nama');
-            var lembaga = $(this).data('namaLembaga');
-            var alamat = $(this).data('alamat');
-            var kota = $(this).data('kotanama');
-            var propinsi = $(this).data('propNama');
-            var kodepos = $(this).data('kodepos');
+        //     console.log($(this).data());
+        //     var milistId = $(this).data('id');
+        //     var namaPerson = $(this).data('nama');
+        //     var lembaga = $(this).data('namaLembaga');
+        //     var alamat = $(this).data('alamat');
+        //     var kota = $(this).data('kotanama');
+        //     var propinsi = $(this).data('propNama');
+        //     var kodepos = $(this).data('kodepos');
 
-            $('#kodeRelasi').val(milistId);
-            $('#namaPerson').val(namaPerson);
-            $('#namaLembaga').val(lembaga);
-            $('#alamat').val(alamat);
-            $('#kota').val(kota);
-            $('#propinsi').val(propinsi);
-            $('#kodepos').val(kodepos);
+        //     $('#kodeRelasi').val(milistId);
+        //     $('#namaPerson').val(namaPerson);
+        //     $('#namaLembaga').val(lembaga);
+        //     $('#alamat').val(alamat);
+        //     $('#kota').val(kota);
+        //     $('#propinsi').val(propinsi);
+        //     $('#kodepos').val(kodepos);
+        //     $('#kodeRelasiList').html('');
 
-            $('#kodeRelasiList').html('');
 
-
-        });
+        // });
     });
 
     function getPersons(dispoNumber) {
