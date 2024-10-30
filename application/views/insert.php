@@ -289,6 +289,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
+
                                         <div class="modal-body w-100">
                                             <table id="tabel" class="display nowrap table table-striped table-bordered" style="width:100%">
                                                 </thead style="color: black;">
@@ -304,10 +305,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                                 </tr>
                                                 </thead>
                                                 <tbody id="tbody" name="tbody" style="color: black;">
-                                                    <!-- Data will be appended here by JavaScript -->
-                            <!-- </tbody>
+                                                </tbody>
                                             </table>
                                         </div>
+                                        
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                             <button type="button" class="btn btn-primary">Save changes</button>
@@ -346,16 +347,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             </div> -->
 
 
-                            <!-- Modal baru -->
+                            <!-- Modal baru judul eror-->
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-xl">
                                     <div class="modal-content">
                                         <div class="modal-header">
-
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
+
                                         <div class="modal-body">
                                             <div class="table-responsive">
                                                 <table id="tabel" class="display nowrap table table-striped table-bordered table-fixed text-nowrap" style="width:100%">
@@ -372,18 +373,56 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                                         </tr>
                                                     </thead>
                                                     <tbody id="tbody" name="tbody" style="color: black; font-size: 12px;">
-                                                        <!-- Data akan dimuat di sini -->
                                                     </tbody>
                                                 </table>
                                             </div>
                                         </div>
+
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
+
+                            <!-- tampilan modal eror judul sudah sesuai -->
+                            <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="table-responsive">
+                                                <table id="tabel" class="display nowrap table table-striped table-bordered table-fixed text-nowrap" style="width:100%">
+                                                    </thead style="color: black;">
+                                                    <tr>
+                                                        <th class="text-center align-middle">No</th>
+                                                        <th class="text-center align-middle">Milist ID</th>
+                                                        <th class="text-center align-middle">Nama</th>
+                                                        <th class="text-center align-middle">Lembaga</th>
+                                                        <th class="text-center align-middle">Alamat</th>
+                                                        <th class="text-center align-middle">Nama Kota</th>
+                                                        <th class="text-center align-middle">Kode Pos</th>
+                                                        <th class="text-center align-middle">Provinsi</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody id="tbody" name="tbody" style="color: black; font-size:12px">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+
 
                             <div class="row form-group m-3">
                                 <div class="col-2">
@@ -570,7 +609,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
         $('#tabel').DataTable({
             "scrollY": "300px",
-            "scrollX": true,
+            // "scrollX": true,
             "scrollCollapse": true,
             "paging": false,
             "bSort": false,
