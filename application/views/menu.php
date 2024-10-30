@@ -108,7 +108,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             </style>
 
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Daftar Menu atau Tabel</h1>
+                <h1 class="h3 mb-0 text-gray-800">Daftar Surat Masuk</h1>
             </div>
 
             <div class="form-group row">

@@ -180,7 +180,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Daftar Menu atau Tabel</h1>
+                <h1 class="h3 mb-0 text-gray-800">Insert Surat Masuk</h1>
             </div>
 
             <!-- Alert untuk "set_flashdata", biarkan saja -->
