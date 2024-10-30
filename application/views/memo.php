@@ -7,19 +7,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 <div id="content-wrapper" class="d-flex flex-column">
     <div id="content">
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top shadow" 
-            style="background-color: #2e7d32; border-bottom: 2px solid #1b5e20;">
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
             <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                <i class="fa fa-bars" style="color: white;"></i>
+                <i class="fa fa-bars"></i>
             </button>
             <ul class="navbar-nav ml-auto">
-                <img src="img/kanisius.png" alt="Logo Kanisius" />
+                <img src="img/kanisius.png">
             </ul>
         </nav>
 
         <div class="container-fluid">
-            <!-- Menu Section -->
             <div class="menu"
                 style="display: flex; justify-content: flex-start; margin-top: 20px; margin-bottom: 20px; border-bottom: 2px solid #ddd;">
                 <a href="memo" class="menu-btn active">
@@ -28,17 +25,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <a href="inputMemo" class="menu-btn">
                     <i class="bi bi-file-earmark-plus"></i> Insert
                 </a>
+
             </div>
 
             <style>
-                /* Green-themed buttons and layout */
                 .menu-btn {
                     display: inline-block;
                     padding: 12px 20px;
                     margin: 0 10px;
                     font-size: 16px;
                     text-decoration: none;
-                    color: white;
+                    color: #fff;
                     background-color: #4b5320;
                     border: none;
                     border-radius: 8px 8px 0 0;
@@ -54,66 +51,39 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 .menu-btn:hover {
                     background-color: #3e4520;
                     transform: translateY(-2px);
-                    text-decoration: none;
+                    color: #fff;
+                    text-decoration: none; /* Menghilangkan garis bawah saat hover */
                 }
 
                 .menu-btn:focus {
                     outline: none;
                     box-shadow: 0 0 0 3px rgba(75, 83, 32, 0.5);
                 }
-
-                .alert {
-                    background-color: #a5d6a7;
-                    color: #1b5e20;
-                    border-left: 5px solid #2e7d32;
-                }
-
-                table thead {
-                    background-color: #81c784;
-                }
-
-                table tbody {
-                    background-color: #e8f5e9;
-                }
-
-                table th, td {
-                    border: 1px solid #1b5e20;
-                }
-
-                .h3 {
-                    color: #1b5e20;
-                }
-
-                footer {
-                    background-color: #2e7d32;
-                    color: white;
-                }
             </style>
 
-            <!-- Header Section -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0">Daftar Memo Internal</h1>
+                <h1 class="h3 mb-0 text-gray-800">Daftar Memo Internal</h1>
             </div>
-
-            <!-- Alert Section -->
+            
             <div class="form-group row">
                 <div class="col-sm-12">
-                    <?php if (isset($_SESSION["pesan"])) { ?>
-                        <div class="alert <?= $_SESSION['type'] ?> alert-dismissible">
+                    <?php if(isset($_SESSION["pesan"])) { ?>
+                        <div class="alert <?=$_SESSION['type'] ?> alert-dismissible">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             <?= $_SESSION['pesan'] ?>
                         </div>
-                    <?php unset($_SESSION['pesan']); } ?>
+                    <?php unset($_SESSION['pesan']);
+                    } ?>
                 </div>
             </div>
 
-            <!-- Memo Table -->
+
             <div class="row">
                 <div class="col">
-                    <table id="tabelMemo" class="display nowrap" style="width:100%; color: #1b5e20;">
-                        <thead>
+                    <table id="tabelMemo" class="display nowrap" style="width:100%">
+                        <thead style="color: black;">
                             <tr>
-                                <th class="text-center align-middle" style="width: 10px;">No</th>
+                                <th style="width:10px" class="text-center align-middle">No</th>
                                 <th class="text-center align-middle">Tanggal</th>
                                 <th class="text-center align-middle">No. Memo</th>
                                 <th class="text-center align-middle">Tgl. Memo</th>
@@ -124,7 +94,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 <th class="text-center align-middle">Detail</th>
                             </tr>
                         </thead>
-                        <tbody id="tbodyMemo" name="tbodyMemo"></tbody>
+                        <tbody id="tbodyMemo" name="tbodyMemo" style="color: black;"></tbody>
                     </table>
                 </div>
             </div>
@@ -132,8 +102,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
         </div>
     </div>
 
-    <!-- Footer Section -->
-    <footer class="sticky-footer">
+    <footer class="sticky-footer bg-white">
         <div class="container my-auto">
             <div class="copyright text-center my-auto">
                 <span>© <?php echo date("Y"); ?> PT Kanisius.</span>
@@ -142,10 +111,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
     </footer>
 </div>
 
-<!-- JS Dependencies (Bootstrap & jQuery) -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
 <a class="scroll-to-top rounded" href="#page-top">
