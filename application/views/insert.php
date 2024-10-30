@@ -592,6 +592,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
             $('#kodepos').val(kodepos);
             $('#propinsi').val(propinsi);
             $('#namaLembaga').val(namaLembaga);
+
+            $('#exampleModal').modal('hide');
         });
     });
 
