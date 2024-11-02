@@ -17,263 +17,563 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 <div id="content-wrapper" class="d-flex flex-column">
 
-<div id="content-wrapper" class="d-flex flex-column">
+<div id="content">
 
-<!DOCTYPE html>
-<html lang="en">
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                <i class="fa fa-bars"></i>
+            </button>
 
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Memo Internal - Form Input</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<style>
-    /* Warna dasar dan tema */
-body {
-background-color: #e8f5e9; /* Hijau lembut background */
-font-family: Arial, sans-serif;
-color: #1b5e20; /* Hijau gelap teks */
-}
+            <ul class="navbar-nav ml-auto">
+                <img src="img/kanisius.png">
+            </ul>
+        </nav>
 
-.navbar {
-background-color: #2e7d32; /* Hijau gelap navbar */
-border-bottom: 2px solid #1b5e20;
-}
+        <div id="overlay"></div>
 
-.navbar a, .navbar img {
-color: white;
-}
+        <div id="spinner" class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
 
-.btn-menu {
-padding: 12px 20px;
-margin: 0 10px;
-font-size: 16px;
-text-decoration: none;
-color: #1b5e20;
-background-color: #a5d6a7; /* Hijau sedang */
-border: 1px solid #81c784;
-border-radius: 8px 8px 0 0;
-transition: background-color 0.3s, color 0.3s;
-}
+        <div class="container-fluid">
 
-.btn-menu.active,
-.btn-menu:hover {
-background-color: #2e7d32; /* Hijau gelap untuk hover */
-color: white;
-}
-
-.divider {
-border-top: 2px solid #1b5e20; /* Garis divider hijau gelap */
-margin: 20px 0;
-}
-
-.custom-file-container {
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-height: 300px;
-border: 1px dashed #4caf50; /* Border hijau */
-border-radius: 8px;
-cursor: pointer;
-transition: border-color 0.3s;
-background-color: #e8f5e9;
-}
-
-.custom-file-container:hover {
-border-color: #1b5e20;
-}
-
-.custom-file-label {
-text-align: center;
-width: 100%;
-padding: 20px;
-color: #1b5e20;
-}
-
-.alert {
-background-color: #a5d6a7;
-color: #1b5e20;
-border-left: 5px solid #2e7d32;
-margin-top: 10px;
-}
-
-.form-control {
-margin-bottom: 10px;
-border: 1px solid #81c784;
-background-color: #f1f8e9;
-color: #1b5e20;
-}
-
-.form-control:focus {
-border-color: #2e7d32;
-box-shadow: 0 0 5px rgba(46, 125, 50, 0.5);
-}
-
-.btn-primary {
-background-color: #2e7d32;
-border-color: #2e7d32;
-color: white;
-transition: background-color 0.3s;
-}
-
-.btn-primary:hover {
-background-color: #1b5e20;
-}
-
-h1, label {
-color: #1b5e20;
-}
-
-.menu-btn {
-                display: inline-block;
-                padding: 12px 20px;
-                margin: 0 10px;
-                font-size: 16px;
-                text-decoration: none;
-                color: #fff;
-                background-color: #4b5320;
-                border: none;
-                border-radius: 8px 8px 0 0;
-                transition: background-color 0.3s ease, transform 0.2s;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            }
-
-            .menu-btn.active {
-                background-color: #3e4520;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            }
-
-            .menu-btn:hover {
-                background-color: #3e4520;
-                transform: translateY(-2px);
-                color: #fff;
-                text-decoration: none; /* Menghilangkan garis bawah saat hover */
-            }
-
-            .menu-btn:focus {
-                outline: none;
-                box-shadow: 0 0 0 3px rgba(75, 83, 32, 0.5);
-            }
-</style>
-</head>
-
-<body>
-
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg">
-    <a class="navbar-brand" href="#">Memo Internal</a>
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-            <img src="img/kanisius.png" alt="Logo">
-        </li>
-    </ul>
-</nav>
-
-<div class="container mt-4">
-    <div class="menu mb-3"
-    style="display: flex; justify-content: flex-start; margin-top: 20px; margin-bottom: 20px; border-bottom: 2px solid #ddd;">
-            <a href="memo" class="menu-btn active">
-                <i class="bi bi-file-earmark-spreadsheet"></i> Tabel
-            </a>
-            <a href="inputMemo" class="menu-btn">
-                <i class="bi bi-file-earmark-plus"></i> Insert
-            </a>
-    </div>
-
-    <div class="form-section">
-        <h3 class="text-center mb-4">Input / Koreksi Memo Internal</h3>
-
-        <!-- Alert Pesan -->
-        <?php if (isset($_SESSION["pesan"])): ?>
-            <div class="alert <?= $_SESSION['type'] ?> alert-dismissible fade show" role="alert">
-                <?= $_SESSION['pesan'] ?>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+            <div class="menu"
+                style="display: flex; justify-content: flex-start; margin-top: 20px; margin-bottom: 20px; border-bottom: 2px solid #ddd;">
+                <a href="menu" class="menu-btn active">
+                    <i class="bi bi-file-earmark-spreadsheet"></i>
+                    <span>Tabel</span>
+                </a>
+                <a href="insert" class="menu-btn">
+                    <i class="bi bi-file-earmark-plus"></i>
+                    <span>Insert</span>
+                </a>
             </div>
-            <?php unset($_SESSION['pesan']); ?>
-        <?php endif; ?>
 
-        <!-- Form Input -->
-        <form action="<?= site_url('insert') ?>" method="post" enctype="multipart/form-data">
+            <style>
+                /* Tombol Menu */
+                .menu-btn {
+                    display: inline-block;
+                    padding: 12px 20px;
+                    margin: 0 10px;
+                    font-size: 16px;
+                    color: #fff;
+                    background-color: #4b5320;
+                    border-radius: 8px 8px 0 0;
+                    transition: background-color 0.3s ease, transform 0.2s;
+                    position: relative;
+                    z-index: 1;
+                    cursor: pointer;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                }
+
+                .menu-btn.active {
+                    background-color: #3e4520;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                }
+
+                .menu-btn:hover {
+                    background-color: #3a4a1c;
+                    transform: translateY(-2px);
+                    color: #fff;
+                    text-decoration: none;
+                }
+
+                .menu-btn span {
+                    margin-left: 4px;
+                }
+
+                /* Modal Tabel */
+
+                /* Atur tabel agar mengikuti lebar modal */
+                .table-fixed {
+                    width: 100%;
+                    table-layout: fixed;
+                    border-collapse: collapse;
+                }
+
+                /* Header Tabel */
+                .table-fixed thead th {
+                    background-color: #4CAF50;
+                    color: white;
+                    font-weight: bold;
+                    text-align: center;
+                    padding: 12px;
+                    font-size: 14px;
+                    border: 1px solid #ddd;
+                    box-sizing: border-box;
+                }
+
+                /* Kolom Tabel dengan min-width */
+                .table-fixed th,
+                .table-fixed td {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    padding: 10px;
+                    font-size: 12px;
+                    border: 1px solid #ddd;
+                    box-sizing: border-box;
+                    min-width: 50px;
+                    /* Lebar minimum */
+                }
+
+                /* Tentukan lebar kolom untuk setiap kolom */
+                .table-fixed th:nth-child(1),
+                .table-fixed td:nth-child(1) {
+                    width: 5%;
+                    min-width: 40px;
+                }
+
+                .table-fixed th:nth-child(2),
+                .table-fixed td:nth-child(2) {
+                    width: 10%;
+                    min-width: 80px;
+                }
+
+                .table-fixed th:nth-child(3),
+                .table-fixed td:nth-child(3) {
+                    width: 20%;
+                    min-width: 120px;
+                }
+
+                .table-fixed th:nth-child(4),
+                .table-fixed td:nth-child(4) {
+                    width: 20%;
+                    min-width: 120px;
+                }
+
+                .table-fixed th:nth-child(5),
+                .table-fixed td:nth-child(5) {
+                    width: 20%;
+                    min-width: 120px;
+                }
+
+                .table-fixed th:nth-child(6),
+                .table-fixed td:nth-child(6) {
+                    width: 10%;
+                    min-width: 80px;
+                }
+
+                .table-fixed th:nth-child(7),
+                .table-fixed td:nth-child(7) {
+                    width: 10%;
+                    min-width: 80px;
+                }
+
+                .table-fixed th:nth-child(8),
+                .table-fixed td:nth-child(8) {
+                    width: 10%;
+                    min-width: 80px;
+                }
+
+                /* Warna alternatif dan hover */
+                .table-fixed tbody tr:nth-child(even) {
+                    background-color: #f9f9f9;
+                }
+
+                .table-fixed tbody tr:hover {
+                    background-color: #e9ecef;
+                }
+
+                /* Responsif */
+                @media (max-width: 768px) {
+
+                    .table-fixed th,
+                    .table-fixed td {
+                        font-size: 10px;
+                        padding: 6px;
+                    }
+                }
+            </style>
+
+
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">Insert Surat Masuk</h1>
+            </div>
+
+            <!-- Alert untuk "set_flashdata", biarkan saja -->
             <div class="form-group row">
-                <div class="col-md-6">
-                    <label>Nomor</label>
-                    <input type="text" class="form-control text-center" value="1" readonly>
-                </div>
-                <div class="col-md-6">
-                    <label>Tanggal Input</label>
-                    <input type="date" class="form-control text-center">
-                </div>
-            </div>
+                <div class="col-sm-12">
+                    <?php if (isset($_SESSION["pesan"])) { ?>
+                        <div class="alert <?= $_SESSION['type'] ?> alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <?= $_SESSION['pesan'] ?>
 
-            <div class="border-divider"></div>
-
-            <div class="form-group row">
-                <div class="col-md-6">
-                    <label>Nomor Memo</label>
-                    <input type="text" class="form-control text-center" placeholder="Nomor Fisik Memo">
-                </div>
-                <div class="col-md-6">
-                    <label>Tanggal Memo</label>
-                    <input type="date" class="form-control text-center">
+                        </div>
+                    <?php unset($_SESSION['pesan']);
+                    } ?>
                 </div>
             </div>
 
-            <div class="form-group">
-                <label>Hal</label>
-                <input type="text" class="form-control text-center" placeholder="Perihal Memo">
-            </div>
+            <!-- form input surat dari admin sekretaris (start) -->
 
-            <div class="form-group">
-                <label>Lampiran</label>
-                <input type="text" class="form-control text-center" placeholder="Lampiran">
-            </div>
-
-            <div class="form-group">
-                <label>Deskripsi</label>
-                <textarea class="form-control text-center" rows="4" placeholder="Ringkasan Isi Memo"></textarea>
-            </div>
-
-            <div class="form-group">
-                <label>Upload File</label>
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="customFile">
-                    <label class="custom-file-label" for="customFile">Pilih File...</label>
-                </div>
-            </div>
-
-            <div class="border-divider"></div>
-
-            <h5>Disposisi</h5>
-            <?php for ($i = 1; $i <= 5; $i++): ?>
+            <form class="user" id="insertMasuk" action="<?= site_url("insert") ?>" method="post">
                 <div class="form-group row">
-                    <div class="col-md-6">
-                        <label>Disposisi <?= $i ?></label>
-                        <select class="form-control" name="divisi<?= $i ?>" onchange="getPersons(<?= $i ?>)">
-                            <option value="">Pilih Divisi</option>
-                            <?php foreach ($divisi as $d): ?>
-                                <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
-                            <?php endforeach; ?>
-                        </select>
+                    <div class="col-8">
+                        <div class="header d-flex justify-content-between p-3">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Nomor</label>
+                                <input type="text" class="form-control w-25 text-center" name="nomor" id="nomor" aria-describedby="emailHelp" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Tanggal Input</label>
+                                <input type="date" class="form-control w-100 text-center" name="tanggal" id="tanggal" aria-describedby="emailHelp">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Jenis Surat</label>
+                                <select class="form-control" id="jenis" name="jenis" style="width:300px;">
+                                    <option>Surat</option>
+                                    <option>Email</option>
+                                    <option>Penawaran</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
+                        <div class="header d-flex p-3" style="gap: 30px;">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Nomor Surat</label>
+                                <input type="text" class="form-control w-100 text-center" name="nomorSurat" id="nomorSurat" placeholder="Nomor Fisik Surat" aria-describedby="emailHelp" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Nomor Fisik Surat</label>
+                                <input type="text" class="form-control w-100 text-center " name="nomorSuratFisik" id="nomorSuratFisik" placeholder="Nomor Fisik Surat" aria-describedby="emailHelp">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Tanggal Fisik Surat</label>
+                                <input type="date" class="form-control w-100 text-center " name="tanggalSurat" id="tanggalSurat" aria-describedby="emailHelp">
+                            </div>
+                        </div>
+
+                        <div class="input-lanjutan">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Hal</label>
+                                <input type="text" class="form-control w-75 text-center " name="hal" id="hal" placeholder="Perihal Surat" aria-describedby="emailHelp">
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="col-md-6">
-                        <label>Person <?= $i ?></label>
-                        <select class="form-control" name="person<?= $i ?>">
-                            <option value="">Pilih Person</option>
-                        </select>
+                    <div class="col-4 w-100" style="height:300px ;">
+                        <!-- <label for="custom-file">Sisipkan File</label> -->
+                        <div class="custom-file d-flex justify-content-between align-items-center w-100">
+                            <input type="file" class="custom-file-input w-100" name="file" style="cursor: pointer;" id="customFile">
+                            <label class="custom-file-label w-75 ml-5 d-flex  justify-content-center align-items-center" id="file" style="height:300px ; cursor:pointer;" for="customFile">+</label>
+                        </div>
                     </div>
                 </div>
-            <?php endfor; ?>
+                <div class="row">
+                    <div class="col">
+                        <div class="input-lanjutan">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Lampiran</label>
+                                <input type="text" class="form-control w-75 text-center " name="lampiran" id="lampiran" placeholder="Lampiran" aria-describedby="emailHelp">
+                            </div>
+                            <div class="form-group d-flex flex-column">
+                                <label for="description">Deskripsi:</label>
+                                <textarea class="form-control w-75 text-center" id="keterangan" name="keterangan" rows="4" placeholder="Ringksan Isi Surat" aria-describedby="emailHelp"></textarea>
+                            </div>
 
-            <button type="submit" class="btn btn-primary mt-3">Submit</button>
-        </form>
+                            <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
+
+                            <div class="form-group row m-4 w-25">
+                                <div class="col">
+                                    <label for="namaPerson">cari Nama / kode relasi</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control w-75 text-center" name="namaPerson" id="namaPerson" placeholder="Nama person / kode relasi">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-secondary" id="searchPerson" type="button" data-toggle="modal" data-target="#exampleModal">Cari</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- Gagal setelah search -->
+                            <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Daftar Personel</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+
+                                        <div class="modal-body w-100">
+                                            <table id="tabel" class="display nowrap table table-striped table-bordered" style="width:100%">
+                                                </thead style="color: black;">
+                                                <tr>
+                                                    <th style="width:10px" class="text-center align-middle">No</th>
+                                                    <th class="text-center align-middle">Milist ID</th>
+                                                    <th class="text-center align-middle">Nama</th>
+                                                    <th class="text-center align-middle">Lembaga</th>
+                                                    <th class="text-center align-middle">Alamat</th>
+                                                    <th class="text-center align-middle">Nama Kota</th>
+                                                    <th class="text-center align-middle">Kode Pos</th>
+                                                    <th class="text-center align-middle">Provinsi</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="tbody" name="tbody" style="color: black;">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <!-- Gagal sebelum search -->
+                            <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Judul Modal</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                                        </div>
+                                        <div class="modal-body w-100">
+                                            <table id="tabel" class="display nowrap table-fixed" style="width:100%">
+                                                <thead style="color: black;">
+                                                    <tr>
+                                                        <th class="text-center align-middle">No</th>
+                                                        <th class="text-center align-middle">Milist ID</th>
+                                                        <th class="text-center align-middle">Nama</th>
+                                                        <th class="text-center align-middle">Lembaga</th>
+                                                        <th class="text-center align-middle">Alamat</th>
+                                                        <th class="text-center align-middle">Nama Kota</th>
+                                                        <th class="text-center align-middle">Kode Pos</th>
+                                                        <th class="text-center align-middle">Provinsi</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tbody" name="tbody" style="color: black; font-size: 12px;"> <!-- Data will be populated here --> </tbody>
+                            <!-- </table>
+                                        </div>
+                                        <div class="modal-footer"> <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> <button type="button" class="btn btn-primary">Save changes</button> </div>
+                                    </div>
+                                </div>
+                            </div> -->
+
+
+                            <!-- Modal baru judul eror-->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <div class="table-responsive">
+                                                <table id="tabel" class="display nowrap table table-striped table-bordered table-fixed text-nowrap" style="width:100%">
+                                                    <thead style="color: black;">
+                                                        <tr>
+                                                            <th class="text-center align-middle">Milist ID</th>
+                                                            <th class="text-center align-middle">Nama</th>
+                                                            <th class="text-center align-middle">Lembaga</th>
+                                                            <th class="text-center align-middle">Alamat</th>
+                                                            <th class="text-center align-middle">Nama Kota</th>
+                                                            <th class="text-center align-middle">Kode Pos</th>
+                                                            <th class="text-center align-middle">Provinsi</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="tbody" name="tbody" style="color: black; font-size: 12px;">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <!-- tampilan modal eror judul sudah sesuai -->
+                            <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="table-responsive">
+                                                <table id="tabel" class="display nowrap table table-striped table-bordered table-fixed text-nowrap" style="width:100%">
+                                                    </thead style="color: black;">
+                                                    <tr>
+                                                        <th class="text-center align-middle">No</th>
+                                                        <th class="text-center align-middle">Milist ID</th>
+                                                        <th class="text-center align-middle">Nama</th>
+                                                        <th class="text-center align-middle">Lembaga</th>
+                                                        <th class="text-center align-middle">Alamat</th>
+                                                        <th class="text-center align-middle">Nama Kota</th>
+                                                        <th class="text-center align-middle">Kode Pos</th>
+                                                        <th class="text-center align-middle">Provinsi</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody id="tbody" name="tbody" style="color: black; font-size:12px">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+
+
+                            <div class="row form-group m-3">
+                                <div class="col-2">
+                                    <label for="kodeRelasi">Kode Relasi</label>
+                                    <input type="text" class="form-control w-100 text-center" name="kodeRelasi" id="kodeRelasi" placeholder="kode Rlasi" readonly>
+                                </div>
+                                <div class="col-2">
+                                    <label for="nsmsLembaga">Nama Lembaga</label>
+                                    <input type="text" class="form-control w-100 text-center" name="namaLembaga" id="namaLembaga" placeholder="Nama Lembaga" readonly>
+                                </div>
+                                <div class="col-8">
+                                    <label for="alamat">Alamat</label>
+                                    <input type="text" class="form-control w-100 text-center" name="alamat" id="alamat" placeholder="Alamat" readonly>
+                                </div>
+                            </div>
+
+                            <div class="row m-3">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="kota">Kota</label>
+                                        <input type="text" class="form-control w-100 text-center" name="kota" id="kota" placeholder="Kota" readonly>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="propinsi">Propinsi</label>
+                                        <input type="text" class="form-control w-100 text-center" name="propinsi" id="propinsi" placeholder="Propinsi" readonly>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="kodepos">Kodepos</label>
+                                        <input type="text" class="form-control w-100 text-center" name="kodepos" id="kodepos" placeholder="Kodepos" readonly>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
+
+                            <div class="row">
+                                <div class="col">
+
+                                    <!-- Disposisi 1 dan Person 1 -->
+                                    <div class="form-group row">
+                                        <label for="dispoDivisi1" class="col-sm-2 col-form-label">Disposisi 1</label>
+                                        <div class="col-sm-4">
+                                            <select class="form-control" id="dispoDivisi1" name="divisi1" onchange="getPersons(1)">
+                                                <option value="">Pilih Divisi</option>
+                                                <?php foreach ($divisi as $d): ?>
+                                                    <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                        <label for="dispoNoreg1" class="col-sm-2 col-form-label">Person 1</label>
+                                        <div class="col-sm-4">
+                                            <select class="form-control" name="person1" id="dispoNoreg1">
+                                                <option value="">Pilih Person</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- Disposisi 2 dan Person 2 -->
+                                    <div class="form-group row">
+                                        <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 2</label>
+                                        <div class="col-sm-4">
+                                            <select class="form-control" id="dispoDivisi2" name="divisi2" onchange="getPersons(2)">
+                                                <option value="">Pilih Divisi</option>
+                                                <?php foreach ($divisi as $d): ?>
+                                                    <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                        <label for="dispoNoreg2" class="col-sm-2 col-form-label">Person 2</label>
+                                        <div class="col-sm-4">
+                                            <select class="form-control" name="person2" id="dispoNoreg2">
+                                                <option value="">Pilih Person</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 2</label>
+                                        <div class="col-sm-4">
+                                            <select class="form-control" id="dispoDivisi3" name="divisi3" onchange="getPersons(3)">
+                                                <option value="">Pilih Divisi</option>
+                                                <?php foreach ($divisi as $d): ?>
+                                                    <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                        <label for="dispoNoreg2" class="col-sm-2 col-form-label">Person 3</label>
+                                        <div class="col-sm-4">
+                                            <select class="form-control" name="person3" id="dispoNoreg3">
+                                                <option value="">Pilih Person</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 2</label>
+                                        <div class="col-sm-4">
+                                            <select class="form-control" id="dispoDivisi4" name="divisi4" onchange="getPersons(4)">
+                                                <option value="">Pilih Divisi</option>
+                                                <?php foreach ($divisi as $d): ?>
+                                                    <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                        <label for="dispoNoreg2" class="col-sm-2 col-form-label">Person 4</label>
+                                        <div class="col-sm-4">
+                                            <select class="form-control" name="person4" id="dispoNoreg4">
+                                                <option value="">Pilih Person</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 2</label>
+                                        <div class="col-sm-4">
+                                            <select class="form-control" id="dispoDivisi5" name="divisi5" onchange="getPersons(5)">
+                                                <option value="">Pilih Divisi</option>
+                                                <?php foreach ($divisi as $d): ?>
+                                                    <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                        <label for="dispoNoreg2" class="col-sm-2 col-form-label">Person 2</label>
+                                        <div class="col-sm-4">
+                                            <select class="form-control" name="person5" id="dispoNoreg5">
+                                                <option value="">Pilih Person</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mt-4">Submit</button>
+            </form>
+
+            <!-- form insert (end) -->
+
+        </div>
+
     </div>
-</div>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
     <footer class="sticky-footer bg-white">
