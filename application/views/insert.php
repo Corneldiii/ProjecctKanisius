@@ -764,7 +764,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
         var tanggalInput = new Date().toISOString().split('T')[0];
         $('#tanggal').val(tanggalInput);
 
-        var kodeSurat = kode + divisi + Tahun + urut;
+        var kodeSurat = kode + Tahun + divisi + urut;
         console.log(kodeSurat);
         $('#nomorSurat').val(kodeSurat);
 
