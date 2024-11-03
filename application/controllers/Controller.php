@@ -92,7 +92,8 @@ class Controller extends CI_Controller
     // http://localhost/surat/menu
     public function menu()
     {
-        $this->load->view('header');
+        $data['kodeDiv'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
+        $this->load->view('header',$data);
         $this->load->view('menu');
     }
     public function input()
@@ -104,7 +105,7 @@ class Controller extends CI_Controller
 
         // var_dump($this->Model->getCount());
 
-        $this->load->view('header');
+        $this->load->view('header',$data);
         $this->load->view('insert', $data);
     }
 
@@ -117,20 +118,22 @@ class Controller extends CI_Controller
     }
     public function menuKeluar()
     {
-        $this->load->view('header');
+        $data['kodeDiv'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
+        $this->load->view('header',$data);
         $this->load->view('menuKeluar');
     }
     public function inputKeluar()
     {
-        $this->load->view('header');
+        $data['kodeDiv'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
+        $this->load->view('header',$data);
         $this->load->view('insertKeluar');
     }
 
      // http://localhost/surat/memo
     public function memo()
     {
-        // Tampilkan ke view memo
-        $this->load->view('header');  // Load header (opsional)
+        $data['kodeDiv'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
+        $this->load->view('header',$data);  // Load header (opsional)
         $this->load->view('memo');  // Load view memo dengan data memo
         
     }
@@ -138,8 +141,8 @@ class Controller extends CI_Controller
     public function inputMemo()
     {
         
-        // Tampilkan ke view memo
-        $this->load->view('header');  // Load header (opsional)
+        $data['kodeDiv'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
+        $this->load->view('header',$data);  // Load header (opsional)
         $this->load->view('inputMemo');  // Load view memo dengan data memo
         
     }

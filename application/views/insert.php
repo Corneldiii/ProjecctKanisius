@@ -220,7 +220,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 </select>
                             </div>
                         </div>
+
                         <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
+
                         <div class="header d-flex p-3" style="gap: 30px;">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Nomor Surat</label>
@@ -272,7 +274,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     <div class="input-group">
                                         <input type="text" class="form-control w-75 text-center" name="namaPerson" id="namaPerson" placeholder="Nama person / kode relasi">
                                         <div class="input-group-append">
-                                            <button class="btn btn-secondary" id="searchPerson" type="button" data-toggle="modal" data-target="#exampleModal">Cari</button>
+                                            <button class="btn btn-secondary" id="searchPerson" type="button" data-toggle="modal" data-target="#modalRelasi">Cari</button>
                                         </div>
                                     </div>
                                 </div>
@@ -280,11 +282,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 
                             <!-- Gagal setelah search -->
-                            <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <!-- <div class="modal fade" id="modalRelasi" tabindex="-1" aria-labelledby="modalRelasiLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-xl">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Daftar Personel</h5>
+                                            <h5 class="modal-title" id="modalRelasiLabel">Daftar Personel</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -314,15 +316,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                             <button type="button" class="btn btn-primary">Save changes</button>
                                         </div>
                                     </div>
+
+
                                 </div>
                             </div> -->
 
                             <!-- Gagal sebelum search -->
-                            <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <!-- <div class="modal fade" id="modalRelasi" tabindex="-1" aria-labelledby="modalRelasiLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-xl">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Judul Modal</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                                            <h5 class="modal-title" id="modalRelasiLabel">Judul Modal</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
                                         </div>
                                         <div class="modal-body w-100">
                                             <table id="tabel" class="display nowrap table-fixed" style="width:100%">
@@ -338,8 +342,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                                         <th class="text-center align-middle">Provinsi</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody id="tbody" name="tbody" style="color: black; font-size: 12px;"> <!-- Data will be populated here --> </tbody>
-                            <!-- </table>
+                                                <tbody id="tbody" name="tbody" style="color: black; font-size: 12px;"> Data will be populated here </tbody>
+                             </table>
                                         </div>
                                         <div class="modal-footer"> <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> <button type="button" class="btn btn-primary">Save changes</button> </div>
                                     </div>
@@ -348,7 +352,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 
                             <!-- Modal baru judul eror-->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="modalRelasi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-xl">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -382,10 +386,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                         </div>
                                     </div>
                                 </div>
-                            </div> -->
+                            </div>
 
                             <!-- tampilan modal eror judul sudah sesuai -->
-                            <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <!-- <div class="modal fade" id="modalRelasi" tabindex="-1" aria-labelledby="modalRelasiLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-xl">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -606,13 +610,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
     $(document).ready(function() {
         $('#menuMenu').trigger('click');
 
-        $('#tabel').DataTable({
-            "scrollY": "300px",
-            // "scrollX": true,
-            "scrollCollapse": true,
-            "paging": false,
+
+        $("#tbody").html(html);
+        $("#tabel").DataTable({
+            "select": true,
+            "scrollX": true,
             "bSort": false,
+            "scrollY": '427px',
+            "scrollCollapse": true,
         });
+
 
         $('#tabel tbody').on('click', 'tr', function() {
             var milistId = $(this).find('td').eq(0).text();
@@ -631,7 +638,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             $('#propinsi').val(propinsi);
             $('#namaLembaga').val(namaLembaga);
 
-            $('#exampleModal').modal('hide');
+            $('#modalRelasi').modal('hide');
         });
     });
 
@@ -683,52 +690,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     },
                     complete: function() {
                         $("#spinner, #overlay").hide();
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('AJAX Error:', error);
-                        console.error('Response Text:', xhr.responseText);
-                    }
-                });
-            } else {
-                $('#kodeRelasiList').html('');
-            }
-        });
+                        $('#tabel').DataTable().destroy();
 
-        $('#searchLembaga').on('click', function() {
-            var namaPerson = $('#namaPerson').val();
-            var namaLembaga = $('#namaLembaga').val();
-
-            if (namaPerson.length > 0 || namaLembaga.length > 0) {
-                $.ajax({
-                    url: "<?php echo site_url('Controller/searchKodeRelasi'); ?>",
-                    method: "POST",
-                    data: {
-                        person: namaPerson,
-                        lembaga: namaLembaga
-                    },
-
-                    beforeSend: function() {
-                        console.log("msauk");
-                        $("#spinner, #overlay").show();
-                    },
-                    dataType: "json",
-                    success: function(data) {
-                        $('#kodeRelasiList').empty();
-
-                        if (data.length > 0) {
-                            $.each(data, function(index, item) {
-                                $('#kodeRelasiList').append(
-                                    '<a href="#" class="list-group-item list-group-item-action" data-id="' + item.milistId + '" data-nama="' + item.namaPerson + '" data-lembaga="' + item.lembaga + '" data-alamat="' + item.alamat + '" data-kota="' + item.kota + '" data-propinsi="' + item.propinsi + '" data-kodepos="' + item.kodepos + '">' +
-                                    item.milistId + ' - ' + item.namaPerson +
-                                    '</a>'
-                                );
-                            });
-                        } else {
-                            $('#kodeRelasiList').append('<li class="list-group-item">No Results Found</li>');
-                        }
-                    },
-                    complete: function() {
-                        $("#spinner, #overlay").hide();
                     },
                     error: function(xhr, status, error) {
                         console.error('AJAX Error:', error);
