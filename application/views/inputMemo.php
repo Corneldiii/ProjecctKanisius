@@ -330,38 +330,38 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 
 
-                        <div class="row form-group m-3">
-                            <div class="col-2">
-                                <label for="kodeRelasi">Kode Relasi</label>
-                                <input type="text" class="form-control w-100 text-center" name="kodeRelasi" id="kodeRelasi" placeholder="kode Rlasi" readonly>
+                        <div class="header p-3">
+                            <div class="form-group d-flex align-items-center">
+                                <label for="kodeRelasi" class="mr-2" style="width: 150px;">Kode Relasi</label>
+                                <input type="text" class="form-control w-100 text-left" name="kodeRelasi" id="kodeRelasi" placeholder="kode Rlasi" readonly>
                             </div>
-                            <div class="col-2">
-                                <label for="nsmsLembaga">Nama Lembaga</label>
-                                <input type="text" class="form-control w-100 text-center" name="namaLembaga" id="namaLembaga" placeholder="Nama Lembaga" readonly>
+                            <div class="form-group d-flex align-items-center">
+                                <label for="nsmsLembaga" class="mr-2" style="width: 150px;">Nama Lembaga</label>
+                                <input type="text" class="form-control w-100 text-left" name="namaLembaga" id="namaLembaga" placeholder="Nama Lembaga" readonly>
                             </div>
-                            <div class="col-8">
-                                <label for="alamat">Alamat</label>
-                                <input type="text" class="form-control w-100 text-center" name="alamat" id="alamat" placeholder="Alamat" readonly>
+                            <div class="form-group d-flex align-items-center">
+                                <label for="alamat" class="mr-2" style="width: 150px;">Alamat</label>
+                                <input type="text" class="form-control w-100 text-left" name="alamat" id="alamat" placeholder="Alamat" readonly>
                             </div>
                         </div>
 
-                        <div class="row m-3">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="kota">Kota</label>
-                                    <input type="text" class="form-control w-100 text-center" name="kota" id="kota" placeholder="Kota" readonly>
+                        <div class="col-8">
+                            <div class="header p-3">
+                                <div class="form-group d-flex align-items-center">
+                                    <label for="kota" class="mr-2" style="width: 120px;">Kota</label>
+                                    <input type="text" class="form-control w-50 text-center" name="kota" id="kota" placeholder="Kota" readonly>
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="propinsi">Propinsi</label>
-                                    <input type="text" class="form-control w-100 text-center" name="propinsi" id="propinsi" placeholder="Propinsi" readonly>
+                            <div class="header p-3">
+                                <div class="form-group d-flex align-items-center">
+                                    <label for="propinsi" class="mr-2" style="width: 120px;">Propinsi</label>
+                                    <input type="text" class="form-control w-50 text-center" name="propinsi" id="propinsi" placeholder="Propinsi" readonly>
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="kodepos">Kodepos</label>
-                                    <input type="text" class="form-control w-100 text-center" name="kodepos" id="kodepos" placeholder="Kodepos" readonly>
+                            <div class="header p-3">
+                                <div class="form-group d-flex align-items-center">
+                                    <label for="kodepos" class="mr-2" style="width: 120px;">Kodepos</label>
+                                    <input type="text" class="form-control w-50 text-center" name="kodepos" id="kodepos" placeholder="Kodepos" readonly>
                                 </div>
                             </div>
                         </div>
