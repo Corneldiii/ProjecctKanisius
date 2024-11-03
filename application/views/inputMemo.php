@@ -183,7 +183,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         font-size: 10px;
                         padding: 6px;
                     }
-                }
+                }                
             </style>
 
 
@@ -208,151 +208,85 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <!-- form input surat dari admin sekretaris (start) -->
 
             <form class="user" id="insertMasuk" action="<?= site_url("insert") ?>" method="post">
-                <div class="form-group row">
-                    <div class="col-8">
-                        <div class="header d-flex justify-content-between p-3">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Nomor</label>
-                                <input type="text" class="form-control w-25 text-center" name="nomor" id="nomor" aria-describedby="emailHelp" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Tanggal Input</label>
-                                <input type="date" class="form-control w-100 text-center" name="tanggal" id="tanggal" aria-describedby="emailHelp">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Jenis Surat</label>
-                                <select class="form-control" id="jenis" name="jenis" style="width:300px;">
-                                    <option>Surat</option>
-                                    <option>Email</option>
-                                    <option>Penawaran</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
-                        <div class="header d-flex p-3" style="gap: 30px;">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Nomor Surat</label>
-                                <input type="text" class="form-control w-100 text-center" name="nomorSurat" id="nomorSurat" placeholder="Nomor Fisik Surat" aria-describedby="emailHelp" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Nomor Fisik Surat</label>
-                                <input type="text" class="form-control w-100 text-center " name="nomorSuratFisik" id="nomorSuratFisik" placeholder="Nomor Fisik Surat" aria-describedby="emailHelp">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Tanggal Fisik Surat</label>
-                                <input type="date" class="form-control w-100 text-center " name="tanggalSurat" id="tanggalSurat" aria-describedby="emailHelp">
-                            </div>
-                        </div>
+    <div class="form-group row">
+        <div class="col-8">
+            <!-- Header Section -->
+            <div class="header p-3">
+                <div class="form-group d-flex align-items-center">
+                    <label for="nomor" class="mr-2" style="width: 150px;">Nomor</label>
+                    <input type="text" style="width: 200px;" class="form-control text-left" name="nomor" id="nomor" readonly>
+                </div>
+                <div class="form-group d-flex align-items-center">
+                    <label for="tanggal" class="mr-2" style="width: 150px;">Tanggal Input</label>
+                    <input type="date" style="width: 200px;" class="form-control text-left" name="tanggal" id="tanggal">
+                </div>
+                <div class="form-group d-flex align-items-center">
+                    <label for="jenis" class="mr-2" style="width: 150px;">Jenis Surat</label>
+                    <select class="form-control" style="width: 200px;" id="jenis" name="jenis">
+                        <option>Surat</option>
+                        <option>Email</option>
+                        <option>Penawaran</option>
+                    </select>
+                </div>
+            </div>
 
-                        <div class="input-lanjutan">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Hal</label>
-                                <input type="text" class="form-control w-75 text-center " name="hal" id="hal" placeholder="Perihal Surat" aria-describedby="emailHelp">
-                            </div>
-                        </div>
+            <div class="border-top my-3"></div>
 
-                    </div>
-                    <div class="col-4 w-100" style="height:300px ;">
-                        <!-- <label for="custom-file">Sisipkan File</label> -->
-                        <div class="custom-file d-flex justify-content-between align-items-center w-100">
-                            <input type="file" class="custom-file-input w-100" name="file" style="cursor: pointer;" id="customFile">
-                            <label class="custom-file-label w-75 ml-5 d-flex  justify-content-center align-items-center" id="file" style="height:300px ; cursor:pointer;" for="customFile">+</label>
-                        </div>
+            <!-- Second Row -->
+            <div class="header p-3">
+                <div class="form-group d-flex align-items-center">
+                    <label for="nomorSurat" class="mr-2" style="width: 150px;">Nomor Surat</label>
+                    <input type="text" class="form-control text-left" name="nomorSurat" id="nomorSurat" placeholder="Nomor Surat" readonly>
+                </div>
+                <div class="form-group d-flex align-items-center">
+                    <label for="nomorSuratFisik" class="mr-2" style="width: 150px;">Nomor Fisik Surat</label>
+                    <input type="text" class="form-control text-left" name="nomorSuratFisik" id="nomorSuratFisik" placeholder="Nomor Fisik Surat">
+                </div>
+                <div class="form-group d-flex align-items-center">
+                    <label for="tanggalSurat" class="mr-2" style="width: 150px;">Tanggal Fisik Surat</label>
+                    <input type="date" class="form-control text-left" name="tanggalSurat" id="tanggalSurat">
+                </div>
+            </div>
+
+            <div class="form-group d-flex align-items-center">
+                <label for="hal" class="mr-2" style="width: 170px;">Hal</label>
+                <input type="text" class="form-control text-left" name="hal" id="hal" placeholder="Perihal Surat">
+            </div>
+        </div>
+
+        <!-- File Upload Section -->
+        <div class="col-4">
+            <div class="custom-file d-flex justify-content-center align-items-center h-100">
+                <input type="file" class="custom-file-input" name="file" id="customFile">
+                <label class="custom-file-label d-flex justify-content-center align-items-center w-75" for="customFile">+</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="form-group d-flex align-items-center">
+                <label for="lampiran" class="mr-2" style="width: 155px;">Lampiran</label>
+                <input type="text" class="form-control text-left" name="lampiran" id="lampiran" placeholder="Lampiran">
+            </div>
+            <div class="form-group">
+                <label for="keterangan">Deskripsi</label>
+                <textarea class="form-control text-left" id="keterangan" name="keterangan" rows="4" placeholder="Ringkasan Isi Surat"></textarea>
+            </div>
+
+            <div class="border-top my-3"></div>
+
+            <!-- Relation Information Section -->
+            <div class="form-group d-flex align-items-center">
+                <label for="namaPerson" class="mr-2" style="width: 150px;">Cari Nama/Kode Relasi</label>
+                <div class="input-group">
+                    <input type="text" class="form-control text-left" name="namaPerson" id="namaPerson" placeholder="Nama/Kode Relasi">
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary" id="searchPerson" type="button" data-toggle="modal" data-target="#exampleModal">Cari</button>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="input-lanjutan">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Lampiran</label>
-                                <input type="text" class="form-control w-75 text-center " name="lampiran" id="lampiran" placeholder="Lampiran" aria-describedby="emailHelp">
-                            </div>
-                            <div class="form-group d-flex flex-column">
-                                <label for="description">Deskripsi:</label>
-                                <textarea class="form-control w-75 text-center" id="keterangan" name="keterangan" rows="4" placeholder="Ringksan Isi Surat" aria-describedby="emailHelp"></textarea>
-                            </div>
+            </div>
 
-                            <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
-
-                            <div class="form-group row m-4 w-25">
-                                <div class="col">
-                                    <label for="namaPerson">cari Nama / kode relasi</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control w-75 text-center" name="namaPerson" id="namaPerson" placeholder="Nama person / kode relasi">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-secondary" id="searchPerson" type="button" data-toggle="modal" data-target="#exampleModal">Cari</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <!-- Gagal setelah search -->
-                            <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-xl">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Daftar Personel</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-
-                                        <div class="modal-body w-100">
-                                            <table id="tabel" class="display nowrap table table-striped table-bordered" style="width:100%">
-                                                </thead style="color: black;">
-                                                <tr>
-                                                    <th style="width:10px" class="text-center align-middle">No</th>
-                                                    <th class="text-center align-middle">Milist ID</th>
-                                                    <th class="text-center align-middle">Nama</th>
-                                                    <th class="text-center align-middle">Lembaga</th>
-                                                    <th class="text-center align-middle">Alamat</th>
-                                                    <th class="text-center align-middle">Nama Kota</th>
-                                                    <th class="text-center align-middle">Kode Pos</th>
-                                                    <th class="text-center align-middle">Provinsi</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody id="tbody" name="tbody" style="color: black;">
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
-
-                            <!-- Gagal sebelum search -->
-                            <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-xl">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Judul Modal</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
-                                        </div>
-                                        <div class="modal-body w-100">
-                                            <table id="tabel" class="display nowrap table-fixed" style="width:100%">
-                                                <thead style="color: black;">
-                                                    <tr>
-                                                        <th class="text-center align-middle">No</th>
-                                                        <th class="text-center align-middle">Milist ID</th>
-                                                        <th class="text-center align-middle">Nama</th>
-                                                        <th class="text-center align-middle">Lembaga</th>
-                                                        <th class="text-center align-middle">Alamat</th>
-                                                        <th class="text-center align-middle">Nama Kota</th>
-                                                        <th class="text-center align-middle">Kode Pos</th>
-                                                        <th class="text-center align-middle">Provinsi</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="tbody" name="tbody" style="color: black; font-size: 12px;"> <!-- Data will be populated here --> </tbody>
-                            <!-- </table>
-                                        </div>
-                                        <div class="modal-footer"> <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> <button type="button" class="btn btn-primary">Save changes</button> </div>
-                                    </div>
-                                </div>
-                            </div> -->
 
 
                             <!-- Modal baru judul eror-->
@@ -392,43 +326,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 </div>
                             </div> -->
 
-                            <!-- tampilan modal eror judul sudah sesuai -->
-                            <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-xl">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="table-responsive">
-                                                <table id="tabel" class="display nowrap table table-striped table-bordered table-fixed text-nowrap" style="width:100%">
-                                                    </thead style="color: black;">
-                                                    <tr>
-                                                        <th class="text-center align-middle">No</th>
-                                                        <th class="text-center align-middle">Milist ID</th>
-                                                        <th class="text-center align-middle">Nama</th>
-                                                        <th class="text-center align-middle">Lembaga</th>
-                                                        <th class="text-center align-middle">Alamat</th>
-                                                        <th class="text-center align-middle">Nama Kota</th>
-                                                        <th class="text-center align-middle">Kode Pos</th>
-                                                        <th class="text-center align-middle">Provinsi</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody id="tbody" name="tbody" style="color: black; font-size:12px">
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
 
 
                             <div class="row form-group m-3">
@@ -574,6 +471,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
         </div>
 
     </div>
+    
 </body>
 
     <footer class="sticky-footer bg-white">
