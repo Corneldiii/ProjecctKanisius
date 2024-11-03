@@ -260,7 +260,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     <div class="col-4">
                         <div class="custom-file d-flex justify-content-center align-items-center h-100">
                             <input type="file" class="custom-file-input" name="file" id="customFile">
-                            <label class="custom-file-label d-flex justify-content-center align-items-center w-75" for="customFile">+</label>
+                            <label class="custom-file-label d-flex justify-content-left align-items-center w-75" for="customFile">Masukan File</label>
                         </div>
                     </div>
                 </div>
@@ -280,8 +280,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
                         <!-- Relation Information Section -->
                         <div class="form-group d-flex align-items-center">
-                            <label for="namaPerson" class="mr-2" style="width: 150px;">Cari Nama/Kode Relasi</label>
-                            <div class="input-group">
+                            <label for="namaPerson" class="mr-2" style="width: 135px;">Cari Nama/Kode Relasi</label>
+                            <div class="input-group" style="width: 300px;">
                                 <input type="text" class="form-control text-left" name="namaPerson" id="namaPerson" placeholder="Nama/Kode Relasi">
                                 <div class="input-group-append">
                                     <button class="btn btn-secondary" id="searchPerson" type="button" data-toggle="modal" data-target="#exampleModal">Cari</button>
@@ -344,6 +344,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 <input type="text" class="form-control w-100 text-left" name="alamat" id="alamat" placeholder="Alamat" readonly>
                             </div>
                         </div>
+
+                        <div class="border-top my-3"></div>
 
                         <div class="col-8">
                             <div class="header p-3">
