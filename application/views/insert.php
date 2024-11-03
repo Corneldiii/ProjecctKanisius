@@ -610,8 +610,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     url: "<?php echo site_url('Controller/searchKodeRelasi'); ?>",
                     method: "POST",
                     data: {
-                        person: namaPerson,
-                        lembaga: namaLembaga
+                        person: namaPerson
                     },
                     beforeSend: function() {
                         console.log("msauk");

@@ -33,10 +33,9 @@ class Controller extends CI_Controller
     public function searchKodeRelasi()
     {
         $person = $this->input->post('person');
-        $lembaga = $this->input->post('lembaga');
 
-        if ($person != '' || $lembaga != '') {
-            $result = $this->Model->getRelasiData($person, $lembaga);
+        if ($person != '') {
+            $result = $this->Model->getRelasiData($person);
 
             // Mengubah hasil menjadi array
             $output = array();

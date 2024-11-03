@@ -126,4 +126,6 @@ class Insert extends CI_Controller
 
         echo json_encode(array("status" => "success"));
     }
+
+    
 }

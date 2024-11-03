@@ -52,7 +52,7 @@ ON divID=LEFT(pegLastDivId,2) WHERE a.userId='" . $username . "' AND a.userPass=
     public function getDataUser($kodeDivisi){
         $query = "SELECT nomor, Tanggal, noSurat, tglSurat, relasiID, namaPerson, namaLembaga, hal, lampiran, keterangan FROM 
                     tb_surat WHERE LEFT(nomor,1)='1' AND (divisi='" . $kodeDivisi . "' OR dispoDivisi1 LIKE '" . $kodeDivisi . "%' OR dispoDivisi2 LIKE '" . $kodeDivisi . "%' 
-                    OR dispoDivisi3 LIKE '" . $kodeDivisi . "%' OR dispoDivisi4 LIKE '" . $kodeDivisi . "%' OR dispoDivisi5 LIKE '" . $kodeDivisi . "%')";
+                    OR dispoDivisi3 LIKE '" . $kodeDivisi . "%' OR dispoDivisi4 LIKE '" . $kodeDivisi . "%' OR dispoDivisi5 LIKE '" . $kodeDivisi . "%') ORDER BY tanggal DESC";
         return $this->db->query($query);
     }
 
@@ -108,7 +108,7 @@ ON divID=LEFT(pegLastDivId,2) WHERE a.userId='" . $username . "' AND a.userPass=
     }
 
 
-    public function getRelasiData($person, $lembaga)
+    public function getRelasiData($person)
     {
         $this->db->select('milistId, namaPerson, namaLembaga, alamat, kotanama, kodepos, propNama');
         $this->db->from('db_referensi.ref_alamat a');
@@ -116,7 +116,7 @@ ON divID=LEFT(pegLastDivId,2) WHERE a.userId='" . $username . "' AND a.userPass=
         $this->db->join('db_referensi.ref_propinsi c', 'c.propKode=a.propinsi', 'left');
         $this->db->where('STATUS', 'Y');
         $this->db->like('namaPerson', $person);
-        $this->db->or_like('namaLembaga', $lembaga);
+        $this->db->or_like('namaLembaga', $person);
 
         $query = $this->db->get();
         return $query->result();
