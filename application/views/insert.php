@@ -27,10 +27,33 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <span class="sr-only">Loading...</span>
         </div>
 
+        <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000" style="position: fixed; top: 20px; right: 20px;">
+            <div class="toast-header">
+                <strong class="mr-auto text-success">Sukses</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                Data berhasil disimpan!
+            </div>
+        </div>
+
+        <div id="errorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000" style="position: fixed; top: 20px; right: 20px;">
+            <div class="toast-header">
+                <strong class="mr-auto text-danger">Error</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body" id="errorToastBody">
+            </div>
+        </div>
+
+
         <div class="container-fluid">
 
             <style>
-
                 /* Modal Tabel */
 
                 /* Atur tabel agar mengikuti lebar modal */
@@ -187,7 +210,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Nomor Fisik Surat</label>
-                                <input type="text" class="form-control w-100 text-center " name="nomorSuratFisik" id="nomorSuratFisik" placeholder="Nomor Fisik Surat" aria-describedby="emailHelp">
+                                <input type="number" class="form-control w-100 text-center " name="nomorSuratFisik" id="nomorSuratFisik" placeholder="Nomor Fisik Surat" aria-describedby="emailHelp">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tanggal Fisik Surat</label>
@@ -752,29 +775,63 @@ defined('BASEPATH') or exit('No direct script access allowed');
     $(document).ready(function() {
         $('#insertMasuk').on('submit', function(event) {
             event.preventDefault();
+            var kode = $('#nomorSurat').val();
+            var perihal = $('#hal').val();
 
             var formData = new FormData(this);
+            var isEmpty = false;
 
             formData.forEach((value, key) => {
-                console.log(key + ": " + value);
-            });
-
-
-            $.ajax({
-                url: '<?= site_url("Insert/insert_data") ?>',
-                method: 'POST',
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    alert('Data berhasil disimpan!');
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error:', error);
+                if (typeof value === 'string' && !value.trim()) {
+                    isEmpty = true;
                 }
             });
+
+            if (isEmpty) {
+                $('#errorToastBody').text('Harap isi semua field sebelum mengirim data.');
+                $('#errorToast').toast('show');
+            } else {
+                $.ajax({
+                    url: '<?= site_url("Insert/insert_data") ?>',
+                    method: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+
+
+                        $.ajax({
+                            url: '<?= site_url("FonnteController/kirimPesan") ?>',
+                            method: 'POST',
+                            data: {
+                                message: "Anda memiliki surat masuk baru dengan kode (" + kode + ") perihal " + perihal ,
+                                url: 'http://surat.test/'
+                            },
+                            success: function(response) {
+                                $('#successToast').toast('show');
+                                setTimeout(function() {
+                                    location.reload();
+                                }, 1000);
+                            },
+                            error: function(xhr, status, error) {
+                                console.error('Error saat mengirim pesan:', error);
+                                $('#errorToastBody').text('Terjadi kesalahan saat mengirim pesan: ' + (xhr.responseText || error));
+                                $('#errorToast').toast('show');
+                            }
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error saat menyimpan data:', error);
+                        $('#errorToastBody').text('Terjadi kesalahan saat menyimpan data: ' + (xhr.responseText || error));
+                        $('#errorToast').toast('show');
+                    }
+                });
+            }
         });
     });
+
+
+
 
 
     // kalau butuh input dari user
