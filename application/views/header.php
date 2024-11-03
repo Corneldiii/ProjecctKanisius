@@ -52,7 +52,7 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUser"
                    aria-expanded="true" aria-controls="collapseUser" id="menuUser">
                     <i class="fas fa-fw fa-user"></i>
-                    <span><?php echo $this->session->userdata('id_surat'); ?></span> <!-- USER = nomor pegawai -->
+                    <span>Login sebagai USER</span> <!-- USER = nomor pegawai -->
                 </a>
                 <div id="collapseUser" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -73,13 +73,62 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Menu:</h6>
-                        <a class="collapse-item" href="menu" style="white-space: normal;">Surat Masuk</a>
-                        <a class="collapse-item" href="menuKeluar" style="white-space: normal;">Surat Keluar</a>
-                        <a class="collapse-item" href="memo" style="white-space: normal;">Memo Iternal</a>
+
+                        <!-- Menu Surat Masuk dengan submenu -->
+                        <a class="collapse-item" href="#" data-toggle="collapse" data-target="#collapseSuratMasuk"
+                           aria-expanded="false" aria-controls="collapseSuratMasuk">
+                            Surat Masuk
+                            <i class="fas fa-angle-down float-right"></i>
+                        </a>
+                        <div id="collapseSuratMasuk" class="collapse" aria-labelledby="headingSuratMasuk" data-parent="#collapseTwo">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <a class="collapse-item" href="menu" style="white-space: normal;">
+                                    <i class="bi bi-file-earmark-spreadsheet"></i> Tabel
+                                </a>
+                                <a class="collapse-item" href="insert" style="white-space: normal;">
+                                    <i class="bi bi-file-earmark-plus"></i> Insert
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Menu Surat Keluar dengan submenu -->
+                        <a class="collapse-item" href="#" data-toggle="collapse" data-target="#collapseSuratKeluar"
+                           aria-expanded="false" aria-controls="collapseSuratKeluar">
+                            Surat Keluar
+                            <i class="fas fa-angle-down float-right"></i>
+                        </a>
+                        <div id="collapseSuratKeluar" class="collapse" aria-labelledby="headingSuratKeluar" data-parent="#collapseTwo">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <a class="collapse-item" href="menuKeluar" style="white-space: normal;">
+                                    <i class="bi bi-file-earmark-spreadsheet"></i> Tabel
+                                </a>
+                                <a class="collapse-item" href="insertKeluar" style="white-space: normal;">
+                                    <i class="bi bi-file-earmark-plus"></i> Insert
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Menu Memo Internal dengan submenu -->
+                        <a class="collapse-item" href="#" data-toggle="collapse" data-target="#collapseMemoInternal"
+                           aria-expanded="false" aria-controls="collapseMemoInternal">
+                            Memo Internal
+                            <i class="fas fa-angle-down float-right"></i>
+                        </a>
+                        <div id="collapseMemoInternal" class="collapse" aria-labelledby="headingMemoInternal" data-parent="#collapseTwo">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <a class="collapse-item" href="memo" style="white-space: normal;">
+                                    <i class="bi bi-file-earmark-spreadsheet"></i> Tabel
+                                </a>
+                                <a class="collapse-item" href="inputMemo" style="white-space: normal;">
+                                    <i class="bi bi-file-earmark-plus"></i> Insert
+                                </a>
+                            </div>
+                        </div>
+
                         <a class="collapse-item" href="insert" style="white-space: normal;">User</a>
                         <a class="collapse-item" href="insert" style="white-space: normal;">Laporan - laporan</a>
                     </div>
                 </div>
 
             </li>
-        </ul>
+        </ul>
