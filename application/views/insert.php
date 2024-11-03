@@ -29,50 +29,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
         <div class="container-fluid">
 
-            <div class="menu"
-                style="display: flex; justify-content: flex-start; margin-top: 20px; margin-bottom: 20px; border-bottom: 2px solid #ddd;">
-                <a href="menu" class="menu-btn active">
-                    <i class="bi bi-file-earmark-spreadsheet"></i>
-                    <span>Tabel</span>
-                </a>
-                <a href="insert" class="menu-btn">
-                    <i class="bi bi-file-earmark-plus"></i>
-                    <span>Insert</span>
-                </a>
-            </div>
-
             <style>
-                /* Tombol Menu */
-                .menu-btn {
-                    display: inline-block;
-                    padding: 12px 20px;
-                    margin: 0 10px;
-                    font-size: 16px;
-                    color: #fff;
-                    background-color: #4b5320;
-                    border-radius: 8px 8px 0 0;
-                    transition: background-color 0.3s ease, transform 0.2s;
-                    position: relative;
-                    z-index: 1;
-                    cursor: pointer;
-                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-                }
-
-                .menu-btn.active {
-                    background-color: #3e4520;
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-                }
-
-                .menu-btn:hover {
-                    background-color: #3a4a1c;
-                    transform: translateY(-2px);
-                    color: #fff;
-                    text-decoration: none;
-                }
-
-                .menu-btn span {
-                    margin-left: 4px;
-                }
 
                 /* Modal Tabel */
 

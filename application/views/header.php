@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
 
@@ -73,13 +73,13 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Menu:</h6>
-                        <a class="collapse-item " href="menu" style="white-space: normal;">Daftar Surat Masuk</a>
+                        <a class="collapse-item" href="menu" style="white-space: normal;">Surat Masuk</a>
                         <a class="collapse-item" href="menuKeluar" style="white-space: normal;">Surat Keluar</a>
                         <a class="collapse-item" href="memo" style="white-space: normal;">Memo Iternal</a>
                         <a class="collapse-item" href="insert" style="white-space: normal;">User</a>
                         <a class="collapse-item" href="insert" style="white-space: normal;">Laporan - laporan</a>
-
                     </div>
                 </div>
+
             </li>
-        </ul>
+        </ul>
