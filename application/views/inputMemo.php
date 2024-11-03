@@ -213,15 +213,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <!-- Header Section -->
             <div class="header p-3">
                 <div class="form-group d-flex align-items-center">
-                    <label for="nomor" class="mr-2" style="width: 150px;">Nomor</label>
+                    <label for="nomor" class="mr-2" style="width: 125px;">Nomor</label>
                     <input type="text" style="width: 200px;" class="form-control text-left" name="nomor" id="nomor" readonly>
                 </div>
                 <div class="form-group d-flex align-items-center">
-                    <label for="tanggal" class="mr-2" style="width: 150px;">Tanggal Input</label>
+                    <label for="tanggal" class="mr-2" style="width: 125px;">Tanggal Input</label>
                     <input type="date" style="width: 200px;" class="form-control text-left" name="tanggal" id="tanggal">
                 </div>
                 <div class="form-group d-flex align-items-center">
-                    <label for="jenis" class="mr-2" style="width: 150px;">Jenis Surat</label>
+                    <label for="jenis" class="mr-2" style="width: 125px;">Jenis Surat</label>
                     <select class="form-control" style="width: 200px;" id="jenis" name="jenis">
                         <option>Surat</option>
                         <option>Email</option>
@@ -248,9 +248,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 </div>
             </div>
 
+            <div class="border-top my-3"></div>
+
             <div class="form-group d-flex align-items-center">
                 <label for="hal" class="mr-2" style="width: 170px;">Hal</label>
-                <input type="text" class="form-control text-left" name="hal" id="hal" placeholder="Perihal Surat">
+                <input type="text"  class="form-control text-left" name="hal" id="hal" placeholder="Perihal Surat">
             </div>
         </div>
 
@@ -269,8 +271,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <label for="lampiran" class="mr-2" style="width: 155px;">Lampiran</label>
                 <input type="text" class="form-control text-left" name="lampiran" id="lampiran" placeholder="Lampiran">
             </div>
-            <div class="form-group">
-                <label for="keterangan">Deskripsi</label>
+            <div class="form-group d-flex align-items-center">
+                <label for="keterangan" class="mr-2" style="width: 155px;">Deskripsi</label>
                 <textarea class="form-control text-left" id="keterangan" name="keterangan" rows="4" placeholder="Ringkasan Isi Surat"></textarea>
             </div>
 
