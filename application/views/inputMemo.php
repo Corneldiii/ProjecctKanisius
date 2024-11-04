@@ -230,50 +230,49 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             </div>
                         </div>
 
-                        <div class="border-top my-3"></div>
-
-                        <!-- Second Row -->
-                        <div class="header p-3">
-                            <div class="form-group d-flex align-items-center">
-                                <label for="nomorSurat" class="mr-2" style="width: 150px;">Nomor Surat</label>
-                                <input type="text" class="form-control text-left" name="nomorSurat" id="nomorSurat" placeholder="Nomor Surat" readonly>
-                            </div>
-                            <div class="form-group d-flex align-items-center">
-                                <label for="nomorSuratFisik" class="mr-2" style="width: 150px;">Nomor Fisik Surat</label>
-                                <input type="text" class="form-control text-left" name="nomorSuratFisik" id="nomorSuratFisik" placeholder="Nomor Fisik Surat">
-                            </div>
-                            <div class="form-group d-flex align-items-center">
-                                <label for="tanggalSurat" class="mr-2" style="width: 150px;">Tanggal Fisik Surat</label>
-                                <input type="date" class="form-control text-left" name="tanggalSurat" id="tanggalSurat">
-                            </div>
-                        </div>
-
-                        <div class="border-top my-3"></div>
-
-                        <div class="form-group d-flex align-items-center">
-                            <label for="hal" class="mr-2" style="width: 170px;">Hal</label>
-                            <input type="text" class="form-control text-left" name="hal" id="hal" placeholder="Perihal Surat">
-                        </div>
                     </div>
-
-                    <!-- File Upload Section -->
                     <div class="col-4">
-                        <div class="custom-file d-flex justify-content-center align-items-center h-100">
-                            <input type="file" class="custom-file-input" name="file" id="customFile">
-                            <label class="custom-file-label d-flex justify-content-left align-items-center w-75" for="customFile">Masukan File</label>
+                        <div class="custom-file d-flex justify-content-center align-items-center">
+                            <input type="file" class="custom-file-input" name="file" id="customFile" style="cursor: pointer;">
+                            <label class="custom-file-label d-flex justify-content-left align-items-center w-75" for="customFile" style="cursor: pointer;">Masukan File</label>
                         </div>
                     </div>
                 </div>
+                <div class="border-top my-3"></div>
+
+                <!-- Second Row -->
+                <div class="header p-3">
+                    <div class="form-group d-flex align-items-center">
+                        <label for="nomorSurat" class="mr-2" style="width: 150px;">Nomor Surat</label>
+                        <input type="text" class="form-control text-left w-25" name="nomorSurat" id="nomorSurat" placeholder="Nomor Surat" readonly>
+                    </div>
+                    <div class="form-group d-flex align-items-center">
+                        <label for="nomorSuratFisik" class="mr-2" style="width: 150px;">Nomor Fisik Surat</label>
+                        <input type="text" class="form-control text-left w-25" name="nomorSuratFisik" id="nomorSuratFisik" placeholder="Nomor Fisik Surat">
+                    </div>
+                    <div class="form-group d-flex align-items-center">
+                        <label for="tanggalSurat" class="mr-2" style="width: 150px;">Tanggal Fisik Surat</label>
+                        <input type="date" class="form-control text-left w-25" name="tanggalSurat" id="tanggalSurat">
+                    </div>
+                </div>
+
+                <div class="border-top my-3"></div>
+
+
 
                 <div class="row">
-                    <div class="col">
+                    <div class="col p-4">
                         <div class="form-group d-flex align-items-center">
-                            <label for="lampiran" class="mr-2" style="width: 155px;">Lampiran</label>
-                            <input type="text" class="form-control text-left" name="lampiran" id="lampiran" placeholder="Lampiran">
+                            <label for="hal"  style="width: 145px;">Hal</label>
+                            <input type="text" class="form-control text-left w-50" name="hal" id="hal" placeholder="Perihal Surat">
                         </div>
                         <div class="form-group d-flex align-items-center">
-                            <label for="keterangan" class="mr-2" style="width: 155px;">Deskripsi</label>
-                            <textarea class="form-control text-left" id="keterangan" name="keterangan" rows="4" placeholder="Ringkasan Isi Surat"></textarea>
+                            <label for="lampiran"  style="width: 145px;">Lampiran</label>
+                            <input type="text" class="form-control text-left w-50" name="lampiran" id="lampiran" placeholder="Lampiran">
+                        </div>
+                        <div class="form-group d-flex align-items-center">
+                            <label for="keterangan" style="width: 145px;">Deskripsi</label>
+                            <textarea class="form-control text-left w-50" id="keterangan" name="keterangan" rows="4" placeholder="Ringkasan Isi Surat"></textarea>
                         </div>
 
                         <div class="border-top my-3"></div>
@@ -326,44 +325,44 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     </div>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
 
 
 
-                        <div class="header p-3">
+                        <div class="header">
                             <div class="form-group d-flex align-items-center">
-                                <label for="kodeRelasi" class="mr-2" style="width: 150px;">Kode Relasi</label>
-                                <input type="text" class="form-control w-100 text-left" name="kodeRelasi" id="kodeRelasi" placeholder="kode Rlasi" readonly>
+                                <label for="kodeRelasi" style="width: 140px;">Kode Relasi</label>
+                                <input type="text" class="form-control w-25 text-left" name="kodeRelasi" id="kodeRelasi" placeholder="kode Rlasi" readonly>
                             </div>
                             <div class="form-group d-flex align-items-center">
-                                <label for="nsmsLembaga" class="mr-2" style="width: 150px;">Nama Lembaga</label>
-                                <input type="text" class="form-control w-100 text-left" name="namaLembaga" id="namaLembaga" placeholder="Nama Lembaga" readonly>
+                                <label for="nsmsLembaga" style="width: 140px;">Nama Lembaga</label>
+                                <input type="text" class="form-control w-25 text-left" name="namaLembaga" id="namaLembaga" placeholder="Nama Lembaga" readonly>
                             </div>
                             <div class="form-group d-flex align-items-center">
-                                <label for="alamat" class="mr-2" style="width: 150px;">Alamat</label>
-                                <input type="text" class="form-control w-100 text-left" name="alamat" id="alamat" placeholder="Alamat" readonly>
+                                <label for="alamat" style="width: 140px;">Alamat</label>
+                                <input type="text" class="form-control w-25 text-left" name="alamat" id="alamat" placeholder="Alamat" readonly>
                             </div>
                         </div>
 
                         <div class="border-top my-3"></div>
 
                         <div class="col-8">
-                            <div class="header p-3">
+                            <div class="header">
                                 <div class="form-group d-flex align-items-center">
                                     <label for="kota" class="mr-2" style="width: 120px;">Kota</label>
-                                    <input type="text" class="form-control w-50 text-center" name="kota" id="kota" placeholder="Kota" readonly>
+                                    <input type="text" class="form-control w-50" name="kota" id="kota" placeholder="Kota" readonly>
                                 </div>
                             </div>
-                            <div class="header p-3">
+                            <div class="header">
                                 <div class="form-group d-flex align-items-center">
                                     <label for="propinsi" class="mr-2" style="width: 120px;">Propinsi</label>
-                                    <input type="text" class="form-control w-50 text-center" name="propinsi" id="propinsi" placeholder="Propinsi" readonly>
+                                    <input type="text" class="form-control w-50" name="propinsi" id="propinsi" placeholder="Propinsi" readonly>
                                 </div>
                             </div>
-                            <div class="header p-3">
+                            <div class="header">
                                 <div class="form-group d-flex align-items-center">
                                     <label for="kodepos" class="mr-2" style="width: 120px;">Kodepos</label>
-                                    <input type="text" class="form-control w-50 text-center" name="kodepos" id="kodepos" placeholder="Kodepos" readonly>
+                                    <input type="text" class="form-control w-50" name="kodepos" id="kodepos" placeholder="Kodepos" readonly>
                                 </div>
                             </div>
                         </div>
@@ -467,23 +466,23 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     </div>
                 </div>
         </div>
-        <button type="submit" class="btn btn-primary w-100 mt-4">Submit</button>
+        <div class="d-flex justify-content-center align-items-center">
+            <button type="submit" class="btn btn-primary w-50 mt-4">Submit</button>
+        </div>
         </form>
 
-        <!-- form insert (end) -->
 
+
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>© <?php echo date("Y"); ?> PT Kanisius.</span>
+                </div>
+            </div>
+        </footer>
     </div>
 
-</div>
 
-
-<footer class="sticky-footer bg-white">
-    <div class="container my-auto">
-        <div class="copyright text-center my-auto">
-            <span>© <?php echo date("Y"); ?> PT Kanisius.</span>
-        </div>
-    </div>
-</footer>
 
 </div>
 

@@ -182,80 +182,76 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <form class="user" id="insertMasuk" action="<?= site_url("insert") ?>" method="post">
                 <div class="form-group row">
                     <div class="col-8">
-                        <div class="header d-flex justify-content-between p-3">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Nomor</label>
-                                <input type="text" class="form-control w-25 text-center" name="nomor" id="nomor" aria-describedby="emailHelp" readonly>
+                        <!-- Header Section -->
+                        <div class="header p-3">
+                            <div class="form-group d-flex align-items-center">
+                                <label for="nomor" class="mr-2" style="width: 125px;">Nomor</label>
+                                <input type="text" style="width: 200px;" class="form-control text-center" name="nomor" id="nomor" readonly>
                             </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Tanggal Input</label>
-                                <input type="date" class="form-control w-100 text-center" name="tanggal" id="tanggal" aria-describedby="emailHelp">
+                            <div class="form-group d-flex align-items-center">
+                                <label for="tanggal" class="mr-2" style="width: 125px;">Tanggal Input</label>
+                                <input type="date" style="width: 200px;" class="form-control text-center" name="tanggal" id="tanggal">
                             </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Jenis Surat</label>
-                                <select class="form-control" id="jenis" name="jenis" style="width:300px;">
+                            <div class="form-group d-flex align-items-center">
+                                <label for="jenis" class="mr-2" style="width: 125px;">Jenis Surat</label>
+                                <select class="form-control" style="width: 200px;" id="jenis" name="jenis">
                                     <option>Surat</option>
                                     <option>Email</option>
                                     <option>Penawaran</option>
                                 </select>
                             </div>
                         </div>
-
-                        <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
-
-                        <div class="header d-flex p-3" style="gap: 30px;">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Nomor Surat</label>
-                                <input type="text" class="form-control w-100 text-center" name="nomorSurat" id="nomorSurat" placeholder="Nomor Fisik Surat" aria-describedby="emailHelp" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Nomor Fisik Surat</label>
-                                <input type="number" class="form-control w-100 text-center " name="nomorSuratFisik" id="nomorSuratFisik" placeholder="Nomor Fisik Surat" aria-describedby="emailHelp">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Tanggal Fisik Surat</label>
-                                <input type="date" class="form-control w-100 text-center " name="tanggalSurat" id="tanggalSurat" aria-describedby="emailHelp">
-                            </div>
-                        </div>
-
-                        <div class="input-lanjutan">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Hal</label>
-                                <input type="text" class="form-control w-75 text-center " name="hal" id="hal" placeholder="Perihal Surat" aria-describedby="emailHelp">
-                            </div>
-                        </div>
-
                     </div>
-                    <div class="col-4 w-100" style="height:300px ;">
-                        <!-- <label for="custom-file">Sisipkan File</label> -->
-                        <div class="custom-file d-flex justify-content-between align-items-center w-100">
-                            <input type="file" class="custom-file-input w-100" name="file" style="cursor: pointer;" id="customFile">
-                            <label class="custom-file-label w-75 ml-5 d-flex  justify-content-center align-items-center" id="file" style="height:300px ; cursor:pointer;" for="customFile">+</label>
+                    <div class="col-4">
+                        <div class="custom-file d-flex justify-content-center align-items-center">
+                            <input type="file" class="custom-file-input" name="file" id="customFile" style="cursor: pointer;">
+                            <label class="custom-file-label d-flex justify-content-left align-items-center w-75" for="customFile" style="cursor: pointer;">Masukan File</label>
                         </div>
                     </div>
                 </div>
+
+
+                <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
+
+                <div class="header p-3">
+                    <div class="form-group d-flex align-items-center">
+                        <label for="nomorSurat" class="mr-2" style="width: 150px;">Nomor Surat</label>
+                        <input type="text" class="form-control text-left w-25" name="nomorSurat" id="nomorSurat" placeholder="Nomor Surat" readonly>
+                    </div>
+                    <div class="form-group d-flex align-items-center">
+                        <label for="nomorSuratFisik" class="mr-2" style="width: 150px;">Nomor Fisik Surat</label>
+                        <input type="text" class="form-control text-left w-25" name="nomorSuratFisik" id="nomorSuratFisik" placeholder="Nomor Fisik Surat">
+                    </div>
+                    <div class="form-group d-flex align-items-center">
+                        <label for="tanggalSurat" class="mr-2" style="width: 150px;">Tanggal Fisik Surat</label>
+                        <input type="date" class="form-control text-left w-25" name="tanggalSurat" id="tanggalSurat">
+                    </div>
+                </div>
+
                 <div class="row">
-                    <div class="col">
+                    <div class="col p-4">
                         <div class="input-lanjutan">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Lampiran</label>
-                                <input type="text" class="form-control w-75 text-center " name="lampiran" id="lampiran" placeholder="Lampiran" aria-describedby="emailHelp">
+                            <div class="form-group d-flex align-items-center">
+                                <label for="hal" style="width: 145px;">Hal</label>
+                                <input type="text" class="form-control text-left w-50" name="hal" id="hal" placeholder="Perihal Surat">
                             </div>
-                            <div class="form-group d-flex flex-column">
-                                <label for="description">Deskripsi:</label>
-                                <textarea class="form-control w-75 text-center" id="keterangan" name="keterangan" rows="4" placeholder="Ringksan Isi Surat" aria-describedby="emailHelp"></textarea>
+                            <div class="form-group d-flex align-items-center">
+                                <label for="lampiran" style="width: 145px;">Lampiran</label>
+                                <input type="text" class="form-control text-left w-50" name="lampiran" id="lampiran" placeholder="Lampiran">
+                            </div>
+                            <div class="form-group d-flex align-items-center">
+                                <label for="keterangan" style="width: 145px;">Deskripsi</label>
+                                <textarea class="form-control text-left w-50" id="keterangan" name="keterangan" rows="4" placeholder="Ringkasan Isi Surat"></textarea>
                             </div>
 
                             <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
 
-                            <div class="form-group row m-4 w-25">
-                                <div class="col">
-                                    <label for="namaPerson">cari Nama / kode relasi</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control w-75 text-center" name="namaPerson" id="namaPerson" placeholder="Nama person / kode relasi">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-secondary" id="searchPerson" type="button" data-toggle="modal" data-target="#modalRelasi">Cari</button>
-                                        </div>
+                            <div class="form-group d-flex align-items-center">
+                                <label for="namaPerson" class="mr-2" style="width: 135px;">Cari Nama/Kode Relasi</label>
+                                <div class="input-group" style="width: 300px;">
+                                    <input type="text" class="form-control text-left" name="namaPerson" id="namaPerson" placeholder="Nama/Kode Relasi">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-secondary" id="searchPerson" type="button" data-toggle="modal" data-target="#modalRelasi">Cari</button>
                                     </div>
                                 </div>
                             </div>
@@ -407,40 +403,34 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             </div> -->
 
 
-                            <div class="row form-group m-3">
-                                <div class="col-2">
-                                    <label for="kodeRelasi">Kode Relasi</label>
-                                    <input type="text" class="form-control w-100 text-center" name="kodeRelasi" id="kodeRelasi" placeholder="kode Rlasi" readonly>
+                            <div class="header">
+                                <div class="form-group d-flex align-items-center">
+                                    <label for="kodeRelasi" style="width: 140px;">Kode Relasi</label>
+                                    <input type="text" class="form-control w-25 text-left" name="kodeRelasi" id="kodeRelasi" placeholder="kode Rlasi" readonly>
                                 </div>
-                                <div class="col-2">
-                                    <label for="nsmsLembaga">Nama Lembaga</label>
-                                    <input type="text" class="form-control w-100 text-center" name="namaLembaga" id="namaLembaga" placeholder="Nama Lembaga" readonly>
+                                <div class="form-group d-flex align-items-center">
+                                    <label for="nsmsLembaga" style="width: 140px;">Nama Lembaga</label>
+                                    <input type="text" class="form-control w-25 text-left" name="namaLembaga" id="namaLembaga" placeholder="Nama Lembaga" readonly>
                                 </div>
-                                <div class="col-8">
-                                    <label for="alamat">Alamat</label>
-                                    <input type="text" class="form-control w-100 text-center" name="alamat" id="alamat" placeholder="Alamat" readonly>
+                                <div class="form-group d-flex align-items-center">
+                                    <label for="alamat" style="width: 140px;">Alamat</label>
+                                    <input type="text" class="form-control w-25 text-left" name="alamat" id="alamat" placeholder="Alamat" readonly>
                                 </div>
                             </div>
 
-                            <div class="row m-3">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="kota">Kota</label>
-                                        <input type="text" class="form-control w-100 text-center" name="kota" id="kota" placeholder="Kota" readonly>
+                            <div class="header">
+                                    <div class="form-group d-flex align-items-center">
+                                        <label for="kota" class="mr-2" style="width: 130px;">Kota</label>
+                                        <input type="text" class="form-control w-25" name="kota" id="kota" placeholder="Kota" readonly>
                                     </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="propinsi">Propinsi</label>
-                                        <input type="text" class="form-control w-100 text-center" name="propinsi" id="propinsi" placeholder="Propinsi" readonly>
+                                    <div class="form-group d-flex align-items-center">
+                                        <label for="propinsi" class="mr-2" style="width: 130px;">Propinsi</label>
+                                        <input type="text" class="form-control w-25" name="propinsi" id="propinsi" placeholder="Propinsi" readonly>
                                     </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="kodepos">Kodepos</label>
-                                        <input type="text" class="form-control w-100 text-center" name="kodepos" id="kodepos" placeholder="Kodepos" readonly>
+                                    <div class="form-group d-flex align-items-center">
+                                        <label for="kodepos" class="mr-2" style="width: 130px;">Kodepos</label>
+                                        <input type="text" class="form-control w-25" name="kodepos" id="kodepos" placeholder="Kodepos" readonly>
                                     </div>
-                                </div>
                             </div>
 
                             <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
@@ -804,7 +794,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             url: '<?= site_url("FonnteController/kirimPesan") ?>',
                             method: 'POST',
                             data: {
-                                message: "Anda memiliki surat masuk baru dengan kode (" + kode + ") perihal " + perihal ,
+                                message: "Anda memiliki surat masuk baru dengan kode (" + kode + ") perihal " + perihal,
                                 url: 'http://surat.test/'
                             },
                             success: function(response) {
