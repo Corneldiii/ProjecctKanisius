@@ -61,10 +61,10 @@ class Insert extends CI_Controller
         if (!empty($_FILES['file']['name'])) {
             $config['upload_path'] = FCPATH . 'file/';
             $config['allowed_types'] = 'pdf|jpg|png|docx';
-            $config['max_size'] = 2048; 
+            $config['max_size'] = 2048;
 
             $this->upload->initialize($config);
-            var_dump($config['upload_path']);  
+            var_dump($config['upload_path']);
 
             if ($this->upload->do_upload('file')) {
                 $uploadData = $this->upload->data();
@@ -76,13 +76,13 @@ class Insert extends CI_Controller
             }
         }
 
-        if($jenis == 'Surat'){
+        if ($jenis == 'Surat') {
             $jenis = 1;
-        }else if($jenis == 'Email'){
+        } else if ($jenis == 'Email') {
             $jenis = 2;
-        }else if($jenis == 'Penawaran'){
+        } else if ($jenis == 'Penawaran') {
             $jenis = 3;
-        }else{
+        } else {
             $jenis = null;
         }
 
@@ -127,5 +127,85 @@ class Insert extends CI_Controller
         echo json_encode(array("status" => "success"));
     }
 
-    
+
+    public function suratKeluar()
+    {
+        var_dump($_POST);
+        // Ambil data dari POST request
+        $nomor = $this->input->post('nomorSurat');
+        $tanggal = $this->input->post('tanggal');
+        $jenis = $this->input->post('jenis');
+        $nomorSuratFisik = $this->input->post('nomorSuratFisik');
+        $tanggalSurat = $this->input->post('tanggalSurat');
+        $hal = $this->input->post('hal');
+        $lampiran = $this->input->post('lampiran');
+        $keterangan = $this->input->post('keterangan');
+        $kodeRelasi = $this->input->post('kodeRelasi');
+        $namaPerson = $this->input->post('namaPerson');
+        $namaLembaga = $this->input->post('namaLembaga');
+        $alamat = $this->input->post('alamat');
+        $kota = $this->input->post('kota');
+        $propinsi = $this->input->post('propinsi');
+        $kodepos = $this->input->post('kodepos');
+
+
+        $filePath = null;
+        if (!empty($_FILES['file']['name'])) {
+            $config['upload_path'] = FCPATH . 'file/';
+            $config['allowed_types'] = 'pdf|jpg|png|docx';
+            $config['max_size'] = 2048;
+
+            $this->upload->initialize($config);
+            var_dump($config['upload_path']);
+
+            if ($this->upload->do_upload('file')) {
+                $uploadData = $this->upload->data();
+                $filePath = 'file/' . $uploadData['file_name'];
+                echo "Upload berhasil!";
+                var_dump($uploadData);
+            } else {
+                echo $this->upload->display_errors();
+            }
+        }
+
+        if ($jenis == 'Surat') {
+            $jenis = 1;
+        } else if ($jenis == 'Email') {
+            $jenis = 2;
+        } else if ($jenis == 'Penawaran') {
+            $jenis = 3;
+        } else {
+            $jenis = null;
+        }
+
+        // Data array untuk disimpan di database
+        $data = array(
+            'nomor' => $nomor,
+            'tanggal' => $tanggal,
+            'jenis' => $jenis,
+            'noSurat' => $nomorSuratFisik,
+            'tglSurat' => $tanggalSurat,
+            'hal' => $hal,
+            'lampiran' => $lampiran,
+            'keterangan' => $keterangan,
+            'relasiID' => $kodeRelasi,
+            'namaPerson' => $namaPerson,
+            'namaLembaga' => $namaLembaga,
+            'alamat' => $alamat,
+            'kota' => $kota,
+            'propinsi' => $propinsi,
+            'kodepos' => $kodepos,
+            'divisi' => isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '',
+            'createUserID' => isset($_SESSION['id_surat']) ? $_SESSION['id_surat'] : '',
+            'createDate' => date('Y-m-d H:i:s'),
+            'file' => $filePath
+
+        );
+
+        var_dump($data);
+
+        $this->Model->insertMasuk($data);
+
+        echo json_encode(array("status" => "success"));
+    }
 }

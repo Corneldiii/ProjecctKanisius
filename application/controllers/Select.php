@@ -18,7 +18,11 @@ class Select extends CI_Controller {
     }
     public function getAllData(){
         $data = $this->Model->getDataUser(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '')->result_array();
-        // var_dump($data);
+        echo json_encode($data); 
+    }
+
+    public function getAllDataKeluar(){
+        $data = $this->Model->getSuratKeluar(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '')->result_array();
         echo json_encode($data); 
     }
 

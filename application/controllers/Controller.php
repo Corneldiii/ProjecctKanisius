@@ -18,7 +18,7 @@ class Controller extends CI_Controller
         $this->load->config('email');
         $this->load->library('email');
         $this->load->database();
-    }   
+    }
 
     public function login()
     {
@@ -93,19 +93,19 @@ class Controller extends CI_Controller
     public function menu()
     {
         $data['kodeDiv'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
-        $this->load->view('header',$data);
+        $this->load->view('header', $data);
         $this->load->view('menu');
     }
     public function input()
     {
-        $data['divisi'] = $this->Model->get_divisi(); 
+        $data['divisi'] = $this->Model->get_divisi();
         $data['kodeDiv'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
-        $data['noFinal'] = $this->Model->getNoSurat();
-        $data['kodeForm'] = $this->Model->getCount();
+        $data['noFinal'] = $this->Model->getNoSurat(1);
+        $data['kodeForm'] = $this->Model->getCount(1);
 
         // var_dump($this->Model->getCount());
 
-        $this->load->view('header',$data);
+        $this->load->view('header', $data);
         $this->load->view('insert', $data);
     }
 
@@ -119,32 +119,41 @@ class Controller extends CI_Controller
     public function menuKeluar()
     {
         $data['kodeDiv'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
-        $this->load->view('header',$data);
+        $this->load->view('header', $data);
         $this->load->view('menuKeluar');
     }
     public function inputKeluar()
     {
+        $data['divisi'] = $this->Model->get_divisi();
         $data['kodeDiv'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
-        $this->load->view('header',$data);
-        $this->load->view('insertKeluar');
+        $data['noFinal'] = $this->Model->getNoSurat(2);
+        $data['kodeForm'] = $this->Model->getCount(2);
+
+        // var_dump($this->Model->getCount());
+
+        $this->load->view('header', $data);
+        $this->load->view('insertKeluar', $data);
     }
 
-     // http://localhost/surat/memo
+    // http://localhost/surat/memo
     public function memo()
     {
         $data['kodeDiv'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
-        $this->load->view('header',$data);  // Load header (opsional)
+        $this->load->view('header', $data);  // Load header (opsional)
         $this->load->view('memo');  // Load view memo dengan data memo
-        
+
     }
 
     public function inputMemo()
     {
-        
+        $data['divisi'] = $this->Model->get_divisi();
         $data['kodeDiv'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
-        $this->load->view('header',$data);  // Load header (opsional)
-        $this->load->view('inputMemo');  // Load view memo dengan data memo
-        
+        $data['noFinal'] = $this->Model->getNoSurat(3);
+        $data['kodeForm'] = $this->Model->getCount(3);
+
+        // var_dump($this->Model->getCount());
+
+        $this->load->view('header', $data);
+        $this->load->view('inputMemo', $data);
     }
-    
 }

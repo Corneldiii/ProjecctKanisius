@@ -1,19 +1,11 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-// if (!isset($_SESSION["id_surat"])) { //jika tidak ada id
-//    $this->session->set_flashdata('type', 'alert-danger');
-//    $this->session->set_flashdata('pesan', '<strong>Error!</strong> Anda harus login terlebih dahulu');
-//    redirect();
-//    exit;
-// }
-
 ?>
 <!-- untuk daftar menu dst, cek header.php-->
 
 <!-- Bootstrap Icons Library -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
-
 
 <div id="content-wrapper" class="d-flex flex-column">
 
@@ -29,13 +21,146 @@ defined('BASEPATH') or exit('No direct script access allowed');
             </ul>
         </nav>
 
-        <div class="container-fluid">
-            
+        <div id="overlay"></div>
 
+        <div id="spinner" class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+
+        <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000" style="position: fixed; top: 20px; right: 20px;">
+            <div class="toast-header">
+                <strong class="mr-auto text-success">Sukses</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                Data berhasil disimpan!
+            </div>
+        </div>
+
+        <div id="errorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000" style="position: fixed; top: 20px; right: 20px;">
+            <div class="toast-header">
+                <strong class="mr-auto text-danger">Error</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body" id="errorToastBody">
+            </div>
+        </div>
+
+
+        <div class="container-fluid">
+
+            <style>
+                /* Modal Tabel */
+
+                /* Atur tabel agar mengikuti lebar modal */
+                .table-fixed {
+                    width: 100%;
+                    table-layout: fixed;
+                    border-collapse: collapse;
+                }
+
+                /* Header Tabel */
+                .table-fixed thead th {
+                    background-color: #4CAF50;
+                    color: white;
+                    font-weight: bold;
+                    text-align: center;
+                    padding: 12px;
+                    font-size: 14px;
+                    border: 1px solid #ddd;
+                    box-sizing: border-box;
+                }
+
+                /* Kolom Tabel dengan min-width */
+                .table-fixed th,
+                .table-fixed td {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    padding: 10px;
+                    font-size: 12px;
+                    border: 1px solid #ddd;
+                    box-sizing: border-box;
+                    min-width: 50px;
+                    /* Lebar minimum */
+                }
+
+                /* Tentukan lebar kolom untuk setiap kolom */
+                .table-fixed th:nth-child(1),
+                .table-fixed td:nth-child(1) {
+                    width: 5%;
+                    min-width: 40px;
+                }
+
+                .table-fixed th:nth-child(2),
+                .table-fixed td:nth-child(2) {
+                    width: 10%;
+                    min-width: 80px;
+                }
+
+                .table-fixed th:nth-child(3),
+                .table-fixed td:nth-child(3) {
+                    width: 20%;
+                    min-width: 120px;
+                }
+
+                .table-fixed th:nth-child(4),
+                .table-fixed td:nth-child(4) {
+                    width: 20%;
+                    min-width: 120px;
+                }
+
+                .table-fixed th:nth-child(5),
+                .table-fixed td:nth-child(5) {
+                    width: 20%;
+                    min-width: 120px;
+                }
+
+                .table-fixed th:nth-child(6),
+                .table-fixed td:nth-child(6) {
+                    width: 10%;
+                    min-width: 80px;
+                }
+
+                .table-fixed th:nth-child(7),
+                .table-fixed td:nth-child(7) {
+                    width: 10%;
+                    min-width: 80px;
+                }
+
+                .table-fixed th:nth-child(8),
+                .table-fixed td:nth-child(8) {
+                    width: 10%;
+                    min-width: 80px;
+                }
+
+                /* Warna alternatif dan hover */
+                .table-fixed tbody tr:nth-child(even) {
+                    background-color: #f9f9f9;
+                }
+
+                .table-fixed tbody tr:hover {
+                    background-color: #e9ecef;
+                }
+
+                /* Responsif */
+                @media (max-width: 768px) {
+
+                    .table-fixed th,
+                    .table-fixed td {
+                        font-size: 10px;
+                        padding: 6px;
+                    }
+                }
+            </style>
 
 
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Input/Koreksi Surat Keluar</h1>
+                <h1 class="h3 mb-0 text-gray-800">Insert Surat Masuk</h1>
             </div>
 
             <!-- Alert untuk "set_flashdata", biarkan saja -->
@@ -47,176 +172,271 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             <?= $_SESSION['pesan'] ?>
 
                         </div>
-                        <?php unset($_SESSION['pesan']);
+                    <?php unset($_SESSION['pesan']);
                     } ?>
                 </div>
             </div>
 
             <!-- form input surat dari admin sekretaris (start) -->
 
-            <form class="user" action="<?= site_url("insert") ?>" method="post">
+            <form class="user" id="insertMasuk" action="<?= site_url("insert") ?>" method="post">
                 <div class="form-group row">
                     <div class="col-8">
+                        <!-- Header Section -->
                         <div class="header p-3">
-                            <div class="form-group row mb-2">
-                                <label for="nomor" class="col-sm-3 col-form-label">Nomor</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control text-left" id="nomor" value="1" readonly
-                                        style="width: 50%;">
-                                </div>
+                            <div class="form-group d-flex align-items-center">
+                                <label for="nomor" class="mr-2" style="width: 125px;">Nomor</label>
+                                <input type="text" style="width: 200px;" class="form-control text-center" name="nomor" id="nomor" readonly>
                             </div>
-                            <div class="form-group row mb-2">
-                                <label for="tanggal" class="col-sm-3 col-form-label">Tanggal Input</label>
-                                <div class="col-sm-9">
-                                    <input type="date" class="form-control text-left" id="tanggal" style="width: 50%;">
-                                </div>
+                            <div class="form-group d-flex align-items-center">
+                                <label for="tanggal" class="mr-2" style="width: 125px;">Tanggal Input</label>
+                                <input type="date" style="width: 200px;" class="form-control text-center" name="tanggal" id="tanggal">
                             </div>
-                            <div class="form-group row mb-2">
-                                <label for="jenis" class="col-sm-3 col-form-label">Jenis Surat</label>
-                                <div class="col-sm-9">
-                                    <select class="form-control" id="jenis" style="width: 50%;">
-                                        <option>Surat</option>
-                                        <option>Email</option>
-                                        <option>Penawaran</option>
-                                    </select>
-                                </div>
+                            <div class="form-group d-flex align-items-center">
+                                <label for="jenis" class="mr-2" style="width: 125px;">Jenis Surat</label>
+                                <select class="form-control" style="width: 200px;" id="jenis" name="jenis">
+                                    <option>Surat</option>
+                                    <option>Email</option>
+                                    <option>Penawaran</option>
+                                </select>
                             </div>
                         </div>
-                        <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
-                        <div class="header p-3">
-                            <div class="form-group row mb-2">
-                                <label for="nomorSurat" class="col-sm-3 col-form-label">Nomor Surat</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control text-left" id="nomorSurat"
-                                        placeholder="Nomor Fisik Surat" style="width: 50%;">
-                                </div>
-                            </div>
-                            <div class="form-group row mb-2">
-                                <label for="tanggalSurat" class="col-sm-3 col-form-label">Tanggal Fisik Surat</label>
-                                <div class="col-sm-9">
-                                    <input type="date" class="form-control text-left" id="tanggalSurat"
-                                        style="width: 50%;">
-                                </div>
-                            </div>
-                            <div class="form-group row mb-2">
-                                <label for="hal" class="col-sm-3 col-form-label">Hal</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control text-left" id="hal"
-                                        placeholder="Perihal Surat" style="width: 50%;">
-                                </div>
-                            </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="custom-file d-flex justify-content-center align-items-center">
+                            <input type="file" class="custom-file-input" name="file" id="customFile" style="cursor: pointer;">
+                            <label class="custom-file-label d-flex justify-content-left align-items-center w-75" for="customFile" style="cursor: pointer;">Masukan File</label>
                         </div>
                     </div>
                 </div>
 
+
+                <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
+
+                <div class="header p-3">
+                    <div class="form-group d-flex align-items-center">
+                        <label for="nomorSurat" class="mr-2" style="width: 150px;">Nomor Surat</label>
+                        <input type="text" class="form-control text-left w-25" name="nomorSurat" id="nomorSurat" placeholder="Nomor Surat" readonly>
+                    </div>
+                    <div class="form-group d-flex align-items-center">
+                        <label for="nomorSuratFisik" class="mr-2" style="width: 150px;">Nomor Fisik Surat</label>
+                        <input type="text" class="form-control text-left w-25" name="nomorSuratFisik" id="nomorSuratFisik" placeholder="Nomor Fisik Surat">
+                    </div>
+                    <div class="form-group d-flex align-items-center">
+                        <label for="tanggalSurat" class="mr-2" style="width: 150px;">Tanggal Fisik Surat</label>
+                        <input type="date" class="form-control text-left w-25" name="tanggalSurat" id="tanggalSurat">
+                    </div>
+                </div>
 
                 <div class="row">
-                    <div class="col-8">
+                    <div class="col p-4">
                         <div class="input-lanjutan">
-                            <div class="header p-3">
-                                <div class="form-group row mb-2">
-                                    <label for="lampiran" class="col-sm-3 col-form-label">Lampiran</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control text-left" id="lampiran"
-                                            placeholder="Lampiran">
+                            <div class="form-group d-flex align-items-center">
+                                <label for="hal" style="width: 145px;">Hal</label>
+                                <input type="text" class="form-control text-left w-50" name="hal" id="hal" placeholder="Perihal Surat">
+                            </div>
+                            <div class="form-group d-flex align-items-center">
+                                <label for="lampiran" style="width: 145px;">Lampiran</label>
+                                <input type="text" class="form-control text-left w-50" name="lampiran" id="lampiran" placeholder="Lampiran">
+                            </div>
+                            <div class="form-group d-flex align-items-center">
+                                <label for="keterangan" style="width: 145px;">Deskripsi</label>
+                                <textarea class="form-control text-left w-50" id="keterangan" name="keterangan" rows="4" placeholder="Ringkasan Isi Surat"></textarea>
+                            </div>
+
+                            <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
+
+                            <div class="form-group d-flex align-items-center">
+                                <label for="namaPerson" class="mr-2" style="width: 135px;">Cari Nama/Kode Relasi</label>
+                                <div class="input-group" style="width: 300px;">
+                                    <input type="text" class="form-control text-left" name="namaPerson" id="namaPerson" placeholder="Nama/Kode Relasi">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-secondary" id="searchPerson" type="button" data-toggle="modal" data-target="#modalRelasi">Cari</button>
                                     </div>
                                 </div>
-                                <div class="form-group d-flex flex-column mb-2">
-                                    <label for="keterangan" class="col-form-label">Deskripsi:</label>
-                                    <textarea class="form-control text-left" id="keterangan" name="description" rows="4"
-                                        placeholder="Ringksan Isi Surat"></textarea>
-                                </div>
-                                <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;">
-                                </div>
-                                <div class="form-group row mb-2">
-                                    <label for="kodeRelasi" class="col-sm-3 col-form-label">Kode Relasi</label>
-                                    <div class="col-sm-9">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control text-left" id="kodeRelasi"
-                                                placeholder="Kode Relasi" readonly>
-                                            <div id="kodeRelasiList" class="list-group overflow-hidden"></div>
+                            </div>
+
+
+                            <!-- Gagal setelah search -->
+                            <!-- <div class="modal fade" id="modalRelasi" tabindex="-1" aria-labelledby="modalRelasiLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modalRelasiLabel">Daftar Personel</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+
+                                        <div class="modal-body w-100">
+                                            <table id="tabel" class="display nowrap table table-striped table-bordered" style="width:100%">
+                                                </thead style="color: black;">
+                                                <tr>
+                                                    <th style="width:10px" class="text-center align-middle">No</th>
+                                                    <th class="text-center align-middle">Milist ID</th>
+                                                    <th class="text-center align-middle">Nama</th>
+                                                    <th class="text-center align-middle">Lembaga</th>
+                                                    <th class="text-center align-middle">Alamat</th>
+                                                    <th class="text-center align-middle">Nama Kota</th>
+                                                    <th class="text-center align-middle">Kode Pos</th>
+                                                    <th class="text-center align-middle">Provinsi</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="tbody" name="tbody" style="color: black;">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Save changes</button>
                                         </div>
                                     </div>
+
+
                                 </div>
-                                <div class="form-group row mb-2">
-                                    <label for="namaPerson" class="col-sm-3 col-form-label">Nama</label>
-                                    <div class="col-sm-9">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control text-left" id="namaPerson"
-                                                placeholder="Nama person">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-secondary" id="searchPerson"
-                                                    type="button">Cari</button>
+                            </div> -->
+
+                            <!-- Gagal sebelum search -->
+                            <!-- <div class="modal fade" id="modalRelasi" tabindex="-1" aria-labelledby="modalRelasiLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modalRelasiLabel">Judul Modal</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                                        </div>
+                                        <div class="modal-body w-100">
+                                            <table id="tabel" class="display nowrap table-fixed" style="width:100%">
+                                                <thead style="color: black;">
+                                                    <tr>
+                                                        <th class="text-center align-middle">No</th>
+                                                        <th class="text-center align-middle">Milist ID</th>
+                                                        <th class="text-center align-middle">Nama</th>
+                                                        <th class="text-center align-middle">Lembaga</th>
+                                                        <th class="text-center align-middle">Alamat</th>
+                                                        <th class="text-center align-middle">Nama Kota</th>
+                                                        <th class="text-center align-middle">Kode Pos</th>
+                                                        <th class="text-center align-middle">Provinsi</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tbody" name="tbody" style="color: black; font-size: 12px;"> Data will be populated here </tbody>
+                             </table>
+                                        </div>
+                                        <div class="modal-footer"> <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> <button type="button" class="btn btn-primary">Save changes</button> </div>
+                                    </div>
+                                </div>
+                            </div> -->
+
+
+                            <!-- Modal baru judul eror-->
+                            <div class="modal fade" id="modalRelasi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <div class="table-responsive">
+                                                <table id="tabel" class="display nowrap table table-striped table-bordered table-fixed text-nowrap" style="width:100%">
+                                                    <thead style="color: black;">
+                                                        <tr>
+                                                            <th class="text-center align-middle">Milist ID</th>
+                                                            <th class="text-center align-middle">Nama</th>
+                                                            <th class="text-center align-middle">Lembaga</th>
+                                                            <th class="text-center align-middle">Alamat</th>
+                                                            <th class="text-center align-middle">Nama Kota</th>
+                                                            <th class="text-center align-middle">Kode Pos</th>
+                                                            <th class="text-center align-middle">Provinsi</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="tbody" name="tbody" style="color: black; font-size: 12px;">
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row mb-2">
-                                    <label for="namaLembaga" class="col-sm-3 col-form-label">Lembaga</label>
-                                    <div class="col-sm-9">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control text-left" id="namaLembaga"
-                                                placeholder="Nama Lembaga">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-secondary" id="searchLembaga"
-                                                    type="button">Cari</button>
-                                            </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group row mb-2">
-                                    <label for="alamat" class="col-sm-3 col-form-label">Alamat</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control text-left" id="alamat"
-                                            placeholder="Alamat" readonly style="height: 80px;"readonly >
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col">
-                                        <div class="form-group row mb-2">
-                                            <label for="kota" class="col-sm-3 col-form-label">Kota</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control text-left" id="kota"
-                                                    placeholder="Kota" readonly>
+                            </div>
+
+                            <!-- tampilan modal eror judul sudah sesuai -->
+                            <!-- <div class="modal fade" id="modalRelasi" tabindex="-1" aria-labelledby="modalRelasiLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="table-responsive">
+                                                <table id="tabel" class="display nowrap table table-striped table-bordered table-fixed text-nowrap" style="width:100%">
+                                                    </thead style="color: black;">
+                                                    <tr>
+                                                        <th class="text-center align-middle">No</th>
+                                                        <th class="text-center align-middle">Milist ID</th>
+                                                        <th class="text-center align-middle">Nama</th>
+                                                        <th class="text-center align-middle">Lembaga</th>
+                                                        <th class="text-center align-middle">Alamat</th>
+                                                        <th class="text-center align-middle">Nama Kota</th>
+                                                        <th class="text-center align-middle">Kode Pos</th>
+                                                        <th class="text-center align-middle">Provinsi</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody id="tbody" name="tbody" style="color: black; font-size:12px">
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-group row mb-2">
-                                            <label for="propinsi" class="col-sm-3 col-form-label">Provinsi</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control text-left" id="propinsi"
-                                                    placeholder="Propinsi" readonly>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-group row mb-2">
-                                            <label for="kodepos" class="col-sm-3 col-form-label">Kodepos</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control text-left" id="kodepos"
-                                                    placeholder="Kodepos" readonly>
-                                            </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;">
+                            </div> -->
+
+
+                            <div class="header">
+                                <div class="form-group d-flex align-items-center">
+                                    <label for="kodeRelasi" style="width: 140px;">Kode Relasi</label>
+                                    <input type="text" class="form-control w-25 text-left" name="kodeRelasi" id="kodeRelasi" placeholder="kode Rlasi" readonly>
                                 </div>
+                                <div class="form-group d-flex align-items-center">
+                                    <label for="nsmsLembaga" style="width: 140px;">Nama Lembaga</label>
+                                    <input type="text" class="form-control w-25 text-left" name="namaLembaga" id="namaLembaga" placeholder="Nama Lembaga" readonly>
+                                </div>
+                                <div class="form-group d-flex align-items-center">
+                                    <label for="alamat" style="width: 140px;">Alamat</label>
+                                    <input type="text" class="form-control w-25 text-left" name="alamat" id="alamat" placeholder="Alamat" readonly>
+                                </div>
+                            </div>
+
+                            <div class="header">
+                                    <div class="form-group d-flex align-items-center">
+                                        <label for="kota" class="mr-2" style="width: 130px;">Kota</label>
+                                        <input type="text" class="form-control w-25" name="kota" id="kota" placeholder="Kota" readonly>
+                                    </div>
+                                    <div class="form-group d-flex align-items-center">
+                                        <label for="propinsi" class="mr-2" style="width: 130px;">Propinsi</label>
+                                        <input type="text" class="form-control w-25" name="propinsi" id="propinsi" placeholder="Propinsi" readonly>
+                                    </div>
+                                    <div class="form-group d-flex align-items-center">
+                                        <label for="kodepos" class="mr-2" style="width: 130px;">Kodepos</label>
+                                        <input type="text" class="form-control w-25" name="kodepos" id="kodepos" placeholder="Kodepos" readonly>
+                                    </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="form-group text-start mt-3">
-                    <input type="file" id="customFile" style="display: none;">
-                    <label for="customFile" class="btn btn-sm px-4"
-                        style="background-color: #4B5320; color: white; cursor: pointer;">
-                        <i class="bi bi-file-earmark-plus"></i>
-                        <span> Sisipkan File</span>
-                    </label>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary w-100 mt-4">Submit</button>
             </form>
-
 
             <!-- form insert (end) -->
 
@@ -260,180 +480,251 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <script>
     // gunakan Javascript dan jQuery
 
-    $(document).ready(function () { // jika jalaman web selesai diload, maka jalankan script ini
+    $(document).ready(function() {
         $('#menuMenu').trigger('click');
 
-        //getContoh1();
 
-        $('#tabel').DataTable({
-            "scrollX": true,
+        $("#tbody").html(html);
+        $("#tabel").DataTable({
             "select": true,
-            "bSort": false
-        });
-    });
-
-
-    $(document).ready(function () {
-        // Saat tombol Cari diklik (untuk nama person)
-        $('#searchPerson').on('click', function () {
-            var namaPerson = $('#namaPerson').val();
-            var namaLembaga = $('#namaLembaga').val();
-
-            if (namaPerson.length > 0 || namaLembaga.length > 0) {
-                $.ajax({
-                    url: "<?php echo site_url('Controller/searchKodeRelasi'); ?>",
-                    method: "POST",
-                    data: {
-                        person: namaPerson,
-                        lembaga: namaLembaga
-                    },
-                    dataType: "json", // Mengharapkan respons JSON
-                    success: function (data) {
-                        $('#kodeRelasiList').empty(); // Bersihkan list sebelumnya
-
-                        if (data.length > 0) {
-                            $.each(data, function (index, item) {
-                                $('#kodeRelasiList').append(
-                                    '<a href="#" class="list-group-item list-group-item-action" data-id="' + item.milistId + '" data-nama="' + item.namaPerson + '" data-lembaga="' + item.lembaga + '" data-alamat="' + item.alamat + '" data-kota="' + item.kota + '" data-propinsi="' + item.propinsi + '" data-kodepos="' + item.kodepos + '">' +
-                                    item.milistId + ' - ' + item.namaPerson +
-                                    '</a>'
-                                );
-                            });
-                        } else {
-                            $('#kodeRelasiList').append('<li class="list-group-item">No Results Found</li>');
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        console.error('AJAX Error:', error);
-                        console.error('Response Text:', xhr.responseText);
-                    }
-                });
-            } else {
-                $('#kodeRelasiList').html(''); // Kosongkan jika input kosong
-            }
+            "scrollX": true,
+            "bSort": false,
+            "scrollY": '427px',
+            "scrollCollapse": true,
         });
 
-        // Saat tombol Cari diklik (untuk nama lembaga)
-        $('#searchLembaga').on('click', function () {
-            var namaPerson = $('#namaPerson').val();
-            var namaLembaga = $('#namaLembaga').val();
 
-            if (namaPerson.length > 0 || namaLembaga.length > 0) {
-                $.ajax({
-                    url: "<?php echo site_url('Controller/searchKodeRelasi'); ?>",
-                    method: "POST",
-                    data: {
-                        person: namaPerson,
-                        lembaga: namaLembaga
-                    },
-                    dataType: "json", // Mengharapkan respons JSON
-                    success: function (data) {
-                        $('#kodeRelasiList').empty(); // Bersihkan list sebelumnya
+        $('#tabel tbody').on('click', 'tr', function() {
+            var milistId = $(this).find('td').eq(0).text();
+            var namaPerson = $(this).find('td').eq(1).text();
+            var alamat = $(this).find('td').eq(3).text();
+            var kota = $(this).find('td').eq(4).text();
+            var kodepos = $(this).find('td').eq(5).text();
+            var propinsi = $(this).find('td').eq(6).text();
+            var namaLembaga = $(this).find('td').eq(2).text();
 
-                        if (data.length > 0) {
-                            $.each(data, function (index, item) {
-                                $('#kodeRelasiList').append(
-                                    '<a href="#" class="list-group-item list-group-item-action" data-id="' + item.milistId + '" data-nama="' + item.namaPerson + '" data-lembaga="' + item.lembaga + '" data-alamat="' + item.alamat + '" data-kota="' + item.kota + '" data-propinsi="' + item.propinsi + '" data-kodepos="' + item.kodepos + '">' +
-                                    item.milistId + ' - ' + item.namaPerson +
-                                    '</a>'
-                                );
-                            });
-                        } else {
-                            $('#kodeRelasiList').append('<li class="list-group-item">No Results Found</li>');
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        console.error('AJAX Error:', error);
-                        console.error('Response Text:', xhr.responseText);
-                    }
-                });
-            } else {
-                $('#kodeRelasiList').html(''); // Kosongkan jika input kosong
-            }
-        });
-
-        // Saat user klik salah satu hasil dari list
-        $(document).on('click', '.list-group-item', function (e) {
-            e.preventDefault(); // Mencegah tindakan default link <a>
-
-            console.log($(this).data());
-            // Ambil data dari atribut 'data-'
-            var milistId = $(this).data('id');
-            var namaPerson = $(this).data('nama');
-            var lembaga = $(this).data('namaLembaga');
-            var alamat = $(this).data('alamat');
-            var kota = $(this).data('kotanama');
-            var propinsi = $(this).data('propNama');
-            var kodepos = $(this).data('kodepos');
-
-            // Isi form input dengan data yang dipilih
-            $('#kodeRelasi').val(milistId);
             $('#namaPerson').val(namaPerson);
-            $('#namaLembaga').val(lembaga);
+            $('#kodeRelasi').val(milistId);
             $('#alamat').val(alamat);
             $('#kota').val(kota);
-            $('#propinsi').val(propinsi);
             $('#kodepos').val(kodepos);
+            $('#propinsi').val(propinsi);
+            $('#namaLembaga').val(namaLembaga);
 
-            // Kosongkan list setelah memilih
-            $('#kodeRelasiList').html('');
+            $('#modalRelasi').modal('hide');
+        });
+    });
+
+    var no = 1;
+    var html = '';
+
+
+    $(document).ready(function() {
+        $('#searchPerson').on('click', function() {
+            var namaPerson = $('#namaPerson').val();
+            var namaLembaga = $('#namaLembaga').val();
+
+            if (namaPerson.length > 0 || namaLembaga.length > 0) {
+                $.ajax({
+                    url: "<?php echo site_url('Controller/searchKodeRelasi'); ?>",
+                    method: "POST",
+                    data: {
+                        person: namaPerson
+                    },
+                    beforeSend: function() {
+                        console.log("msauk");
+                        $("#spinner, #overlay").show();
+                    },
+                    dataType: "json",
+                    success: function(data) {
+                        $('#kodeRelasiList').empty();
+
+
+                        if (data.length > 0) {
+                            $.each(data, function(index, item) {
+                                html += '<tr>';
+                                html += '<td class="text-center align-middle" style="cursor:pointer;">' + (item.milistId ? item.milistId : '-') + '</td>';
+                                html += '<td class="text-center align-middle" style="cursor:pointer;">' + (item.namaPerson ? item.namaPerson : '-') + '</td>';
+                                html += '<td class="text-center align-middle" style="cursor:pointer;">' + (item.namaLembaga ? item.namaLembaga : '-') + '</td>';
+                                html += '<td class="text-center align-middle" style="cursor:pointer;">' + (item.alamat ? item.alamat : '-') + '</td>';
+                                html += '<td class="text-center align-middle" style="cursor:pointer;">' + (item.kotanama ? item.kotanama : '-') + '</td>';
+                                html += '<td class="text-center align-middle" style="cursor:pointer;">' + (item.kodepos ? item.kodepos : '-') + '</td>';
+                                html += '<td class="text-center align-middle" style="cursor:pointer;">' + (item.pronama ? item.pronama : '-') + '</td>';
+
+                                html += '</tr>';
+
+                                no++;
+                            });
+                            $("#tbody").html(html);
+
+                        } else {
+                            $('#kodeRelasiList').append('<li class="list-group-item">No Results Found</li>');
+                        }
+                    },
+                    complete: function() {
+                        $("#spinner, #overlay").hide();
+                        $('#tabel').DataTable().destroy();
+
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('AJAX Error:', error);
+                        console.error('Response Text:', xhr.responseText);
+                    }
+                });
+            } else {
+                $('#kodeRelasiList').html('');
+            }
+        });
+
+
+        // $(document).on('click', '.list-group-item', function(e) {
+        //     e.preventDefault();
+
+        //     console.log($(this).data());
+        //     var milistId = $(this).data('id');
+        //     var namaPerson = $(this).data('nama');
+        //     var lembaga = $(this).data('namaLembaga');
+        //     var alamat = $(this).data('alamat');
+        //     var kota = $(this).data('kotanama');
+        //     var propinsi = $(this).data('propNama');
+        //     var kodepos = $(this).data('kodepos');
+
+        //     $('#kodeRelasi').val(milistId);
+        //     $('#namaPerson').val(namaPerson);
+        //     $('#namaLembaga').val(lembaga);
+        //     $('#alamat').val(alamat);
+        //     $('#kota').val(kota);
+        //     $('#propinsi').val(propinsi);
+        //     $('#kodepos').val(kodepos);
+        //     $('#kodeRelasiList').html('');
+
+
+        // });
+    });
+
+    function getPersons(dispoNumber) {
+        var divisiID = document.getElementById('dispoDivisi' + dispoNumber).value;
+
+        if (divisiID) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '<?= base_url("get-persons/") ?>' + encodeURIComponent(divisiID), true);
+            xhr.onload = function() {
+                if (this.status === 200) {
+                    console.log(this.responseText);
+                    try {
+                        var persons = JSON.parse(this.responseText);
+                        console.log(persons);
+
+                        var select = document.getElementById('dispoNoreg' + dispoNumber);
+                        select.innerHTML = '<option value="">Pilih Person</option>';
+
+                        persons.forEach(function(person) {
+                            var option = document.createElement('option');
+                            option.value = person.userId;
+                            option.text = person.userNama;
+                            select.appendChild(option);
+                        });
+                    } catch (e) {
+                        console.error('Error parsing JSON:', e);
+                    }
+                } else {
+                    console.error('Error fetching persons:', this.statusText);
+                }
+            };
+
+            xhr.onerror = function() {
+                console.error('Request failed');
+            };
+            xhr.send();
+        } else {
+            document.getElementById('dispoNoreg' + dispoNumber).innerHTML = '<option value="">Pilih Person</option>';
+        }
+    }
+
+    $(document).ready(function() {
+        var kode = '2';
+        var divisi = '<?php echo $kodeDiv; ?>';
+        console.log(divisi);
+        var noFinal = '<?php echo ($noFinal === '0000') ? $noFinal = '0001' : str_pad($noFinal + 1, 4, "0", STR_PAD_LEFT); ?>';
+        var Tahun = new Date().getFullYear().toString().substring(2);
+        var urut = noFinal !== '' ? noFinal : '0001';
+        console.log(urut);
+
+        var kodeForm = '<?php echo $kodeForm + 1 ?>';
+        console.log(kodeForm + 'cek');
+        $('#nomor').val(kodeForm);
+
+        var tanggalInput = new Date().toISOString().split('T')[0];
+        $('#tanggal').val(tanggalInput);
+
+        var kodeSurat = kode + Tahun + divisi + urut;
+        console.log(kodeSurat);
+        $('#nomorSurat').val(kodeSurat);
+
+    });
+
+
+
+    $(document).ready(function() {
+        $('#insertMasuk').on('submit', function(event) {
+            event.preventDefault();
+            var kode = $('#nomorSurat').val();
+            var perihal = $('#hal').val();
+
+            var formData = new FormData(this);
+            var isEmpty = false;
+
+            formData.forEach((value, key) => {
+                if (typeof value === 'string' && !value.trim()) {
+                    isEmpty = true;
+                }
+            });
+
+            if (isEmpty) {
+                $('#errorToastBody').text('Harap isi semua field sebelum mengirim data.');
+                $('#errorToast').toast('show');
+            } else {
+                $.ajax({
+                    url: '<?= site_url("Insert/insert_data") ?>',
+                    method: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+
+
+                        $.ajax({
+                            url: '<?= site_url("FonnteController/kirimPesan") ?>',
+                            method: 'POST',
+                            data: {
+                                message: "Anda memiliki surat masuk baru dengan kode (" + kode + ") perihal " + perihal,
+                                url: 'http://surat.test/'
+                            },
+                            success: function(response) {
+                                $('#successToast').toast('show');
+                                setTimeout(function() {
+                                    location.reload();
+                                }, 1000);
+                            },
+                            error: function(xhr, status, error) {
+                                console.error('Error saat mengirim pesan:', error);
+                                $('#errorToastBody').text('Terjadi kesalahan saat mengirim pesan: ' + (xhr.responseText || error));
+                                $('#errorToast').toast('show');
+                            }
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error saat menyimpan data:', error);
+                        $('#errorToastBody').text('Terjadi kesalahan saat menyimpan data: ' + (xhr.responseText || error));
+                        $('#errorToast').toast('show');
+                    }
+                });
+            }
         });
     });
 
 
-    // menggunakan AJAX untuk membuat tabel dari data tabel
-    // AJAX (View) -> Controller -> Model -> dapat hasil
 
-    // var html = '';
-    // var no = 1;
-
-    // $.ajax({
-    //     url: "<?php echo base_url('Select/getAllData'); ?>",
-    //     method: "GET",
-    //     dataType: "JSON",
-    //     async: false,
-    //     success: function(data) {
-    //         for (var i = 0; i < data.length; i++) {
-
-    //             html += '<tr>';
-    //             html += '<td class="text-center align-middle">' + no + '</td>';
-    //             html += '<td class="text-center align-middle"><img src="' + data[i].pict_surat + '" alt="Gambar Surat" style="width: 100px; height: auto;"></td>';
-    //             html += '<td class="text-center align-middle">' + data[i].title + '</td>';
-    //             html += '<td class="text-center align-middle">' + data[i].description + '</td>';
-    //             html += '<td class="text-center align-middle">' +
-    //                 (data[i].status == 0 ?
-    //                     'Tertunda <td class="text-center align-middle"><button type="button" class="btn btn-primary btn-kirim" data-id="' + data[i].id + '">Kirim</button></td>' :
-    //                     'Terkirim <td class="text-center align-middle"> - </td>'
-    //                 ) + '</td>';
-    //             // html += '<td><button type="button" class="btn btn-danger">Hapus</button></td>';
-    //             html += '</tr>';
-
-    //             no++;
-    //         }
-    //         $("#tbody").html(html);
-    //     }
-    // });
-
-    // $(document).on('click', '.btn-kirim', function() {
-    //     var id = $(this).data('id'); 
-    //     var button = $(this);
-
-    //     $.ajax({
-    //         url: '<?php echo base_url('Controller/sendEmail'); ?>', 
-    //         type: 'POST',
-    //         data: {
-    //             id: id
-    //         },
-    //         success: function(response) {
-    //             console.log(response);
-    //             alert('Email berhasil dikirim!');
-    //             button.closest('td').html('Terkirim <td class="text-center align-middle"> - </td>');
-    //         },
-    //         error: function(xhr, status, error) {
-    //             alert('Gagal mengirim email: ' + xhr.responseText);
-    //         }
-    //     });
-    // });
 
 
     // kalau butuh input dari user
@@ -452,7 +743,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             method: "POST",
             dataType: "JSON",
             async: false,
-            success: function (data) {
+            success: function(data) {
                 for (var i = 0; i < data.length; i++) {
 
                     html += '<tr>';
@@ -468,8 +759,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
             }
         });
     }
-</script>
 
+    // Tanggal otomatis
+    document.addEventListener('DOMContentLoaded', (event) => {
+        let today = new Date().toISOString().substr(0, 10);
+        document.querySelector("#tanggal").value = today;
+    });
+</script>
 </body>
 
 </html>

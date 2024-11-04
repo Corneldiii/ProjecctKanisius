@@ -29,15 +29,15 @@ ON divID=LEFT(pegLastDivId,2) WHERE a.userId='" . $username . "' AND a.userPass=
     }
 
     //contoh query biasa
-    public function getNoSurat()
+    public function getNoSurat($id)
     {
-        $query = "SELECT SUBSTR(NOMOR,6,9) AS nomorForm FROM tb_surat ORDER BY nomorForm DESC LIMIT 1";
+        $query = "SELECT SUBSTR(NOMOR,6,9) AS nomorForm FROM tb_surat WHERE LEFT(nomor,1)='". $id ."' ORDER BY nomorForm DESC LIMIT 1";
         $result = $this->db->query($query)->row();
         return $result ? (string)$result->nomorForm : '0000';
     }
 
-    public function getCount(){
-        $query = "SELECT COUNT(*) as count FROM tb_surat";
+    public function getCount($id){
+        $query = "SELECT COUNT(*) as count FROM tb_surat WHERE LEFT(nomor,1)='". $id ."' ";
         $result = $this->db->query($query)->row();
         return $result->count;
     }
@@ -52,7 +52,12 @@ ON divID=LEFT(pegLastDivId,2) WHERE a.userId='" . $username . "' AND a.userPass=
     public function getDataUser($kodeDivisi){
         $query = "SELECT nomor, Tanggal, noSurat, tglSurat, relasiID, namaPerson, namaLembaga, hal, lampiran, keterangan FROM 
                     tb_surat WHERE LEFT(nomor,1)='1' AND (divisi='" . $kodeDivisi . "' OR dispoDivisi1 LIKE '" . $kodeDivisi . "%' OR dispoDivisi2 LIKE '" . $kodeDivisi . "%' 
-                    OR dispoDivisi3 LIKE '" . $kodeDivisi . "%' OR dispoDivisi4 LIKE '" . $kodeDivisi . "%' OR dispoDivisi5 LIKE '" . $kodeDivisi . "%') ORDER BY tanggal DESC";
+                    OR dispoDivisi3 LIKE '" . $kodeDivisi . "%' OR dispoDivisi4 LIKE '" . $kodeDivisi . "%' OR dispoDivisi5 LIKE '" . $kodeDivisi . "%') ORDER BY nomor DESC";
+        return $this->db->query($query);
+    }
+
+    public function getSuratKeluar($kodeDivisi){
+        $query = "SELECT nomor, Tanggal, noSurat, tglSurat, relasiID, namaPerson, namaLembaga, hal, lampiran, keterangan FROM tb_surat WHERE LEFT(nomor,1)='2' AND divisi='". $kodeDivisi ."' ORDER BY nomor DESC ";
         return $this->db->query($query);
     }
 

@@ -176,7 +176,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             for (var i = 0; i < data.length; i++) {
                 console.log(data);
                 html += '<tr>';
-                html += '<td class="text-center align-middle">' + no + '</td>';
+                html += '<td class="text-center align-middle">' + (data[i].nomor ? data[i].nomor : '-') + '</td>';
                 html += '<td class="text-center align-middle">' + (data[i].Tanggal ? data[i].Tanggal : '-') + '</td>';
                 html += '<td class="text-center align-middle">' + (data[i].noSurat ? data[i].noSurat : '-') + '</td>';
                 html += '<td class="text-center align-middle">' + (data[i].tglSurat ? data[i].tglSurat : '-') + '</td>';
