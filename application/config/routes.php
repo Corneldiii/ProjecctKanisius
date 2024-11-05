@@ -18,6 +18,7 @@ $route['searchId'] = 'Controller/searchKodeRelasi';
 $route['insertMasuk'] = 'Insert/insert_data';
 $route['memo'] = 'Controller/memo';
 $route['inputMemo'] = 'Controller/inputMemo';
+$route['detailMasuk'] = 'Controller/detailMasuk';
 
 
 $route['sendMessage'] = 'FonnteController/kirimPesan';

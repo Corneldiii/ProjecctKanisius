@@ -139,8 +139,8 @@ class Controller extends CI_Controller
     public function memo()
     {
         $data['kodeDiv'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
-        $this->load->view('header', $data);  // Load header (opsional)
-        $this->load->view('memo');  // Load view memo dengan data memo
+        $this->load->view('header', $data); 
+        $this->load->view('memo');
 
     }
 
@@ -155,5 +155,11 @@ class Controller extends CI_Controller
 
         $this->load->view('header', $data);
         $this->load->view('inputMemo', $data);
+    }
+
+    public function detailMasuk(){
+        $data['kodeDiv'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
+        $this->load->view('header', $data); 
+        $this->load->view('detailMasuk');
     }
 }

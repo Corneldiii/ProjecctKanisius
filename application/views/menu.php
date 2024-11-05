@@ -18,7 +18,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <div class="container-fluid">
 
             <style>
-
                 .btn-circle {
                     width: 30px;
                     height: 30px;
@@ -199,63 +198,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
     $(document).on('click', '.btn-detail', function() {
         var id = $(this).data('id');
         console.log("ID yang dikirim: ", id);
-        $.ajax({
-            url: "<?php echo base_url('Select/getDetailData'); ?>",
-            method: "GET",
-            data: {
-                id: id
-            },
-            dataType: "json",
-            success: function(data) {
-                console.log("Data yang diterima:", data); 
 
-                var detailHtml = `
-                <div class="detail-section">
-                    <h6>Informasi Utama</h6>
-                    <p><span class="detail-label">Nomor:</span> <span class="detail-value">${data.nomor || '-'}</span></p>
-                    <p><span class="detail-label">Tanggal:</span> <span class="detail-value">${data.tanggal || '-'}</span></p>
-                    <p><span class="detail-label">Referensi:</span> <span class="detail-value">${data.referensi || '-'}</span></p>
-                    <p><span class="detail-label">Jenis:</span> <span class="detail-value">${data.jenis = (data.jenis == 1) ? 'Surat' : ((data.jenis == 2) ? 'Email' : ((data.jenis == 3) ? 'Penawaran' : 'Tidak diketahui'))
-                    || '-'}</span></p>
-                </div>
-
-                <div class="detail-section">
-                    <h6>Surat dan Lampiran</h6>
-                    <p><span class="detail-label">No. Surat:</span> <span class="detail-value">${data.noSurat || '-'}</span></p>
-                    <p><span class="detail-label">Tanggal Surat:</span> <span class="detail-value">${data.tglSurat || '-'}</span></p>
-                    <p><span class="detail-label">Hal:</span> <span class="detail-value">${data.hal || '-'}</span></p>
-                    <p><span class="detail-label">Lampiran:</span> <span class="detail-value">${data.lampiran || '-'}</span></p>
-                </div>
-
-                <div class="detail-section">
-                    <h6>Informasi Relasi</h6>
-                    <p><span class="detail-label">Nama Person:</span> <span class="detail-value">${data.namaPerson || '-'}</span></p>
-                    <p><span class="detail-label">Nama Lembaga:</span> <span class="detail-value">${data.namaLembaga || '-'}</span></p>
-                    <p><span class="detail-label">Alamat:</span> <span class="detail-value">${data.alamat || '-'}</span></p>
-                    <p><span class="detail-label">Kota:</span> <span class="detail-value">${data.kota || '-'}</span></p>
-                    <p><span class="detail-label">Propinsi:</span> <span class="detail-value">${data.propinsi || '-'}</span></p>
-                    <p><span class="detail-label">Kode Pos:</span> <span class="detail-value">${data.kodepos || '-'}</span></p>
-                </div>
-
-                <div class="detail-section">
-                    <h6>Informasi Tambahan</h6>
-                    <p><span class="detail-label">Divisi:</span> <span class="detail-value">${data.divisi || '-'}</span></p>
-                    <p><span class="detail-label">Create User ID:</span> <span class="detail-value">${data.createUserID || '-'}</span></p>
-                    <p><span class="detail-label">Create Date:</span> <span class="detail-value">${data.createDate || '-'}</span></p>
-                    <p><span class="detail-label">File: </span> 
-                      <span class="detail-value">
-                        ${data.file ? `<a href="<?php echo base_url(); ?>${data.file}" target="_blank" class="bi bi-download">    Lihat File </a>` : '-'}
-                      </span>
-                    </p>
-                </div>
-            `;
-
-                $('#modalDetailContent').html(detailHtml);
-                $('#modalDetail').modal('show');
-            },
-            error: function(xhr, status, error) {
-                console.error("Error AJAX:", error); 
-            }
-        });
+        window.location.href = "<?php echo base_url('detailMasuk'); ?>?id=" + id;
     });
 </script>
