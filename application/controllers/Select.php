@@ -32,6 +32,18 @@ class Select extends CI_Controller {
         echo json_encode($data);
     }
     
+    public function getDiv(){
+        $id = $this->input->get('id');
+        $data = $this->Model->getDivisi($id);
+        echo json_encode($data);
+    }
+
+    public function getPerson(){
+        $id = $this->input->get('id');
+        $data = $this->Model->getPerson($id);
+        echo json_encode($data);
+    }
+
     public function contoh2(){
         $inputAjax = $this->input->get('inputAjax');
 		

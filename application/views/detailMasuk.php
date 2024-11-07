@@ -160,7 +160,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Insert Surat Masuk</h1>
+                <h1 class="h3 mb-0 text-gray-800">Detail dan Update Surat Masuk</h1>
             </div>
 
             <!-- Alert untuk "set_flashdata", biarkan saja -->
@@ -185,19 +185,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <!-- Header Section -->
                         <div class="header p-3">
                             <div class="form-group d-flex align-items-center">
-                                <label for="nomor" class="mr-2" style="width: 125px;">Nomor</label>
-                                <input type="text" style="width: 200px;" class="form-control text-center" name="nomor" id="nomor" readonly>
-                            </div>
-                            <div class="form-group d-flex align-items-center">
                                 <label for="tanggal" class="mr-2" style="width: 125px;">Tanggal Input</label>
-                                <input type="date" style="width: 200px;" class="form-control text-center" name="tanggal" id="tanggal">
+                                <input type="date" style="width: 200px;" class="form-control text-center" name="tanggal" id="tanggal" readonly>
                             </div>
                             <div class="form-group d-flex align-items-center">
                                 <label for="jenis" class="mr-2" style="width: 125px;">Jenis Surat</label>
                                 <select class="form-control" style="width: 200px;" id="jenis" name="jenis">
-                                    <option>Surat</option>
-                                    <option>Email</option>
-                                    <option>Penawaran</option>
+                                    <option value="surat">Surat</option>
+                                    <option value="email">Email</option>
+                                    <option value="penawaran">Penawaran</option>1
                                 </select>
                             </div>
                         </div>
@@ -385,7 +381,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary w-100 mt-4">Submit</button>
+                <button type="submit" class="btn btn-primary w-100 mt-4">Update</button>
             </form>
 
             <!-- form insert (end) -->
@@ -447,12 +443,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 data: {
                     id: id
                 },
+                beforeSend: function() {
+                    console.log("msauk");
+                    $("#spinner, #overlay").show();
+                },
                 dataType: "JSON",
                 success: function(data) {
                     if (data) {
-                        $('#nomor').val(1);
                         $('#tanggal').val(data.tanggal);
-                        $('#jenis').val(data.jenis);
+                        $('#jenis').val(data.jenis == 1 ? 'surat' : data.jenis == 2 ? 'email' : data.jenis == 3 ? 'penawaran' : '');
                         // $('#customFile').val(data.file);
                         $('#nomorSurat').val(data.nomor);
                         $('#nomorSuratFisik').val(data.noSurat);
@@ -467,26 +466,73 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         $('#kota').val(data.kota);
                         $('#propinsi').val(data.propinsi);
                         $('#kodepos').val(data.kodepos);
-                        $('#dispoDivisi1').val(data.dispoDivisi1);
-                        $('#dispoNoreg1').val(data.dispoNoreg1);
-                        $('#dispoDivisi2').val(data.dispoDivisi2);
-                        $('#dispoNoreg2').val(data.dispoNoreg2);
-                        $('#dispoDivisi3').val(data.dispoDivisi3);
-                        $('#dispoNoreg3').val(data.dispoNoreg3);
-                        $('#dispoDivisi4').val(data.dispoDivisi4);
-                        $('#dispoNoreg4').val(data.dispoNoreg4);
-                        $('#dispoDivisi5').val(data.dispoDivisi5);
-                        $('#dispoNoreg5').val(data.dispoNoreg5);
+
+                        setDisposisiVal('#dispoDivisi1', data.dispoDivisi1);
+                        setDisposisiVal('#dispoDivisi2', data.dispoDivisi2);
+                        setDisposisiVal('#dispoDivisi3', data.dispoDivisi3);
+                        setDisposisiVal('#dispoDivisi4', data.dispoDivisi4);
+                        setDisposisiVal('#dispoDivisi5', data.dispoDivisi5);
+
+                        setPersonVal('#dispoNoreg1', data.dispoNoreg1);
+                        setPersonVal('#dispoNoreg2', data.dispoNoreg2);
+                        setPersonVal('#dispoNoreg3', data.dispoNoreg3);
+                        setPersonVal('#dispoNoreg4', data.dispoNoreg4);
+                        setPersonVal('#dispoNoreg5', data.dispoNoreg5);
+
+
                     } else {
                         console.error("Data tidak ditemukan");
                     }
                 },
+                
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.log("Error:", textStatus, errorThrown);
                 }
             });
         } else {
             console.log("ID tidak ditemukan di URL");
+        }
+
+        function setDisposisiVal(dropdownSelector, divisiID) {
+            $.ajax({
+                url: "<?php echo base_url('Select/getDiv'); ?>",
+                method: "GET",
+                data: {
+                    id: divisiID
+                },
+                dataType: "JSON",
+                success: function(response) {
+                    if (response) {
+                        $(dropdownSelector).append(`<option value="${response.divID}" selected>${response.DivNama}</option>`);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log("Error:", textStatus, errorThrown);
+                }
+            });
+        }
+
+        function setPersonVal(dropdownSelector, userID) {
+            $.ajax({
+                url: "<?php echo base_url('Select/getPerson'); ?>",
+                method: "GET",
+                data: {
+                    id: userID
+                },
+                dataType: "JSON",
+                success: function(response) {
+                    if (response) {
+                        $(dropdownSelector).append(`<option value="${response.userId}" selected>${response.userNama}</option>`);
+                    }
+                },
+                complete: function() {
+                    $("#spinner, #overlay").hide();
+
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log("Error:", textStatus, errorThrown);
+                }
+            });
         }
     });
 

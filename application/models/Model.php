@@ -31,17 +31,18 @@ ON divID=LEFT(pegLastDivId,2) WHERE a.userId='" . $username . "' AND a.userPass=
     //contoh query biasa
     public function getNoSurat($id)
     {
-        $query = "SELECT SUBSTR(NOMOR,6,9) AS nomorForm FROM tb_surat WHERE LEFT(nomor,1)='". $id ."' ORDER BY nomorForm DESC LIMIT 1";
+        $query = "SELECT SUBSTR(NOMOR,6,9) AS nomorForm FROM tb_surat WHERE LEFT(nomor,1)='" . $id . "' ORDER BY nomorForm DESC LIMIT 1";
         $result = $this->db->query($query)->row();
         return $result ? (string)$result->nomorForm : '0000';
     }
 
-    public function getCount($id){
-        $query = "SELECT COUNT(*) as count FROM tb_surat WHERE LEFT(nomor,1)='". $id ."' ";
+    public function getCount($id)
+    {
+        $query = "SELECT COUNT(*) as count FROM tb_surat WHERE LEFT(nomor,1)='" . $id . "' ";
         $result = $this->db->query($query)->row();
         return $result->count;
     }
-    
+
 
     public function allData()
     {
@@ -49,30 +50,28 @@ ON divID=LEFT(pegLastDivId,2) WHERE a.userId='" . $username . "' AND a.userPass=
         return $this->db->query($query);
     }
 
-    public function getDataUser($kodeDivisi){
+    public function getDataUser($kodeDivisi)
+    {
         $query = "SELECT nomor, Tanggal, noSurat, tglSurat, relasiID, namaPerson, namaLembaga, hal, lampiran, keterangan FROM 
                     tb_surat WHERE LEFT(nomor,1)='1' AND (divisi='" . $kodeDivisi . "' OR dispoDivisi1 LIKE '" . $kodeDivisi . "%' OR dispoDivisi2 LIKE '" . $kodeDivisi . "%' 
                     OR dispoDivisi3 LIKE '" . $kodeDivisi . "%' OR dispoDivisi4 LIKE '" . $kodeDivisi . "%' OR dispoDivisi5 LIKE '" . $kodeDivisi . "%') ORDER BY nomor DESC";
         return $this->db->query($query);
     }
 
-    public function getSuratKeluar($kodeDivisi){
-        $query = "SELECT nomor, Tanggal, noSurat, tglSurat, relasiID, namaPerson, namaLembaga, hal, lampiran, keterangan FROM tb_surat WHERE LEFT(nomor,1)='2' AND divisi='". $kodeDivisi ."' ORDER BY nomor DESC ";
+    public function getSuratKeluar($kodeDivisi)
+    {
+        $query = "SELECT nomor, Tanggal, noSurat, tglSurat, relasiID, namaPerson, namaLembaga, hal, lampiran, keterangan FROM tb_surat WHERE LEFT(nomor,1)='2' AND divisi='" . $kodeDivisi . "' ORDER BY nomor DESC ";
         return $this->db->query($query);
     }
 
-    public function getDataById($nomor){
+    public function getDataById($nomor)
+    {
         $query = "SELECT * FROM 
-                    tb_surat WHERE LEFT(nomor,1)='1' AND nomor = '".$nomor."'";
+                    tb_surat WHERE LEFT(nomor,1)='1' AND nomor = '" . $nomor . "'";
         $result = $this->db->query($query);
         return $result->row_array();
     }
 
-    // public function getDataByID($id)
-    // {
-    //     $query = "SELECT * FROM surat WHERE id_surat = '" . $id . "'";
-    //     return $this->db->query($query);
-    // }
 
     //contoh query dengan input dari AJAX
     public function contoh2($inputAjax)
@@ -81,18 +80,16 @@ ON divID=LEFT(pegLastDivId,2) WHERE a.userId='" . $username . "' AND a.userPass=
         return $this->db->query($query);
     }
 
-    // public function getRelasiData()
-    // {
-    //     $query = "SELECT milistId,namaPerson,namaLembaga,alamat,kotanama,kodepos,propNama 
-    //     FROM db_referensi.ref_alamat a 
-    //     LEFT JOIN db_referensi.ref_kota b ON b.kotakode=a.kota LEFT JOIN db_referensi.ref_propinsi c ON c.propKode=a.propinsi
-    //     WHERE STATUS='Y' AND (namaPerson LIKE '%%' OR namaLembaga LIKE '%%')";
+    public function getDivisi($ID)
+    {
+        $query = "SELECT divID, DivNama FROM db_personalia.ref_divisi WHERE divAktif = 'Y' AND divID = ?";
+        return $this->db->query($query, array($ID))->row();
+    }
 
-    //     return $this->db->query($query);
-
-
-
-    // }
+    public function getPerson($id){
+        $query = "SELECT userId,userNama FROM vUser WHERE userId = ?";
+        return $this->db->query($query,array($id))->row();
+    }
 
     public function get_divisi()
     {
@@ -128,7 +125,12 @@ ON divID=LEFT(pegLastDivId,2) WHERE a.userId='" . $username . "' AND a.userPass=
     }
 
 
-    public function insertMasuk($data){
+    public function insertMasuk($data)
+    {
         $this->db->insert('tb_surat', $data);
     }
+
+    //update model
+
+    
 }

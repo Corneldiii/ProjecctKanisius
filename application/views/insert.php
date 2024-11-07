@@ -584,6 +584,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
         $("#tbody").html(html);
         $("#tabel").DataTable({
             "select": true,
+            "search" : true,
             "scrollX": true,
             "bSort": false,
             "scrollY": '427px',
@@ -661,6 +662,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     complete: function() {
                         $("#spinner, #overlay").hide();
                         $('#tabel').DataTable().destroy();
+                        $("#tbody").html(html);
 
                     },
                     error: function(xhr, status, error) {
@@ -669,6 +671,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     }
                 });
             } else {
+                console.log('test failed');
+                
                 $('#kodeRelasiList').html('');
             }
         });
