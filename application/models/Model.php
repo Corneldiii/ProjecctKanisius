@@ -72,6 +72,14 @@ ON divID=LEFT(pegLastDivId,2) WHERE a.userId='" . $username . "' AND a.userPass=
         return $result->row_array();
     }
 
+    public function getKeluarById($nomor)
+    {
+        $query = "SELECT * FROM 
+                    tb_surat WHERE LEFT(nomor,1)='2' AND nomor = '" . $nomor . "'";
+        $result = $this->db->query($query);
+        return $result->row_array();
+    }
+
 
     //contoh query dengan input dari AJAX
     public function contoh2($inputAjax)
@@ -86,9 +94,10 @@ ON divID=LEFT(pegLastDivId,2) WHERE a.userId='" . $username . "' AND a.userPass=
         return $this->db->query($query, array($ID))->row();
     }
 
-    public function getPerson($id){
+    public function getPerson($id)
+    {
         $query = "SELECT userId,userNama FROM vUser WHERE userId = ?";
-        return $this->db->query($query,array($id))->row();
+        return $this->db->query($query, array($id))->row();
     }
 
     public function get_divisi()
@@ -132,5 +141,9 @@ ON divID=LEFT(pegLastDivId,2) WHERE a.userId='" . $username . "' AND a.userPass=
 
     //update model
 
-    
+    public function updateMasuk($id, $data)
+    {
+        $this->db->where('nomor', $id);
+        $this->db->update('tb_surat', $data);
+    }
 }

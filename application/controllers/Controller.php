@@ -103,8 +103,6 @@ class Controller extends CI_Controller
         $data['noFinal'] = $this->Model->getNoSurat(1);
         $data['kodeForm'] = $this->Model->getCount(1);
 
-        // var_dump($this->Model->getCount());
-
         $this->load->view('header', $data);
         $this->load->view('insert', $data);
     }
@@ -159,7 +157,13 @@ class Controller extends CI_Controller
 
     public function detailMasuk(){
         $data['kodeDiv'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
+        $data['divisi'] = $this->Model->get_divisi();
         $this->load->view('header', $data); 
-        $this->load->view('detailMasuk');
+        $this->load->view('detailMasuk',$data);
+    }
+    public function detailKeluar(){
+        $data['kodeDiv'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
+        $this->load->view('header', $data); 
+        $this->load->view('detailKeluar');
     }
 }

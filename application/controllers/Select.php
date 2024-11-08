@@ -31,6 +31,11 @@ class Select extends CI_Controller {
         $data = $this->Model->getDataById($id);
         echo json_encode($data);
     }
+    public function detailDataKeluar() {
+        $id = $this->input->get('id');
+        $data = $this->Model->getKeluarById($id);
+        echo json_encode($data);
+    }
     
     public function getDiv(){
         $id = $this->input->get('id');

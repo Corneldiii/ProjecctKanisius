@@ -35,7 +35,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 </button>
             </div>
             <div class="toast-body">
-                Data berhasil disimpan!
+                Data berhasil di Perbaharui!
             </div>
         </div>
 
@@ -160,7 +160,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Insert Surat Masuk</h1>
+                <h1 class="h3 mb-0 text-gray-800">Detail dan Update Surat Keluar</h1>
             </div>
 
             <!-- Alert untuk "set_flashdata", biarkan saja -->
@@ -179,25 +179,21 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
             <!-- form input surat dari admin sekretaris (start) -->
 
-            <form class="user" id="insertMasuk" action="<?= site_url("insert") ?>" method="post">
+            <form class="user" id="updateMasuk" action="<?= site_url("insert") ?>" method="post">
                 <div class="form-group row">
                     <div class="col-8">
                         <!-- Header Section -->
                         <div class="header p-3">
                             <div class="form-group d-flex align-items-center">
-                                <label for="nomor" class="mr-2" style="width: 125px;">Nomor</label>
-                                <input type="text" style="width: 200px;" class="form-control text-center" name="nomor" id="nomor" readonly>
-                            </div>
-                            <div class="form-group d-flex align-items-center">
                                 <label for="tanggal" class="mr-2" style="width: 125px;">Tanggal Input</label>
-                                <input type="date" style="width: 200px;" class="form-control text-center" name="tanggal" id="tanggal">
+                                <input type="date" style="width: 200px;" class="form-control text-center" name="tanggal" id="tanggal" readonly>
                             </div>
                             <div class="form-group d-flex align-items-center">
                                 <label for="jenis" class="mr-2" style="width: 125px;">Jenis Surat</label>
                                 <select class="form-control" style="width: 200px;" id="jenis" name="jenis">
-                                    <option>Surat</option>
-                                    <option>Email</option>
-                                    <option>Penawaran</option>
+                                    <option value="surat">Surat</option>
+                                    <option value="email">Email</option>
+                                    <option value="penawaran">Penawaran</option>
                                 </select>
                             </div>
                         </div>
@@ -256,7 +252,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 </div>
                             </div>
 
-                            <!-- Modal baru judul eror-->
                             <div class="modal fade" id="modalRelasi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-xl">
                                     <div class="modal-content">
@@ -309,120 +304,24 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             </div>
 
                             <div class="header">
-                                    <div class="form-group d-flex align-items-center">
-                                        <label for="kota" class="mr-2" style="width: 130px;">Kota</label>
-                                        <input type="text" class="form-control w-25" name="kota" id="kota" placeholder="Kota" readonly>
-                                    </div>
-                                    <div class="form-group d-flex align-items-center">
-                                        <label for="propinsi" class="mr-2" style="width: 130px;">Propinsi</label>
-                                        <input type="text" class="form-control w-25" name="propinsi" id="propinsi" placeholder="Propinsi" readonly>
-                                    </div>
-                                    <div class="form-group d-flex align-items-center">
-                                        <label for="kodepos" class="mr-2" style="width: 130px;">Kodepos</label>
-                                        <input type="text" class="form-control w-25" name="kodepos" id="kodepos" placeholder="Kodepos" readonly>
-                                    </div>
-                            </div>
-
-                            <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
-
-                            <div class="row">
-                                <div class="col">
-
-                                    <!-- Disposisi 1 dan Person 1 -->
-                                    <div class="form-group row">
-                                        <label for="dispoDivisi1" class="col-sm-2 col-form-label">Disposisi 1</label>
-                                        <div class="col-sm-4">
-                                            <select class="form-control" id="dispoDivisi1" name="divisi1" onchange="getPersons(1)">
-                                                <option value="">Pilih Divisi</option>
-                                                <?php foreach ($divisi as $d): ?>
-                                                    <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                        <label for="dispoNoreg1" class="col-sm-2 col-form-label">Person 1</label>
-                                        <div class="col-sm-4">
-                                            <select class="form-control" name="person1" id="dispoNoreg1">
-                                                <option value="">Pilih Person</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <!-- Disposisi 2 dan Person 2 -->
-                                    <div class="form-group row">
-                                        <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 2</label>
-                                        <div class="col-sm-4">
-                                            <select class="form-control" id="dispoDivisi2" name="divisi2" onchange="getPersons(2)">
-                                                <option value="">Pilih Divisi</option>
-                                                <?php foreach ($divisi as $d): ?>
-                                                    <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                        <label for="dispoNoreg2" class="col-sm-2 col-form-label">Person 2</label>
-                                        <div class="col-sm-4">
-                                            <select class="form-control" name="person2" id="dispoNoreg2">
-                                                <option value="">Pilih Person</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 2</label>
-                                        <div class="col-sm-4">
-                                            <select class="form-control" id="dispoDivisi3" name="divisi3" onchange="getPersons(3)">
-                                                <option value="">Pilih Divisi</option>
-                                                <?php foreach ($divisi as $d): ?>
-                                                    <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                        <label for="dispoNoreg2" class="col-sm-2 col-form-label">Person 3</label>
-                                        <div class="col-sm-4">
-                                            <select class="form-control" name="person3" id="dispoNoreg3">
-                                                <option value="">Pilih Person</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 2</label>
-                                        <div class="col-sm-4">
-                                            <select class="form-control" id="dispoDivisi4" name="divisi4" onchange="getPersons(4)">
-                                                <option value="">Pilih Divisi</option>
-                                                <?php foreach ($divisi as $d): ?>
-                                                    <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                        <label for="dispoNoreg2" class="col-sm-2 col-form-label">Person 4</label>
-                                        <div class="col-sm-4">
-                                            <select class="form-control" name="person4" id="dispoNoreg4">
-                                                <option value="">Pilih Person</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 2</label>
-                                        <div class="col-sm-4">
-                                            <select class="form-control" id="dispoDivisi5" name="divisi5" onchange="getPersons(5)">
-                                                <option value="">Pilih Divisi</option>
-                                                <?php foreach ($divisi as $d): ?>
-                                                    <option value="<?= $d['divID'] ?>"><?= $d['DivNama'] ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                        <label for="dispoNoreg2" class="col-sm-2 col-form-label">Person 2</label>
-                                        <div class="col-sm-4">
-                                            <select class="form-control" name="person5" id="dispoNoreg5">
-                                                <option value="">Pilih Person</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                <div class="form-group d-flex align-items-center">
+                                    <label for="kota" class="mr-2" style="width: 130px;">Kota</label>
+                                    <input type="text" class="form-control w-25" name="kota" id="kota" placeholder="Kota" readonly>
+                                </div>
+                                <div class="form-group d-flex align-items-center">
+                                    <label for="propinsi" class="mr-2" style="width: 130px;">Propinsi</label>
+                                    <input type="text" class="form-control w-25" name="propinsi" id="propinsi" placeholder="Propinsi" readonly>
+                                </div>
+                                <div class="form-group d-flex align-items-center">
+                                    <label for="kodepos" class="mr-2" style="width: 130px;">Kodepos</label>
+                                    <input type="text" class="form-control w-25" name="kodepos" id="kodepos" placeholder="Kodepos" readonly>
                                 </div>
                             </div>
 
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary w-100 mt-4">Submit</button>
+                <button type="submit" class="btn btn-primary w-100 mt-4">Update</button>
             </form>
 
             <!-- form insert (end) -->
@@ -474,7 +373,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
         $("#tbody").html(html);
         $("#tabel").DataTable({
             "select": true,
-            "search" : true,
+            "search": true,
             "scrollX": true,
             "bSort": false,
             "scrollY": '427px',
@@ -503,9 +402,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
         });
     });
 
-    var no = 1;
     var html = '';
-
 
     $(document).ready(function() {
         $('#searchPerson').on('click', function() {
@@ -540,8 +437,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 html += '<td class="text-center align-middle" style="cursor:pointer;">' + (item.pronama ? item.pronama : '-') + '</td>';
 
                                 html += '</tr>';
-
-                                no++;
                             });
                             $("#tbody").html(html);
 
@@ -562,89 +457,84 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 });
             } else {
                 console.log('test failed');
-                
+
                 $('#kodeRelasiList').html('');
             }
         });
 
     });
 
-    function getPersons(dispoNumber) {
-        var divisiID = document.getElementById('dispoDivisi' + dispoNumber).value;
-
-        if (divisiID) {
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', '<?= base_url("get-persons/") ?>' + encodeURIComponent(divisiID), true);
-            xhr.onload = function() {
-                if (this.status === 200) {
-                    console.log(this.responseText);
-                    try {
-                        var persons = JSON.parse(this.responseText);
-                        console.log(persons);
-
-                        var select = document.getElementById('dispoNoreg' + dispoNumber);
-                        select.innerHTML = '<option value="">Pilih Person</option>';
-
-                        persons.forEach(function(person) {
-                            var option = document.createElement('option');
-                            option.value = person.userId;
-                            option.text = person.userNama;
-                            select.appendChild(option);
-                        });
-                    } catch (e) {
-                        console.error('Error parsing JSON:', e);
-                    }
-                } else {
-                    console.error('Error fetching persons:', this.statusText);
-                }
-            };
-
-            xhr.onerror = function() {
-                console.error('Request failed');
-            };
-            xhr.send();
-        } else {
-            document.getElementById('dispoNoreg' + dispoNumber).innerHTML = '<option value="">Pilih Person</option>';
-        }
-    }
-
     $(document).ready(function() {
-        var kode = '1';
-        var divisi = '<?php echo $kodeDiv; ?>';
-        console.log(divisi);
-        var noFinal = '<?php echo ($noFinal === '0000') ? $noFinal = '0001' : str_pad($noFinal + 1, 4, "0", STR_PAD_LEFT); ?>';
-        var Tahun = new Date().getFullYear().toString().substring(2);
-        var urut = noFinal !== '' ? noFinal : '0001';
-        console.log(urut);
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id');
 
-        var kodeForm = '<?php echo $kodeForm + 1 ?>';
-        console.log(kodeForm + 'cek');
-        $('#nomor').val(kodeForm);
+        if (id) {
+            $.ajax({
+                url: "<?php echo base_url('Select/detailDataKeluar'); ?>",
+                method: "GET",
+                data: {
+                    id: id
+                },
+                beforeSend: function() {
+                    console.log("msauk");
+                    $("#spinner, #overlay").show();
+                },
+                dataType: "JSON",
+                success: function(data) {
+                    if (data) {
+                        $('#tanggal').val(data.tanggal);
+                        $('#jenis').val(data.jenis == 1 ? 'surat' : data.jenis == 2 ? 'email' : data.jenis == 3 ? 'penawaran' : '');
+                        // $('#customFile').val(data.file);
+                        $('#nomorSurat').val(data.nomor);
+                        $('#nomorSuratFisik').val(data.noSurat);
+                        $('#tanggalSurat').val(data.tglSurat);
+                        $('#hal').val(data.hal);
+                        $('#lampiran').val(data.lampiran);
+                        $('#keterangan').val(data.keterangan);
+                        $('#namaPerson').val(data.namaPerson);
+                        $('#kodeRelasi').val(data.relasiID);
+                        $('#namaLembaga').val(data.namaLembaga);
+                        $('#alamat').val(data.alamat);
+                        $('#kota').val(data.kota);
+                        $('#propinsi').val(data.propinsi);
+                        $('#kodepos').val(data.kodepos);
 
-        var tanggalInput = new Date().toISOString().split('T')[0];
-        $('#tanggal').val(tanggalInput);
 
-        var kodeSurat = kode + Tahun + divisi + urut;
-        console.log(kodeSurat);
-        $('#nomorSurat').val(kodeSurat);
 
+                    } else {
+                        console.error("Data tidak ditemukan");
+                    }
+                },
+                complete: function() {
+                    $("#spinner, #overlay").hide();
+
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log("Error:", textStatus, errorThrown);
+                }
+            });
+        } else {
+            console.log("ID tidak ditemukan di URL");
+        }
     });
 
 
 
+
     $(document).ready(function() {
-        $('#insertMasuk').on('submit', function(event) {
+        $('#updateMasuk').on('submit', function(event) {
             event.preventDefault();
             var kode = $('#nomorSurat').val();
-            var perihal = $('#hal').val();
 
             var formData = new FormData(this);
             var isEmpty = false;
+
 
             formData.forEach((value, key) => {
                 if (typeof value === 'string' && !value.trim()) {
                     isEmpty = true;
                 }
+                // console.log(value,key);
             });
 
             if (isEmpty) {
@@ -652,43 +542,27 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 $('#errorToast').toast('show');
             } else {
                 $.ajax({
-                    url: '<?= site_url("Insert/insert_data") ?>',
+                    url: '<?= site_url("Update/update_data") ?>',
                     method: 'POST',
                     data: formData,
                     contentType: false,
                     processData: false,
                     success: function(response) {
-
-
-                        $.ajax({
-                            url: '<?= site_url("FonnteController/kirimPesan") ?>',
-                            method: 'POST',
-                            data: {
-                                message: "Anda memiliki surat masuk baru dengan kode (" + kode + ") perihal " + perihal,
-                                url: 'http://surat.test/'
-                            },
-                            success: function(response) {
-                                $('#successToast').toast('show');
-                                setTimeout(function() {
-                                    location.reload();
-                                }, 1000);
-                            },
-                            error: function(xhr, status, error) {
-                                console.error('Error saat mengirim pesan:', error);
-                                $('#errorToastBody').text('Terjadi kesalahan saat mengirim pesan: ' + (xhr.responseText || error));
-                                $('#errorToast').toast('show');
-                            }
-                        });
+                        $('#successToast').toast('show');
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1000);
                     },
                     error: function(xhr, status, error) {
-                        console.error('Error saat menyimpan data:', error);
-                        $('#errorToastBody').text('Terjadi kesalahan saat menyimpan data: ' + (xhr.responseText || error));
+                        console.error('Error saat mengirim pesan:', error);
+                        $('#errorToastBody').text('Terjadi kesalahan saat mengirim pesan: ' + (xhr.responseText || error));
                         $('#errorToast').toast('show');
                     }
                 });
             }
         });
     });
+
 
 
 
@@ -726,12 +600,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
             }
         });
     }
-
-    // Tanggal otomatis
-    document.addEventListener('DOMContentLoaded', (event) => {
-        let today = new Date().toISOString().substr(0, 10);
-        document.querySelector("#tanggal").value = today;
-    });
 </script>
 </body>
 

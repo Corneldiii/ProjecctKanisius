@@ -19,6 +19,7 @@ $route['insertMasuk'] = 'Insert/insert_data';
 $route['memo'] = 'Controller/memo';
 $route['inputMemo'] = 'Controller/inputMemo';
 $route['detailMasuk'] = 'Controller/detailMasuk';
+$route['detailKeluar'] = 'Controller/detailKeluar';
 
 
 $route['sendMessage'] = 'FonnteController/kirimPesan';
