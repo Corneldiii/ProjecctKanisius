@@ -716,7 +716,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 
             formData.forEach((value, key) => {
-                if (typeof value === 'string' && !value.trim()) {
+                if (typeof value === 'string' && !value.trim() && !['divisi2', 'divisi3', 'divisi4', 'divisi5', 'person2', 'person3', 'person4', 'person5'].includes(key)) {
                     isEmpty = true;
                 }
                 // console.log(value,key);

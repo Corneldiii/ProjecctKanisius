@@ -483,31 +483,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 $('#kodeRelasiList').html('');
             }
         });
-
-
-        // $(document).on('click', '.list-group-item', function(e) {
-        //     e.preventDefault();
-
-        //     console.log($(this).data());
-        //     var milistId = $(this).data('id');
-        //     var namaPerson = $(this).data('nama');
-        //     var lembaga = $(this).data('namaLembaga');
-        //     var alamat = $(this).data('alamat');
-        //     var kota = $(this).data('kotanama');
-        //     var propinsi = $(this).data('propNama');
-        //     var kodepos = $(this).data('kodepos');
-
-        //     $('#kodeRelasi').val(milistId);
-        //     $('#namaPerson').val(namaPerson);
-        //     $('#namaLembaga').val(lembaga);
-        //     $('#alamat').val(alamat);
-        //     $('#kota').val(kota);
-        //     $('#propinsi').val(propinsi);
-        //     $('#kodepos').val(kodepos);
-        //     $('#kodeRelasiList').html('');
-
-
-        // });
     });
 
     function getPersons(dispoNumber) {
@@ -583,7 +558,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             var isEmpty = false;
 
             formData.forEach((value, key) => {
-                if (typeof value === 'string' && !value.trim()) {
+                if (typeof value === 'string' && !value.trim() && !['divisi2', 'divisi3', 'divisi4', 'divisi5', 'person2', 'person3', 'person4', 'person5'].includes(key) ) {
                     isEmpty = true;
                 }
             });
@@ -593,33 +568,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 $('#errorToast').toast('show');
             } else {
                 $.ajax({
-                    url: '<?= site_url("Insert/insert_data") ?>',
+                    url: '<?= site_url("Insert/insert_Memo") ?>',
                     method: 'POST',
                     data: formData,
                     contentType: false,
                     processData: false,
                     success: function(response) {
-
-
-                        $.ajax({
-                            url: '<?= site_url("FonnteController/kirimPesan") ?>',
-                            method: 'POST',
-                            data: {
-                                message: "Anda memiliki surat masuk baru dengan kode (" + kode + ") perihal " + perihal,
-                                url: 'http://surat.test/'
-                            },
-                            success: function(response) {
-                                $('#successToast').toast('show');
-                                setTimeout(function() {
-                                    location.reload();
-                                }, 1000);
-                            },
-                            error: function(xhr, status, error) {
-                                console.error('Error saat mengirim pesan:', error);
-                                $('#errorToastBody').text('Terjadi kesalahan saat mengirim pesan: ' + (xhr.responseText || error));
-                                $('#errorToast').toast('show');
-                            }
-                        });
+                        $('#successToast').toast('show');
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1000);
                     },
                     error: function(xhr, status, error) {
                         console.error('Error saat menyimpan data:', error);

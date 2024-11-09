@@ -57,10 +57,15 @@ ON divID=LEFT(pegLastDivId,2) WHERE a.userId='" . $username . "' AND a.userPass=
                     OR dispoDivisi3 LIKE '" . $kodeDivisi . "%' OR dispoDivisi4 LIKE '" . $kodeDivisi . "%' OR dispoDivisi5 LIKE '" . $kodeDivisi . "%') ORDER BY nomor DESC";
         return $this->db->query($query);
     }
-
+    
     public function getSuratKeluar($kodeDivisi)
     {
         $query = "SELECT nomor, Tanggal, noSurat, tglSurat, relasiID, namaPerson, namaLembaga, hal, lampiran, keterangan FROM tb_surat WHERE LEFT(nomor,1)='2' AND divisi='" . $kodeDivisi . "' ORDER BY nomor DESC ";
+        return $this->db->query($query);
+    }
+    public function getMemo($kodeDivisi)
+    {
+        $query = "SELECT nomor, Tanggal, noSurat, tglSurat, CONCAT(a.`userNama`,',',b.userNama) Nama ,hal, lampiran, keterangan FROM tb_surat LEFT JOIN vUser a ON a.userId=dispoNoreg1 LEFT JOIN vUser b ON a.userId=dispoNoreg2 LEFT JOIN vUser c ON a.userId=dispoNoreg3 LEFT JOIN vUser d ON a.userId=dispoNoreg4 LEFT JOIN vUser e ON a.userId=dispoNoreg5 WHERE LEFT(nomor,1)='3' AND (divisi='" . $kodeDivisi . "' OR LEFT(dispoDivisi1,2)='" . $kodeDivisi . "' OR LEFT(dispoDivisi2,2)='" . $kodeDivisi . "' OR LEFT(dispoDivisi3,2)='" . $kodeDivisi . "' OR LEFT(dispoDivisi4,2)='" . $kodeDivisi . "' OR LEFT(dispoDivisi5,2)='" . $kodeDivisi . "');";
         return $this->db->query($query);
     }
 
@@ -76,6 +81,13 @@ ON divID=LEFT(pegLastDivId,2) WHERE a.userId='" . $username . "' AND a.userPass=
     {
         $query = "SELECT * FROM 
                     tb_surat WHERE LEFT(nomor,1)='2' AND nomor = '" . $nomor . "'";
+        $result = $this->db->query($query);
+        return $result->row_array();
+    }
+    public function getMemoById($nomor)
+    {
+        $query = "SELECT * FROM 
+                    tb_surat WHERE LEFT(nomor,1)='3' AND nomor = '" . $nomor . "'";
         $result = $this->db->query($query);
         return $result->row_array();
     }
@@ -141,7 +153,7 @@ ON divID=LEFT(pegLastDivId,2) WHERE a.userId='" . $username . "' AND a.userPass=
 
     //update model
 
-    public function updateMasuk($id, $data)
+    public function update($id, $data)
     {
         $this->db->where('nomor', $id);
         $this->db->update('tb_surat', $data);

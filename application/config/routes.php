@@ -20,6 +20,7 @@ $route['memo'] = 'Controller/memo';
 $route['inputMemo'] = 'Controller/inputMemo';
 $route['detailMasuk'] = 'Controller/detailMasuk';
 $route['detailKeluar'] = 'Controller/detailKeluar';
+$route['detailMemo'] = 'Controller/detailMemo';
 
 
 $route['sendMessage'] = 'FonnteController/kirimPesan';

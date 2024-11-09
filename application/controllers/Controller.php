@@ -166,4 +166,9 @@ class Controller extends CI_Controller
         $this->load->view('header', $data); 
         $this->load->view('detailKeluar');
     }
+    public function detailMemo(){
+        $data['kodeDiv'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
+        $this->load->view('header', $data); 
+        $this->load->view('detailMemo');
+    }
 }

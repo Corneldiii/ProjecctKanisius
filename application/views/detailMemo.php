@@ -35,7 +35,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 </button>
             </div>
             <div class="toast-body">
-                Data berhasil disimpan!
+                Data berhasil di Perbaharui!
             </div>
         </div>
 
@@ -160,7 +160,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Insert Surat Masuk</h1>
+                <h1 class="h3 mb-0 text-gray-800">Detail dan Update Surat Masuk</h1>
             </div>
 
             <!-- Alert untuk "set_flashdata", biarkan saja -->
@@ -179,25 +179,21 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
             <!-- form input surat dari admin sekretaris (start) -->
 
-            <form class="user" id="insertMasuk" action="<?= site_url("insert") ?>" method="post">
+            <form class="user" id="updateMasuk" action="<?= site_url("insert") ?>" method="post">
                 <div class="form-group row">
                     <div class="col-8">
                         <!-- Header Section -->
                         <div class="header p-3">
                             <div class="form-group d-flex align-items-center">
-                                <label for="nomor" class="mr-2" style="width: 125px;">Nomor</label>
-                                <input type="text" style="width: 200px;" class="form-control text-center" name="nomor" id="nomor" readonly>
-                            </div>
-                            <div class="form-group d-flex align-items-center">
                                 <label for="tanggal" class="mr-2" style="width: 125px;">Tanggal Input</label>
-                                <input type="date" style="width: 200px;" class="form-control text-center" name="tanggal" id="tanggal">
+                                <input type="date" style="width: 200px;" class="form-control text-center" name="tanggal" id="tanggal" readonly>
                             </div>
                             <div class="form-group d-flex align-items-center">
                                 <label for="jenis" class="mr-2" style="width: 125px;">Jenis Surat</label>
                                 <select class="form-control" style="width: 200px;" id="jenis" name="jenis">
-                                    <option>Surat</option>
-                                    <option>Email</option>
-                                    <option>Penawaran</option>
+                                    <option value="surat">Surat</option>
+                                    <option value="email">Email</option>
+                                    <option value="penawaran">Penawaran</option>
                                 </select>
                             </div>
                         </div>
@@ -242,85 +238,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             <div class="form-group d-flex align-items-center">
                                 <label for="keterangan" style="width: 145px;">Deskripsi</label>
                                 <textarea class="form-control text-left w-50" id="keterangan" name="keterangan" rows="4" placeholder="Ringkasan Isi Surat"></textarea>
-                            </div>
-
-                            <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
-
-                            <div class="form-group d-flex align-items-center">
-                                <label for="namaPerson" class="mr-2" style="width: 135px;">Cari Nama/Kode Relasi</label>
-                                <div class="input-group" style="width: 300px;">
-                                    <input type="text" class="form-control text-left" name="namaPerson" id="namaPerson" placeholder="Nama/Kode Relasi">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-secondary" id="searchPerson" type="button" data-toggle="modal" data-target="#modalRelasi">Cari</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Modal baru judul eror-->
-                            <div class="modal fade" id="modalRelasi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-xl">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-
-                                        <div class="modal-body">
-                                            <div class="table-responsive">
-                                                <table id="tabel" class="display nowrap table table-striped table-bordered table-fixed text-nowrap" style="width:100%">
-                                                    <thead style="color: black;">
-                                                        <tr>
-                                                            <th class="text-center align-middle">Milist ID</th>
-                                                            <th class="text-center align-middle">Nama</th>
-                                                            <th class="text-center align-middle">Lembaga</th>
-                                                            <th class="text-center align-middle">Alamat</th>
-                                                            <th class="text-center align-middle">Nama Kota</th>
-                                                            <th class="text-center align-middle">Kode Pos</th>
-                                                            <th class="text-center align-middle">Provinsi</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="tbody" name="tbody" style="color: black; font-size: 12px;">
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="header">
-                                <div class="form-group d-flex align-items-center">
-                                    <label for="kodeRelasi" style="width: 140px;">Kode Relasi</label>
-                                    <input type="text" class="form-control w-25 text-left" name="kodeRelasi" id="kodeRelasi" placeholder="kode Rlasi" readonly>
-                                </div>
-                                <div class="form-group d-flex align-items-center">
-                                    <label for="nsmsLembaga" style="width: 140px;">Nama Lembaga</label>
-                                    <input type="text" class="form-control w-25 text-left" name="namaLembaga" id="namaLembaga" placeholder="Nama Lembaga" readonly>
-                                </div>
-                                <div class="form-group d-flex align-items-center">
-                                    <label for="alamat" style="width: 140px;">Alamat</label>
-                                    <input type="text" class="form-control w-25 text-left" name="alamat" id="alamat" placeholder="Alamat" readonly>
-                                </div>
-                            </div>
-
-                            <div class="header">
-                                    <div class="form-group d-flex align-items-center">
-                                        <label for="kota" class="mr-2" style="width: 130px;">Kota</label>
-                                        <input type="text" class="form-control w-25" name="kota" id="kota" placeholder="Kota" readonly>
-                                    </div>
-                                    <div class="form-group d-flex align-items-center">
-                                        <label for="propinsi" class="mr-2" style="width: 130px;">Propinsi</label>
-                                        <input type="text" class="form-control w-25" name="propinsi" id="propinsi" placeholder="Propinsi" readonly>
-                                    </div>
-                                    <div class="form-group d-flex align-items-center">
-                                        <label for="kodepos" class="mr-2" style="width: 130px;">Kodepos</label>
-                                        <input type="text" class="form-control w-25" name="kodepos" id="kodepos" placeholder="Kodepos" readonly>
-                                    </div>
                             </div>
 
                             <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
@@ -422,7 +339,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary w-100 mt-4">Submit</button>
+                <button type="submit" class="btn btn-primary w-100 mt-4">Update</button>
             </form>
 
             <!-- form insert (end) -->
@@ -469,105 +386,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
     $(document).ready(function() {
         $('#menuMenu').trigger('click');
-
-
-        $("#tbody").html(html);
-        $("#tabel").DataTable({
-            "select": true,
-            "search" : true,
-            "scrollX": true,
-            "bSort": false,
-            "scrollY": '427px',
-            "scrollCollapse": true,
-        });
-
-
-        $('#tabel tbody').on('click', 'tr', function() {
-            var milistId = $(this).find('td').eq(0).text();
-            var namaPerson = $(this).find('td').eq(1).text();
-            var alamat = $(this).find('td').eq(3).text();
-            var kota = $(this).find('td').eq(4).text();
-            var kodepos = $(this).find('td').eq(5).text();
-            var propinsi = $(this).find('td').eq(6).text();
-            var namaLembaga = $(this).find('td').eq(2).text();
-
-            $('#namaPerson').val(namaPerson);
-            $('#kodeRelasi').val(milistId);
-            $('#alamat').val(alamat);
-            $('#kota').val(kota);
-            $('#kodepos').val(kodepos);
-            $('#propinsi').val(propinsi);
-            $('#namaLembaga').val(namaLembaga);
-
-            $('#modalRelasi').modal('hide');
-        });
     });
 
-    var no = 1;
     var html = '';
-
-
-    $(document).ready(function() {
-        $('#searchPerson').on('click', function() {
-            var namaPerson = $('#namaPerson').val();
-            var namaLembaga = $('#namaLembaga').val();
-
-            if (namaPerson.length > 0 || namaLembaga.length > 0) {
-                $.ajax({
-                    url: "<?php echo site_url('Controller/searchKodeRelasi'); ?>",
-                    method: "POST",
-                    data: {
-                        person: namaPerson
-                    },
-                    beforeSend: function() {
-                        console.log("msauk");
-                        $("#spinner, #overlay").show();
-                    },
-                    dataType: "json",
-                    success: function(data) {
-                        $('#kodeRelasiList').empty();
-
-
-                        if (data.length > 0) {
-                            $.each(data, function(index, item) {
-                                html += '<tr>';
-                                html += '<td class="text-center align-middle" style="cursor:pointer;">' + (item.milistId ? item.milistId : '-') + '</td>';
-                                html += '<td class="text-center align-middle" style="cursor:pointer;">' + (item.namaPerson ? item.namaPerson : '-') + '</td>';
-                                html += '<td class="text-center align-middle" style="cursor:pointer;">' + (item.namaLembaga ? item.namaLembaga : '-') + '</td>';
-                                html += '<td class="text-center align-middle" style="cursor:pointer;">' + (item.alamat ? item.alamat : '-') + '</td>';
-                                html += '<td class="text-center align-middle" style="cursor:pointer;">' + (item.kotanama ? item.kotanama : '-') + '</td>';
-                                html += '<td class="text-center align-middle" style="cursor:pointer;">' + (item.kodepos ? item.kodepos : '-') + '</td>';
-                                html += '<td class="text-center align-middle" style="cursor:pointer;">' + (item.pronama ? item.pronama : '-') + '</td>';
-
-                                html += '</tr>';
-
-                                no++;
-                            });
-                            $("#tbody").html(html);
-
-                        } else {
-                            $('#kodeRelasiList').append('<li class="list-group-item">No Results Found</li>');
-                        }
-                    },
-                    complete: function() {
-                        $("#spinner, #overlay").hide();
-                        $('#tabel').DataTable().destroy();
-                        $("#tbody").html(html);
-
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('AJAX Error:', error);
-                        console.error('Response Text:', xhr.responseText);
-                    }
-                });
-            } else {
-                console.log('test failed');
-                
-                $('#kodeRelasiList').html('');
-            }
-        });
-
-    });
 
     function getPersons(dispoNumber) {
         var divisiID = document.getElementById('dispoDivisi' + dispoNumber).value;
@@ -608,43 +429,122 @@ defined('BASEPATH') or exit('No direct script access allowed');
         }
     }
 
+    
+
     $(document).ready(function() {
-        var kode = '1';
-        var divisi = '<?php echo $kodeDiv; ?>';
-        console.log(divisi);
-        var noFinal = '<?php echo ($noFinal === '0000') ? $noFinal = '0001' : str_pad($noFinal + 1, 4, "0", STR_PAD_LEFT); ?>';
-        var Tahun = new Date().getFullYear().toString().substring(2);
-        var urut = noFinal !== '' ? noFinal : '0001';
-        console.log(urut);
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id');
 
-        var kodeForm = '<?php echo $kodeForm + 1 ?>';
-        console.log(kodeForm + 'cek');
-        $('#nomor').val(kodeForm);
+        if (id) {
+            $.ajax({
+                url: "<?php echo base_url('Select/detailDataMemo'); ?>",
+                method: "GET",
+                data: {
+                    id: id
+                },
+                beforeSend: function() {
+                    console.log("msauk");
+                    $("#spinner, #overlay").show();
+                },
+                dataType: "JSON",
+                success: function(data) {
+                    if (data) {
+                        $('#tanggal').val(data.tanggal);
+                        $('#jenis').val(data.jenis == 1 ? 'surat' : data.jenis == 2 ? 'email' : data.jenis == 3 ? 'penawaran' : '');
+                        // $('#customFile').val(data.file);
+                        $('#nomorSurat').val(data.nomor);
+                        $('#nomorSuratFisik').val(data.noSurat);
+                        $('#tanggalSurat').val(data.tglSurat);
+                        $('#hal').val(data.hal);
+                        $('#lampiran').val(data.lampiran);
+                        $('#keterangan').val(data.keterangan);
 
-        var tanggalInput = new Date().toISOString().split('T')[0];
-        $('#tanggal').val(tanggalInput);
+                        setDisposisiVal('#dispoDivisi1', data.dispoDivisi1);
+                        setDisposisiVal('#dispoDivisi2', data.dispoDivisi2);
+                        setDisposisiVal('#dispoDivisi3', data.dispoDivisi3);
+                        setDisposisiVal('#dispoDivisi4', data.dispoDivisi4);
+                        setDisposisiVal('#dispoDivisi5', data.dispoDivisi5);
 
-        var kodeSurat = kode + Tahun + divisi + urut;
-        console.log(kodeSurat);
-        $('#nomorSurat').val(kodeSurat);
+                        setPersonVal('#dispoNoreg1', data.dispoNoreg1);
+                        setPersonVal('#dispoNoreg2', data.dispoNoreg2);
+                        setPersonVal('#dispoNoreg3', data.dispoNoreg3);
+                        setPersonVal('#dispoNoreg4', data.dispoNoreg4);
+                        setPersonVal('#dispoNoreg5', data.dispoNoreg5);
 
+
+                    } else {
+                        console.error("Data tidak ditemukan");
+                    }
+                },
+
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log("Error:", textStatus, errorThrown);
+                }
+            });
+        } else {
+            console.log("ID tidak ditemukan di URL");
+        }
+
+        function setDisposisiVal(dropdownSelector, divisiID) {
+            $.ajax({
+                url: "<?php echo base_url('Select/getDiv'); ?>",
+                method: "GET",
+                data: {
+                    id: divisiID
+                },
+                dataType: "JSON",
+                success: function(response) {
+                    if (response) {
+                        $(dropdownSelector).append(`<option value="${response.divID}" selected>${response.DivNama}</option>`);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log("Error:", textStatus, errorThrown);
+                }
+            });
+        }
+
+        function setPersonVal(dropdownSelector, userID) {
+            $.ajax({
+                url: "<?php echo base_url('Select/getPerson'); ?>",
+                method: "GET",
+                data: {
+                    id: userID
+                },
+                dataType: "JSON",
+                success: function(response) {
+                    if (response) {
+                        $(dropdownSelector).append(`<option value="${response.userId}" selected>${response.userNama}</option>`);
+                    }
+                },
+                complete: function() {
+                    $("#spinner, #overlay").hide();
+
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log("Error:", textStatus, errorThrown);
+                }
+            });
+        }
     });
 
 
 
+
     $(document).ready(function() {
-        $('#insertMasuk').on('submit', function(event) {
+        $('#updateMasuk').on('submit', function(event) {
             event.preventDefault();
             var kode = $('#nomorSurat').val();
-            var perihal = $('#hal').val();
 
             var formData = new FormData(this);
             var isEmpty = false;
 
+
             formData.forEach((value, key) => {
-                if (typeof value === 'string' && !value.trim() && !['divisi2', 'divisi3', 'divisi4', 'divisi5', 'person2', 'person3', 'person4', 'person5'].includes(key) ) {
+                if (typeof value === 'string' && !value.trim() && !['divisi2', 'divisi3', 'divisi4', 'divisi5', 'person2', 'person3', 'person4', 'person5'].includes(key)) {
                     isEmpty = true;
                 }
+                // console.log(value,key);
             });
 
             if (isEmpty) {
@@ -652,43 +552,27 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 $('#errorToast').toast('show');
             } else {
                 $.ajax({
-                    url: '<?= site_url("Insert/insert_data") ?>',
+                    url: '<?= site_url("Update/update_Memo") ?>',
                     method: 'POST',
                     data: formData,
                     contentType: false,
                     processData: false,
                     success: function(response) {
-
-
-                        $.ajax({
-                            url: '<?= site_url("FonnteController/kirimPesan") ?>',
-                            method: 'POST',
-                            data: {
-                                message: "Anda memiliki surat masuk baru dengan kode (" + kode + ") perihal " + perihal,
-                                url: 'http://surat.test/'
-                            },
-                            success: function(response) {
-                                $('#successToast').toast('show');
-                                setTimeout(function() {
-                                    location.reload();
-                                }, 1000);
-                            },
-                            error: function(xhr, status, error) {
-                                console.error('Error saat mengirim pesan:', error);
-                                $('#errorToastBody').text('Terjadi kesalahan saat mengirim pesan: ' + (xhr.responseText || error));
-                                $('#errorToast').toast('show');
-                            }
-                        });
+                        $('#successToast').toast('show');
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1000);
                     },
                     error: function(xhr, status, error) {
-                        console.error('Error saat menyimpan data:', error);
-                        $('#errorToastBody').text('Terjadi kesalahan saat menyimpan data: ' + (xhr.responseText || error));
+                        console.error('Error saat mengirim pesan:', error);
+                        $('#errorToastBody').text('Terjadi kesalahan saat mengirim pesan: ' + (xhr.responseText || error));
                         $('#errorToast').toast('show');
                     }
                 });
             }
         });
     });
+
 
 
 
@@ -726,12 +610,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
             }
         });
     }
-
-    // Tanggal otomatis
-    document.addEventListener('DOMContentLoaded', (event) => {
-        let today = new Date().toISOString().substr(0, 10);
-        document.querySelector("#tanggal").value = today;
-    });
 </script>
 </body>
 

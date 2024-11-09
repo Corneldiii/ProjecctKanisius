@@ -184,7 +184,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 html += '<td class="text-center align-middle">' + (data[i].namaLembaga ? data[i].namaLembaga : '-') + '</td>';
                 html += '<td class="text-center align-middle">' + (data[i].hal ? data[i].hal : '-') + '</td>';
                 html += '<td class="text-center align-middle">' + (data[i].lampiran ? data[i].lampiran : '-') + '</td>';
-                html += '<td class="text-center align-middle">';
+                html += '<td class="text-center align-middle d-flex justify-content-center align-items-center">';
                 html += '<button type="button" class="btn btn-circle btn-detail" data-id="' + data[i].nomor + '" data-toggle="modal" data-target="#detailModal">';
                 html += '<i class="fas fa-exclamation"></i>';
                 html += '</button>';

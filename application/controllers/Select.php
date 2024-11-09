@@ -25,6 +25,10 @@ class Select extends CI_Controller {
         $data = $this->Model->getSuratKeluar(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '')->result_array();
         echo json_encode($data); 
     }
+    public function getAllDataMemo(){
+        $data = $this->Model->getMemo(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '')->result_array();
+        echo json_encode($data); 
+    }
 
     public function detailDataMasuk() {
         $id = $this->input->get('id');
@@ -34,6 +38,11 @@ class Select extends CI_Controller {
     public function detailDataKeluar() {
         $id = $this->input->get('id');
         $data = $this->Model->getKeluarById($id);
+        echo json_encode($data);
+    }
+    public function detailDataMemo() {
+        $id = $this->input->get('id');
+        $data = $this->Model->getMemoById($id);
         echo json_encode($data);
     }
     
