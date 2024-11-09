@@ -69,7 +69,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             </style>
 
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Daftar Surat Masuk</h1>
+                <h1 class="h3 mb-0 text-gray-800">Daftar Surat Keluar</h1>
             </div>
 
             <div class="form-group row">
@@ -98,6 +98,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 <th class="text-center align-middle">Nama Lembaga</th>
                                 <th class="text-center align-middle">Hal</th>
                                 <th class="text-center align-middle">Lampiran</th>
+                                <th class="text-center align-middle">Isi Surat</th>
                                 <th class="text-center align-middle">Detail</th>
                             </tr>
                         </thead>
@@ -167,7 +168,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
     var html = '';
     var no = 1;
     $.ajax({
-        url: "<?php echo base_url('Select/getAllData'); ?>",
+        url: "<?php echo base_url('Select/getAllDataKeluar'); ?>",
         method: "GET",
         dataType: "JSON",
         async: false,
@@ -184,6 +185,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 html += '<td class="text-center align-middle">' + (data[i].namaLembaga ? data[i].namaLembaga : '-') + '</td>';
                 html += '<td class="text-center align-middle">' + (data[i].hal ? data[i].hal : '-') + '</td>';
                 html += '<td class="text-center align-middle">' + (data[i].lampiran ? data[i].lampiran : '-') + '</td>';
+                html += '<td class="text-center align-middle">' + (data[i].keterangan ? data[i].keterangan : '-') + '</td>';
                 html += '<td class="text-center align-middle d-flex justify-content-center align-items-center">';
                 html += '<button type="button" class="btn btn-circle btn-detail" data-id="' + data[i].nomor + '" data-toggle="modal" data-target="#detailModal">';
                 html += '<i class="fas fa-exclamation"></i>';
@@ -199,6 +201,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
         var id = $(this).data('id');
         console.log("ID yang dikirim: ", id);
 
-        window.location.href = "<?php echo base_url('detailMasuk'); ?>?id=" + id;
+        window.location.href = "<?php echo base_url('detailKeluar'); ?>?id=" + id;
     });
 </script>

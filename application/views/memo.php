@@ -89,16 +89,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     <table id="tabel" class="display nowrap" style="width:100%">
                         <thead style="color: black;">
                             <tr>
-                                <th style="width:10px" class="text-center align-middle">No. Agenda</th>
+                                <th style="width:10px" class="text-center align-middle">No. Memo</th>
                                 <th class="text-center align-middle">Tgl Input</th>
-                                <th class="text-center align-middle">No. Surat</th>
-                                <th class="text-center align-middle">Tgl Surat</th>
-                                <th class="text-center align-middle">Kode</th>
-                                <th class="text-center align-middle">Nama Person</th>
-                                <th class="text-center align-middle">Nama Lembaga</th>
+                                <th class="text-center align-middle">No. Memo</th>
+                                <th class="text-center align-middle">Tgl Memo</th>
+                                <th class="text-center align-middle">Tujuan</th>
                                 <th class="text-center align-middle">Hal</th>
                                 <th class="text-center align-middle">Lampiran</th>
-                                <th class="text-center align-middle">Detail</th>
+                                <th class="text-center align-middle">Isi Memo</th>
+                                <th class="text-center align-middle ">Detail</th>
                             </tr>
                         </thead>
                         <tbody id="tbody" name="tbody" style="color: black;"></tbody>
@@ -167,7 +166,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
     var html = '';
     var no = 1;
     $.ajax({
-        url: "<?php echo base_url('Select/getAllData'); ?>",
+        url: "<?php echo base_url('Select/getAllDataMemo'); ?>",
         method: "GET",
         dataType: "JSON",
         async: false,
@@ -179,13 +178,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 html += '<td class="text-center align-middle">' + (data[i].Tanggal ? data[i].Tanggal : '-') + '</td>';
                 html += '<td class="text-center align-middle">' + (data[i].noSurat ? data[i].noSurat : '-') + '</td>';
                 html += '<td class="text-center align-middle">' + (data[i].tglSurat ? data[i].tglSurat : '-') + '</td>';
-                html += '<td class="text-center align-middle">' + (data[i].relasiID ? data[i].relasiID : '-') + '</td>';
-                html += '<td class="text-center align-middle">' + (data[i].namaPerson ? data[i].namaPerson : '-') + '</td>';
-                html += '<td class="text-center align-middle">' + (data[i].namaLembaga ? data[i].namaLembaga : '-') + '</td>';
+                html += '<td class="text-center align-middle">' + (data[i].Nama ? data[i].Nama : '-') + '</td>';
                 html += '<td class="text-center align-middle">' + (data[i].hal ? data[i].hal : '-') + '</td>';
                 html += '<td class="text-center align-middle">' + (data[i].lampiran ? data[i].lampiran : '-') + '</td>';
+                html += '<td class="text-center align-middle">' + (data[i].keterangan ? data[i].keterangan : '-') + '</td>';
                 html += '<td class="text-center align-middle d-flex justify-content-center align-items-center">';
-                html += '<button type="button" class="btn btn-circle btn-detail" data-id="' + data[i].nomor + '" data-toggle="modal" data-target="#detailModal">';
+                html += '<button type="button" class="btn btn-circle btn-detail  " data-id="' + data[i].nomor + '" data-toggle="modal" data-target="#detailModal">';
                 html += '<i class="fas fa-exclamation"></i>';
                 html += '</button>';
                 html += '</td>';
@@ -199,6 +197,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
         var id = $(this).data('id');
         console.log("ID yang dikirim: ", id);
 
-        window.location.href = "<?php echo base_url('detailMasuk'); ?>?id=" + id;
+        window.location.href = "<?php echo base_url('detailMemo'); ?>?id=" + id;
     });
 </script>

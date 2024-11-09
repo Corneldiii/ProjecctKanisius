@@ -7,6 +7,20 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['index'] = 'Controller/index';
 $route['logout'] = 'Controller/logout';
-// $route['login'] = 'Controller/login';
+$route['login'] = 'Controller/login';
 
 $route['menu'] = 'Controller/menu';
+$route['insert'] = 'Controller/input';
+$route['get-persons/(:any)'] = 'Controller/get_persons/$1';
+$route['menuKeluar'] = 'Controller/menuKeluar';
+$route['insertKeluar'] = 'Controller/inputKeluar';
+$route['searchId'] = 'Controller/searchKodeRelasi';
+$route['insertMasuk'] = 'Insert/insert_data';
+$route['memo'] = 'Controller/memo';
+$route['inputMemo'] = 'Controller/inputMemo';
+$route['detailMasuk'] = 'Controller/detailMasuk';
+$route['detailKeluar'] = 'Controller/detailKeluar';
+$route['detailMemo'] = 'Controller/detailMemo';
+
+
+$route['sendMessage'] = 'FonnteController/kirimPesan';
