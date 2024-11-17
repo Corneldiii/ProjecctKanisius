@@ -57,32 +57,6 @@ class Controller extends CI_Controller
         }
     }
 
-
-    public function sendEmail()
-    {
-        $id = $this->input->post('id');
-
-        $data = $this->Model->getDataById($id);
-
-
-        $this->email->from('aldianocta178@gmail.com', 'admin');
-
-        $this->email->to('exdarkout@gmail.com');
-        $this->email->subject('Test Email dengan SMTP CodeIgniter');
-        $foto = './assets/pictSurat/bayu.png';
-        $this->email->attach($foto);
-
-        // Isi email
-        $this->email->message('Ini adalah email percobaan menggunakan SMTP di CodeIgniter 3.');
-
-        // Mengirim email
-        if ($this->email->send()) {
-            echo 'Email berhasil dikirim!';
-        } else {
-            echo $this->email->print_debugger();
-        }
-    }
-
     // http://localhost/surat/
     public function index()
     {

@@ -57,7 +57,7 @@ ON divID=LEFT(pegLastDivId,2) WHERE a.userId='" . $username . "' AND a.userPass=
                     OR dispoDivisi3 LIKE '" . $kodeDivisi . "%' OR dispoDivisi4 LIKE '" . $kodeDivisi . "%' OR dispoDivisi5 LIKE '" . $kodeDivisi . "%') ORDER BY nomor DESC";
         return $this->db->query($query);
     }
-    
+
     public function getSuratKeluar($kodeDivisi)
     {
         $query = "SELECT nomor, Tanggal, noSurat, tglSurat, relasiID, namaPerson, namaLembaga, hal, lampiran, keterangan FROM tb_surat WHERE LEFT(nomor,1)='2' AND divisi='" . $kodeDivisi . "' ORDER BY nomor DESC ";
@@ -157,5 +157,12 @@ ON divID=LEFT(pegLastDivId,2) WHERE a.userId='" . $username . "' AND a.userPass=
     {
         $this->db->where('nomor', $id);
         $this->db->update('tb_surat', $data);
+    }
+
+    public function getNoTelp($id)
+    {
+        $query = "SELECT pegHP, userNama , divNama FROM vUser WHERE userId = ?";
+        $result = $this->db->query($query, array($id))->row();
+        return $result;
     }
 }

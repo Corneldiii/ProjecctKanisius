@@ -251,7 +251,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 <div class="input-group" style="width: 300px;">
                                     <input type="text" class="form-control text-left" name="namaPerson" id="namaPerson" placeholder="Nama/Kode Relasi">
                                     <div class="input-group-append">
-                                        <button class="btn btn-secondary" id="searchPerson" type="button" data-toggle="modal" data-target="#modalRelasi">Cari</button>
+                                        <button class="btn btn-secondary" id="searchPerson" type="button">Cari</button>
                                     </div>
                                 </div>
                             </div>
@@ -309,18 +309,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             </div>
 
                             <div class="header">
-                                    <div class="form-group d-flex align-items-center">
-                                        <label for="kota" class="mr-2" style="width: 130px;">Kota</label>
-                                        <input type="text" class="form-control w-25" name="kota" id="kota" placeholder="Kota" readonly>
-                                    </div>
-                                    <div class="form-group d-flex align-items-center">
-                                        <label for="propinsi" class="mr-2" style="width: 130px;">Propinsi</label>
-                                        <input type="text" class="form-control w-25" name="propinsi" id="propinsi" placeholder="Propinsi" readonly>
-                                    </div>
-                                    <div class="form-group d-flex align-items-center">
-                                        <label for="kodepos" class="mr-2" style="width: 130px;">Kodepos</label>
-                                        <input type="text" class="form-control w-25" name="kodepos" id="kodepos" placeholder="Kodepos" readonly>
-                                    </div>
+                                <div class="form-group d-flex align-items-center">
+                                    <label for="kota" class="mr-2" style="width: 130px;">Kota</label>
+                                    <input type="text" class="form-control w-25" name="kota" id="kota" placeholder="Kota" readonly>
+                                </div>
+                                <div class="form-group d-flex align-items-center">
+                                    <label for="propinsi" class="mr-2" style="width: 130px;">Propinsi</label>
+                                    <input type="text" class="form-control w-25" name="propinsi" id="propinsi" placeholder="Propinsi" readonly>
+                                </div>
+                                <div class="form-group d-flex align-items-center">
+                                    <label for="kodepos" class="mr-2" style="width: 130px;">Kodepos</label>
+                                    <input type="text" class="form-control w-25" name="kodepos" id="kodepos" placeholder="Kodepos" readonly>
+                                </div>
                             </div>
 
                             <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
@@ -474,7 +474,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
         $("#tbody").html(html);
         $("#tabel").DataTable({
             "select": true,
-            "search" : true,
+            "search": true,
             "scrollX": true,
             "bSort": false,
             "scrollY": '427px',
@@ -525,6 +525,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     },
                     dataType: "json",
                     success: function(data) {
+                        $('#modalRelasi').modal('show');
                         $('#kodeRelasiList').empty();
 
 
@@ -562,7 +563,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 });
             } else {
                 console.log('test failed');
-                
+
                 $('#kodeRelasiList').html('');
             }
         });
@@ -570,6 +571,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
     });
 
     function getPersons(dispoNumber) {
+        $("#spinner, #overlay").show();
         var divisiID = document.getElementById('dispoDivisi' + dispoNumber).value;
 
         if (divisiID) {
@@ -581,7 +583,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     try {
                         var persons = JSON.parse(this.responseText);
                         console.log(persons);
-
+                        
+                        $("#spinner, #overlay").hide();
                         var select = document.getElementById('dispoNoreg' + dispoNumber);
                         select.innerHTML = '<option value="">Pilih Person</option>';
 
@@ -642,14 +645,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
             var isEmpty = false;
 
             formData.forEach((value, key) => {
-                if (typeof value === 'string' && !value.trim() && !['divisi2', 'divisi3', 'divisi4', 'divisi5', 'person2', 'person3', 'person4', 'person5'].includes(key) ) {
+
+                if (typeof value === 'string' && !value.trim() && !['divisi2', 'divisi3', 'divisi4', 'divisi5', 'person2', 'person3', 'person4', 'person5'].includes(key)) {
                     isEmpty = true;
                 }
             });
 
+            $("#spinner, #overlay").show();
             if (isEmpty) {
+                $("#spinner, #overlay").hide();
                 $('#errorToastBody').text('Harap isi semua field sebelum mengirim data.');
                 $('#errorToast').toast('show');
+
             } else {
                 $.ajax({
                     url: '<?= site_url("Insert/insert_data") ?>',
@@ -658,16 +665,27 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     contentType: false,
                     processData: false,
                     success: function(response) {
+                        var id = [
+                            $('#dispoNoreg1').val(),
+                            $('#dispoNoreg2').val(),
+                            $('#dispoNoreg3').val(),
+                            $('#dispoNoreg4').val(),
+                            $('#dispoNoreg5').val()
 
+                        ];
+
+                        console.log(id);
 
                         $.ajax({
                             url: '<?= site_url("FonnteController/kirimPesan") ?>',
                             method: 'POST',
                             data: {
                                 message: "Anda memiliki surat masuk baru dengan kode (" + kode + ") perihal " + perihal,
-                                url: 'http://surat.test/'
+                                url: 'http://surat.test/',
+                                userid: id
                             },
                             success: function(response) {
+                                $("#spinner, #overlay").hide();
                                 $('#successToast').toast('show');
                                 setTimeout(function() {
                                     location.reload();
