@@ -583,7 +583,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     try {
                         var persons = JSON.parse(this.responseText);
                         console.log(persons);
-                        
+
                         $("#spinner, #overlay").hide();
                         var select = document.getElementById('dispoNoreg' + dispoNumber);
                         select.innerHTML = '<option value="">Pilih Person</option>';
@@ -692,6 +692,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 }, 1000);
                             },
                             error: function(xhr, status, error) {
+                                $("#spinner, #overlay").hide();
                                 console.error('Error saat mengirim pesan:', error);
                                 $('#errorToastBody').text('Terjadi kesalahan saat mengirim pesan: ' + (xhr.responseText || error));
                                 $('#errorToast').toast('show');
@@ -699,6 +700,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         });
                     },
                     error: function(xhr, status, error) {
+                        $("#spinner, #overlay").hide();
                         console.error('Error saat menyimpan data:', error);
                         $('#errorToastBody').text('Terjadi kesalahan saat menyimpan data: ' + (xhr.responseText || error));
                         $('#errorToast').toast('show');
