@@ -462,6 +462,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <script>
     // gunakan Javascript dan jQuery
 
+    document.addEventListener('DOMContentLoaded', function() {
+        const fileInput = document.querySelector('#customFile');
+        const label = document.querySelector('label[for="customFile"]');
+
+        fileInput.addEventListener('change', function() {
+            const fileName = this.files[0] ? this.files[0].name : 'Masukan File';
+            label.innerHTML = fileName;
+        });
+    });
+
     $(document).ready(function() {
         $('#menuMenu').trigger('click');
 
@@ -645,6 +655,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         setPersonVal('#dispoNoreg3', data.dispoNoreg3);
                         setPersonVal('#dispoNoreg4', data.dispoNoreg4);
                         setPersonVal('#dispoNoreg5', data.dispoNoreg5);
+
+                        if (data.file) {
+                            const fileName = data.file.split('/').pop(); 
+                            $('#customFile').next('.custom-file-label').text(fileName);
+
+                            const downloadLink = `<a href="${data.file}" download class="btn btn-primary">Download</a>`;
+                            $('#customFile').parent().append(downloadLink);
+                        }
 
 
                     } else {

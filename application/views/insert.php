@@ -467,6 +467,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <script>
     // gunakan Javascript dan jQuery
 
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const fileInput = document.querySelector('#customFile');
+        const label = document.querySelector('label[for="customFile"]');
+
+        fileInput.addEventListener('change', function() {
+            const fileName = this.files[0] ? this.files[0].name : 'Masukan File';
+            label.innerHTML = fileName;
+        });
+    });
+
+
     $(document).ready(function() {
         $('#menuMenu').trigger('click');
 

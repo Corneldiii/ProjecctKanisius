@@ -64,13 +64,13 @@ class Insert extends CI_Controller
             $config['max_size'] = 2048;
 
             $this->upload->initialize($config);
-            var_dump($config['upload_path']);
+            // var_dump($config['upload_path']);
 
             if ($this->upload->do_upload('file')) {
                 $uploadData = $this->upload->data();
                 $filePath = 'file/' . $uploadData['file_name'];
                 echo "Upload berhasil!";
-                var_dump($uploadData);
+                // var_dump($uploadData);
             } else {
                 echo $this->upload->display_errors();
             }
