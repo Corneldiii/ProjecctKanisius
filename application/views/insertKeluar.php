@@ -204,7 +204,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 <label for="file" class="mr-4" style="width: 125px;">Upload File</label>
                                 <div class="custom-file d-flex justify-content-center align-items-center ml-4">
                                     <input type="file" class="custom-file-input" name="file" id="customFile" style="cursor: pointer;">
-                                    <label class="custom-file-label d-flex justify-content-left align-items-center w-75" for="customFile" style="cursor: pointer;">Masukan File</label>
+                                    <label class="custom-file-label d-flex justify-content-left align-items-center " for="customFile" style="cursor: pointer;">Masukan File</label>
                                 </div>
                             </div>
                         </div>
@@ -252,7 +252,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 <div class="input-group" style="width: 300px;">
                                     <input type="text" class="form-control text-left" name="namaPerson" id="namaPerson" placeholder="Nama/Kode Relasi">
                                     <div class="input-group-append">
-                                        <button class="btn btn-secondary" id="searchPerson" type="button" data-toggle="modal" data-target="#modalRelasi">Cari</button>
+                                        <button class="btn btn-secondary" id="searchPerson" type="button" >Cari</button>
                                     </div>
                                 </div>
                             </div>
@@ -481,6 +481,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <script>
     // gunakan Javascript dan jQuery
 
+    document.addEventListener('DOMContentLoaded', function() {
+        const fileInput = document.querySelector('#customFile');
+        const label = document.querySelector('label[for="customFile"]');
+
+        fileInput.addEventListener('change', function() {
+            const fileName = this.files[0] ? this.files[0].name : 'Masukan File';
+            label.innerHTML = fileName;
+        });
+    });
+
     $(document).ready(function() {
         $('#menuMenu').trigger('click');
 
@@ -488,6 +498,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
         $("#tbody").html(html);
         $("#tabel").DataTable({
             "select": true,
+            "search":true,
             "scrollX": true,
             "bSort": false,
             "scrollY": '427px',
@@ -538,6 +549,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     },
                     dataType: "json",
                     success: function(data) {
+                        $('#modalRelasi').modal('show');
                         $('#kodeRelasiList').empty();
 
 
@@ -565,6 +577,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     complete: function() {
                         $("#spinner, #overlay").hide();
                         $('#tabel').DataTable().destroy();
+                        $("#tbody").html(html);
+
 
                     },
                     error: function(xhr, status, error) {
