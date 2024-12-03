@@ -185,15 +185,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <!-- Header Section -->
                         <div class="header p-3">
                             <div class="form-group d-flex align-items-center">
-                                <label for="nomor" class="mr-2" style="width: 125px;">Nomor</label>
+                                <label for="nomor" class="mr-4" style="width: 125px;">Nomor</label>
                                 <input type="text" style="width: 200px;" class="form-control text-center" name="nomor" id="nomor" readonly>
                             </div>
                             <div class="form-group d-flex align-items-center">
-                                <label for="tanggal" class="mr-2" style="width: 125px;">Tanggal Input</label>
+                                <label for="tanggal" class="mr-4" style="width: 125px;">Tanggal Input</label>
                                 <input type="date" style="width: 200px;" class="form-control text-center" name="tanggal" id="tanggal">
                             </div>
                             <div class="form-group d-flex align-items-center">
-                                <label for="jenis" class="mr-2" style="width: 125px;">Jenis Surat</label>
+                                <label for="jenis" class="mr-4" style="width: 125px;">Jenis Surat</label>
                                 <select class="form-control" style="width: 200px;" id="jenis" name="jenis">
                                     <option>Surat</option>
                                     <option>Email</option>
@@ -216,15 +216,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
                 <div class="header p-3">
                     <div class="form-group d-flex align-items-center">
-                        <label for="nomorSurat" class="mr-2" style="width: 150px;">Nomor Surat</label>
+                        <label for="nomorSurat" class="mr-0.5" style="width: 150px;">Nomor Surat</label>
                         <input type="text" class="form-control text-left w-25" name="nomorSurat" id="nomorSurat" placeholder="Nomor Surat" readonly>
                     </div>
                     <div class="form-group d-flex align-items-center">
-                        <label for="nomorSuratFisik" class="mr-2" style="width: 150px;">Nomor Fisik Surat</label>
+                        <label for="nomorSuratFisik" class="mr-0.5" style="width: 150px;">Nomor Fisik Surat</label>
                         <input type="text" class="form-control text-left w-25" name="nomorSuratFisik" id="nomorSuratFisik" placeholder="Nomor Fisik Surat">
                     </div>
                     <div class="form-group d-flex align-items-center">
-                        <label for="tanggalSurat" class="mr-2" style="width: 150px;">Tanggal Fisik Surat</label>
+                        <label for="tanggalSurat" class="mr-0.5" style="width: 150px;">Tanggal Fisik Surat</label>
                         <input type="date" class="form-control text-left w-25" name="tanggalSurat" id="tanggalSurat">
                     </div>
                 </div>
