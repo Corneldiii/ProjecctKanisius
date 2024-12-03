@@ -196,12 +196,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     <option value="penawaran">Penawaran</option>
                                 </select>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="custom-file d-flex justify-content-center align-items-center">
-                            <input type="file" class="custom-file-input" name="file" id="customFile" style="cursor: pointer;">
-                            <label class="custom-file-label d-flex justify-content-left align-items-center w-75" for="customFile" style="cursor: pointer;">Masukan File</label>
+                            <div class="form-group d-flex align-items-center">
+                                <label for="file" class="mr-2" style="width: 125px;">Upload File</label>
+                                <div class="custom-file d-flex justify-content-center align-items-center ml-3">
+                                    <input type="file" class="custom-file-input" name="file" id="customFile" style="cursor: pointer;">
+                                    <label class="custom-file-label d-flex justify-content-left align-items-center w-75" for="customFile" style="cursor: pointer;">Masukan File</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -655,7 +656,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         setPersonVal('#dispoNoreg3', data.dispoNoreg3);
                         setPersonVal('#dispoNoreg4', data.dispoNoreg4);
                         setPersonVal('#dispoNoreg5', data.dispoNoreg5);
-
+                        console.log(data.file);
                         if (data.file) {
                             const fileName = data.file.split('/').pop(); 
                             $('#customFile').next('.custom-file-label').text(fileName);

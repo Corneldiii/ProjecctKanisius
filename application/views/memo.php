@@ -69,7 +69,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             </style>
 
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Daftar Surat Masuk</h1>
+                <h1 class="h3 mb-0 text-gray-800">Daftar Memo</h1>
             </div>
 
             <div class="form-group row">
@@ -89,15 +89,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     <table id="tabel" class="display nowrap" style="width:100%">
                         <thead style="color: black;">
                             <tr>
-                                <th style="width:10px" class="text-center align-middle">No. Memo</th>
-                                <th class="text-center align-middle">Tgl Input</th>
-                                <th class="text-center align-middle">No. Memo</th>
-                                <th class="text-center align-middle">Tgl Memo</th>
-                                <th class="text-center align-middle">Tujuan</th>
-                                <th class="text-center align-middle">Hal</th>
-                                <th class="text-center align-middle">Lampiran</th>
-                                <th class="text-center align-middle">Isi Memo</th>
-                                <th class="text-center align-middle ">Detail</th>
+                                <th style="width:10px" class="align-middle">No. Memo</th>
+                                <th class="align-middle">Tgl Input</th>
+                                <th class="align-middle">No. Memo</th>
+                                <th class="align-middle">Tgl Memo</th>
+                                <th class="align-middle">Tujuan</th>
+                                <th class="align-middle">Hal</th>
+                                <th class="align-middle">Lampiran</th>
+                                <th class="align-middle">Isi Memo</th>
+                                <th class="align-middle ">Detail</th>
                             </tr>
                         </thead>
                         <tbody id="tbody" name="tbody" style="color: black;"></tbody>
@@ -173,18 +173,30 @@ defined('BASEPATH') or exit('No direct script access allowed');
         success: function(data) {
             for (var i = 0; i < data.length; i++) {
                 console.log(data);
+
+                const formatDate = (tanggal) => {
+                    if (!tanggal) return '-';
+                    const date = new Date(tanggal);
+                    if (isNaN(date)) return tanggal;
+                    return new Intl.DateTimeFormat('id-ID', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric'
+                    }).format(date);
+                };  
+
                 html += '<tr>';
-                html += '<td class="text-center align-middle">' + (data[i].nomor ? data[i].nomor : '-') + '</td>';
-                html += '<td class="text-center align-middle">' + (data[i].Tanggal ? data[i].Tanggal : '-') + '</td>';
-                html += '<td class="text-center align-middle">' + (data[i].noSurat ? data[i].noSurat : '-') + '</td>';
-                html += '<td class="text-center align-middle">' + (data[i].tglSurat ? data[i].tglSurat : '-') + '</td>';
-                html += '<td class="text-center align-middle">' + (data[i].Nama ? data[i].Nama : '-') + '</td>';
-                html += '<td class="text-center align-middle">' + (data[i].hal ? data[i].hal : '-') + '</td>';
-                html += '<td class="text-center align-middle">' + (data[i].lampiran ? data[i].lampiran : '-') + '</td>';
-                html += '<td class="text-center align-middle">' + (data[i].keterangan ? data[i].keterangan : '-') + '</td>';
+                html += '<td class="align-middle">' + (data[i].nomor ? data[i].nomor : '-') + '</td>';
+                html += '<td class="align-middle">' + (data[i].Tanggal ? formatDate(data[i].Tanggal) : '-') + '</td>';
+                html += '<td class="align-middle">' + (data[i].noSurat ? data[i].noSurat : '-') + '</td>';
+                html += '<td class="align-middle">' + (data[i].tglSurat ? formatDate(data[i].tglSurat) : '-') + '</td>';
+                html += '<td class="align-middle">' + (data[i].Nama ? data[i].Nama : '-') + '</td>';
+                html += '<td class="align-middle">' + (data[i].hal ? data[i].hal : '-') + '</td>';
+                html += '<td class="align-middle">' + (data[i].lampiran ? data[i].lampiran : '-') + '</td>';
+                html += '<td class="align-middle">' + (data[i].keterangan ? data[i].keterangan : '-') + '</td>';
                 html += '<td class="text-center align-middle d-flex justify-content-center align-items-center">';
-                html += '<button type="button" class="btn btn-circle btn-detail  " data-id="' + data[i].nomor + '" data-toggle="modal" data-target="#detailModal">';
-                html += '<i class="fas fa-exclamation"></i>';
+                html += '<button type="button" class="btn btn-primary btn-detail  " data-id="' + data[i].nomor + '" data-toggle="modal" data-target="#detailModal">';
+                html += 'Detail';
                 html += '</button>';
                 html += '</td>';
                 html += '</tr>';

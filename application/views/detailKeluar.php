@@ -196,12 +196,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     <option value="penawaran">Penawaran</option>
                                 </select>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="custom-file d-flex justify-content-center align-items-center">
-                            <input type="file" class="custom-file-input" name="file" id="customFile" style="cursor: pointer;">
-                            <label class="custom-file-label d-flex justify-content-left align-items-center w-75" for="customFile" style="cursor: pointer;">Masukan File</label>
+                            <div class="form-group d-flex align-items-center">
+                                <label for="file" class="mr-2" style="width: 125px;">Upload File</label>
+                                <div class="custom-file d-flex justify-content-center align-items-center ml-3">
+                                    <input type="file" class="custom-file-input" name="file" id="customFile" style="cursor: pointer;">
+                                    <label class="custom-file-label d-flex justify-content-left align-items-center w-75" for="customFile" style="cursor: pointer;">Masukan File</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -498,6 +499,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         $('#kota').val(data.kota);
                         $('#propinsi').val(data.propinsi);
                         $('#kodepos').val(data.kodepos);
+
+                        console.log(data.file);
+                        if (data.file) {
+                            const fileName = data.file.split('/').pop(); 
+                            $('#customFile').next('.custom-file-label').text(fileName);
+
+                            const downloadLink = `<a href="${data.file}" download class="btn btn-primary">Download</a>`;
+                            $('#customFile').parent().append(downloadLink);
+                        }
 
 
 
