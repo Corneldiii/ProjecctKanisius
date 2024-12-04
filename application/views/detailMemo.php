@@ -185,11 +185,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <!-- Header Section -->
                         <div class="header p-3">
                             <div class="form-group d-flex align-items-center">
-                                <label for="tanggal" class="mr-2" style="width: 125px;">Tanggal Input</label>
+                                <label for="tanggal" class="mr-4" style="width: 125px;">Tanggal Input</label>
                                 <input type="date" style="width: 200px;" class="form-control text-center" name="tanggal" id="tanggal" readonly>
                             </div>
                             <div class="form-group d-flex align-items-center">
-                                <label for="jenis" class="mr-2" style="width: 125px;">Jenis Surat</label>
+                                <label for="jenis" class="mr-4" style="width: 125px;">Jenis Surat</label>
                                 <select class="form-control" style="width: 200px;" id="jenis" name="jenis">
                                     <option value="surat">Surat</option>
                                     <option value="email">Email</option>
@@ -197,8 +197,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 </select>
                             </div>
                             <div class="form-group d-flex align-items-center">
-                                <label for="file" class="mr-2" style="width: 125px;">Upload File</label>
-                                <div class="custom-file d-flex justify-content-center align-items-center ml-3">
+                                <label for="file" class="mr-4" style="width: 125px;">Upload File</label>
+                                <div class="custom-file d-flex justify-content-center align-items-center ml-4">
                                     <input type="file" class="custom-file-input" name="file" id="customFile" style="cursor: pointer;">
                                     <label class="custom-file-label d-flex justify-content-left align-items-center" for="customFile" style="cursor: pointer;">Masukan File</label>
                                 </div>
@@ -213,15 +213,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
                 <div class="header p-3">
                     <div class="form-group d-flex align-items-center">
-                        <label for="nomorSurat" class="mr-2" style="width: 150px;">Nomor Surat</label>
+                        <label for="nomorSurat" class="mr-0.5" style="width: 150px;">Nomor Surat</label>
                         <input type="text" class="form-control text-left w-25" name="nomorSurat" id="nomorSurat" placeholder="Nomor Surat" readonly>
                     </div>
                     <div class="form-group d-flex align-items-center">
-                        <label for="nomorSuratFisik" class="mr-2" style="width: 150px;">Nomor Fisik Surat</label>
+                        <label for="nomorSuratFisik" class="mr-0.5" style="width: 150px;">Nomor Fisik Surat</label>
                         <input type="text" class="form-control text-left w-25" name="nomorSuratFisik" id="nomorSuratFisik" placeholder="Nomor Fisik Surat">
                     </div>
                     <div class="form-group d-flex align-items-center">
-                        <label for="tanggalSurat" class="mr-2" style="width: 150px;">Tanggal Fisik Surat</label>
+                        <label for="tanggalSurat" class="mr-0.5" style="width: 150px;">Tanggal Fisik Surat</label>
                         <input type="date" class="form-control text-left w-25" name="tanggalSurat" id="tanggalSurat">
                     </div>
                 </div>
@@ -230,15 +230,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     <div class="col p-4">
                         <div class="input-lanjutan">
                             <div class="form-group d-flex align-items-center">
-                                <label for="hal" style="width: 145px;">Hal</label>
+                                <label for="hal" class="mr-2" style="width: 145px;">Hal</label>
                                 <input type="text" class="form-control text-left w-50" name="hal" id="hal" placeholder="Perihal Surat">
                             </div>
                             <div class="form-group d-flex align-items-center">
-                                <label for="lampiran" style="width: 145px;">Lampiran</label>
+                                <label for="lampiran" class="mr-2" style="width: 145px;">Lampiran</label>
                                 <input type="text" class="form-control text-left w-50" name="lampiran" id="lampiran" placeholder="Lampiran">
                             </div>
                             <div class="form-group d-flex align-items-center">
-                                <label for="keterangan" style="width: 145px;">Deskripsi</label>
+                                <label for="keterangan" class="mr-2" style="width: 145px;">Deskripsi</label>
                                 <textarea class="form-control text-left w-50" id="keterangan" name="keterangan" rows="4" placeholder="Ringkasan Isi Surat"></textarea>
                             </div>
 
