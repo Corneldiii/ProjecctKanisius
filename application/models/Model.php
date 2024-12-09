@@ -65,7 +65,7 @@ ON divID=LEFT(pegLastDivId,2) WHERE a.userId='" . $username . "' AND a.userPass=
     }
     public function getMemo($kodeDivisi)
     {
-        $query = "SELECT nomor, Tanggal, noSurat, tglSurat, CONCAT(a.`userNama`,',',b.userNama) Nama ,hal, lampiran, keterangan FROM tb_surat LEFT JOIN vUser a ON a.userId=dispoNoreg1 LEFT JOIN vUser b ON a.userId=dispoNoreg2 LEFT JOIN vUser c ON a.userId=dispoNoreg3 LEFT JOIN vUser d ON a.userId=dispoNoreg4 LEFT JOIN vUser e ON a.userId=dispoNoreg5 WHERE LEFT(nomor,1)='3' AND (divisi='" . $kodeDivisi . "' OR LEFT(dispoDivisi1,2)='" . $kodeDivisi . "' OR LEFT(dispoDivisi2,2)='" . $kodeDivisi . "' OR LEFT(dispoDivisi3,2)='" . $kodeDivisi . "' OR LEFT(dispoDivisi4,2)='" . $kodeDivisi . "' OR LEFT(dispoDivisi5,2)='" . $kodeDivisi . "');";
+        $query = "SELECT nomor, Tanggal, noSurat, tglSurat, CONCAT(a.`userNama`,',',b.userNama) Nama ,hal, lampiran, keterangan FROM tb_surat LEFT JOIN vUser a ON a.userId=dispoNoreg1 LEFT JOIN vUser b ON a.userId=dispoNoreg2 LEFT JOIN vUser c ON a.userId=dispoNoreg3 LEFT JOIN vUser d ON a.userId=dispoNoreg4 LEFT JOIN vUser e ON a.userId=dispoNoreg5 WHERE LEFT(nomor,1)='3' AND (divisi='" . $kodeDivisi . "' OR LEFT(dispoDivisi1,2)='" . $kodeDivisi . "' OR LEFT(dispoDivisi2,2)='" . $kodeDivisi . "' OR LEFT(dispoDivisi3,2)='" . $kodeDivisi . "' OR LEFT(dispoDivisi4,2)='" . $kodeDivisi . "' OR LEFT(dispoDivisi5,2)='" . $kodeDivisi . "')ORDER BY NOMOR DESC;";
         return $this->db->query($query);
     }
 

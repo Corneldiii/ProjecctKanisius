@@ -185,8 +185,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <!-- Header Section -->
                         <div class="header p-3">
                             <div class="form-group d-flex align-items-center">
+                                <label for="nomorSurat" class="mr-0.5" style="width: 150px;">Nomor Surat</label>
+                                <input type="text" class="form-control text-left w-25" name="nomorSurat" id="nomorSurat" placeholder="Nomor Surat" readonly>
+                            </div>
+                            <div class="form-group d-flex align-items-center">
                                 <label for="tanggal" class="mr-4" style="width: 125px;">Tanggal Input</label>
-                                <input type="date" style="width: 200px;" class="form-control text-center" name="tanggal" id="tanggal" readonly>
+                                <input type="date" style="width: 200px;" class="form-control text-left" name="tanggal" id="tanggal" readonly>
                             </div>
                             <div class="form-group d-flex align-items-center">
                                 <label for="jenis" class="mr-4" style="width: 125px;">Jenis Surat</label>
@@ -198,9 +202,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             </div>
                             <div class="form-group d-flex align-items-center">
                                 <label for="file" class="mr-4" style="width: 125px;">Upload File</label>
-                                <div class="custom-file d-flex justify-content-center align-items-center ml-4">
+                                <div class="custom-file d-flex justify-content-center align-items-center ml-3">
                                     <input type="file" class="custom-file-input" name="file" id="customFile" style="cursor: pointer;">
-                                    <label class="custom-file-label d-flex justify-content-left align-items-center" for="customFile" style="cursor: pointer;">Masukan File</label>
+                                    <label class="custom-file-label d-flex justify-content-left align-items-center w-75" for="customFile" style="cursor: pointer;color:black;">Masukan File</label>
                                 </div>
                             </div>
                         </div>
@@ -211,10 +215,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
 
                 <div class="header p-3">
-                    <div class="form-group d-flex align-items-center">
-                        <label for="nomorSurat" class="mr-0.5" style="width: 150px;">Nomor Surat</label>
-                        <input type="text" class="form-control text-left w-25" name="nomorSurat" id="nomorSurat" placeholder="Nomor Surat" readonly>
-                    </div>
+
                     <div class="form-group d-flex align-items-center">
                         <label for="nomorSuratFisik" class="mr-0.5" style="width: 150px;">Nomor Fisik Surat</label>
                         <input type="text" class="form-control text-left w-25" name="nomorSuratFisik" id="nomorSuratFisik" placeholder="Nomor Fisik Surat">
@@ -248,7 +249,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 <div class="input-group" style="width: 300px;">
                                     <input type="text" class="form-control text-left" name="namaPerson" id="namaPerson" placeholder="Nama/Kode Relasi">
                                     <div class="input-group-append">
-                                        <button class="btn btn-secondary" id="searchPerson" type="button" data-toggle="modal" data-target="#modalRelasi">Cari</button>
+                                        <button class="btn btn-secondary" id="searchPerson" type="button">Cari</button>
                                     </div>
                                 </div>
                             </div>
@@ -367,6 +368,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <script>
     // gunakan Javascript dan jQuery
 
+    document.addEventListener('DOMContentLoaded', function() {
+        const fileInput = document.querySelector('#customFile');
+        const label = document.querySelector('label[for="customFile"]');
+
+        fileInput.addEventListener('change', function() {
+            const fileName = this.files[0] ? this.files[0].name : 'Masukan File';
+            label.innerHTML = fileName;
+        });
+    });
+
     $(document).ready(function() {
         $('#menuMenu').trigger('click');
 
@@ -423,6 +434,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     },
                     dataType: "json",
                     success: function(data) {
+                        $('#modalRelasi').modal('show');
                         $('#kodeRelasiList').empty();
 
 
@@ -502,11 +514,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
                         console.log(data.file);
                         if (data.file) {
-                            const fileName = data.file.split('/').pop(); 
+                            const fileName = data.file.split('/').pop();
                             $('#customFile').next('.custom-file-label').text(fileName);
 
                             const downloadLink = `<a href="${data.file}" download class="btn btn-primary">Download</a>`;
                             $('#customFile').parent().append(downloadLink);
+                            console.log(fileName);
                         }
 
 
@@ -551,6 +564,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 $('#errorToastBody').text('Harap isi semua field sebelum mengirim data.');
                 $('#errorToast').toast('show');
             } else {
+                $("#spinner, #overlay").show();
                 $.ajax({
                     url: '<?= site_url("Update/update_data") ?>',
                     method: 'POST',
@@ -558,9 +572,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     contentType: false,
                     processData: false,
                     success: function(response) {
-                        $('#successToast').toast('show');
                         setTimeout(function() {
-                            location.reload();
+                            $("#spinner, #overlay").show();
+                            sessionStorage.setItem('showToast', 'true');
+                            sessionStorage.setItem('Message', 'Data berhasil diUpdate!!');
+                            window.location.href = '/menuKeluar';
                         }, 1000);
                     },
                     error: function(xhr, status, error) {

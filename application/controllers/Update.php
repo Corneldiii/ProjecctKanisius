@@ -10,6 +10,7 @@ class Update extends CI_Controller
         parent::__construct();
         $this->load->library('form_validation');
         $this->load->helper('url');
+        $this->load->library('upload');
         $this->load->helper('date');
         $this->load->model("Model");
         $this->load->library('session');

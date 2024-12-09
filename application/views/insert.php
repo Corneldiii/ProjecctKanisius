@@ -54,17 +54,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <div class="container-fluid">
 
             <style>
-                /* Modal Tabel */
-
-                /* Atur tabel agar mengikuti lebar modal */
-                .table-fixed {
+                / * Modal Tabel */ / * Atur tabel agar mengikuti lebar modal */ .table-fixed {
                     width: 100%;
                     table-layout: fixed;
                     border-collapse: collapse;
                 }
 
-                /* Header Tabel */
-                .table-fixed thead th {
+                / * Header Tabel */ .table-fixed thead th {
                     background-color: #4CAF50;
                     color: white;
                     font-weight: bold;
@@ -75,8 +71,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     box-sizing: border-box;
                 }
 
-                /* Kolom Tabel dengan min-width */
-                .table-fixed th,
+                / * Kolom Tabel dengan min-width */ .table-fixed th,
                 .table-fixed td {
                     overflow: hidden;
                     text-overflow: ellipsis;
@@ -86,11 +81,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     border: 1px solid #ddd;
                     box-sizing: border-box;
                     min-width: 50px;
-                    /* Lebar minimum */
+                    / * Lebar minimum */
                 }
 
-                /* Tentukan lebar kolom untuk setiap kolom */
-                .table-fixed th:nth-child(1),
+                / * Tentukan lebar kolom untuk setiap kolom */ .table-fixed th:nth-child(1),
                 .table-fixed td:nth-child(1) {
                     width: 5%;
                     min-width: 40px;
@@ -138,8 +132,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     min-width: 80px;
                 }
 
-                /* Warna alternatif dan hover */
-                .table-fixed tbody tr:nth-child(even) {
+                / * Warna alternatif dan hover */ .table-fixed tbody tr:nth-child(even) {
                     background-color: #f9f9f9;
                 }
 
@@ -147,8 +140,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     background-color: #e9ecef;
                 }
 
-                /* Responsif */
-                @media (max-width: 768px) {
+                / * Responsif */ @media (max-width: 768px) {
 
                     .table-fixed th,
                     .table-fixed td {
@@ -185,15 +177,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <!-- Header Section -->
                         <div class="header p-3">
                             <div class="form-group d-flex align-items-center">
-                                <label for="nomor" class="mr-4" style="width: 125px;">Nomor</label>
-                                <input type="text" style="width: 200px;" class="form-control text-center" name="nomor" id="nomor" readonly>
+                                <label for="nomorSurat" class="mr-0.5" style="width: 150px;">Nomor Surat</label>
+                                <input type="text" class="form-control text-left" style="width: 200px;" name="nomorSurat" id="nomorSurat" placeholder="Nomor Surat" readonly>
                             </div>
                             <div class="form-group d-flex align-items-center">
                                 <label for="tanggal" class="mr-4" style="width: 125px;">Tanggal Input</label>
-                                <input type="date" style="width: 200px;" class="form-control text-center" name="tanggal" id="tanggal">
+                                <input type="date" style="width: 200px;" class="form-control text-left" name="tanggal" id="tanggal">
                             </div>
                             <div class="form-group d-flex align-items-center">
-                                <label for="jenis" class="mr-4" style="width: 125px;">Jenis Surat</label>
+                                <label for="jenis" class="mr-4" style="width: 125px;">Jenis Surat *</label>
                                 <select class="form-control" style="width: 200px;" id="jenis" name="jenis">
                                     <option>Surat</option>
                                     <option>Email</option>
@@ -204,7 +196,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 <label for="file" class="mr-4" style="width: 125px;">Upload File</label>
                                 <div class="custom-file d-flex justify-content-center align-items-center ml-4">
                                     <input type="file" class="custom-file-input" name="file" id="customFile" style="cursor: pointer;">
-                                    <label class="custom-file-label d-flex justify-content-left align-items-center " for="customFile" style="cursor: pointer;">Masukan File</label>
+                                    <label class="custom-file-label d-flex justify-content-left align-items-center " for="customFile" style="cursor: pointer;color:black;">Masukan File</label>
                                 </div>
                             </div>
                         </div>
@@ -215,16 +207,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
 
                 <div class="header p-3">
+
                     <div class="form-group d-flex align-items-center">
-                        <label for="nomorSurat" class="mr-0.5" style="width: 150px;">Nomor Surat</label>
-                        <input type="text" class="form-control text-left w-25" name="nomorSurat" id="nomorSurat" placeholder="Nomor Surat" readonly>
-                    </div>
-                    <div class="form-group d-flex align-items-center">
-                        <label for="nomorSuratFisik" class="mr-0.5" style="width: 150px;">Nomor Fisik Surat</label>
+                        <label for="nomorSuratFisik" class="mr-0.5" style="width: 150px;">Nomor Fisik Surat *</label>
                         <input type="text" class="form-control text-left w-25" name="nomorSuratFisik" id="nomorSuratFisik" placeholder="Nomor Fisik Surat">
                     </div>
                     <div class="form-group d-flex align-items-center">
-                        <label for="tanggalSurat" class="mr-0.5" style="width: 150px;">Tanggal Fisik Surat</label>
+                        <label for="tanggalSurat" class="mr-0.5" style="width: 150px;">Tanggal Fisik Surat *</label>
                         <input type="date" class="form-control text-left w-25" name="tanggalSurat" id="tanggalSurat">
                     </div>
                 </div>
@@ -233,22 +222,22 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     <div class="col p-4">
                         <div class="input-lanjutan">
                             <div class="form-group d-flex align-items-center">
-                                <label for="hal" class="mr-2" style="width: 145px;">Hal</label>
+                                <label for="hal" class="mr-2" style="width: 145px;">Hal *</label>
                                 <input type="text" class="form-control text-left w-50" name="hal" id="hal" placeholder="Perihal Surat">
                             </div>
                             <div class="form-group d-flex align-items-center">
-                                <label for="lampiran" class="mr-2" style="width: 145px;">Lampiran</label>
+                                <label for="lampiran" class="mr-2" style="width: 145px;">Lampiran *</label>
                                 <input type="text" class="form-control text-left w-50" name="lampiran" id="lampiran" placeholder="Lampiran">
                             </div>
                             <div class="form-group d-flex align-items-center">
-                                <label for="keterangan" class="mr-2" style="width: 145px;">Deskripsi</label>
+                                <label for="keterangan" class="mr-2" style="width: 145px;">Deskripsi *</label>
                                 <textarea class="form-control text-left w-50" id="keterangan" name="keterangan" rows="4" placeholder="Ringkasan Isi Surat"></textarea>
                             </div>
 
                             <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
 
                             <div class="form-group d-flex align-items-center">
-                                <label for="namaPerson" class="mr-3" style="width: 135px;">Cari Nama/Kode Relasi</label>
+                                <label for="namaPerson" class="mr-3" style="width: 135px;">Cari Nama/Kode Relasi *</label>
                                 <div class="input-group" style="width: 300px;">
                                     <input type="text" class="form-control text-left" name="namaPerson" id="namaPerson" placeholder="Nama/Kode Relasi">
                                     <div class="input-group-append">
@@ -296,30 +285,30 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
                             <div class="header">
                                 <div class="form-group d-flex align-items-center ">
-                                    <label for="kodeRelasi"  class="mr-2 ml-1" style="width: 140px;" >Kode Relasi</label>
+                                    <label for="kodeRelasi" class="mr-2 ml-1" style="width: 140px;">Kode Relasi *</label>
                                     <input type="text" class="form-control w-25 text-left" name="kodeRelasi" id="kodeRelasi" placeholder="kode Rlasi" readonly>
                                 </div>
                                 <div class="form-group d-flex align-items-center">
-                                    <label for="nsmsLembaga" class="mr-2 ml-1" style="width: 140px;">Nama Lembaga</label>
+                                    <label for="nsmsLembaga" class="mr-2 ml-1" style="width: 140px;">Nama Lembaga *</label>
                                     <input type="text" class="form-control w-25 text-left" name="namaLembaga" id="namaLembaga" placeholder="Nama Lembaga" readonly>
                                 </div>
                                 <div class="form-group d-flex align-items-center">
-                                    <label for="alamat" class="mr-2 ml-1" style="width: 140px;">Alamat</label>
+                                    <label for="alamat" class="mr-2 ml-1" style="width: 140px;">Alamat *</label>
                                     <input type="text" class="form-control w-25 text-left" name="alamat" id="alamat" placeholder="Alamat" readonly>
                                 </div>
                             </div>
 
                             <div class="header">
                                 <div class="form-group d-flex align-items-center">
-                                    <label for="kota" class="mr-3 ml-1" style="width: 130px;">Kota</label>
+                                    <label for="kota" class="mr-3 ml-1" style="width: 130px;">Kota *</label>
                                     <input type="text" class="form-control w-25" name="kota" id="kota" placeholder="Kota" readonly>
                                 </div>
                                 <div class="form-group d-flex align-items-center">
-                                    <label for="propinsi" class="mr-3 ml-1" style="width: 130px;">Propinsi</label>
+                                    <label for="propinsi" class="mr-3 ml-1" style="width: 130px;">Propinsi *</label>
                                     <input type="text" class="form-control w-25" name="propinsi" id="propinsi" placeholder="Propinsi" readonly>
                                 </div>
                                 <div class="form-group d-flex align-items-center">
-                                    <label for="kodepos" class="mr-3 ml-1" style="width: 130px;">Kodepos</label>
+                                    <label for="kodepos" class="mr-3 ml-1" style="width: 130px;">Kodepos *</label>
                                     <input type="text" class="form-control w-25" name="kodepos" id="kodepos" placeholder="Kodepos" readonly>
                                 </div>
                             </div>
@@ -331,7 +320,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
                                     <!-- Disposisi 1 dan Person 1 -->
                                     <div class="form-group row">
-                                        <label for="dispoDivisi1" class="col-sm-2 col-form-label">Disposisi 1</label>
+                                        <label for="dispoDivisi1" class="col-sm-2 col-form-label">Disposisi 1 *</label>
                                         <div class="col-sm-4">
                                             <select class="form-control" id="dispoDivisi1" name="divisi1" onchange="getPersons(1)">
                                                 <option value="">Pilih Divisi</option>
@@ -340,7 +329,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
-                                        <label for="dispoNoreg1" class="col-sm-2 col-form-label">Person 1</label>
+                                        <label for="dispoNoreg1" class="col-sm-2 col-form-label">Person 1 *</label>
                                         <div class="col-sm-4">
                                             <select class="form-control" name="person1" id="dispoNoreg1">
                                                 <option value="">Pilih Person</option>
@@ -554,8 +543,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 html += '<td class="text-center align-middle" style="cursor:pointer;">' + (item.pronama ? item.pronama : '-') + '</td>';
 
                                 html += '</tr>';
-
-                                no++;
                             });
                             $("#tbody").html(html);
 
@@ -664,13 +651,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 }
             });
 
-            $("#spinner, #overlay").show();
             if (isEmpty) {
-                $("#spinner, #overlay").hide();
+                // $("#spinner, #overlay").hide();
                 $('#errorToastBody').text('Harap isi semua field sebelum mengirim data.');
                 $('#errorToast').toast('show');
 
             } else {
+                $("#spinner, #overlay").show();
                 $.ajax({
                     url: '<?= site_url("Insert/insert_data") ?>',
                     method: 'POST',
@@ -698,10 +685,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 userid: id
                             },
                             success: function(response) {
-                                $("#spinner, #overlay").hide();
-                                $('#successToast').toast('show');
                                 setTimeout(function() {
-                                    location.reload();
+                                    $("#spinner, #overlay").show();
+                                    sessionStorage.setItem('showToast', 'true');
+                                    sessionStorage.setItem('Message', 'Data berhasil di Simpan!!');
+                                    window.location.href = '/memo';
                                 }, 1000);
                             },
                             error: function(xhr, status, error) {

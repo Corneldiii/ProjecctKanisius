@@ -30,6 +30,8 @@ class Controller extends CI_Controller
         redirect();
     }
 
+    // fungsi dibawah adalah fungsi pembantu
+
     public function searchKodeRelasi()
     {
         $person = $this->input->post('person');
@@ -56,6 +58,25 @@ class Controller extends CI_Controller
             echo json_encode($output);
         }
     }
+    public function get_persons($divisiID)
+    {
+        $persons = $this->Model->get_karyawan($divisiID);
+        header('Content-Type: application/json');
+        echo json_encode($persons);
+        // var_dump($persons);
+    }
+    public function is_login()
+    {
+        if ($_SESSION['login_surat'] !== true) {
+            $this->session->set_flashdata('type', 'alert-danger');
+            $this->session->set_flashdata('izin',  '<strong>Peringatan!</strong> Login Terlebih Dahulu!!');
+            redirect('index');
+            exit();
+        }
+    }
+
+
+    //Controller dibawah di fungsikan untuk menampilkan view insert dan update
 
     // http://localhost/surat/
     public function index()
@@ -66,12 +87,14 @@ class Controller extends CI_Controller
     // http://localhost/surat/menu
     public function menu()
     {
+        $this->is_login();
         $data['kodeDiv'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
         $this->load->view('header', $data);
         $this->load->view('menu');
     }
     public function input()
     {
+        $this->is_login();
         $data['divisi'] = $this->Model->get_divisi();
         $data['kodeDiv'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
         $data['noFinal'] = $this->Model->getNoSurat(1);
@@ -80,22 +103,24 @@ class Controller extends CI_Controller
         $this->load->view('header', $data);
         $this->load->view('insert', $data);
     }
-
-    public function get_persons($divisiID)
+    public function detailMasuk()
     {
-        $persons = $this->Model->get_karyawan($divisiID);
-        header('Content-Type: application/json');
-        echo json_encode($persons);
-        // var_dump($persons);
+        $this->is_login();
+        $data['kodeDiv'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
+        $data['divisi'] = $this->Model->get_divisi();
+        $this->load->view('header', $data);
+        $this->load->view('detailMasuk', $data);
     }
     public function menuKeluar()
     {
+        $this->is_login();
         $data['kodeDiv'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
         $this->load->view('header', $data);
         $this->load->view('menuKeluar');
     }
     public function inputKeluar()
     {
+        $this->is_login();
         $data['divisi'] = $this->Model->get_divisi();
         $data['kodeDiv'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
         $data['noFinal'] = $this->Model->getNoSurat(2);
@@ -106,18 +131,25 @@ class Controller extends CI_Controller
         $this->load->view('header', $data);
         $this->load->view('insertKeluar', $data);
     }
+    public function detailKeluar()
+    {
+        $this->is_login();
+        $data['kodeDiv'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
+        $this->load->view('header', $data);
+        $this->load->view('detailKeluar');
+    }
 
-    // http://localhost/surat/memo
     public function memo()
     {
+        $this->is_login();
         $data['kodeDiv'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
-        $this->load->view('header', $data); 
+        $this->load->view('header', $data);
         $this->load->view('memo');
-
     }
 
     public function inputMemo()
     {
+        $this->is_login();
         $data['divisi'] = $this->Model->get_divisi();
         $data['kodeDiv'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
         $data['noFinal'] = $this->Model->getNoSurat(3);
@@ -129,20 +161,12 @@ class Controller extends CI_Controller
         $this->load->view('inputMemo', $data);
     }
 
-    public function detailMasuk(){
+    public function detailMemo()
+    {
+        $this->is_login();
         $data['kodeDiv'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
         $data['divisi'] = $this->Model->get_divisi();
-        $this->load->view('header', $data); 
-        $this->load->view('detailMasuk',$data);
-    }
-    public function detailKeluar(){
-        $data['kodeDiv'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
-        $this->load->view('header', $data); 
-        $this->load->view('detailKeluar');
-    }
-    public function detailMemo(){
-        $data['kodeDiv'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
-        $this->load->view('header', $data); 
+        $this->load->view('header', $data);
         $this->load->view('detailMemo');
     }
 }

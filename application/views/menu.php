@@ -15,6 +15,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
             </ul>
         </nav>
 
+        <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000" style="position: fixed; top: 20px; right: 20px;">
+            <div class="toast-header">
+                <strong class="mr-auto text-success">Sukses</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                Data berhasil di Perbaharui!
+            </div>
+        </div>
+
         <div class="container-fluid">
 
             <style>
@@ -71,6 +83,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 class="h3 mb-0 text-gray-800">Daftar Surat Masuk</h1>
             </div>
+
+            <a class=" btn btn-primary text-light" style="text-decoration: none;" href="insert">+</a>
 
             <div class="form-group row">
                 <div class="col-sm-12">
@@ -156,6 +170,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 <script>
     $(document).ready(function() {
+
+        if (sessionStorage.getItem('showToast') === 'true') {
+            $('#successToast').toast('show');
+            $('#successToast .toast-body').text(sessionStorage.getItem('Message'));
+            sessionStorage.removeItem('showToast');
+            sessionStorage.removeItem('Message');
+        }
         $('#menuMenu').trigger('click');
         $('#tabel').DataTable({
             "scrollX": true,
