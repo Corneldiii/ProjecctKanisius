@@ -179,7 +179,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
             <!-- form input surat dari admin sekretaris (start) -->
 
-            <form class="user" id="updateMasuk" action="<?= site_url("insert") ?>" method="post">
+            <form class="user" id="updateKeluar" action="<?= site_url("update") ?>" method="post">
                 <div class="form-group row">
                     <div class="col-8">
                         <!-- Header Section -->
@@ -255,7 +255,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             </div>
 
                             <div class="modal fade" id="modalRelasi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-xl">
+                                <div class="modal-dialog modal-dialog-scrollable modal-xl">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -458,6 +458,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         }
                     },
                     complete: function() {
+                    
                         $("#spinner, #overlay").hide();
                         $('#tabel').DataTable().destroy();
                         $("#tbody").html(html);
@@ -545,7 +546,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 
     $(document).ready(function() {
-        $('#updateMasuk').on('submit', function(event) {
+        $('#updateKeluar').on('submit', function(event) {
             event.preventDefault();
             var kode = $('#nomorSurat').val();
 
@@ -566,7 +567,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             } else {
                 $("#spinner, #overlay").show();
                 $.ajax({
-                    url: '<?= site_url("Update/update_data") ?>',
+                    url: '<?= site_url("Update/update_keluar") ?>',
                     method: 'POST',
                     data: formData,
                     contentType: false,

@@ -54,13 +54,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <div class="container-fluid">
 
             <style>
-                / * Modal Tabel */ / * Atur tabel agar mengikuti lebar modal */ .table-fixed {
+                .table-fixed {
                     width: 100%;
                     table-layout: fixed;
                     border-collapse: collapse;
                 }
 
-                / * Header Tabel */ .table-fixed thead th {
+                .table-fixed thead th {
                     background-color: #4CAF50;
                     color: white;
                     font-weight: bold;
@@ -71,7 +71,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     box-sizing: border-box;
                 }
 
-                / * Kolom Tabel dengan min-width */ .table-fixed th,
+                .table-fixed th,
                 .table-fixed td {
                     overflow: hidden;
                     text-overflow: ellipsis;
@@ -81,10 +81,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     border: 1px solid #ddd;
                     box-sizing: border-box;
                     min-width: 50px;
-                    / * Lebar minimum */
                 }
 
-                / * Tentukan lebar kolom untuk setiap kolom */ .table-fixed th:nth-child(1),
+                .table-fixed th:nth-child(1),
                 .table-fixed td:nth-child(1) {
                     width: 5%;
                     min-width: 40px;
@@ -132,7 +131,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     min-width: 80px;
                 }
 
-                / * Warna alternatif dan hover */ .table-fixed tbody tr:nth-child(even) {
+                .table-fixed tbody tr:nth-child(even) {
                     background-color: #f9f9f9;
                 }
 
@@ -140,7 +139,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     background-color: #e9ecef;
                 }
 
-                / * Responsif */ @media (max-width: 768px) {
+                @media (max-width: 768px) {
 
                     .table-fixed th,
                     .table-fixed td {
@@ -248,7 +247,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
                             <!-- Modal baru judul eror-->
                             <div class="modal fade" id="modalRelasi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-xl">
+                                <div class="modal-dialog modal-dialog-scrollable modal-xl">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -689,7 +688,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     $("#spinner, #overlay").show();
                                     sessionStorage.setItem('showToast', 'true');
                                     sessionStorage.setItem('Message', 'Data berhasil di Simpan!!');
-                                    window.location.href = '/memo';
+                                    window.location.href = '/menu';
                                 }, 1000);
                             },
                             error: function(xhr, status, error) {

@@ -66,6 +66,7 @@ class Update extends CI_Controller
             }
         }
 
+
         if ($jenis == 'surat') {
             $jenis = 1;
         } else if ($jenis == 'email') {

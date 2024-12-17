@@ -84,7 +84,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <h1 class="h3 mb-0 text-gray-800">Daftar Surat Masuk</h1>
             </div>
 
-            <a class=" btn btn-primary text-light" style="text-decoration: none;" href="insert">+</a>
+            <a class=" btn btn-primary text-light" style="text-decoration: none;" href="insert">+ Tambah</a>
 
             <div class="form-group row">
                 <div class="col-sm-12">
@@ -216,7 +216,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 html += '<td class="align-middle">' + (data[i].namaPerson ? data[i].namaPerson : '-') + '</td>';
                 html += '<td class="align-middle">' + (data[i].namaLembaga ? data[i].namaLembaga : '-') + '</td>';
                 html += '<td class="align-middle">' + (data[i].hal ? data[i].hal : '-') + '</td>';
-                html += '<td class="align-middle">' + (data[i].lampiran ? data[i].lampiran : '-') + '</td>';
+                html += '<td class="align-middle">' + (data[i].lampiran? (data[i].lampiran.length > 10 ? data[i].lampiran.substring(0,20)+"..." : data[i].lampiran): '-') + '</td>';
                 html += '<td class="align-middle d-flex justify-content-center align-items-center">';
                 html += '<button type="button" class="btn btn-primary btn-detail" data-id="' + data[i].nomor + '" data-toggle="modal" data-target="#detailModal">';
                 html += 'Detail';

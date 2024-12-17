@@ -179,7 +179,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
             <!-- form input surat dari admin sekretaris (start) -->
 
-            <form class="user" id="updateMasuk" action="<?= site_url("insert") ?>" method="post">
+            <form class="user" id="updateMasuk" action="<?= site_url("update") ?>" method="post">
                 <div class="form-group row">
                     <div class="col-8">
                         <!-- Header Section -->
@@ -251,7 +251,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             </div>
 
                             <div class="modal fade" id="modalRelasi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-xl">
+                                <div class="modal-dialog modal-dialog-scrollable modal-xl">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -655,6 +655,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         setPersonVal('#dispoNoreg3', data.dispoNoreg3);
                         setPersonVal('#dispoNoreg4', data.dispoNoreg4);
                         setPersonVal('#dispoNoreg5', data.dispoNoreg5);
+
                         console.log(data.file);
                         if (data.file) {
                             const fileName = data.file.split('/').pop();

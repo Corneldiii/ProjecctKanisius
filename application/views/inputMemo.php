@@ -284,7 +284,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 2</label>
+                                        <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 3</label>
                                         <div class="col-sm-4">
                                             <select class="form-control" id="dispoDivisi3" name="divisi3" onchange="getPersons(3)">
                                                 <option value="">Pilih Divisi</option>
@@ -301,7 +301,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 2</label>
+                                        <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 4</label>
                                         <div class="col-sm-4">
                                             <select class="form-control" id="dispoDivisi4" name="divisi4" onchange="getPersons(4)">
                                                 <option value="">Pilih Divisi</option>
@@ -318,7 +318,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 2</label>
+                                        <label for="dispoDivisi2" class="col-sm-2 col-form-label">Disposisi 5</label>
                                         <div class="col-sm-4">
                                             <select class="form-control" id="dispoDivisi5" name="divisi5" onchange="getPersons(5)">
                                                 <option value="">Pilih Divisi</option>
@@ -327,7 +327,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
-                                        <label for="dispoNoreg2" class="col-sm-2 col-form-label">Person 2</label>
+                                        <label for="dispoNoreg2" class="col-sm-2 col-form-label">Person 5</label>
                                         <div class="col-sm-4">
                                             <select class="form-control" name="person5" id="dispoNoreg5">
                                                 <option value="">Pilih Person</option>

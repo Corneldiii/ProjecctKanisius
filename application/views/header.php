@@ -45,7 +45,7 @@
 
             <a class="sidebar-brand d-flex align-items-center justify-content-center">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-mail-bulk"></i> <!-- cari ikon di: https://fontawesome.com/v5/search?q=laptop-medical&o=r -->
+                    <i class="fas fa-mail-bulk"></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">SURAT</div>
             </a>
@@ -56,7 +56,7 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUser"
                     aria-expanded="true" aria-controls="collapseUser" id="menuUser">
                     <i class="fas fa-fw fa-user"></i>
-                    <span> <?php echo $this->session->userdata('id_surat'); ?> </span> <!-- USER = nomor pegawai -->
+                    <span> <?php echo $this->session->userdata('id_surat'); ?> </span> 
                 </a>
                 <div id="collapseUser" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -81,8 +81,8 @@
                         <a class="collapse-item" href="menu" style="white-space: normal;">Surat Masuk</a>
                         <a class="collapse-item" href="menuKeluar" style="white-space: normal;">Surat Keluar</a>
                         <a class="collapse-item" href="memo" style="white-space: normal;">Memo Internal</a>
-                        <a class="collapse-item" href="insert" style="white-space: normal;">User</a>
-                        <a class="collapse-item" href="insert" style="white-space: normal;">Laporan - laporan</a>
+                        <a class="collapse-item" href="menu" style="white-space: normal;">User</a>
+                        <a class="collapse-item" href="menu" style="white-space: normal;">Laporan - laporan</a>
                     </div>
                 </div>
 

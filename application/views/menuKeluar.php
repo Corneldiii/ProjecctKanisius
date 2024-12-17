@@ -83,7 +83,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <h1 class="h3 mb-0 text-gray-800">Daftar Surat Keluar</h1>
             </div>
 
-            <a class=" btn btn-primary text-light" style="text-decoration: none;" href="insertKeluar">+</a>
+            <a class=" btn btn-primary text-light" style="text-decoration: none;" href="insertKeluar">+ Tambah</a>
 
             <div class="form-group row">
                 <div class="col-sm-12">
@@ -206,6 +206,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     }).format(date);
                 };
 
+
                 html += '<tr>';
                 html += '<td class="align-middle">' + (data[i].nomor ? data[i].nomor : '-') + '</td>';
                 html += '<td class="align-middle">' + (data[i].Tanggal ? formatDate(data[i].Tanggal) : '-') + '</td>';
@@ -216,7 +217,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 html += '<td class="align-middle">' + (data[i].namaLembaga ? data[i].namaLembaga : '-') + '</td>';
                 html += '<td class="align-middle">' + (data[i].hal ? data[i].hal : '-') + '</td>';
                 html += '<td class="align-middle">' + (data[i].lampiran ? data[i].lampiran : '-') + '</td>';
-                html += '<td class="align-middle">' + (data[i].keterangan ? data[i].keterangan : '-') + '</td>';
+                html += '<td class="align-middle">' + (data[i].keterangan? (data[i].keterangan.length > 10 ? data[i].keterangan.substring(0,20)+"..." : data[i].keterangan): '-') + '</td>';
                 html += '<td class="text-center align-middle d-flex justify-content-center align-items-center">';
                 html += '<button type="button" class="btn btn-primary btn-detail" data-id="' + data[i].nomor + '" data-toggle="modal" data-target="#detailModal">';
                 html += 'Detail';
