@@ -132,29 +132,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
     </footer>
 </div>
 
-<!-- Modal untuk detail data -->
-<div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="modalDetailLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="modalDetailLabel">Detail Surat</h5>
-                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div id="modalDetailContent">
-                    <!-- Konten Detail akan diisi oleh JavaScript -->
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>

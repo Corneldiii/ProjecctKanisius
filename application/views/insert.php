@@ -192,7 +192,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 </select>
                             </div>
                             <div class="form-group d-flex align-items-center">
-                                <label for="file" class="mr-4" style="width: 125px;">Upload File</label>
+                                <label for="file" class="mr-4" style="width: 150px;">Upload File</label>
                                 <div class="custom-file d-flex justify-content-center align-items-center ml-4">
                                     <input type="file" class="custom-file-input" name="file" id="customFile" style="cursor: pointer;">
                                     <label class="custom-file-label d-flex justify-content-left align-items-center " for="customFile" style="cursor: pointer;color:black;">Masukan File</label>

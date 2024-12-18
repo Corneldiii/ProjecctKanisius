@@ -81,8 +81,8 @@
                         <a class="collapse-item" href="menu" style="white-space: normal;">Surat Masuk</a>
                         <a class="collapse-item" href="menuKeluar" style="white-space: normal;">Surat Keluar</a>
                         <a class="collapse-item" href="memo" style="white-space: normal;">Memo Internal</a>
-                        <a class="collapse-item" href="menu" style="white-space: normal;">User</a>
-                        <a class="collapse-item" href="menu" style="white-space: normal;">Laporan - laporan</a>
+                        <a class="collapse-item" href="underCon" style="white-space: normal;">User</a>
+                        <a class="collapse-item" href="underCon" style="white-space: normal;">Laporan - laporan</a>
                     </div>
                 </div>
 

@@ -169,4 +169,12 @@ class Controller extends CI_Controller
         $this->load->view('header', $data);
         $this->load->view('detailMemo');
     }
+
+    public function underCon()
+    {
+        $this->is_login();
+        $data['kodeDiv'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
+        $this->load->view('header', $data);
+        $this->load->view('undercontstruction');
+    }
 }
