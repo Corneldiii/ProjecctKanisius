@@ -204,8 +204,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 <label for="file" class="mr-4" style="width: 125px;">Upload File</label>
                                 <div class="custom-file d-flex justify-content-center align-items-center ml-4">
                                     <input type="file" class="custom-file-input" name="file" id="customFile" style="cursor: pointer;">
-                                    <label class="custom-file-label d-flex justify-content-left align-items-center w-75" for="customFile" style="cursor: pointer;color:black;">Masukan File</label>
+                                    <label class="custom-file-label d-flex justify-content-left align-items-center" for="customFile" style="cursor: pointer;color:black;">Masukan File</label>
                                 </div>
+                                <text class="ml-3 text-secondary" > (pdf,jpg,png,docx)</text>
                             </div>
                         </div>
                     </div>

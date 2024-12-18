@@ -206,6 +206,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     <input type="file" class="custom-file-input" name="file" id="customFile" style="cursor: pointer;">
                                     <label class="custom-file-label d-flex justify-content-left align-items-center " for="customFile" style="cursor: pointer;color:black;">Masukan File</label>
                                 </div>
+                                <text class="ml-3 text-secondary" > (pdf,jpg,png,docx)</text>
                             </div>
                         </div>
                     </div>
@@ -255,76 +256,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             </div>
 
 
-                            <!-- Gagal setelah search -->
-                            <!-- <div class="modal fade" id="modalRelasi" tabindex="-1" aria-labelledby="modalRelasiLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-xl">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="modalRelasiLabel">Daftar Personel</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-
-                                        <div class="modal-body w-100">
-                                            <table id="tabel" class="display nowrap table table-striped table-bordered" style="width:100%">
-                                                </thead style="color: black;">
-                                                <tr>
-                                                    <th style="width:10px" class="text-center align-middle">No</th>
-                                                    <th class="text-center align-middle">Milist ID</th>
-                                                    <th class="text-center align-middle">Nama</th>
-                                                    <th class="text-center align-middle">Lembaga</th>
-                                                    <th class="text-center align-middle">Alamat</th>
-                                                    <th class="text-center align-middle">Nama Kota</th>
-                                                    <th class="text-center align-middle">Kode Pos</th>
-                                                    <th class="text-center align-middle">Provinsi</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody id="tbody" name="tbody" style="color: black;">
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                            </div> -->
-
-                            <!-- Gagal sebelum search -->
-                            <!-- <div class="modal fade" id="modalRelasi" tabindex="-1" aria-labelledby="modalRelasiLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-xl">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="modalRelasiLabel">Judul Modal</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
-                                        </div>
-                                        <div class="modal-body w-100">
-                                            <table id="tabel" class="display nowrap table-fixed" style="width:100%">
-                                                <thead style="color: black;">
-                                                    <tr>
-                                                        <th class="text-center align-middle">No</th>
-                                                        <th class="text-center align-middle">Milist ID</th>
-                                                        <th class="text-center align-middle">Nama</th>
-                                                        <th class="text-center align-middle">Lembaga</th>
-                                                        <th class="text-center align-middle">Alamat</th>
-                                                        <th class="text-center align-middle">Nama Kota</th>
-                                                        <th class="text-center align-middle">Kode Pos</th>
-                                                        <th class="text-center align-middle">Provinsi</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="tbody" name="tbody" style="color: black; font-size: 12px;"> Data will be populated here </tbody>
-                             </table>
-                                        </div>
-                                        <div class="modal-footer"> <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> <button type="button" class="btn btn-primary">Save changes</button> </div>
-                                    </div>
-                                </div>
-                            </div> -->
-
-
                             <!-- Modal baru judul eror-->
                             <div class="modal fade" id="modalRelasi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-scrollable modal-xl">
@@ -361,45 +292,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- tampilan modal eror judul sudah sesuai -->
-                            <!-- <div class="modal fade" id="modalRelasi" tabindex="-1" aria-labelledby="modalRelasiLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-xl">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="table-responsive">
-                                                <table id="tabel" class="display nowrap table table-striped table-bordered table-fixed text-nowrap" style="width:100%">
-                                                    </thead style="color: black;">
-                                                    <tr>
-                                                        <th class="text-center align-middle">No</th>
-                                                        <th class="text-center align-middle">Milist ID</th>
-                                                        <th class="text-center align-middle">Nama</th>
-                                                        <th class="text-center align-middle">Lembaga</th>
-                                                        <th class="text-center align-middle">Alamat</th>
-                                                        <th class="text-center align-middle">Nama Kota</th>
-                                                        <th class="text-center align-middle">Kode Pos</th>
-                                                        <th class="text-center align-middle">Provinsi</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody id="tbody" name="tbody" style="color: black; font-size:12px">
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
-
 
                             <div class="header">
                                 <div class="form-group d-flex align-items-center">

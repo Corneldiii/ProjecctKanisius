@@ -190,7 +190,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     <option value="penawaran">Penawaran</option>
                                 </select>
                             </div>
-                            <div class="form-group d-flex align-items-center">
+                            <div class="form-group d-flex align-items-center" id="infoUpload" >
                                 <label for="file" class="mr-4" style="width: 125px;">Upload File</label>
                                 <div class="custom-file d-flex justify-content-center align-items-center ml-3">
                                     <input type="file" class="custom-file-input" name="file" id="customFile" style="cursor: pointer;">
@@ -480,7 +480,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             $('#customFile').next('.custom-file-label').text(fileName);
 
                             const downloadLink = `<a href="${data.file}" download class="btn btn-primary">Download</a>`;
+                            const info = '<text class="text-secondary"> (pdf,jpg,png,docx)</text>';
                             $('#customFile').parent().append(downloadLink);
+                            $('#infoUpload').parent().append(info);
+
                             $('#customFile').val('');
                         }
 

@@ -197,6 +197,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     <input type="file" class="custom-file-input" name="file" id="customFile" style="cursor: pointer;">
                                     <label class="custom-file-label d-flex justify-content-left align-items-center " for="customFile" style="cursor: pointer;color:black;">Masukan File</label>
                                 </div>
+                                <text class="ml-3 text-secondary" > (pdf,jpg,png,docx)</text>
                             </div>
                         </div>
                     </div>
@@ -235,10 +236,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
                             <div class="border-top mb-3 bg-dark" style="border-top: 2px solid black; height: 0;"></div>
 
+                            <!-- cari nama/lembaga -->
+
                             <div class="form-group d-flex align-items-center">
-                                <label for="namaPerson" class="mr-3" style="width: 135px;">Cari Nama/Kode Relasi *</label>
+                                <label for="namaPerson" class="mr-3" style="width: 135px;">Cari Nama/Lembaga *</label>
                                 <div class="input-group" style="width: 300px;">
-                                    <input type="text" class="form-control text-left" name="namaPerson" id="namaPerson" placeholder="Nama/Kode Relasi">
+                                    <input type="text" class="form-control text-left" name="namaPerson" id="namaPerson" placeholder="Nama/Lembaga">
                                     <div class="input-group-append">
                                         <button class="btn btn-secondary" id="searchPerson" type="button">Cari</button>
                                     </div>
