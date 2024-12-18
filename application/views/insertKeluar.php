@@ -602,7 +602,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             url: '<?= site_url("FonnteController/kirimPesan") ?>',
                             method: 'POST',
                             data: {
-                                message: "Anda memiliki surat masuk baru dengan kode (" + kode + ") perihal " + perihal,
+                                message: "Anda memiliki surat keluar baru dengan kode (" + kode + ") perihal " + perihal,
                                 url: 'http://surat.test/'
                             },
                             success: function(response) {

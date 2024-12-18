@@ -189,6 +189,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 <input type="text" class="form-control text-left w-25" name="nomorSurat" id="nomorSurat" placeholder="Nomor Surat" readonly>
                             </div>
                             <div class="form-group d-flex align-items-center">
+                                <label for="tanggal" class="mr-4" style="width: 125px;">Tanggal Input</label>
+                                <input type="date" style="width: 200px;" class="form-control text-left" name="tanggal" id="tanggal" readonly>
+                            </div>
+                            <div class="form-group d-flex align-items-center">
                                 <label for="jenis" class="mr-4" style="width: 125px;">Jenis Surat</label>
                                 <select class="form-control" style="width: 200px;" id="jenis" name="jenis">
                                     <option value="surat">Surat</option>
